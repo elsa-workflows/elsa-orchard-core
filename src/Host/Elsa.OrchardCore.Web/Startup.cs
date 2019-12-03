@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace OrchardCore.Elsa.Web
+namespace Elsa.OrchardCore.Web
 {
     public class Startup
     {

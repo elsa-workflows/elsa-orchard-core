@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{7E0B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "themes", "themes", "{B739230C-1F05-492A-83E1-44BE85CC48C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.Elsa.Workflows", "src\Modules\OrchardCore.Elsa.Workflows\OrchardCore.Elsa.Workflows.csproj", "{06836A34-FF87-490F-ADCE-957D81076153}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elsa.OrchardCore", "src\Modules\Elsa.OrchardCore\Elsa.OrchardCore.csproj", "{06836A34-FF87-490F-ADCE-957D81076153}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{5C2A0A7C-D9E5-47EF-B8B0-92CBCC958AB5}"
 ProjectSection(SolutionItems) = preProject
@@ -15,7 +15,7 @@ EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{BD23D9D4-5723-467C-8CB7-66D4EE5431A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.Elsa.Web", "src\Host\OrchardCore.Elsa.Web\OrchardCore.Elsa.Web.csproj", "{1BE0DD6E-7E1C-4A34-BC32-7F4BC0CB40F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elsa.OrchardCore.Web", "src\Host\Elsa.OrchardCore.Web\Elsa.OrchardCore.Web.csproj", "{1BE0DD6E-7E1C-4A34-BC32-7F4BC0CB40F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

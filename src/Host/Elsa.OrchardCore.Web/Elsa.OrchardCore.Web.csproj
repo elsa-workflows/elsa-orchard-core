@@ -5,11 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="OrchardCore.Application.Cms.Targets" Version="1.0.0-rc1-10004" />
+      <PackageReference Include="OrchardCore.Application.Cms.Targets" Version="1.0.0-rc1-10957" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Modules\OrchardCore.Elsa.Workflows\OrchardCore.Elsa.Workflows.csproj" />
+      <ProjectReference Include="..\..\Modules\Elsa.OrchardCore\Elsa.OrchardCore.csproj" />
     </ItemGroup>
 
 </Project>

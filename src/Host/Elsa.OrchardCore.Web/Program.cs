@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace OrchardCore.Elsa.Web
+namespace Elsa.OrchardCore.Web
 {
     public static class Program
     {
