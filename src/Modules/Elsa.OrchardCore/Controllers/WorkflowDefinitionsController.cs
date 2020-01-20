@@ -40,6 +40,7 @@ namespace Elsa.OrchardCore.Controllers
         public IStringLocalizer<WorkflowDefinitionsController> S { get; }
         public IHtmlLocalizer<WorkflowDefinitionsController> H { get; }
 
+        [HttpGet("")]
         public async Task<ActionResult> Index(WorkflowDefinitionListOptions options, PagerParameters pagerParameters)
         {
             if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
@@ -98,6 +99,12 @@ namespace Elsa.OrchardCore.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet("create")]
+        public IActionResult Create()
+        {
+            return View();
         }
     }
 }
