@@ -9,6 +9,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{5C2A0A7C-D9E5-47EF-B8B0-92CBCC958AB5}"
 ProjectSection(SolutionItems) = preProject
 	README.md = README.md
+	NuGet.config = NuGet.config
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{BD23D9D4-5723-467C-8CB7-66D4EE5431A4}"
