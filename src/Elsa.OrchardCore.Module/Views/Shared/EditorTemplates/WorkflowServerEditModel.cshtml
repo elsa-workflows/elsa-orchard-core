@@ -1,0 +1,16 @@
+﻿@model WorkflowServerEditModel
+
+<div>
+    @Html.ValidationSummary()
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" type="text" class="form-control"/>
+        <div class="hint">@T["Enter a name for the remote workflow server."]</div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Url">URL</label>
+        <input asp-for="Url" type="url" class="form-control"/>
+        <div class="hint">@T["The URL pointing to the workflow server's GraphQL endpoint. Example: https://acme.com/graphql"]</div>
+    </div>
+    <button class="btn btn-primary" type="submit">@T["Save"]</button>
+</div>

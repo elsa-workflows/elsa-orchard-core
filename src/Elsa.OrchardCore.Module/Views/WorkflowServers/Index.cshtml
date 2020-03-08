@@ -1,0 +1,52 @@
+﻿@model WorkflowServersViewModel
+
+<h1>@RenderTitleSegments(T["Remote Workflow Servers"])</h1>
+
+<form asp-action="Index" id="workflows-servers-form" method="post">
+
+    <div class="row">
+        <div class="form-group col-xl-12 col-sm-12">
+            <div class="btn-group float-right">
+                <a asp-action="Create" asp-route-returnUrl="@FullRequestPath" class="btn btn-sm btn-primary" role="button">@T["Add Remote Workflow Server"]</a>
+            </div>
+        </div>
+    </div>
+
+    <ul class="list-group">
+        <li class="list-group-item bg-light">
+            <p>&nbsp;</p>
+        </li>
+        @if (Model.WorkflowServers.Any())
+        {
+            foreach (var server in Model.WorkflowServers)
+            {
+                var serverId = server.WorkflowServerId;
+
+                <li class="list-group-item">
+                    <div class="properties">
+                        <div class="related">
+                            <a asp-action="Edit" asp-route-id="@serverId" asp-route-returnUrl="@FullRequestPath" class="btn btn-primary btn-sm">@T["Edit"]</a>
+                            <a asp-action="Delete" asp-route-id="@serverId" asp-route-returnUrl="@FullRequestPath" class="btn btn-danger btn-sm" itemprop="RemoveUrl UnsafeUrl">@T["Delete"]</a>
+                        </div>
+
+                        <div class="custom-control custom-checkbox float-left">
+                            <input type="checkbox" class="custom-control-input" value="@serverId" name="itemIds" id="itemIds-@serverId">
+                            <label class="custom-control-label" for="itemIds-@serverId">&nbsp;</label>
+
+                        </div>
+                        <a asp-action="Edit" asp-route-id="@serverId" asp-route-returnUrl="@FullRequestPath">@server.Name</a>
+                        <p class="text-muted">@server.Url</p>
+                    </div>
+                </li>
+            }
+        }
+        else
+        {
+            <li class="list-unstyled">
+                <div class="alert alert-info" role="alert">
+                    @T["<strong>Nothing here!</strong> There are no workflow servers registered yet. <a href=\"{0}\">Register one</a>", Url.Action("Create")]
+                </div>
+            </li>
+        }
+    </ul>
+</form>

@@ -1,0 +1,13 @@
+query getWorkflowDefinitions($version: VersionOptionsInput) {
+    workflowDefinitions(version: $version) {
+        id
+        definitionId
+        name
+        description
+        version
+        isLatest
+        isPublished
+        isSingleton
+        isDisabled
+    }
+}

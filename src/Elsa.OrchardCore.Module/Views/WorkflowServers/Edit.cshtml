@@ -1,0 +1,7 @@
+﻿@model WorkflowServerEditModel
+
+<h1>@RenderTitleSegments(T["Edit Remote Workflow Server"])</h1>
+
+<form asp-action="Edit" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]" method="post">
+    @Html.EditorForModel()
+</form>
