@@ -23,8 +23,7 @@ namespace Elsa.OrchardCore
                 .AddScoped<IWorkflowServerStore, WorkflowServerStore>()
                 .AddScoped<IWorkflowServerProvider, StoreBasedWorkflowServerProvider>()
                 .AddScoped<IWorkflowServerService, WorkflowServerService>()
-                .AddSingleton<IIndexProvider, WorkflowServerIndexProvider>()
-                .AddSingleton<IElsaClientFactory, ElsaClientFactory>();
+                .AddSingleton<IIndexProvider, WorkflowServerIndexProvider>();
         }
 
         public override void Configure(

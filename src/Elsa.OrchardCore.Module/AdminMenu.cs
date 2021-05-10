@@ -34,7 +34,7 @@ namespace Elsa.OrchardCore
                     .Add(T["Workflows"], NavigationConstants.AdminMenuWorkflowsPosition, workflow => workflow
                         .AddClass("elsa")
                         .Id("elsa")
-                        .Action("Index", "WorkflowDefinitions", new { area = "Elsa.OrchardCore.Module", server = server.WorkflowServerId })
+                        .Action("Index", "WorkflowDashboard", new { area = "Elsa.OrchardCore.Module", serverId = server.WorkflowServerId })
                         .Permission(Permissions.ManageWorkflows)
                         .LocalNav());
             }
@@ -47,7 +47,7 @@ namespace Elsa.OrchardCore
                             .AddClass("elsa")
                             .Id("elsa")
                             .Add(T[server.Name],  workflow => workflow
-                                .Action("Index", "WorkflowDefinitions", new { area = "Elsa.OrchardCore.Module", server = server.WorkflowServerId })
+                                .Action("Index", "WorkflowDashboard", new { area = "Elsa.OrchardCore.Module", serverId = server.WorkflowServerId })
                                 .Permission(Permissions.ManageWorkflows)
                                 .LocalNav()));
                 }

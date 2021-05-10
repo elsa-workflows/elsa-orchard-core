@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
         <Nullable>enable</Nullable>
         <RootNamespace>Elsa.OrchardCore</RootNamespace>
@@ -12,19 +12,19 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.2" />
-        <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.2" />
-        <PackageReference Include="OrchardCore.Admin.Abstractions" Version="1.0.0-rc1-12244" />
-        <PackageReference Include="OrchardCore.Module.Targets" Version="1.0.0-rc1-12244" />
-        <PackageReference Include="OrchardCore.ContentManagement" Version="1.0.0-rc1-12244" />
-        <PackageReference Include="OrchardCore.ContentTypes.Abstractions" Version="1.0.0-rc1-12244" />
-        <PackageReference Include="OrchardCore.DisplayManagement" Version="1.0.0-rc1-12244" />
-        <PackageReference Include="OrchardCore.Navigation.Core" Version="1.0.0-rc1-12244" />
-        <PackageReference Include="StrawberryShake" Version="11.0.0-preview.107" />
+        <PackageReference Include="Elsa.Designer.Components.Web" Version="2.0.0-rc1.41" />
+        <PackageReference Include="OrchardCore.Admin.Abstractions" Version="1.0.0-rc2-16189" />
+        <PackageReference Include="OrchardCore.Infrastructure" Version="1.0.0-rc2-16189" />
+        <PackageReference Include="OrchardCore.Module.Targets" Version="1.0.0-rc2-16189" />
+        <PackageReference Include="OrchardCore.ContentManagement" Version="1.0.0-rc2-16189" />
+        <PackageReference Include="OrchardCore.ContentTypes.Abstractions" Version="1.0.0-rc2-16189" />
+        <PackageReference Include="OrchardCore.DisplayManagement" Version="1.0.0-rc2-16189" />
+        <PackageReference Include="OrchardCore.Navigation.Core" Version="1.0.0-rc2-16189" />
+        <PackageReference Include="OrchardCore.ResourceManagement" Version="1.0.0-rc2-16189" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Elsa.OrchardCore.Abstractions\Elsa.OrchardCore.Abstractions.csproj" />
     </ItemGroup>
-    
+
 </Project>

@@ -1,43 +1,49 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: crowdin.com\n"
 "X-Crowdin-Project: orchard-core\n"
 "X-Crowdin-Language: sv-SE\n"
 "X-Crowdin-File: /dev/Localization/OrchardCore.Queries.pot\n"
 "Project-Id-Version: orchard-core\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Last-Translator: Antoine Griffard (agriffard)\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2019-09-21 09:28\n"
+"PO-Revision-Date: 2020-03-31 13:59\n"
 
-#. builder.Add(T["Configuration"], content => content
+#. builder.Add(S["Search"], NavigationConstants.AdminMenuSearchPosition, search => search
 #: OrchardCore.Queries\AdminMenu.cs:24
 msgctxt "OrchardCore.Queries.AdminMenu"
-msgid "Configuration"
+msgid "Search"
 msgstr ""
 
-#. .Add(T["Queries"], "1", contentItems => contentItems
-#: OrchardCore.Queries\AdminMenu.cs:25
+#. .Add(S["Queries"], S["Queries"], contentItems => contentItems
+#. .Add(S["Queries"], S["Queries"], contentItems => contentItems
+#: OrchardCore.Queries\AdminMenu.cs:26
+#: OrchardCore.Queries\AdminMenu.cs:26
 msgctxt "OrchardCore.Queries.AdminMenu"
 msgid "Queries"
 msgstr ""
 
+#. .Add(S["All queries"], "1", queries => queries
+#: OrchardCore.Queries\AdminMenu.cs:27
+msgctxt "OrchardCore.Queries.AdminMenu"
+msgid "All queries"
+msgstr ""
+
 #. _notifier.Success(H["Query created successfully"]);
-#: OrchardCore.Queries\Controllers\AdminController.cs:156
+#: OrchardCore.Queries\Controllers\AdminController.cs:165
 msgctxt "OrchardCore.Queries.Controllers.AdminController"
 msgid "Query created successfully"
 msgstr ""
 
 #. _notifier.Success(H["Query updated successfully"]);
-#: OrchardCore.Queries\Controllers\AdminController.cs:212
+#: OrchardCore.Queries\Controllers\AdminController.cs:221
 msgctxt "OrchardCore.Queries.Controllers.AdminController"
 msgid "Query updated successfully"
 msgstr ""
 
 #. _notifier.Success(H["Query deleted successfully"]);
-#: OrchardCore.Queries\Controllers\AdminController.cs:239
+#: OrchardCore.Queries\Controllers\AdminController.cs:248
 msgctxt "OrchardCore.Queries.Controllers.AdminController"
 msgid "Query deleted successfully"
 msgstr ""
@@ -60,28 +66,34 @@ msgctxt "OrchardCore.Queries.Drivers.QueryDisplayDriver"
 msgid "A query with the same name already exists"
 msgstr ""
 
-#. .Add(T["Configuration"], "10", configuration => configuration
+#. .Add(S["Search"], search => search
 #: OrchardCore.Queries\Sql\AdminMenu.cs:25
 msgctxt "OrchardCore.Queries.Sql.AdminMenu"
-msgid "Configuration"
+msgid "Search"
 msgstr ""
 
-#. .Add(T["Site"], "10", site => site
+#. .Add(S["Queries"], "10", queries => queries
+#: OrchardCore.Queries\Sql\AdminMenu.cs:26
+msgctxt "OrchardCore.Queries.Sql.AdminMenu"
+msgid "Queries"
+msgstr ""
+
+#. .Add(S["Run SQL Query"], "5", sql => sql
 #: OrchardCore.Queries\Sql\AdminMenu.cs:27
 msgctxt "OrchardCore.Queries.Sql.AdminMenu"
-msgid "Site"
-msgstr ""
-
-#. .Add(T["SQL Queries"], "5", queries => queries
-#: OrchardCore.Queries\Sql\AdminMenu.cs:28
-msgctxt "OrchardCore.Queries.Sql.AdminMenu"
-msgid "SQL Queries"
+msgid "Run SQL Query"
 msgstr ""
 
 #. updater.ModelState.AddModelError(nameof(model.Template), S["The query field is required"]);
 #: OrchardCore.Queries\Sql\Drivers\SqlQueryDisplayDriver.cs:60
 msgctxt "OrchardCore.Queries.Sql.Drivers.SqlQueryDisplayDriver"
 msgid "The query field is required"
+msgstr ""
+
+#. <span class="icon"><i class="fa fa-search" aria-hidden="true"></i></span><span class="title">@T["Search"]</span>
+#: OrchardCore.Queries\Views\NavigationItemText-search.Id.cshtml:1
+msgctxt "OrchardCore.Queries.Views.NavigationItemText-search.Id"
+msgid "Search"
 msgstr ""
 
 #. <h4>@T["SQL"]</h4>
@@ -211,57 +223,71 @@ msgid "Edit '{0}' query"
 msgstr ""
 
 #. <h1>@RenderTitleSegments(T["Queries"])</h1>
-#: OrchardCore.Queries\Views\Admin\Index.cshtml:5
+#: OrchardCore.Queries\Views\Admin\Index.cshtml:6
 msgctxt "OrchardCore.Queries.Views.Admin.Index"
 msgid "Queries"
 msgstr ""
 
-#. <button type="button" class="btn btn-primary float-right" role="button" data-toggle="modal" data-target="#modalAddQuery">@T["Add Query"]</button>
-#: OrchardCore.Queries\Views\Admin\Index.cshtml:9
-msgctxt "OrchardCore.Queries.Views.Admin.Index"
-msgid "Add Query"
-msgstr ""
-
-#. <span class="input-group-text bg-secondary text-light">@T["Filter"]</span>
-#: OrchardCore.Queries\Views\Admin\Index.cshtml:18
-msgctxt "OrchardCore.Queries.Views.Admin.Index"
-msgid "Filter"
-msgstr ""
-
-#. <input id="search-box" asp-for="Options.Search" class="form-control" placeholder="@T["Search"]" autofocus="autofocus" />
-#. <button type="submit" class="btn btn-sm btn-secondary">@T["Search"]</button>
-#: OrchardCore.Queries\Views\Admin\Index.cshtml:20
-#: OrchardCore.Queries\Views\Admin\Index.cshtml:22
+#. <input id="search-box" asp-for="Options.Search" class="form-control" placeholder="@T["Search"]" type="search" autofocus />
+#: OrchardCore.Queries\Views\Admin\Index.cshtml:12
 msgctxt "OrchardCore.Queries.Views.Admin.Index"
 msgid "Search"
 msgstr ""
 
+#. <button type="button" class="btn btn-primary float-right" role="button" data-toggle="modal" data-target="#modalAddQuery">@T["Add Query"]</button>
+#: OrchardCore.Queries\Views\Admin\Index.cshtml:17
+msgctxt "OrchardCore.Queries.Views.Admin.Index"
+msgid "Add Query"
+msgstr ""
+
+#. <label id="items" for="select-all">@T.Plural(Model.Queries.Count, "1 item", "{0} items")<span class="text-muted" title="@T["Items {0} to {1}", startIndex, endIndex]">@T.Plural((int)Model.Pager.TotalItemCount, " / {0} item in total", " / {0} items in total")</span></label>
+#: OrchardCore.Queries\Views\Admin\Index.cshtml:26
+msgctxt "OrchardCore.Queries.Views.Admin.Index"
+msgid "1 item"
+msgid_plural "{0} items"
+msgstr[0] ""
+msgstr[1] ""
+
+#. <label id="items" for="select-all">@T.Plural(Model.Queries.Count, "1 item", "{0} items")<span class="text-muted" title="@T["Items {0} to {1}", startIndex, endIndex]">@T.Plural((int)Model.Pager.TotalItemCount, " / {0} item in total", " / {0} items in total")</span></label>
+#: OrchardCore.Queries\Views\Admin\Index.cshtml:26
+msgctxt "OrchardCore.Queries.Views.Admin.Index"
+msgid "Items {0} to {1}"
+msgstr ""
+
+#. <label id="items" for="select-all">@T.Plural(Model.Queries.Count, "1 item", "{0} items")<span class="text-muted" title="@T["Items {0} to {1}", startIndex, endIndex]">@T.Plural((int)Model.Pager.TotalItemCount, " / {0} item in total", " / {0} items in total")</span></label>
+#: OrchardCore.Queries\Views\Admin\Index.cshtml:26
+msgctxt "OrchardCore.Queries.Views.Admin.Index"
+msgid " / {0} item in total"
+msgid_plural " / {0} items in total"
+msgstr[0] ""
+msgstr[1] ""
+
 #. @T["<strong>Nothing here!</strong> There are no queries for the moment."]
-#: OrchardCore.Queries\Views\Admin\Index.cshtml:45
+#: OrchardCore.Queries\Views\Admin\Index.cshtml:44
 msgctxt "OrchardCore.Queries.Views.Admin.Index"
 msgid "<strong>Nothing here!</strong> There are no queries for the moment."
 msgstr ""
 
 #. <h5 class="modal-title">@T["Available Query Types"]</h5>
-#: OrchardCore.Queries\Views\Admin\Index.cshtml:57
+#: OrchardCore.Queries\Views\Admin\Index.cshtml:58
 msgctxt "OrchardCore.Queries.Views.Admin.Index"
 msgid "Available Query Types"
 msgstr ""
 
 #. <p class="p-3 mb-2 bg-warning text-white">@T["You need to enable a feature which provides a query source."] <a asp-action="Features" asp-controller="Admin" asp-area="OrchardCore.Features">@T["Go to Features"]</a></p>
-#: OrchardCore.Queries\Views\Admin\Index.cshtml:65
+#: OrchardCore.Queries\Views\Admin\Index.cshtml:66
 msgctxt "OrchardCore.Queries.Views.Admin.Index"
 msgid "You need to enable a feature which provides a query source."
 msgstr ""
 
 #. <p class="p-3 mb-2 bg-warning text-white">@T["You need to enable a feature which provides a query source."] <a asp-action="Features" asp-controller="Admin" asp-area="OrchardCore.Features">@T["Go to Features"]</a></p>
-#: OrchardCore.Queries\Views\Admin\Index.cshtml:65
+#: OrchardCore.Queries\Views\Admin\Index.cshtml:66
 msgctxt "OrchardCore.Queries.Views.Admin.Index"
 msgid "Go to Features"
 msgstr ""
 
 #. <button type="button" class="btn btn-secondary" data-dismiss="modal">@T["Cancel"]</button>
-#: OrchardCore.Queries\Views\Admin\Index.cshtml:82
+#: OrchardCore.Queries\Views\Admin\Index.cshtml:83
 msgctxt "OrchardCore.Queries.Views.Admin.Index"
 msgid "Cancel"
 msgstr ""
@@ -303,31 +329,31 @@ msgid "An optional Json object containing the parameter values for this query."
 msgstr ""
 
 #. <button type="submit" class="btn btn-primary">@T["Query"]</button>
-#: OrchardCore.Queries\Views\Admin\Query.cshtml:42
+#: OrchardCore.Queries\Views\Admin\Query.cshtml:41
 msgctxt "OrchardCore.Queries.Views.Admin.Query"
 msgid "Query"
 msgstr ""
 
 #. <label asp-for="RawSql">@T["Final SQL Query"]</label>
-#: OrchardCore.Queries\Views\Admin\Query.cshtml:52
+#: OrchardCore.Queries\Views\Admin\Query.cshtml:51
 msgctxt "OrchardCore.Queries.Views.Admin.Query"
 msgid "Final SQL Query"
 msgstr ""
 
 #. <span class="hint">@T["The query as it will be executed by the SQL database."]</span>
-#: OrchardCore.Queries\Views\Admin\Query.cshtml:54
+#: OrchardCore.Queries\Views\Admin\Query.cshtml:53
 msgctxt "OrchardCore.Queries.Views.Admin.Query"
 msgid "The query as it will be executed by the SQL database."
 msgstr ""
 
 #. <a href="@Url.Action("Create", "Admin", new { area = "OrchardCore.Queries", id = "Sql", query = Model.DecodedQuery })" class="btn btn-success">@T["Create"]</a>
-#: OrchardCore.Queries\Views\Admin\Query.cshtml:58
+#: OrchardCore.Queries\Views\Admin\Query.cshtml:57
 msgctxt "OrchardCore.Queries.Views.Admin.Query"
 msgid "Create"
 msgstr ""
 
 #. <span class="text-muted">@T["Query executed in {0} ms", Model.Elapsed.TotalMilliseconds]</span>
-#: OrchardCore.Queries\Views\Admin\Query.cshtml:66
+#: OrchardCore.Queries\Views\Admin\Query.cshtml:65
 msgctxt "OrchardCore.Queries.Views.Admin.Query"
 msgid "Query executed in {0} ms"
 msgstr ""

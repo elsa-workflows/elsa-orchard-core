@@ -1,39 +1,41 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: crowdin.com\n"
 "X-Crowdin-Project: orchard-core\n"
 "X-Crowdin-Language: it\n"
 "X-Crowdin-File: /dev/Localization/OrchardCore.BackgroundTasks.pot\n"
 "Project-Id-Version: orchard-core\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Last-Translator: Antoine Griffard (agriffard)\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2019-09-04 19:02\n"
+"PO-Revision-Date: 2020-05-10 20:40\n"
 
-#. .Add(T["Configuration"], configuration => configuration
+#. .Add(S["Configuration"], configuration => configuration
 #: OrchardCore.BackgroundTasks\AdminMenu.cs:25
 msgctxt "OrchardCore.BackgroundTasks.AdminMenu"
 msgid "Configuration"
 msgstr "Configurazione"
 
-#. .Add(T["Tasks"], "10", tasks => tasks
+#. .Add(S["Tasks"], S["Tasks"].PrefixPosition(), tasks => tasks
+#. .Add(S["Tasks"], S["Tasks"].PrefixPosition(), tasks => tasks
+#: OrchardCore.BackgroundTasks\AdminMenu.cs:26
 #: OrchardCore.BackgroundTasks\AdminMenu.cs:26
 msgctxt "OrchardCore.BackgroundTasks.AdminMenu"
 msgid "Tasks"
 msgstr "Attività"
 
-#. .Add(T["Background Tasks"], "10", backgroundTasks => backgroundTasks
+#. .Add(S["Background Tasks"], S["Background Tasks"].PrefixPosition(), backgroundTasks => backgroundTasks
+#. .Add(S["Background Tasks"], S["Background Tasks"].PrefixPosition(), backgroundTasks => backgroundTasks
+#: OrchardCore.BackgroundTasks\AdminMenu.cs:27
 #: OrchardCore.BackgroundTasks\AdminMenu.cs:27
 msgctxt "OrchardCore.BackgroundTasks.AdminMenu"
 msgid "Background Tasks"
 msgstr "Attività in background"
 
-#. ModelState.AddModelError(nameof(BackgroundTaskViewModel.Name), T["The name is mandatory."]);
-#. ModelState.AddModelError(nameof(BackgroundTaskViewModel.Name), T["The name is mandatory."]);
-#: OrchardCore.BackgroundTasks\Controllers\BackgroundTaskController.cs:130
-#: OrchardCore.BackgroundTasks\Controllers\BackgroundTaskController.cs:194
+#. ModelState.AddModelError(nameof(BackgroundTaskViewModel.Name), S["The name is mandatory."]);
+#. ModelState.AddModelError(nameof(BackgroundTaskViewModel.Name), S["The name is mandatory."]);
+#: OrchardCore.BackgroundTasks\Controllers\BackgroundTaskController.cs:123
+#: OrchardCore.BackgroundTasks\Controllers\BackgroundTaskController.cs:187
 msgctxt "OrchardCore.BackgroundTasks.Controllers.BackgroundTaskController"
 msgid "The name is mandatory."
 msgstr "Il nome è obbligatorio."
@@ -66,13 +68,13 @@ msgstr "Pianifica"
 #: OrchardCore.BackgroundTasks\Views\BackgroundTask\Create.cshtml:17
 msgctxt "OrchardCore.BackgroundTasks.Views.BackgroundTask.Create"
 msgid "The task schedule as a cron expression."
-msgstr "La pianificazione dell'attività come espressione cronologica."
+msgstr "La pianificazione dell'attività tramite espressione cronologica."
 
 #. <button id="use-default-schedule" class="btn btn-success">@T["Use Default"]</button>
 #: OrchardCore.BackgroundTasks\Views\BackgroundTask\Create.cshtml:27
 msgctxt "OrchardCore.BackgroundTasks.Views.BackgroundTask.Create"
 msgid "Use Default"
-msgstr "Usa predefinito"
+msgstr "Usa come predefinito"
 
 #. <button class="btn btn-primary" type="submit">@T["Save"]</button>
 #: OrchardCore.BackgroundTasks\Views\BackgroundTask\Create.cshtml:28
@@ -114,13 +116,13 @@ msgstr "Pianifica"
 #: OrchardCore.BackgroundTasks\Views\BackgroundTask\Edit.cshtml:17
 msgctxt "OrchardCore.BackgroundTasks.Views.BackgroundTask.Edit"
 msgid "The task schedule as a cron expression."
-msgstr "La pianificazione dell'attività come espressione cronologica."
+msgstr "La pianificazione dell'attività tramite espressione cronologica."
 
 #. <button id="use-default-schedule" class="btn btn-success">@T["Use Default"]</button>
 #: OrchardCore.BackgroundTasks\Views\BackgroundTask\Edit.cshtml:27
 msgctxt "OrchardCore.BackgroundTasks.Views.BackgroundTask.Edit"
 msgid "Use Default"
-msgstr "Usa predefinito"
+msgstr "Usa come predefinito"
 
 #. <button class="btn btn-primary" type="submit">@T["Save"]</button>
 #: OrchardCore.BackgroundTasks\Views\BackgroundTask\Edit.cshtml:28
@@ -164,15 +166,9 @@ msgctxt "OrchardCore.BackgroundTasks.Views.BackgroundTask.Index"
 msgid "Settings"
 msgstr "Impostazioni"
 
-#. <span class="hint">@T["— {0}", settings.Description]</span>
-#: OrchardCore.BackgroundTasks\Views\BackgroundTask\Index.cshtml:29
-msgctxt "OrchardCore.BackgroundTasks.Views.BackgroundTask.Index"
-msgid "— {0}"
-msgstr ""
-
 #. @T["<strong>Nothing here!</strong> There are no background task for the moment."]
-#: OrchardCore.BackgroundTasks\Views\BackgroundTask\Index.cshtml:39
+#: OrchardCore.BackgroundTasks\Views\BackgroundTask\Index.cshtml:38
 msgctxt "OrchardCore.BackgroundTasks.Views.BackgroundTask.Index"
 msgid "<strong>Nothing here!</strong> There are no background task for the moment."
-msgstr "<strong>Niente qui!</strong> Non ci sono attività in background per il momento."
+msgstr "<strong>Nessun elemento!</strong> Non ci sono attività in background per il momento."
 

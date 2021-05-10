@@ -1,154 +1,164 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: crowdin.com\n"
 "X-Crowdin-Project: orchard-core\n"
 "X-Crowdin-Language: vi\n"
 "X-Crowdin-File: /dev/Localization/OrchardCore.Twitter.pot\n"
 "Project-Id-Version: orchard-core\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Last-Translator: Antoine Griffard (agriffard)\n"
 "Language-Team: Vietnamese\n"
 "Language: vi_VN\n"
-"PO-Revision-Date: 2019-09-06 12:28\n"
+"PO-Revision-Date: 2020-03-31 14:11\n"
 
-#. builder.Add(T["Twitter"], "15", settings => settings
+#. builder.Add(S["Security"], security => security
+#: OrchardCore.Twitter\AdminMenu.cs:28
+msgctxt "OrchardCore.Twitter.AdminMenu"
+msgid "Security"
+msgstr "Bảo mật"
+
+#. .Add(S["Authentication"], authentication => authentication
+#: OrchardCore.Twitter\AdminMenu.cs:29
+msgctxt "OrchardCore.Twitter.AdminMenu"
+msgid "Authentication"
+msgstr "Xác thực"
+
+#. .Add(S["Twitter"], "18", settings => settings
 #: OrchardCore.Twitter\AdminMenu.cs:30
 msgctxt "OrchardCore.Twitter.AdminMenu"
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
-#. .Add(T["Twitter Integration"], "10", client => client
-#: OrchardCore.Twitter\AdminMenu.cs:32
-msgctxt "OrchardCore.Twitter.AdminMenu"
-msgid "Twitter Integration"
-msgstr ""
+#. builder.Add(S["Security"], security => security
+#: OrchardCore.Twitter\AdminMenu.cs:59
+msgctxt "OrchardCore.Twitter.AdminMenuSignin"
+msgid "Security"
+msgstr "Bảo mật"
 
-#. builder.Add(T["Twitter"], "15", settings => settings
-#: OrchardCore.Twitter\AdminMenu.cs:62
+#. .Add(S["Twitter"], "15", settings => settings
+#: OrchardCore.Twitter\AdminMenu.cs:60
 msgctxt "OrchardCore.Twitter.AdminMenuSignin"
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
-#. .Add(T["Sign in with Twitter"], "15", client => client
-#: OrchardCore.Twitter\AdminMenu.cs:64
+#. .Add(S["Sign in with Twitter"], "15", client => client
+#: OrchardCore.Twitter\AdminMenu.cs:62
 msgctxt "OrchardCore.Twitter.AdminMenuSignin"
 msgid "Sign in with Twitter"
-msgstr ""
+msgstr "Đăng nhập bằng Twitter"
 
-#. yield return new ValidationResult(T["ConsumerKey is required"], new string[] { nameof(settings.ConsumerKey) });
-#: OrchardCore.Twitter\Services\TwitterSettingsService.cs:64
+#. yield return new ValidationResult(S["ConsumerKey is required"], new string[] { nameof(settings.ConsumerKey) });
+#: OrchardCore.Twitter\Services\TwitterSettingsService.cs:57
 msgctxt "OrchardCore.Twitter.Services.TwitterSettingsService"
 msgid "ConsumerKey is required"
-msgstr ""
+msgstr "ConsumerKey là bắt buộc"
 
-#. yield return new ValidationResult(T["ConsumerSecret is required"], new string[] { nameof(settings.ConsumerSecret) });
-#: OrchardCore.Twitter\Services\TwitterSettingsService.cs:69
+#. yield return new ValidationResult(S["ConsumerSecret is required"], new string[] { nameof(settings.ConsumerSecret) });
+#: OrchardCore.Twitter\Services\TwitterSettingsService.cs:62
 msgctxt "OrchardCore.Twitter.Services.TwitterSettingsService"
 msgid "ConsumerSecret is required"
-msgstr ""
+msgstr "ConsumerSecret là bắt buộc"
 
-#. yield return new ValidationResult(T["Access Token is required"], new string[] { nameof(settings.AccessToken) });
-#: OrchardCore.Twitter\Services\TwitterSettingsService.cs:74
+#. yield return new ValidationResult(S["Access Token is required"], new string[] { nameof(settings.AccessToken) });
+#: OrchardCore.Twitter\Services\TwitterSettingsService.cs:67
 msgctxt "OrchardCore.Twitter.Services.TwitterSettingsService"
 msgid "Access Token is required"
-msgstr ""
+msgstr "Access Token là bắt buộc"
 
-#. yield return new ValidationResult(T["Access Token Secret is required"], new string[] { nameof(settings.AccessTokenSecret) });
-#: OrchardCore.Twitter\Services\TwitterSettingsService.cs:79
+#. yield return new ValidationResult(S["Access Token Secret is required"], new string[] { nameof(settings.AccessTokenSecret) });
+#: OrchardCore.Twitter\Services\TwitterSettingsService.cs:72
 msgctxt "OrchardCore.Twitter.Services.TwitterSettingsService"
 msgid "Access Token Secret is required"
-msgstr ""
+msgstr "Access Token Secret là bắt buộc"
 
-#. public override LocalizedString DisplayText => T["Update Twitter Status Task"];
-#: OrchardCore.Twitter\Workflows\Activities\UpdateTwitterStatusTask.cs:38
+#. public override LocalizedString DisplayText => S["Update Twitter Status Task"];
+#: OrchardCore.Twitter\Workflows\Activities\UpdateTwitterStatusTask.cs:35
 msgctxt "OrchardCore.Twitter.Workflows.Activities.UpdateTwitterStatusTask"
 msgid "Update Twitter Status Task"
-msgstr ""
+msgstr "Tác vụ Cập nhật Trạng thái Twitter"
 
-#. public override LocalizedString Category => T["Social"];
-#: OrchardCore.Twitter\Workflows\Activities\UpdateTwitterStatusTask.cs:41
+#. public override LocalizedString Category => S["Social"];
+#: OrchardCore.Twitter\Workflows\Activities\UpdateTwitterStatusTask.cs:38
 msgctxt "OrchardCore.Twitter.Workflows.Activities.UpdateTwitterStatusTask"
 msgid "Social"
-msgstr ""
+msgstr "Xã hội"
 
-#. return Outcomes(T["Done"], T["Failed"]);
-#: OrchardCore.Twitter\Workflows\Activities\UpdateTwitterStatusTask.cs:53
+#. return Outcomes(S["Done"], S["Failed"]);
+#: OrchardCore.Twitter\Workflows\Activities\UpdateTwitterStatusTask.cs:50
 msgctxt "OrchardCore.Twitter.Workflows.Activities.UpdateTwitterStatusTask"
 msgid "Done"
-msgstr ""
+msgstr "Hoàn thành"
 
-#. return Outcomes(T["Done"], T["Failed"]);
-#: OrchardCore.Twitter\Workflows\Activities\UpdateTwitterStatusTask.cs:53
+#. return Outcomes(S["Done"], S["Failed"]);
+#: OrchardCore.Twitter\Workflows\Activities\UpdateTwitterStatusTask.cs:50
 msgctxt "OrchardCore.Twitter.Workflows.Activities.UpdateTwitterStatusTask"
 msgid "Failed"
-msgstr ""
+msgstr "Thất bại"
 
 #. <span class="icon"><i class="fab fa-twitter" aria-hidden="true"></i></span><span class="title">@T["Twitter"]</span>
 #: OrchardCore.Twitter\Views\NavigationItemText-twitter.Id.cshtml:1
 msgctxt "OrchardCore.Twitter.Views.NavigationItemText-twitter.Id"
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #. <p class="alert alert-warning">@T["The current tenant will be reloaded when the settings are saved."]</p>
 #: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:4
 msgctxt "OrchardCore.Twitter.Views.TwitterSettings.Edit"
 msgid "The current tenant will be reloaded when the settings are saved."
-msgstr ""
+msgstr "Trang web hiện tại sẽ được tải lại sau khi các cài đặt được lưu."
 
 #. <h3>@T["Twitter Integration Settings"]</h3>
 #: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:6
 msgctxt "OrchardCore.Twitter.Views.TwitterSettings.Edit"
 msgid "Twitter Integration Settings"
-msgstr ""
+msgstr "Cài đặt Tích hợp Twitter"
 
 #. <label asp-for="APIKey">@T["API key"]</label>
-#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:11
+#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:10
 msgctxt "OrchardCore.Twitter.Views.TwitterSettings.Edit"
 msgid "API key"
-msgstr ""
+msgstr "Khoá API"
 
 #. <span class="hint">@T["The API key defined in the Keys and tokens tab of twitter app dashboard."]</span>
-#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:14
+#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:13
 msgctxt "OrchardCore.Twitter.Views.TwitterSettings.Edit"
 msgid "The API key defined in the Keys and tokens tab of twitter app dashboard."
-msgstr ""
+msgstr "Khóa API được xác định trong tab Keys and tokens của bảng điều khiển ứng dụng twitter."
 
 #. <label asp-for="APISecretKey">@T["API secret key"]</label>
-#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:20
+#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:19
 msgctxt "OrchardCore.Twitter.Views.TwitterSettings.Edit"
 msgid "API secret key"
-msgstr ""
+msgstr "Khoá bí mật API"
 
 #. <span class="hint">@T["The API secret defined in the Keys and tokens tab of twitter app dashboard."]</span>
-#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:23
+#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:22
 msgctxt "OrchardCore.Twitter.Views.TwitterSettings.Edit"
 msgid "The API secret defined in the Keys and tokens tab of twitter app dashboard."
-msgstr ""
+msgstr "Bí mật API được xác định trong tab Keys and tokens của bảng điều khiển ứng dụng twitter."
 
 #. <label asp-for="AccessToken">@T["Access Token"]</label>
-#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:29
+#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:28
 msgctxt "OrchardCore.Twitter.Views.TwitterSettings.Edit"
 msgid "Access Token"
-msgstr ""
+msgstr "Access Token"
 
 #. <span class="hint">@T["The Access Token defined in the Keys and tokens tab of twitter app dashboard."]</span>
-#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:32
+#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:31
 msgctxt "OrchardCore.Twitter.Views.TwitterSettings.Edit"
 msgid "The Access Token defined in the Keys and tokens tab of twitter app dashboard."
-msgstr ""
+msgstr "Access Token được xác định trong tab Keys and tokens của bảng điều khiển ứng dụng twitter."
 
 #. <label asp-for="AccessTokenSecret">@T["Access Token Secret"]</label>
-#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:38
+#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:37
 msgctxt "OrchardCore.Twitter.Views.TwitterSettings.Edit"
 msgid "Access Token Secret"
-msgstr ""
+msgstr "Access Token Secret"
 
 #. <span class="hint">@T["The Access Token Secret in the Keys and tokens tab of twitter app dashboard."]</span>
-#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:41
+#: OrchardCore.Twitter\Views\TwitterSettings.Edit.cshtml:40
 msgctxt "OrchardCore.Twitter.Views.TwitterSettings.Edit"
 msgid "The Access Token Secret in the Keys and tokens tab of twitter app dashboard."
-msgstr ""
+msgstr "Access Token Secret được xác định trong tab Keys and tokens của bảng điều khiển ứng dụng twitter."
 
 #. <p class="alert alert-warning">@T["The current tenant will be reloaded when the settings are saved."]</p>
 #: OrchardCore.Twitter\Views\TwitterSigninSettings.Edit.cshtml:4
@@ -163,13 +173,13 @@ msgid "Sign in with Twitter Settings"
 msgstr "Đăng nhập bằng Cài đặt Twitter"
 
 #. <label asp-for="CallbackPath">@T["CallbackPath"]</label>
-#: OrchardCore.Twitter\Views\TwitterSigninSettings.Edit.cshtml:11
+#: OrchardCore.Twitter\Views\TwitterSigninSettings.Edit.cshtml:10
 msgctxt "OrchardCore.Twitter.Views.TwitterSigninSettings.Edit"
 msgid "CallbackPath"
-msgstr ""
+msgstr "CallbackPath"
 
 #. <span class="hint">@T["The request path within the application's base path where the user-agent will be returned. The middleware will process this request when it arrives."]</span>
-#: OrchardCore.Twitter\Views\TwitterSigninSettings.Edit.cshtml:14
+#: OrchardCore.Twitter\Views\TwitterSigninSettings.Edit.cshtml:13
 msgctxt "OrchardCore.Twitter.Views.TwitterSigninSettings.Edit"
 msgid "The request path within the application's base path where the user-agent will be returned. The middleware will process this request when it arrives."
 msgstr "Đường dẫn yêu cầu trong đường dẫn cơ sở của ứng dụng nơi tác nhân người dùng sẽ được trả về. Phần mềm trung gian sẽ xử lý yêu cầu này khi nó đến."
@@ -178,29 +188,29 @@ msgstr "Đường dẫn yêu cầu trong đường dẫn cơ sở của ứng d�
 #: OrchardCore.Twitter\Views\Items\UpdateTwitterStatusTask.Fields.Design.cshtml:8
 msgctxt "OrchardCore.Twitter.Views.Items.UpdateTwitterStatusTask.Fields.Design"
 msgid "Update Twitter Status"
-msgstr ""
+msgstr "Cập nhật Trạng thái Twitter"
 
 #. <label asp-for="StatusTemplate">@T["Template for updating twitter status"]</label>
 #: OrchardCore.Twitter\Views\Items\UpdateTwitterStatusTask.Fields.Edit.cshtml:6
 msgctxt "OrchardCore.Twitter.Views.Items.UpdateTwitterStatusTask.Fields.Edit"
 msgid "Template for updating twitter status"
-msgstr ""
+msgstr "Mẫu cập nhật trạng thái twitter"
 
 #. <span class="hint">@T["The status text of the tweet."]</span>
 #: OrchardCore.Twitter\Views\Items\UpdateTwitterStatusTask.Fields.Edit.cshtml:9
 msgctxt "OrchardCore.Twitter.Views.Items.UpdateTwitterStatusTask.Fields.Edit"
 msgid "The status text of the tweet."
-msgstr ""
+msgstr "Nọi dung trạng thái của tweet."
 
 #. <h4 class="card-title"><i class="fab fa-twitter"></i>@T["Update Twitter Status"]</h4>
 #: OrchardCore.Twitter\Views\Items\UpdateTwitterStatusTask.Fields.Thumbnail.cshtml:1
 msgctxt "OrchardCore.Twitter.Views.Items.UpdateTwitterStatusTask.Fields.Thumbnail"
 msgid "Update Twitter Status"
-msgstr ""
+msgstr "Cập nhật Trạng thái Twitter"
 
 #. <p>@T["Post a tweet"]</p>
 #: OrchardCore.Twitter\Views\Items\UpdateTwitterStatusTask.Fields.Thumbnail.cshtml:2
 msgctxt "OrchardCore.Twitter.Views.Items.UpdateTwitterStatusTask.Fields.Thumbnail"
 msgid "Post a tweet"
-msgstr ""
+msgstr "Đăng một tweet"
 

@@ -1,70 +1,74 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: crowdin.com\n"
 "X-Crowdin-Project: orchard-core\n"
 "X-Crowdin-Language: fa\n"
 "X-Crowdin-File: /dev/Localization/OrchardCore.OpenId.pot\n"
 "Project-Id-Version: orchard-core\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Last-Translator: Antoine Griffard (agriffard)\n"
 "Language-Team: Persian\n"
 "Language: fa_IR\n"
-"PO-Revision-Date: 2019-09-07 05:42\n"
+"PO-Revision-Date: 2020-03-31 13:59\n"
 
-#. builder.Add(T["OpenID Connect"], "15", category =>
+#. builder.Add(S["Security"], security => security
+#: OrchardCore.OpenId\AdminMenu.cs:31
+msgctxt "OrchardCore.OpenId.AdminMenu"
+msgid "Security"
+msgstr "امنیت"
+
+#. .Add(S["OpenID Connect"], "15", category =>
 #: OrchardCore.OpenId\AdminMenu.cs:32
 msgctxt "OrchardCore.OpenId.AdminMenu"
 msgid "OpenID Connect"
 msgstr "OpenID Connect"
 
-#. category.Add(T["Settings"], "1", settings =>
+#. category.Add(S["Settings"], "1", settings =>
 #: OrchardCore.OpenId\AdminMenu.cs:41
 msgctxt "OrchardCore.OpenId.AdminMenu"
 msgid "Settings"
 msgstr "تنظیمات"
 
-#. settings.Add(T["Authentication client"], "1", client => client
+#. settings.Add(S["Authentication client"], "1", client => client
 #: OrchardCore.OpenId\AdminMenu.cs:45
 msgctxt "OrchardCore.OpenId.AdminMenu"
 msgid "Authentication client"
 msgstr "احرازهویت سرویس‌گیرنده"
 
-#. settings.Add(T["Authorization server"], "2", server => server
+#. settings.Add(S["Authorization server"], "2", server => server
 #: OrchardCore.OpenId\AdminMenu.cs:53
 msgctxt "OrchardCore.OpenId.AdminMenu"
 msgid "Authorization server"
 msgstr "سروِر صدورمجوز"
 
-#. settings.Add(T["Token validation"], "3", validation => validation
+#. settings.Add(S["Token validation"], "3", validation => validation
 #: OrchardCore.OpenId\AdminMenu.cs:61
 msgctxt "OrchardCore.OpenId.AdminMenu"
 msgid "Token validation"
 msgstr "اعتبارسنجی توکن"
 
-#. category.Add(T["Management"], "2", management =>
+#. category.Add(S["Management"], "2", management =>
 #: OrchardCore.OpenId\AdminMenu.cs:71
 msgctxt "OrchardCore.OpenId.AdminMenu"
 msgid "Management"
 msgstr "مدیریت"
 
-#. management.Add(T["Applications"], "1", applications => applications
+#. management.Add(S["Applications"], "1", applications => applications
 #: OrchardCore.OpenId\AdminMenu.cs:73
 msgctxt "OrchardCore.OpenId.AdminMenu"
 msgid "Applications"
 msgstr "برنامه‌های‌کاربردی"
 
-#. management.Add(T["Scopes"], "2", applications => applications
+#. management.Add(S["Scopes"], "2", applications => applications
 #: OrchardCore.OpenId\AdminMenu.cs:78
 msgctxt "OrchardCore.OpenId.AdminMenu"
 msgid "Scopes"
 msgstr "اِسکوپ‌ها"
 
-#. ErrorDescription = T["The specified 'client_id' parameter is invalid."]
-#. ErrorDescription = T["The specified 'client_id' parameter is invalid."]
-#. ErrorDescription = T["The specified 'client_id' parameter is invalid."]
-#. ErrorDescription = T["The specified 'client_id' parameter is invalid."]
-#. ErrorDescription = T["The specified 'client_id' parameter is invalid."]
+#. ErrorDescription = S["The specified 'client_id' parameter is invalid."]
+#. ErrorDescription = S["The specified 'client_id' parameter is invalid."]
+#. ErrorDescription = S["The specified 'client_id' parameter is invalid."]
+#. ErrorDescription = S["The specified 'client_id' parameter is invalid."]
+#. ErrorDescription = S["The specified 'client_id' parameter is invalid."]
 #: OrchardCore.OpenId\Controllers\AccessController.cs:80
 #: OrchardCore.OpenId\Controllers\AccessController.cs:141
 #: OrchardCore.OpenId\Controllers\AccessController.cs:259
@@ -74,9 +78,9 @@ msgctxt "OrchardCore.OpenId.Controllers.AccessController"
 msgid "The specified 'client_id' parameter is invalid."
 msgstr "پارامتر 'client_id' مشخص‌شده نامعتبر است."
 
-#. ErrorDescription = T["The logged in user is not allowed to access this client application."]
-#. ErrorDescription = T["The logged in user is not allowed to access this client application."]
-#. ErrorDescription = T["The logged in user is not allowed to access this client application."]
+#. ErrorDescription = S["The logged in user is not allowed to access this client application."]
+#. ErrorDescription = S["The logged in user is not allowed to access this client application."]
+#. ErrorDescription = S["The logged in user is not allowed to access this client application."]
 #: OrchardCore.OpenId\Controllers\AccessController.cs:97
 #: OrchardCore.OpenId\Controllers\AccessController.cs:161
 #: OrchardCore.OpenId\Controllers\AccessController.cs:365
@@ -84,19 +88,19 @@ msgctxt "OrchardCore.OpenId.Controllers.AccessController"
 msgid "The logged in user is not allowed to access this client application."
 msgstr "کاربری که به سامانه وارد شده است، اجازه دسترسی به برنامه‌کاربردی این سرویس‌گیرنده را ندارد."
 
-#. ErrorDescription = T["Interactive user consent is required."]
+#. ErrorDescription = S["Interactive user consent is required."]
 #: OrchardCore.OpenId\Controllers\AccessController.cs:113
 msgctxt "OrchardCore.OpenId.Controllers.AccessController"
 msgid "Interactive user consent is required."
 msgstr "تایید تعاملی کاربر ضروری است."
 
-#. ErrorDescription = T["The resource owner password credentials grant is not supported."]
+#. ErrorDescription = S["The resource owner password credentials grant is not supported."]
 #: OrchardCore.OpenId\Controllers\AccessController.cs:332
 msgctxt "OrchardCore.OpenId.Controllers.AccessController"
 msgid "The resource owner password credentials grant is not supported."
 msgstr "اعطای اعتبارنامه رمزعبور صاحب منبع، پشتیبانی نمی‌شود."
 
-#. ErrorDescription = T["The user is not logged in."]
+#. ErrorDescription = S["The user is not logged in."]
 #: OrchardCore.OpenId\Controllers\AccessController.cs:552
 msgctxt "OrchardCore.OpenId.Controllers.AccessController"
 msgid "The user is not logged in."
@@ -104,35 +108,35 @@ msgstr "کاربر به سامانه وارد نشده است."
 
 #. _notifier.Warning(H["There are no registered services to provide roles."]);
 #. _notifier.Warning(H["There are no registered services to provide roles."]);
-#: OrchardCore.OpenId\Controllers\ApplicationController.cs:112
+#: OrchardCore.OpenId\Controllers\ApplicationController.cs:110
 #: OrchardCore.OpenId\Controllers\ApplicationController.cs:267
 msgctxt "OrchardCore.OpenId.Controllers.ApplicationController"
 msgid "There are no registered services to provide roles."
 msgstr "هیچ سرویس ثبت‌شده‌ای جهت ارائه نقش‌ها وجود ندارد."
 
-#. ModelState.AddModelError(nameof(model.ClientSecret), T["No client secret can be set for public applications."]);
-#. ModelState.AddModelError(nameof(model.ClientSecret), T["No client secret can be set for public applications."]);
-#: OrchardCore.OpenId\Controllers\ApplicationController.cs:131
+#. ModelState.AddModelError(nameof(model.ClientSecret), S["No client secret can be set for public applications."]);
+#. ModelState.AddModelError(nameof(model.ClientSecret), S["No client secret can be set for public applications."]);
+#: OrchardCore.OpenId\Controllers\ApplicationController.cs:129
 #: OrchardCore.OpenId\Controllers\ApplicationController.cs:300
 msgctxt "OrchardCore.OpenId.Controllers.ApplicationController"
 msgid "No client secret can be set for public applications."
 msgstr "امکان استفاده از کلید مخفی سرویس‌گیرنده برای برنامه‌های‌کاربردی عمومی وجود ندارد."
 
-#. ModelState.AddModelError(nameof(model.ClientSecret), T["The client secret is required for confidential applications."]);
-#: OrchardCore.OpenId\Controllers\ApplicationController.cs:136
+#. ModelState.AddModelError(nameof(model.ClientSecret), S["The client secret is required for confidential applications."]);
+#: OrchardCore.OpenId\Controllers\ApplicationController.cs:134
 msgctxt "OrchardCore.OpenId.Controllers.ApplicationController"
 msgid "The client secret is required for confidential applications."
 msgstr "کلید مخفی سرویس‌گیرنده برای برنامه‌های‌کاربردی محرمانه ضروری است."
 
-#. ModelState.AddModelError(nameof(model.ClientId), T["The client identifier is already taken by another application."]);
-#. ModelState.AddModelError(nameof(model.ClientId), T["The client identifier is already taken by another application."]);
-#: OrchardCore.OpenId\Controllers\ApplicationController.cs:141
+#. ModelState.AddModelError(nameof(model.ClientId), S["The client identifier is already taken by another application."]);
+#. ModelState.AddModelError(nameof(model.ClientId), S["The client identifier is already taken by another application."]);
+#: OrchardCore.OpenId\Controllers\ApplicationController.cs:139
 #: OrchardCore.OpenId\Controllers\ApplicationController.cs:310
 msgctxt "OrchardCore.OpenId.Controllers.ApplicationController"
 msgid "The client identifier is already taken by another application."
 msgstr "این مشخص‌کننده سرویس‌گیرنده قبلا توسط برنامه‌کاربردی دیگری گرفته شده است."
 
-#. ModelState.AddModelError(nameof(model.ClientSecret), T["Setting a new client secret is required."]);
+#. ModelState.AddModelError(nameof(model.ClientSecret), S["Setting a new client secret is required."]);
 #: OrchardCore.OpenId\Controllers\ApplicationController.cs:294
 msgctxt "OrchardCore.OpenId.Controllers.ApplicationController"
 msgid "Setting a new client secret is required."
@@ -144,201 +148,219 @@ msgctxt "OrchardCore.OpenId.Controllers.ApplicationController"
 msgid "OpenID Connect settings are not properly configured."
 msgstr "تنظیمات OpenID Connect به درستی پیکربندی نشده است."
 
-#. ModelState.AddModelError(nameof(model.Name), T["The name is already taken by another scope."]);
-#. ModelState.AddModelError(nameof(model.Name), T["The name is already taken by another scope."]);
-#: OrchardCore.OpenId\Controllers\ScopeController.cs:126
-#: OrchardCore.OpenId\Controllers\ScopeController.cs:225
+#. ModelState.AddModelError(nameof(model.Name), S["The name is already taken by another scope."]);
+#. ModelState.AddModelError(nameof(model.Name), S["The name is already taken by another scope."]);
+#: OrchardCore.OpenId\Controllers\ScopeController.cs:124
+#: OrchardCore.OpenId\Controllers\ScopeController.cs:223
 msgctxt "OrchardCore.OpenId.Controllers.ScopeController"
 msgid "The name is already taken by another scope."
 msgstr "این نام در حال حاضر توسط اِسکوپ دیگری گرفته شده است."
 
 #. _notifier.Success(H["OpenID server configuration successfully updated."]);
-#: OrchardCore.OpenId\Controllers\ServerConfigurationController.cs:93
+#: OrchardCore.OpenId\Controllers\ServerConfigurationController.cs:96
 msgctxt "OrchardCore.OpenId.Controllers.ServerConfigurationController"
 msgid "OpenID server configuration successfully updated."
 msgstr "پیکربندی سرور OpenID با موفقیت به‌روزرسانی شد."
 
-#. ErrorDescription = T["The userinfo endpoint can only be used with access tokens representing users."]
-#: OrchardCore.OpenId\Controllers\UserInfoController.cs:53
+#. ErrorDescription = S["The userinfo endpoint can only be used with access tokens representing users."]
+#: OrchardCore.OpenId\Controllers\UserInfoController.cs:58
 msgctxt "OrchardCore.OpenId.Controllers.UserInfoController"
 msgid "The userinfo endpoint can only be used with access tokens representing users."
 msgstr "نقطه‌پایانی اطلاعات‌کاربری با دستیابی به توکن‌های معرف کاربران، می‌تواند استفاده شود."
 
 #. _notifier.Success(H["OpenID validation configuration successfully updated."]);
-#: OrchardCore.OpenId\Controllers\ValidationConfigurationController.cs:93
+#: OrchardCore.OpenId\Controllers\ValidationConfigurationController.cs:96
 msgctxt "OrchardCore.OpenId.Controllers.ValidationConfigurationController"
 msgid "OpenID validation configuration successfully updated."
 msgstr "پیکربندی اعتبار سنجی OpenID با موفقیت به‌روزرسانی شد."
 
-#. results.Add(new ValidationResult(T["The authority cannot be null or empty."], new[]
-#: OrchardCore.OpenId\Services\OpenIdClientService.cs:60
+#. results.Add(new ValidationResult(S["The authority cannot be null or empty."], new[]
+#: OrchardCore.OpenId\Services\OpenIdClientService.cs:56
 msgctxt "OrchardCore.OpenId.Services.OpenIdClientService"
 msgid "The authority cannot be null or empty."
 msgstr "مجوز نمی‌تواند نول یا خالی باشد."
 
-#. results.Add(new ValidationResult(T["The authority must be a valid absolute URL."], new[]
-#: OrchardCore.OpenId\Services\OpenIdClientService.cs:67
+#. results.Add(new ValidationResult(S["The authority must be a valid absolute URL."], new[]
+#: OrchardCore.OpenId\Services\OpenIdClientService.cs:63
 msgctxt "OrchardCore.OpenId.Services.OpenIdClientService"
 msgid "The authority must be a valid absolute URL."
 msgstr "مجوز باید یک آدرس مطلق معتبر باشد."
 
-#. results.Add(new ValidationResult(T["The authority cannot contain a query string or a fragment."], new[]
-#: OrchardCore.OpenId\Services\OpenIdClientService.cs:74
+#. results.Add(new ValidationResult(S["The authority cannot contain a query string or a fragment."], new[]
+#: OrchardCore.OpenId\Services\OpenIdClientService.cs:70
 msgctxt "OrchardCore.OpenId.Services.OpenIdClientService"
 msgid "The authority cannot contain a query string or a fragment."
 msgstr "مجوز نمی‌تواند شامل query string یا fragment باشد."
 
-#. results.Add(new ValidationResult(T["The response type cannot be null or empty."], new[]
-#: OrchardCore.OpenId\Services\OpenIdClientService.cs:82
+#. results.Add(new ValidationResult(S["The response type cannot be null or empty."], new[]
+#: OrchardCore.OpenId\Services\OpenIdClientService.cs:78
 msgctxt "OrchardCore.OpenId.Services.OpenIdClientService"
 msgid "The response type cannot be null or empty."
 msgstr "نوع پاسخ نمی‌تواند نول یا خالی باشد."
 
-#. results.Add(new ValidationResult(T["Unknown response type ."], new[]
-#: OrchardCore.OpenId\Services\OpenIdClientService.cs:91
+#. results.Add(new ValidationResult(S["Unknown response type ."], new[]
+#: OrchardCore.OpenId\Services\OpenIdClientService.cs:87
 msgctxt "OrchardCore.OpenId.Services.OpenIdClientService"
 msgid "Unknown response type ."
 msgstr "نوع پاسخ ناشناخته است."
 
-#. results.Add(new ValidationResult(T["The response mode cannot be null or empty."], new[]
-#: OrchardCore.OpenId\Services\OpenIdClientService.cs:99
+#. results.Add(new ValidationResult(S["The response mode cannot be null or empty."], new[]
+#: OrchardCore.OpenId\Services\OpenIdClientService.cs:95
 msgctxt "OrchardCore.OpenId.Services.OpenIdClientService"
 msgid "The response mode cannot be null or empty."
 msgstr "حالت پاسخ نمی‌تواند نول یا خالی باشد."
 
-#. results.Add(new ValidationResult(T["Unknown response mode."], new[]
-#: OrchardCore.OpenId\Services\OpenIdClientService.cs:107
+#. results.Add(new ValidationResult(S["Unknown response mode."], new[]
+#: OrchardCore.OpenId\Services\OpenIdClientService.cs:103
 msgctxt "OrchardCore.OpenId.Services.OpenIdClientService"
 msgid "Unknown response mode."
 msgstr "حالت پاسخ ناشناخته است."
 
-#. results.Add(new ValidationResult(T["At least one OpenID Connect flow must be enabled."]));
+#. results.Add(new ValidationResult(S["At least one OpenID Connect flow must be enabled."]));
 #: OrchardCore.OpenId\Services\OpenIdServerService.cs:97
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "At least one OpenID Connect flow must be enabled."
 msgstr "حداقل باید یک جریان OpenID Connect فعال شود."
 
-#. results.Add(new ValidationResult(T["The authority must be a valid absolute URL."], new[]
+#. results.Add(new ValidationResult(S["The authority must be a valid absolute URL."], new[]
 #: OrchardCore.OpenId\Services\OpenIdServerService.cs:104
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "The authority must be a valid absolute URL."
 msgstr "مجوز باید یک آدرس مطلق معتبر باشد."
 
-#. results.Add(new ValidationResult(T["The authority cannot contain a query string or a fragment."], new[]
+#. results.Add(new ValidationResult(S["The authority cannot contain a query string or a fragment."], new[]
 #: OrchardCore.OpenId\Services\OpenIdServerService.cs:112
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "The authority cannot contain a query string or a fragment."
 msgstr "مجوز نمی‌تواند شامل query string یا fragment باشد."
 
-#. results.Add(new ValidationResult(T["The certificate cannot be found."], new[]
-#: OrchardCore.OpenId\Services\OpenIdServerService.cs:129
+#. results.Add(new ValidationResult(S["Reference tokens can only be enabled when using the Encrypted token format."], new[]
+#: OrchardCore.OpenId\Services\OpenIdServerService.cs:121
+msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
+msgid "Reference tokens can only be enabled when using the Encrypted token format."
+msgstr ""
+
+#. results.Add(new ValidationResult(S["The certificate cannot be found."], new[]
+#: OrchardCore.OpenId\Services\OpenIdServerService.cs:137
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "The certificate cannot be found."
 msgstr "گواهی‌نامه یافت نمی‌شود."
 
-#. results.Add(new ValidationResult(T["The certificate doesn't contain the required private key."], new[]
-#: OrchardCore.OpenId\Services\OpenIdServerService.cs:137
+#. results.Add(new ValidationResult(S["The certificate doesn't contain the required private key."], new[]
+#: OrchardCore.OpenId\Services\OpenIdServerService.cs:144
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "The certificate doesn't contain the required private key."
 msgstr "گواهی‌نامه شامل کلید خصوصی موردنیاز نیست."
 
-#. results.Add(new ValidationResult(T["The certificate is not valid because it is marked as archived."], new[]
-#: OrchardCore.OpenId\Services\OpenIdServerService.cs:145
+#. results.Add(new ValidationResult(S["The certificate is not valid because it is marked as archived."], new[]
+#: OrchardCore.OpenId\Services\OpenIdServerService.cs:151
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "The certificate is not valid because it is marked as archived."
 msgstr "این گواهی‌نامه به دلیل اینکه بایگانی شده است، معتبر نیست."
 
-#. results.Add(new ValidationResult(T["The certificate is not valid for current date."], new[]
-#: OrchardCore.OpenId\Services\OpenIdServerService.cs:153
+#. results.Add(new ValidationResult(S["The certificate is not valid for current date."], new[]
+#: OrchardCore.OpenId\Services\OpenIdServerService.cs:158
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "The certificate is not valid for current date."
 msgstr "گواهی‌نامه برای تاریخ فعلی معتبر نیست."
 
-#. results.Add(new ValidationResult(T["The password flow cannot be enabled when the token endpoint is disabled."], new[]
-#: OrchardCore.OpenId\Services\OpenIdServerService.cs:162
+#. results.Add(new ValidationResult(S["The password flow cannot be enabled when the token endpoint is disabled."], new[]
+#: OrchardCore.OpenId\Services\OpenIdServerService.cs:167
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "The password flow cannot be enabled when the token endpoint is disabled."
 msgstr "جریان پسورد نمی‌تواند فعال شود وقتی که نقطه‌پایانی توکن غیرفعال است."
 
-#. results.Add(new ValidationResult(T["The client credentials flow cannot be enabled when the token endpoint is disabled."], new[]
-#: OrchardCore.OpenId\Services\OpenIdServerService.cs:170
+#. results.Add(new ValidationResult(S["The client credentials flow cannot be enabled when the token endpoint is disabled."], new[]
+#: OrchardCore.OpenId\Services\OpenIdServerService.cs:175
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "The client credentials flow cannot be enabled when the token endpoint is disabled."
 msgstr "جریان اعتبارنامه سرویس‌گیرنده نمی‌تواند فعال شود وقتی که نقطه‌پایانی توکن غیرفعال است."
 
-#. results.Add(new ValidationResult(T["The authorization code flow cannot be enabled when the authorization and token endpoints are disabled."], new[]
-#: OrchardCore.OpenId\Services\OpenIdServerService.cs:179
+#. results.Add(new ValidationResult(S["The authorization code flow cannot be enabled when the authorization and token endpoints are disabled."], new[]
+#: OrchardCore.OpenId\Services\OpenIdServerService.cs:184
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "The authorization code flow cannot be enabled when the authorization and token endpoints are disabled."
 msgstr "جریان کد مجوز نمی‌تواند فعال شود وقتی که نقاط‌پایانی توکن و صدورمجوز غیرفعال هستند."
 
-#. results.Add(new ValidationResult(T["The refresh token flow cannot be enabled when the token endpoint is disabled."], new[]
-#: OrchardCore.OpenId\Services\OpenIdServerService.cs:189
+#. results.Add(new ValidationResult(S["The refresh token flow cannot be enabled when the token endpoint is disabled."], new[]
+#: OrchardCore.OpenId\Services\OpenIdServerService.cs:194
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "The refresh token flow cannot be enabled when the token endpoint is disabled."
 msgstr "جریان تازه‌سازی توکن نمی‌تواند فعال شود وقتی که نقطه‌پایانی توکن غیرفعال است."
 
-#. results.Add(new ValidationResult(T["The refresh token flow can only be enabled if the password, authorization code or hybrid flows are enabled."], new[]
-#: OrchardCore.OpenId\Services\OpenIdServerService.cs:197
+#. results.Add(new ValidationResult(S["The refresh token flow can only be enabled if the password, authorization code or hybrid flows are enabled."], new[]
+#: OrchardCore.OpenId\Services\OpenIdServerService.cs:202
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "The refresh token flow can only be enabled if the password, authorization code or hybrid flows are enabled."
 msgstr "جریان تازه‌سازی توکن فقط می‌تواند زمانی فعال شود که جریا‌ن پسورد، جریان کد مجوز یا جریان ترکیبی فعال باشد."
 
-#. results.Add(new ValidationResult(T["The implicit flow cannot be enabled when the authorization endpoint is disabled."], new[]
-#: OrchardCore.OpenId\Services\OpenIdServerService.cs:206
+#. results.Add(new ValidationResult(S["The implicit flow cannot be enabled when the authorization endpoint is disabled."], new[]
+#: OrchardCore.OpenId\Services\OpenIdServerService.cs:211
 msgctxt "OrchardCore.OpenId.Services.OpenIdServerService"
 msgid "The implicit flow cannot be enabled when the authorization endpoint is disabled."
 msgstr "جریان ضمنی نمی‌تواند فعال شود وقتی که نقطه‌پایانی صدورمجوز غیرفعال است."
 
-#. results.Add(new ValidationResult(T["Either a tenant or an authority must be registered."], new[]
+#. results.Add(new ValidationResult(S["Either a tenant or an authority must be registered."], new[]
 #: OrchardCore.OpenId\Services\OpenIdValidationService.cs:83
 msgctxt "OrchardCore.OpenId.Services.OpenIdValidationService"
 msgid "Either a tenant or an authority must be registered."
 msgstr "یا یک تِنِنت (tenant)، یا یک مجوز باید ثبت شود."
 
-#. results.Add(new ValidationResult(T["The specified authority is not valid."], new[]
+#. results.Add(new ValidationResult(S["The specified authority is not valid."], new[]
 #: OrchardCore.OpenId\Services\OpenIdValidationService.cs:94
 msgctxt "OrchardCore.OpenId.Services.OpenIdValidationService"
 msgid "The specified authority is not valid."
 msgstr "مجوز مشخص شده نامعتبر است."
 
-#. results.Add(new ValidationResult(T["The authority cannot contain a query string or a fragment."], new[]
+#. results.Add(new ValidationResult(S["The authority cannot contain a query string or a fragment."], new[]
 #: OrchardCore.OpenId\Services\OpenIdValidationService.cs:102
 msgctxt "OrchardCore.OpenId.Services.OpenIdValidationService"
 msgid "The authority cannot contain a query string or a fragment."
 msgstr "مجوز نمی‌تواند شامل query string یا fragment باشد."
 
-#. results.Add(new ValidationResult(T["No audience can be set when using another tenant."], new[]
+#. results.Add(new ValidationResult(S["No audience can be set when using another tenant."], new[]
 #: OrchardCore.OpenId\Services\OpenIdValidationService.cs:111
 msgctxt "OrchardCore.OpenId.Services.OpenIdValidationService"
 msgid "No audience can be set when using another tenant."
 msgstr "در هنگام استفاده از تِننت (tenant) دیگر، نمی‌توان مخاطبی را تنظیم کرد."
 
-#. results.Add(new ValidationResult(T["An audience must be set when configuring the authority."], new[]
+#. results.Add(new ValidationResult(S["An audience must be set when configuring the authority."], new[]
 #: OrchardCore.OpenId\Services\OpenIdValidationService.cs:119
 msgctxt "OrchardCore.OpenId.Services.OpenIdValidationService"
 msgid "An audience must be set when configuring the authority."
 msgstr "در هنگام پیکربندی مجوز، یک مخاطب باید تنظیم شود."
 
-#. results.Add(new ValidationResult(T["The audience cannot start with the special 'oct:' prefix."], new[]
+#. results.Add(new ValidationResult(S["The audience cannot start with the special 'oct:' prefix."], new[]
 #: OrchardCore.OpenId\Services\OpenIdValidationService.cs:128
 msgctxt "OrchardCore.OpenId.Services.OpenIdValidationService"
 msgid "The audience cannot start with the special 'oct:' prefix."
 msgstr "مخاطب نمی‌تواند با پیشوند ویژه ':oct' شروع شود."
 
-#. results.Add(new ValidationResult(T["The specified tenant is not valid."]));
-#. results.Add(new ValidationResult(T["The specified tenant is not valid."], new[]
+#. results.Add(new ValidationResult(S["The specified tenant is not valid."]));
+#. results.Add(new ValidationResult(S["The specified tenant is not valid."], new[]
 #: OrchardCore.OpenId\Services\OpenIdValidationService.cs:141
 #: OrchardCore.OpenId\Services\OpenIdValidationService.cs:152
 msgctxt "OrchardCore.OpenId.Services.OpenIdValidationService"
 msgid "The specified tenant is not valid."
 msgstr "تِننت (tenant) مشخص شده نامعتبر است."
 
-#. results.Add(new ValidationResult(T["No appropriate scope was found."], new[]
+#. results.Add(new ValidationResult(S["No appropriate scope was found."], new[]
 #: OrchardCore.OpenId\Services\OpenIdValidationService.cs:163
 msgctxt "OrchardCore.OpenId.Services.OpenIdValidationService"
 msgid "No appropriate scope was found."
 msgstr "اسکوپ مناسبی پیدا نشد."
+
+#. yield return new ValidationResult(S["{0} is not wellformed", url], new[] { memberName });
+#: OrchardCore.OpenId\ViewModels\CreateOpenIdApplicationViewModel.cs:50
+msgctxt "OrchardCore.OpenId.ViewModels.CreateOpenIdApplicationViewModel"
+msgid "{0} is not wellformed"
+msgstr ""
+
+#. yield return new ValidationResult(S["{0} is not wellformed", url], new[] { memberName });
+#: OrchardCore.OpenId\ViewModels\EditOpenIdApplicationViewModel.cs:54
+msgctxt "OrchardCore.OpenId.ViewModels.EditOpenIdApplicationViewModel"
+msgid "{0} is not wellformed"
+msgstr ""
 
 #. <span class="icon"><i class="fa fa-openid" aria-hidden="true"></i></span><span class="title">@T["OpenID Connect"]</span>
 #: OrchardCore.OpenId\Views\NavigationItemText-openid.Id.cshtml:1
@@ -431,19 +453,19 @@ msgid "The uri where the user agent will be redirected to after application is s
 msgstr "Uri جایی که user agent بعد از خروج (sign out) برنامه‌کاربردی از سرویس ارائه‌دهنده هویت به آن تغییرمسیر می‌دهد. تغییرمسیر بعد از فراخوانی SignedOutCallbackPath اتفاق می‌افتد."
 
 #. <label asp-for="Scopes">@T["Scopes"]</label>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:52
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:51
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Scopes"
 msgstr "اِسکوپ‌ها"
 
 #. <span class="hint">@T["extra scopes except openid and profile"]</span>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:55
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:54
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "extra scopes except openid and profile"
 msgstr "اسکوپ‌های اضافی به جز openid و profile"
 
 #. <h3>@T["Code Authentication Flow"]</h3>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:58
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:57
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Code Authentication Flow"
 msgstr "جریان احرازهویت کد"
@@ -451,15 +473,15 @@ msgstr "جریان احرازهویت کد"
 #. <h5 class="mb-3"><a class="hint" href="http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth" target="_blank">@T["see: "]http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth</a></h5>
 #. <h5 class="mb-3"><a class="hint" href="http://openid.net/specs/openid-connect-core-1_0.html#HybridAuthRequest" target="_blank">@T["see: "]http://openid.net/specs/openid-connect-core-1_0.html#HybridAuthRequest</a></h5>
 #. <h5 class="mb-3"><a class="hint" href="http://openid.net/specs/openid-connect-core-1_0.html#ImplicitAuthRequest" target="_blank">@T["see: "]http://openid.net/specs/openid-connect-core-1_0.html#ImplicitAuthRequest</a></h5>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:59
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:69
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:96
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:58
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:68
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:95
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "see: "
 msgstr "مشاهده شود: "
 
 #. <label class="custom-control-label" asp-for="UseCodeFlow">@T["Use 'code' response type"]</label>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:63
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:62
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Use 'code' response type"
 msgstr "از پاسخی که نوع آن 'code' است، استفاده کن"
@@ -470,78 +492,78 @@ msgstr "از پاسخی که نوع آن 'code' است، استفاده کن"
 #. <span class="hint"><a href="http://openid.net/specs/openid-connect-core-1_0.html#code-tokenExample" target="_blank">— @T["example:"] http://openid.net/specs/openid-connect-core-1_0.html#code-tokenExample</a></span>
 #. <span class="hint"><a href="http://openid.net/specs/openid-connect-core-1_0.html#id_tokenExample" target="_blank">— @T["example:"] http://openid.net/specs/openid-connect-core-1_0.html#id_tokenExample</a></span>
 #. <span class="hint"><a href="http://openid.net/specs/openid-connect-core-1_0.html#id_token-tokenExample" target="_blank">— @T["example:"] http://openid.net/specs/openid-connect-core-1_0.html#id_token-tokenExample</a></span>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:64
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:75
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:83
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:91
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:102
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:110
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:63
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:74
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:82
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:90
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:101
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:109
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "example:"
 msgstr "مثال:"
 
 #. <h3>@T["Hybrid Authentication Flow"]</h3>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:68
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:67
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Hybrid Authentication Flow"
 msgstr "جریان احرازهویت ترکیبی"
 
 #. <label class="custom-control-label" asp-for="UseCodeIdTokenFlow">@T["Use 'code id_token' response type"]</label>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:74
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:73
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Use 'code id_token' response type"
 msgstr "از پاسخی که نوع آن 'code id_token' است، استفاده کن"
 
 #. <label class="custom-control-label" asp-for="UseCodeIdTokenTokenFlow">@T["Use 'code id_token token' response type"]</label>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:82
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:81
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Use 'code id_token token' response type"
 msgstr "از پاسخی که نوع آن 'code id_token token' است، استفاده کن"
 
 #. <label class="custom-control-label" asp-for="UseCodeTokenFlow">@T["Use 'code token' response type"]</label>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:90
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:89
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Use 'code token' response type"
 msgstr "از پاسخی که نوع آن 'code token' است، استفاده کن"
 
 #. <h3>@T["Implicit Authentication Flow"]</h3>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:95
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:94
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Implicit Authentication Flow"
 msgstr "جریان احرازهویت ضمنی"
 
 #. <label class="custom-control-label" asp-for="UseIdTokenFlow">@T["Use 'id_token' response type"]</label>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:101
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:100
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Use 'id_token' response type"
 msgstr "از پاسخی که نوع آن ''id_token' است، استفاده کن"
 
 #. <label class="custom-control-label" asp-for="UseIdTokenTokenFlow">@T["Use 'id_token token' response type"]</label>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:109
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:108
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Use 'id_token token' response type"
 msgstr "از پاسخی که نوع آن 'id_token token' است، استفاده کن"
 
 #. <label>@T["Response Mode"]</label>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:115
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:114
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Response Mode"
 msgstr "حالت پاسخ"
 
 #. <span class="hint">@T["Configure Response Mode see: http://openid.net/specs/openid-connect-core-1_0.html#ImplicitAuthResponse"]</span>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:122
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:121
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Configure Response Mode see: http://openid.net/specs/openid-connect-core-1_0.html#ImplicitAuthResponse"
 msgstr "پیکربندی حالت پاسخ. مشاهده شود: http://openid.net/specs/openid-connect-core-1_0.html#ImplicitAuthResponse"
 
 #. <label>@T["Client Secret"]</label>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:126
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:125
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "Client Secret"
 msgstr "کلید مخفی سرویس‌گیرنده"
 
 #. <span class="hint">@T["set client secret."]</span>
-#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:129
+#: OrchardCore.OpenId\Views\OpenIdClientSettings.Edit.cshtml:128
 msgctxt "OrchardCore.OpenId.Views.OpenIdClientSettings.Edit"
 msgid "set client secret."
 msgstr "کلید مخفی سرویس‌گیرنده را تنظیم می‌کند."
@@ -552,6 +574,12 @@ msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
 msgid "The current tenant will be reloaded when the settings are saved."
 msgstr "پس از ذخیره تنظیمات، tenant جاری، مجدد بارگذاری خواهد شد."
 
+#. <h3>@T["Endpoints"]</h3>
+#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:8
+msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
+msgid "Endpoints"
+msgstr ""
+
 #. <label class="custom-control-label" asp-for="EnableTokenEndpoint">@T["Enable Token Endpoint"]</label>
 #: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:12
 msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
@@ -561,7 +589,7 @@ msgstr "نقطه‌پایانی توکن فعال شود"
 #. <span class="hint">— @T["Enables action"] /connect/token</span>
 #. <span class="hint">— @T["Enables action"] /connect/authorize</span>
 #. <span class="hint">— @T["Enables action"] /connect/logout</span>
-#. <span class="hint">— @T["Enables action"] /connect/userinfo]</span>
+#. <span class="hint">— @T["Enables action"] /connect/userinfo</span>
 #: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:13
 #: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:21
 #: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:29
@@ -587,6 +615,12 @@ msgstr "نقطه‌پایانی خروج از سامانه (Logout) فعال ش�
 msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
 msgid "Enable User Info Endpoint"
 msgstr "نقطه‌پایانی اطلاعات کاربری فعال شود"
+
+#. <h3>@T["Flows"]</h3>
+#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:41
+msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
+msgid "Flows"
+msgstr ""
 
 #. <label class="custom-control-label" asp-for="AllowAuthorizationCodeFlow">@T["Allow Authorization Code Flow"]</label>
 #: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:46
@@ -618,7 +652,7 @@ msgstr "جریان ضمنی مجاز باشد"
 #: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:62
 msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
 msgid "Allow Password Flow"
-msgstr "جریان رمز عبور مجاز باشد"
+msgstr "جریان رمزعبور مجاز باشد"
 
 #. <label class="custom-control-label" asp-for="AllowRefreshTokenFlow">@T["Allow Refresh Token Flow"]</label>
 #: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:70
@@ -631,6 +665,12 @@ msgstr "جریان تازه‌سازی توکن مجاز باشد"
 msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
 msgid "Allow Client Credentials Flow"
 msgstr "جریان اعتبارنامه سرویس‌گیرنده مجاز باشد"
+
+#. <h3>@T["Advanced options"]</h3>
+#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:83
+msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
+msgid "Advanced options"
+msgstr ""
 
 #. <p class="alert alert-info">@T["These options are all optional and are for advanced users only."]</p>
 #: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:85
@@ -661,7 +701,7 @@ msgstr "محل ذخیره‌سازی گواهی‌نامه"
 #. <option value="">@T["None"]</option>
 #: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:97
 #: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:111
-#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:128
+#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:127
 msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
 msgid "None"
 msgstr "هیچ‌کدام"
@@ -685,31 +725,31 @@ msgid "Select the certificate store."
 msgstr "محل ذخیره گواهی‌نامه را انتخاب کنید."
 
 #. <label asp-for="CertificateThumbprint">@T["Certificate"]</label>
-#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:126
+#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:125
 msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
 msgid "Certificate"
 msgstr "گواهینامه"
 
 #. <span class="hint">@T["Select the certificate for signing tokens."]</span>
-#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:151
+#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:150
 msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
 msgid "Select the certificate for signing tokens."
 msgstr "گواهی‌نامه‌ای که برای امضا توکن‌ها استفاده می‌شود را انتخاب کنید."
 
 #. <div class="alert alert-warning" asp-validation-for="CertificateThumbprint">@T["You need to add a certificate to your server for setting up OpenID Connect module."]</div>
-#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:155
+#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:154
 msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
 msgid "You need to add a certificate to your server for setting up OpenID Connect module."
 msgstr "جهت تنظیم ماژول OpenID Connect، شما باید به سرورتان یک گواهی‌نامه اضافه کنید."
 
 #. <label class="custom-control-label" asp-for="UseRollingTokens">@T["Use Rolling Tokens"]</label>
-#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:162
+#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:161
 msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
 msgid "Use Rolling Tokens"
 msgstr "از توکن‌های Rolling استفاده شود"
 
 #. <span class="hint">— @T["When this option is enabled, a new refresh token is issued for each refresh token request (and the previous one is automatically revoked)."]</span>
-#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:163
+#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:162
 msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
 msgid "When this option is enabled, a new refresh token is issued for each refresh token request (and the previous one is automatically revoked)."
 msgstr "وقتی این گزینه فعال باشد، یک توکن تازه‌سازی جدید برای هر درخواست تازه‌سازی توکن، صادر می‌شود (و توکن قبلی به صورت خودکار باطل می‌شود)."
@@ -719,6 +759,18 @@ msgstr "وقتی این گزینه فعال باشد، یک توکن تازه‌
 msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
 msgid "Token Format"
 msgstr "فرمت Token"
+
+#. <label class="custom-control-label" asp-for="UseReferenceTokens">@T["Use Reference Tokens"]</label>
+#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:181
+msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
+msgid "Use Reference Tokens"
+msgstr ""
+
+#. <span class="hint">— @T["When this option is enabled, it allows to keep track of all the issued tokens, when storing a very large number of claims in the authorization codes, access tokens and refresh tokens or when immediate revocation of reference access tokens is desired."]</span>
+#: OrchardCore.OpenId\Views\OpenIdServerSettings.Edit.cshtml:182
+msgctxt "OrchardCore.OpenId.Views.OpenIdServerSettings.Edit"
+msgid "When this option is enabled, it allows to keep track of all the issued tokens, when storing a very large number of claims in the authorization codes, access tokens and refresh tokens or when immediate revocation of reference access tokens is desired."
+msgstr ""
 
 #. <p class="alert alert-warning">@T["The current tenant will be reloaded when the settings are saved."]</p>
 #: OrchardCore.OpenId\Views\OpenIdValidationSettings.Edit.cshtml:4
@@ -757,31 +809,31 @@ msgid "The unique name associated with this tenant. If none is provided, the ten
 msgstr "نام یکتایی که به این تِننت (tenant) مرتبط است. اگر هیچ‌چیزی ارائه نشود، نام تِننت (tenant) به صورت خودکار به عنوان مخاطب پیش‌فرض استفاده می‌شود."
 
 #. <h1>@T["Authorization"]</h1>
-#: OrchardCore.OpenId\Views\Access\Authorize.cshtml:5
+#: OrchardCore.OpenId\Views\Access\Authorize.cshtml:9
 msgctxt "OrchardCore.OpenId.Views.Access.Authorize"
 msgid "Authorization"
 msgstr "صدورمجوز"
 
-#. <p class="lead text-left">@T["Do you want to grant <strong>{0}</strong> access to your data? (scopes requested: {1})", @Model.ApplicationName, @Model.Scope]</p>
-#: OrchardCore.OpenId\Views\Access\Authorize.cshtml:7
+#. <p class="lead text-left">@T["Do you want to grant <strong>{0}</strong> access to your data? (scopes requested: {1})", Model.ApplicationName, Model.Scope]</p>
+#: OrchardCore.OpenId\Views\Access\Authorize.cshtml:11
 msgctxt "OrchardCore.OpenId.Views.Access.Authorize"
 msgid "Do you want to grant <strong>{0}</strong> access to your data? (scopes requested: {1})"
 msgstr "آیا می‌خواهید دسترسی <strong>{0}</strong> را به داده‌های خود بدهید؟ (اِسکپ‌های درخواست شده: {1})"
 
 #. <h2>@T["Ooooops, something went really bad! :("]</h2>
-#: OrchardCore.OpenId\Views\Access\Error.cshtml:5
+#: OrchardCore.OpenId\Views\Access\Error.cshtml:9
 msgctxt "OrchardCore.OpenId.Views.Access.Error"
 msgid "Ooooops, something went really bad! :("
 msgstr "اوووووپس،اتفاق بدی افتاد! :("
 
 #. <h1>@T["Log out"]</h1>
-#: OrchardCore.OpenId\Views\Access\Logout.cshtml:5
+#: OrchardCore.OpenId\Views\Access\Logout.cshtml:9
 msgctxt "OrchardCore.OpenId.Views.Access.Logout"
 msgid "Log out"
 msgstr "خروج از سامانه"
 
 #. <p class="lead text-left">@T["Are you sure you want to log out?"]</p>
-#: OrchardCore.OpenId\Views\Access\Logout.cshtml:7
+#: OrchardCore.OpenId\Views\Access\Logout.cshtml:11
 msgctxt "OrchardCore.OpenId.Views.Access.Logout"
 msgid "Are you sure you want to log out?"
 msgstr "آیا مطمئن هستید که می‌خواهید از سامانه خارج شوید؟"
@@ -878,7 +930,7 @@ msgstr "جریان ضمنی مجاز باشد"
 #: OrchardCore.OpenId\Views\Application\Create.cshtml:59
 msgctxt "OrchardCore.OpenId.Views.Application.Create"
 msgid "Allow Password Flow"
-msgstr "جریان رمز عبور مجاز باشد"
+msgstr "جریان رمزعبور مجاز باشد"
 
 #. <label class="custom-control-label" asp-for="AllowClientCredentialsFlow">@T["Allow Client Credentials Flow"]</label>
 #: OrchardCore.OpenId\Views\Application\Create.cshtml:68
@@ -959,13 +1011,13 @@ msgid "Client Credentials Roles"
 msgstr "نقش‌های اعتبارنامه سرویس‌گیرنده"
 
 #. <button class="btn btn-primary" type="submit">@T["Save"]</button>
-#: OrchardCore.OpenId\Views\Application\Create.cshtml:142
+#: OrchardCore.OpenId\Views\Application\Create.cshtml:141
 msgctxt "OrchardCore.OpenId.Views.Application.Create"
 msgid "Save"
 msgstr "ذخیره"
 
 #. <a class="btn btn-secondary" asp-route-action="Index">@T["Cancel"]</a>
-#: OrchardCore.OpenId\Views\Application\Create.cshtml:143
+#: OrchardCore.OpenId\Views\Application\Create.cshtml:142
 msgctxt "OrchardCore.OpenId.Views.Application.Create"
 msgid "Cancel"
 msgstr "انصراف"
@@ -1068,7 +1120,7 @@ msgstr "جریان ضمنی مجاز باشد"
 #: OrchardCore.OpenId\Views\Application\Edit.cshtml:60
 msgctxt "OrchardCore.OpenId.Views.Application.Edit"
 msgid "Allow Password Flow"
-msgstr "جریان رمز عبور مجاز باشد"
+msgstr "جریان رمزعبور مجاز باشد"
 
 #. <label class="custom-control-label" asp-for="AllowClientCredentialsFlow">@T["Allow Client Credentials Flow"]</label>
 #: OrchardCore.OpenId\Views\Application\Edit.cshtml:69
@@ -1149,13 +1201,13 @@ msgid "Client Credentials Roles"
 msgstr "نقش‌های اعتبارنامه سرویس‌گیرنده"
 
 #. <button class="btn btn-primary" type="submit">@T["Save"]</button>
-#: OrchardCore.OpenId\Views\Application\Edit.cshtml:144
+#: OrchardCore.OpenId\Views\Application\Edit.cshtml:143
 msgctxt "OrchardCore.OpenId.Views.Application.Edit"
 msgid "Save"
 msgstr "ذخیره"
 
 #. <a class="btn btn-secondary" asp-route-action="Index">@T["Cancel"]</a>
-#: OrchardCore.OpenId\Views\Application\Edit.cshtml:145
+#: OrchardCore.OpenId\Views\Application\Edit.cshtml:144
 msgctxt "OrchardCore.OpenId.Views.Application.Edit"
 msgid "Cancel"
 msgstr "انصراف"
@@ -1183,6 +1235,36 @@ msgstr "ویرایش"
 msgctxt "OrchardCore.OpenId.Views.Application.Index"
 msgid "Delete"
 msgstr "پاک‌کردن"
+
+#. <h5>@T["OpenID Server"]</h5>
+#: OrchardCore.OpenId\Views\Items\OpenIdServerDeploymentStep.Edit.cshtml:3
+msgctxt "OrchardCore.OpenId.Views.Items.OpenIdServerDeploymentStep.Edit"
+msgid "OpenID Server"
+msgstr "سرور OpenID"
+
+#. <h5>@T["OpenID Server"]</h5>
+#: OrchardCore.OpenId\Views\Items\OpenIdServerDeploymentStep.Summary.cshtml:3
+msgctxt "OrchardCore.OpenId.Views.Items.OpenIdServerDeploymentStep.Summary"
+msgid "OpenID Server"
+msgstr "سرور OpenID"
+
+#. <span class="hint">@T["Adds OpenID Server settings to the plan."]</span>
+#: OrchardCore.OpenId\Views\Items\OpenIdServerDeploymentStep.Summary.cshtml:5
+msgctxt "OrchardCore.OpenId.Views.Items.OpenIdServerDeploymentStep.Summary"
+msgid "Adds OpenID Server settings to the plan."
+msgstr "تنظیمات سرور OpenID را به برنامه استقرار اضافه می‌کند."
+
+#. <h4 class="card-title">@T["OpenID Server"]</h4>
+#: OrchardCore.OpenId\Views\Items\OpenIdServerDeploymentStep.Thumbnail.cshtml:3
+msgctxt "OrchardCore.OpenId.Views.Items.OpenIdServerDeploymentStep.Thumbnail"
+msgid "OpenID Server"
+msgstr "سرور OpenID"
+
+#. <p>@T["Exports all OpenID Server settings."]</p>
+#: OrchardCore.OpenId\Views\Items\OpenIdServerDeploymentStep.Thumbnail.cshtml:4
+msgctxt "OrchardCore.OpenId.Views.Items.OpenIdServerDeploymentStep.Thumbnail"
+msgid "Exports all OpenID Server settings."
+msgstr "از همه تنظیمات سرور OpenID خروجی می‌گیرد."
 
 #. <h1>@RenderTitleSegments(T["Create a new scope"])</h1>
 #: OrchardCore.OpenId\Views\Scope\Create.cshtml:4
@@ -1221,13 +1303,13 @@ msgid "Additional resources (API audiences)"
 msgstr "منابع اضافی (مخاطبان API)"
 
 #. <button class="btn btn-primary" type="submit">@T["Save"]</button>
-#: OrchardCore.OpenId\Views\Scope\Create.cshtml:46
+#: OrchardCore.OpenId\Views\Scope\Create.cshtml:45
 msgctxt "OrchardCore.OpenId.Views.Scope.Create"
 msgid "Save"
 msgstr "ذخیره"
 
 #. <a class="btn btn-secondary" asp-route-action="Index">@T["Cancel"]</a>
-#: OrchardCore.OpenId\Views\Scope\Create.cshtml:47
+#: OrchardCore.OpenId\Views\Scope\Create.cshtml:46
 msgctxt "OrchardCore.OpenId.Views.Scope.Create"
 msgid "Cancel"
 msgstr "انصراف"
@@ -1269,13 +1351,13 @@ msgid "Additional resources (API audiences)"
 msgstr "منابع اضافی (مخاطبان API)"
 
 #. <button class="btn btn-primary" type="submit">@T["Save"]</button>
-#: OrchardCore.OpenId\Views\Scope\Edit.cshtml:46
+#: OrchardCore.OpenId\Views\Scope\Edit.cshtml:45
 msgctxt "OrchardCore.OpenId.Views.Scope.Edit"
 msgid "Save"
 msgstr "ذخیره"
 
 #. <a class="btn btn-secondary" asp-route-action="Index">@T["Cancel"]</a>
-#: OrchardCore.OpenId\Views\Scope\Edit.cshtml:47
+#: OrchardCore.OpenId\Views\Scope\Edit.cshtml:46
 msgctxt "OrchardCore.OpenId.Views.Scope.Edit"
 msgid "Cancel"
 msgstr "انصراف"
@@ -1311,7 +1393,7 @@ msgid "Configure OpenID server settings"
 msgstr "پیکربندی تنظیمات سرور OpenID"
 
 #. <button class="btn btn-primary" type="submit">@T["Update the server settings and reload the tenant"]</button>
-#: OrchardCore.OpenId\Views\ServerConfiguration\Index.cshtml:11
+#: OrchardCore.OpenId\Views\ServerConfiguration\Index.cshtml:10
 msgctxt "OrchardCore.OpenId.Views.ServerConfiguration.Index"
 msgid "Update the server settings and reload the tenant"
 msgstr "به‌روزرسانی تنظیمات سِروِر و بارگذاری مجدد tenant"
@@ -1323,7 +1405,7 @@ msgid "Configure OpenID validation settings"
 msgstr "پیکربندی تنظیمات اعتبارسنجی OpenID"
 
 #. <button class="btn btn-primary" type="submit">@T["Update the server settings and reload the tenant"]</button>
-#: OrchardCore.OpenId\Views\ValidationConfiguration\Index.cshtml:11
+#: OrchardCore.OpenId\Views\ValidationConfiguration\Index.cshtml:10
 msgctxt "OrchardCore.OpenId.Views.ValidationConfiguration.Index"
 msgid "Update the server settings and reload the tenant"
 msgstr "به‌روزرسانی تنظیمات سِروِر و بارگذاری مجدد tenant"

@@ -8,9 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Localization;
-using Microsoft.Extensions.Localization;
 using OrchardCore.Admin;
-using OrchardCore.DisplayManagement;
 using OrchardCore.DisplayManagement.Notify;
 using OrchardCore.Entities;
 
@@ -30,7 +28,7 @@ namespace Elsa.OrchardCore.Controllers
             IAuthorizationService authorizationService,
             IIdGenerator idGenerator,
             INotifier notifier,
-            IHtmlLocalizer<WorkflowDefinitionsController> localizer)
+            IHtmlLocalizer<WorkflowServersController> localizer)
         {
             _store = store;
             _authorizationService = authorizationService;
@@ -39,7 +37,7 @@ namespace Elsa.OrchardCore.Controllers
             T = localizer;
         }
 
-        private IHtmlLocalizer<WorkflowDefinitionsController> T { get; }
+        private IHtmlLocalizer T { get; }
 
         [HttpGet("")]
         public async Task<ActionResult> Index(CancellationToken cancellationToken)

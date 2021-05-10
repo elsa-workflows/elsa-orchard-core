@@ -1,52 +1,84 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: crowdin.com\n"
 "X-Crowdin-Project: orchard-core\n"
 "X-Crowdin-Language: zh-CN\n"
 "X-Crowdin-File: /dev/Localization/OrchardCore.Facebook.pot\n"
 "Project-Id-Version: orchard-core\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Last-Translator: Antoine Griffard (agriffard)\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2019-09-04 18:52\n"
+"PO-Revision-Date: 2020-06-07 09:12\n"
 
-#. builder.Add(T["Facebook"], "15", settings =>
+#. builder.Add(S["Configuration"], configuration => configuration
+#: OrchardCore.Facebook\AdminMenu.cs:27
+msgctxt "OrchardCore.Facebook.AdminMenu"
+msgid "Configuration"
+msgstr "配置"
+
+#. .Add(S["Settings"], settings => settings
+#: OrchardCore.Facebook\AdminMenu.cs:28
+msgctxt "OrchardCore.Facebook.AdminMenu"
+msgid "Settings"
+msgstr "设置"
+
+#. .Add(S["Facebook App"], S["Facebook App"].PrefixPosition(), settings => settings
+#. .Add(S["Facebook App"], S["Facebook App"].PrefixPosition(), settings => settings
+#: OrchardCore.Facebook\AdminMenu.cs:29
 #: OrchardCore.Facebook\AdminMenu.cs:29
 msgctxt "OrchardCore.Facebook.AdminMenu"
-msgid "Facebook"
-msgstr ""
+msgid "Facebook App"
+msgstr "Facebook 应用程序"
 
-#. .Add(T["Application"], "1", client => client
-#: OrchardCore.Facebook\AdminMenu.cs:31
-msgctxt "OrchardCore.Facebook.AdminMenu"
-msgid "Application"
-msgstr "应用程序"
+#. builder.Add(S["Security"], security => security
+#: OrchardCore.Facebook\AdminMenu.cs:59
+msgctxt "OrchardCore.Facebook.AdminMenuLogin"
+msgid "Security"
+msgstr "安全"
 
-#. builder.Add(T["Facebook"], "1", settings =>
+#. .Add(S["Authentication"], authentication => authentication
 #: OrchardCore.Facebook\AdminMenu.cs:60
+msgctxt "OrchardCore.Facebook.AdminMenuLogin"
+msgid "Authentication"
+msgstr "认证"
+
+#. .Add(S["Facebook"], S["Facebook"].PrefixPosition(), settings => settings
+#. .Add(S["Facebook"], S["Facebook"].PrefixPosition(), settings => settings
+#: OrchardCore.Facebook\AdminMenu.cs:61
+#: OrchardCore.Facebook\AdminMenu.cs:61
 msgctxt "OrchardCore.Facebook.AdminMenuLogin"
 msgid "Facebook"
 msgstr "脸谱网（Facebook）"
 
-#. .Add(T["Login"], "2", client => client
-#: OrchardCore.Facebook\AdminMenu.cs:62
-msgctxt "OrchardCore.Facebook.AdminMenuLogin"
-msgid "Login"
-msgstr "登  录"
-
-#. results.Add(new ValidationResult(T["The AppId is required."], new[]
-#: OrchardCore.Facebook\Services\FacebookService.cs:60
+#. results.Add(new ValidationResult(S["The AppId is required."], new[]
+#: OrchardCore.Facebook\Services\FacebookService.cs:55
 msgctxt "OrchardCore.Facebook.Services.FacebookService"
 msgid "The AppId is required."
 msgstr "AppId 是必需的。"
 
-#. results.Add(new ValidationResult(T["The App Secret is required."], new[]
-#: OrchardCore.Facebook\Services\FacebookService.cs:68
+#. results.Add(new ValidationResult(S["The App Secret is required."], new[]
+#: OrchardCore.Facebook\Services\FacebookService.cs:63
 msgctxt "OrchardCore.Facebook.Services.FacebookService"
 msgid "The App Secret is required."
 msgstr "App Secret 是必需的。"
+
+#. [RegularExpression(@"\/[-A-Za-z0-9+&@#\/%?=~_|!:,.;]+[-A-Za-z0-9+&@#\/%=~_|]", ErrorMessage = "Invalid path")]
+#: OrchardCore.Facebook\Login\ViewModels\FacebookLoginSettingsViewModel.cs:7
+msgctxt "OrchardCore.Facebook.Login.ViewModels.FacebookLoginSettingsViewModel"
+msgid "Invalid path"
+msgstr "无效路径"
+
+#. updater.ModelState.AddModelError(nameof(model.Liquid), S["The FaceBook Body doesn't contain a valid Liquid expression. Details: {0}", string.Join(" ", errors)]);
+#: OrchardCore.Facebook\Widgets\Drivers\FacebookPluginPartDisplayDriver.cs:85
+msgctxt "OrchardCore.Facebook.Widgets.Drivers.FacebookPluginPartDisplayDriver"
+msgid "The FaceBook Body doesn't contain a valid Liquid expression. Details: {0}"
+msgstr "Facebook正文不包含有效的 Liquid 表达式。详细信息： {0}"
+
+#. context.Updater.ModelState.AddModelError(nameof(model.Liquid), S["The Body doesn't contain a valid Liquid expression. Details: {0}", string.Join(" ", errors)]);
+#: OrchardCore.Facebook\Widgets\Settings\FacebookPluginPartSettingsDisplayDriver.cs:52
+msgctxt "OrchardCore.Facebook.Widgets.Settings.FacebookPluginPartSettingsDisplayDriver"
+msgid "The Body doesn't contain a valid Liquid expression. Details: {0}"
+msgstr "Facebook正文不包含有效的 Liquid 表达式。详细信息： {0}"
 
 #. <p class="alert alert-warning">@T["The current tenant will be reloaded when the settings are saved."]</p>
 #: OrchardCore.Facebook\Views\FacebookLoginSettings.Edit.cshtml:4
@@ -64,7 +96,7 @@ msgstr "登录设置"
 #: OrchardCore.Facebook\Views\FacebookLoginSettings.Edit.cshtml:9
 msgctxt "OrchardCore.Facebook.Views.FacebookLoginSettings.Edit"
 msgid "CallbackPath"
-msgstr "回头路径"
+msgstr "回调地址"
 
 #. <span class="hint">@T["The request path within the application's base path where the user-agent will be returned. The middleware will process this request when it arrives."]</span>
 #: OrchardCore.Facebook\Views\FacebookLoginSettings.Edit.cshtml:12
@@ -142,7 +174,7 @@ msgstr "Javascript SDK 版本"
 #: OrchardCore.Facebook\Views\FacebookSettings.Edit.cshtml:27
 msgctxt "OrchardCore.Facebook.Views.FacebookSettings.Edit"
 msgid "Javascript Sdk js"
-msgstr ""
+msgstr "Javascript Sdk js"
 
 #. <span class="hint">@T["Determines which versions of the Graph API and any API dialogs or plugins are invoked. Default is v3.2"]</span>
 #: OrchardCore.Facebook\Views\FacebookSettings.Edit.cshtml:32
@@ -178,5 +210,11 @@ msgstr "应用ID和版本自动填充。请检查 <a target=\"_blank\" href=\"ht
 #: OrchardCore.Facebook\Views\NavigationItemText-facebook.Id.cshtml:1
 msgctxt "OrchardCore.Facebook.Views.NavigationItemText-facebook.Id"
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
+
+#. <span class="icon"><i class="fa fa-facebook" aria-hidden="true"></i></span><span class="title">@T["Facebook App"]</span>
+#: OrchardCore.Facebook\Views\NavigationItemText-facebookApp.Id.cshtml:1
+msgctxt "OrchardCore.Facebook.Views.NavigationItemText-facebookApp.Id"
+msgid "Facebook App"
+msgstr "Facebook 应用程序"
 

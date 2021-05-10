@@ -2,6 +2,6 @@
 {
     public class ElsaWorkflowsSettingsViewModel
     {
-        public string  WorkflowServerUrl { get; set; }
+        public string WorkflowServerUrl { get; set; } = default!;
     }
 }

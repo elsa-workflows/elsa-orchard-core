@@ -1,40 +1,52 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
-"X-Generator: crowdin.com\n"
 "X-Crowdin-Project: orchard-core\n"
 "X-Crowdin-Language: ar\n"
 "X-Crowdin-File: /dev/Localization/OrchardCore.Google.pot\n"
 "Project-Id-Version: orchard-core\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Last-Translator: Antoine Griffard (agriffard)\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2019-09-04 18:51\n"
+"PO-Revision-Date: 2020-03-31 13:45\n"
 
-#. builder.Add(T["Google"], "15", settings => settings
+#. builder.Add(S["Security"], security => security
+#: OrchardCore.Google\AdminMenu.cs:28
+msgctxt "OrchardCore.Google.GoogleAuthenticationAdminMenu"
+msgid "Security"
+msgstr ""
+
+#. .Add(S["Authentication"], authentication => authentication
+#: OrchardCore.Google\AdminMenu.cs:29
+msgctxt "OrchardCore.Google.GoogleAuthenticationAdminMenu"
+msgid "Authentication"
+msgstr ""
+
+#. .Add(S["Google"], "16", settings => settings
 #: OrchardCore.Google\AdminMenu.cs:30
-msgctxt "OrchardCore.Google.AdminMenuGoogleAuthentication"
+msgctxt "OrchardCore.Google.GoogleAuthenticationAdminMenu"
 msgid "Google"
-msgstr "قوقل"
+msgstr ""
 
-#. .Add(T["Google Authentication"], "20", client => client
-#: OrchardCore.Google\AdminMenu.cs:32
-msgctxt "OrchardCore.Google.AdminMenuGoogleAuthentication"
-msgid "Google Authentication"
-msgstr "مصادقة قوقل"
+#. builder.Add(S["Configuration"], configuration => configuration
+#: OrchardCore.Google\AdminMenu.cs:59
+msgctxt "OrchardCore.Google.GoogleAnalyticsAdminMenu"
+msgid "Configuration"
+msgstr ""
 
-#. builder.Add(T["Google"], "15", settings => settings
+#. .Add(S["Settings"], settings => settings
+#: OrchardCore.Google\AdminMenu.cs:60
+msgctxt "OrchardCore.Google.GoogleAnalyticsAdminMenu"
+msgid "Settings"
+msgstr ""
+
+#. .Add(S["Google Analytics"], S["Google Analytics"], settings => settings
+#. .Add(S["Google Analytics"], S["Google Analytics"], settings => settings
 #: OrchardCore.Google\AdminMenu.cs:61
-msgctxt "OrchardCore.Google.AdminMenuGoogleAnalytics"
-msgid "Google"
-msgstr "قوقل"
-
-#. .Add(T["Google Analytics"], "10", client => client
-#: OrchardCore.Google\AdminMenu.cs:63
-msgctxt "OrchardCore.Google.AdminMenuGoogleAnalytics"
+#: OrchardCore.Google\AdminMenu.cs:61
+msgctxt "OrchardCore.Google.GoogleAnalyticsAdminMenu"
 msgid "Google Analytics"
-msgstr "تحليلات قوقل"
+msgstr ""
 
 #. <h3>@T["Google Analytics Settings"]</h3>
 #: OrchardCore.Google\Views\GoogleAnalyticsSettings.Edit.cshtml:4
@@ -67,37 +79,37 @@ msgid "Google Authentication Settings"
 msgstr "إعدادات مصادقة قوقل"
 
 #. <label asp-for="ClientID">@T["Client ID"]</label>
-#: OrchardCore.Google\Views\GoogleAuthenticationSettings.Edit.cshtml:11
+#: OrchardCore.Google\Views\GoogleAuthenticationSettings.Edit.cshtml:10
 msgctxt "OrchardCore.Google.Views.GoogleAuthenticationSettings.Edit"
 msgid "Client ID"
 msgstr "معرف العميل"
 
 #. <span class="hint">@T["The client id defined in Google API console for the application."]</span>
-#: OrchardCore.Google\Views\GoogleAuthenticationSettings.Edit.cshtml:14
+#: OrchardCore.Google\Views\GoogleAuthenticationSettings.Edit.cshtml:13
 msgctxt "OrchardCore.Google.Views.GoogleAuthenticationSettings.Edit"
 msgid "The client id defined in Google API console for the application."
 msgstr "معرف العميل موجود في واجهة برمجة التطبيقات لقوقل للتطبيق."
 
 #. <label asp-for="ClientSecret">@T["API secret key"]</label>
-#: OrchardCore.Google\Views\GoogleAuthenticationSettings.Edit.cshtml:20
+#: OrchardCore.Google\Views\GoogleAuthenticationSettings.Edit.cshtml:19
 msgctxt "OrchardCore.Google.Views.GoogleAuthenticationSettings.Edit"
 msgid "API secret key"
 msgstr "المفتاح السري للـ API"
 
 #. <span class="hint">@T["The client secret defined in Google API console for the application."]</span>
-#: OrchardCore.Google\Views\GoogleAuthenticationSettings.Edit.cshtml:23
+#: OrchardCore.Google\Views\GoogleAuthenticationSettings.Edit.cshtml:22
 msgctxt "OrchardCore.Google.Views.GoogleAuthenticationSettings.Edit"
 msgid "The client secret defined in Google API console for the application."
 msgstr "شفرة أمان العميل معرفة في واجهة التطبيقات البرمجية لقوقل للتطبيق."
 
 #. <label asp-for="CallbackPath">@T["CallbackPath"]</label>
-#: OrchardCore.Google\Views\GoogleAuthenticationSettings.Edit.cshtml:29
+#: OrchardCore.Google\Views\GoogleAuthenticationSettings.Edit.cshtml:28
 msgctxt "OrchardCore.Google.Views.GoogleAuthenticationSettings.Edit"
 msgid "CallbackPath"
 msgstr "مسار الإستدعاء المرجعي"
 
 #. <span class="hint">@T["The request path within the application's base path where the user-agent will be returned. The middleware will process this request when it arrives."]</span>
-#: OrchardCore.Google\Views\GoogleAuthenticationSettings.Edit.cshtml:32
+#: OrchardCore.Google\Views\GoogleAuthenticationSettings.Edit.cshtml:31
 msgctxt "OrchardCore.Google.Views.GoogleAuthenticationSettings.Edit"
 msgid "The request path within the application's base path where the user-agent will be returned. The middleware will process this request when it arrives."
 msgstr "المسار المطلوب داخل المسار الأساسي للتطبيق حيث سيتم إرجاع وكيل المستخدم إليه. الـ middleware سوف تعالج الطلب عند وصوله."
@@ -107,4 +119,10 @@ msgstr "المسار المطلوب داخل المسار الأساسي للت�
 msgctxt "OrchardCore.Google.Views.NavigationItemText-google.Id"
 msgid "Google"
 msgstr "قوقل"
+
+#. <span class="icon"><i class="fa fa-google" aria-hidden="true"></i></span><span class="title">@T["Google Analytics"]</span>
+#: OrchardCore.Google\Views\NavigationItemText-googleAnalytics.Id.cshtml:1
+msgctxt "OrchardCore.Google.Views.NavigationItemText-googleAnalytics.Id"
+msgid "Google Analytics"
+msgstr ""
 

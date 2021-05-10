@@ -4,8 +4,8 @@ namespace Elsa.OrchardCore.ViewModels
 {
     public class WorkflowDefinitionListViewModel
     {
-        public ICollection<WorkflowDefinitionListEntry> WorkflowDefinitions { get; set; }
-        public WorkflowDefinitionListOptions Options { get; set; }
-        public dynamic Pager { get; set; }
+        public ICollection<WorkflowDefinitionListEntry> WorkflowDefinitions { get; set; } = new List<WorkflowDefinitionListEntry>();
+        public WorkflowDefinitionListOptions Options { get; set; } = new WorkflowDefinitionListOptions();
+        public dynamic Pager { get; set; } = default!;
     }
 }

@@ -1,6 +1,6 @@
-using System;
 using Elsa.OrchardCore.Indexes;
 using OrchardCore.Data.Migration;
+using YesSql.Sql;
 
 namespace Elsa.OrchardCore
 {
@@ -8,7 +8,7 @@ namespace Elsa.OrchardCore
     {
         public int Create()
         {
-            SchemaBuilder.CreateMapIndexTable(nameof(WorkflowServerIndex), table => table
+            SchemaBuilder.CreateMapIndexTable<WorkflowServerIndex>( table => table
                 .Column<string>("WorkflowServerId")
             );
 

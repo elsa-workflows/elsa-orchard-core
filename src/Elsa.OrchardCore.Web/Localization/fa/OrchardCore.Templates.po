@@ -1,39 +1,57 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: crowdin.com\n"
 "X-Crowdin-Project: orchard-core\n"
 "X-Crowdin-Language: fa\n"
 "X-Crowdin-File: /dev/Localization/OrchardCore.Templates.pot\n"
 "Project-Id-Version: orchard-core\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Last-Translator: Antoine Griffard (agriffard)\n"
 "Language-Team: Persian\n"
 "Language: fa_IR\n"
-"PO-Revision-Date: 2019-09-04 19:19\n"
+"PO-Revision-Date: 2020-03-31 14:10\n"
 
-#. .Add(T["Configuration"], content => content
+#. .Add(S["Design"], design => design
 #: OrchardCore.Templates\AdminMenu.cs:25
 msgctxt "OrchardCore.Templates.AdminMenu"
-msgid "Configuration"
-msgstr "پیکربندی"
+msgid "Design"
+msgstr "طراحی"
 
-#. .Add(T["Templates"], "10", import => import
+#. .Add(S["Templates"], "Templates", import => import
 #: OrchardCore.Templates\AdminMenu.cs:26
 msgctxt "OrchardCore.Templates.AdminMenu"
 msgid "Templates"
 msgstr "قالب‌ها"
 
-#. ModelState.AddModelError(nameof(TemplateViewModel.Name), T["The name is mandatory."]);
-#. ModelState.AddModelError(nameof(TemplateViewModel.Name), T["The name is mandatory."]);
-#: OrchardCore.Templates\Controllers\TemplateController.cs:103
-#: OrchardCore.Templates\Controllers\TemplateController.cs:163
+#. .Add(S["Design"], design => design
+#: OrchardCore.Templates\AdminTemplatesAdminMenu.cs:25
+msgctxt "OrchardCore.Templates.AdminTemplatesAdminMenu"
+msgid "Design"
+msgstr "طراحی"
+
+#. .Add(S["Admin Templates"], "Admin Templates", import => import
+#: OrchardCore.Templates\AdminTemplatesAdminMenu.cs:26
+msgctxt "OrchardCore.Templates.AdminTemplatesAdminMenu"
+msgid "Admin Templates"
+msgstr "قالب‌های ادمین"
+
+#. ModelState.AddModelError(nameof(TemplateViewModel.Name), S["The name is mandatory."]);
+#. ModelState.AddModelError(nameof(TemplateViewModel.Name), S["The name is mandatory."]);
+#: OrchardCore.Templates\Controllers\TemplateController.cs:129
+#: OrchardCore.Templates\Controllers\TemplateController.cs:226
 msgctxt "OrchardCore.Templates.Controllers.TemplateController"
 msgid "The name is mandatory."
 msgstr "نام اجباری است."
 
+#. ModelState.AddModelError(nameof(TemplateViewModel.Name), S["A template with the same name already exists."]);
+#. ModelState.AddModelError(nameof(TemplateViewModel.Name), S["A template with the same name already exists."]);
+#: OrchardCore.Templates\Controllers\TemplateController.cs:140
+#: OrchardCore.Templates\Controllers\TemplateController.cs:230
+msgctxt "OrchardCore.Templates.Controllers.TemplateController"
+msgid "A template with the same name already exists."
+msgstr "یک قالب با این نام وجود دارد."
+
 #. _notifier.Success(H["Template deleted successfully"]);
-#: OrchardCore.Templates\Controllers\TemplateController.cs:207
+#: OrchardCore.Templates\Controllers\TemplateController.cs:292
 msgctxt "OrchardCore.Templates.Controllers.TemplateController"
 msgid "Template deleted successfully"
 msgstr "قالب با موفقیت پاک شد"
@@ -79,6 +97,36 @@ msgstr "قالب برای بخش {0} نوع محتوا {1} جهت مشاهده �
 msgctxt "OrchardCore.Templates.Views.TemplateSettings"
 msgid "Edit templates"
 msgstr "ویرایش قالب‌ها"
+
+#. <h5>@T["All Admin Templates"]</h5>
+#: OrchardCore.Templates\Views\Items\AllAdminTemplatesDeploymentStep.Edit.cshtml:3
+msgctxt "OrchardCore.Templates.Views.Items.AllAdminTemplatesDeploymentStep.Edit"
+msgid "All Admin Templates"
+msgstr "همه قالب‌های ادمین"
+
+#. <h5>@T["All Admin Templates"]</h5>
+#: OrchardCore.Templates\Views\Items\AllAdminTemplatesDeploymentStep.Summary.cshtml:3
+msgctxt "OrchardCore.Templates.Views.Items.AllAdminTemplatesDeploymentStep.Summary"
+msgid "All Admin Templates"
+msgstr "همه قالب‌های ادمین"
+
+#. <span class="hint">@T["Adds all admin templates to the plan."]</span>
+#: OrchardCore.Templates\Views\Items\AllAdminTemplatesDeploymentStep.Summary.cshtml:5
+msgctxt "OrchardCore.Templates.Views.Items.AllAdminTemplatesDeploymentStep.Summary"
+msgid "Adds all admin templates to the plan."
+msgstr "تمامی قالب‌های ادمین را به برنامه استقرار اضافه می‌کند."
+
+#. <h4 class="card-title">@T["All Admin Templates"]</h4>
+#: OrchardCore.Templates\Views\Items\AllAdminTemplatesDeploymentStep.Thumbnail.cshtml:3
+msgctxt "OrchardCore.Templates.Views.Items.AllAdminTemplatesDeploymentStep.Thumbnail"
+msgid "All Admin Templates"
+msgstr "همه قالب‌های ادمین"
+
+#. <p>@T["Exports admin templates."]</p>
+#: OrchardCore.Templates\Views\Items\AllAdminTemplatesDeploymentStep.Thumbnail.cshtml:4
+msgctxt "OrchardCore.Templates.Views.Items.AllAdminTemplatesDeploymentStep.Thumbnail"
+msgid "Exports admin templates."
+msgstr "از قالب‌های ادمین خروجی می‌گیرد."
 
 #. <h5>@T["All Templates"]</h5>
 #: OrchardCore.Templates\Views\Items\AllTemplatesDeploymentStep.Edit.cshtml:3
@@ -134,73 +182,67 @@ msgid "Create Template"
 msgstr "ایجاد قالب"
 
 #. <label asp-for="Name">@T["Name"]</label>
-#: OrchardCore.Templates\Views\Template\Create.cshtml:21
+#: OrchardCore.Templates\Views\Template\Create.cshtml:23
 msgctxt "OrchardCore.Templates.Views.Template.Create"
 msgid "Name"
 msgstr "نام"
 
-#. <span asp-validation-for="Name" class="text-danger">@T["The name is required."]</span>
-#: OrchardCore.Templates\Views\Template\Create.cshtml:22
-msgctxt "OrchardCore.Templates.Views.Template.Create"
-msgid "The name is required."
-msgstr "نام ضروری است."
-
 #. <span class="hint">@T["The name of the template."]</span>
-#: OrchardCore.Templates\Views\Template\Create.cshtml:24
+#: OrchardCore.Templates\Views\Template\Create.cshtml:26
 msgctxt "OrchardCore.Templates.Views.Template.Create"
 msgid "The name of the template."
 msgstr "نام قالب."
 
 #. <label asp-for="Description">@T["Description"]</label>
-#: OrchardCore.Templates\Views\Template\Create.cshtml:28
+#: OrchardCore.Templates\Views\Template\Create.cshtml:30
 msgctxt "OrchardCore.Templates.Views.Template.Create"
 msgid "Description"
 msgstr "توضیحات"
 
 #. <span class="hint">@T["The description of the template."]</span>
-#: OrchardCore.Templates\Views\Template\Create.cshtml:30
+#: OrchardCore.Templates\Views\Template\Create.cshtml:32
 msgctxt "OrchardCore.Templates.Views.Template.Create"
 msgid "The description of the template."
 msgstr "توضیحات قالب."
 
 #. <label asp-for="Content">@T["Content"]</label>
-#: OrchardCore.Templates\Views\Template\Create.cshtml:34
+#: OrchardCore.Templates\Views\Template\Create.cshtml:36
 msgctxt "OrchardCore.Templates.Views.Template.Create"
 msgid "Content"
 msgstr "محتوا"
 
 #. <span class="hint">@T["The Liquid template."]</span>
-#: OrchardCore.Templates\Views\Template\Create.cshtml:36
+#: OrchardCore.Templates\Views\Template\Create.cshtml:38
 msgctxt "OrchardCore.Templates.Views.Template.Create"
 msgid "The Liquid template."
 msgstr "قالب Liquid."
 
 #. <button type="submit" name="submit" class="btn btn-secondary">@T["Save"]</button>
-#: OrchardCore.Templates\Views\Template\Create.cshtml:42
+#: OrchardCore.Templates\Views\Template\Create.cshtml:43
 msgctxt "OrchardCore.Templates.Views.Template.Create"
 msgid "Save"
 msgstr "ذخیره"
 
 #. <span class="sr-only">@T["Toggle Dropdown"]</span>
-#: OrchardCore.Templates\Views\Template\Create.cshtml:44
+#: OrchardCore.Templates\Views\Template\Create.cshtml:45
 msgctxt "OrchardCore.Templates.Views.Template.Create"
 msgid "Toggle Dropdown"
 msgstr "تغییر وضعیت منوی کشویی"
 
 #. <button class="dropdown-item" name="submit" type="submit" value="SaveAndContinue">@T["and continue"]</button>
-#: OrchardCore.Templates\Views\Template\Create.cshtml:47
+#: OrchardCore.Templates\Views\Template\Create.cshtml:48
 msgctxt "OrchardCore.Templates.Views.Template.Create"
 msgid "and continue"
 msgstr "و ادامه"
 
 #. <a class="btn btn-secondary" href="@returnUrl">@T["Cancel"]</a>
-#: OrchardCore.Templates\Views\Template\Create.cshtml:53
+#: OrchardCore.Templates\Views\Template\Create.cshtml:54
 msgctxt "OrchardCore.Templates.Views.Template.Create"
 msgid "Cancel"
 msgstr "انصراف"
 
 #. <a class="btn btn-info" href="@Url.Action("Index", "Preview", new { area = "OrchardCore.Templates" })" target="_blank">@T["Preview"]</a>
-#: OrchardCore.Templates\Views\Template\Create.cshtml:55
+#: OrchardCore.Templates\Views\Template\Create.cshtml:59
 msgctxt "OrchardCore.Templates.Views.Template.Create"
 msgid "Preview"
 msgstr "پیش‌نمایش"
@@ -212,43 +254,37 @@ msgid "Edit Template"
 msgstr "ویرایش قالب"
 
 #. <label asp-for="Name">@T["Name"]</label>
-#: OrchardCore.Templates\Views\Template\Edit.cshtml:24
+#: OrchardCore.Templates\Views\Template\Edit.cshtml:25
 msgctxt "OrchardCore.Templates.Views.Template.Edit"
 msgid "Name"
 msgstr "نام"
 
-#. <span asp-validation-for="Name" class="text-danger">@T["The name is required."]</span>
-#: OrchardCore.Templates\Views\Template\Edit.cshtml:25
-msgctxt "OrchardCore.Templates.Views.Template.Edit"
-msgid "The name is required."
-msgstr "نام ضروری است."
-
 #. <span class="hint">@T["The name of the template."]</span>
-#: OrchardCore.Templates\Views\Template\Edit.cshtml:27
+#: OrchardCore.Templates\Views\Template\Edit.cshtml:28
 msgctxt "OrchardCore.Templates.Views.Template.Edit"
 msgid "The name of the template."
 msgstr "نام قالب."
 
 #. <label asp-for="Description">@T["Description"]</label>
-#: OrchardCore.Templates\Views\Template\Edit.cshtml:31
+#: OrchardCore.Templates\Views\Template\Edit.cshtml:32
 msgctxt "OrchardCore.Templates.Views.Template.Edit"
 msgid "Description"
 msgstr "توضیحات"
 
 #. <span class="hint">@T["The description of the template."]</span>
-#: OrchardCore.Templates\Views\Template\Edit.cshtml:33
+#: OrchardCore.Templates\Views\Template\Edit.cshtml:34
 msgctxt "OrchardCore.Templates.Views.Template.Edit"
 msgid "The description of the template."
 msgstr "توضیحات قالب."
 
 #. <label asp-for="Content">@T["Content"]</label>
-#: OrchardCore.Templates\Views\Template\Edit.cshtml:37
+#: OrchardCore.Templates\Views\Template\Edit.cshtml:38
 msgctxt "OrchardCore.Templates.Views.Template.Edit"
 msgid "Content"
 msgstr "محتوا"
 
 #. <span class="hint">@T["The Liquid template."]</span>
-#: OrchardCore.Templates\Views\Template\Edit.cshtml:39
+#: OrchardCore.Templates\Views\Template\Edit.cshtml:40
 msgctxt "OrchardCore.Templates.Views.Template.Edit"
 msgid "The Liquid template."
 msgstr "قالب Liquid."
@@ -278,37 +314,65 @@ msgid "Cancel"
 msgstr "انصراف"
 
 #. <a class="btn btn-info" href="@Url.Action("Index", "Preview", new { area = "OrchardCore.Templates" })" target="_blank">@T["Preview"]</a>
-#: OrchardCore.Templates\Views\Template\Edit.cshtml:58
+#: OrchardCore.Templates\Views\Template\Edit.cshtml:61
 msgctxt "OrchardCore.Templates.Views.Template.Edit"
 msgid "Preview"
 msgstr "پیش‌نمایش"
 
+#. <h1>@RenderTitleSegments(T["Admin Templates"])</h1>
+#: OrchardCore.Templates\Views\Template\Index.cshtml:14
+msgctxt "OrchardCore.Templates.Views.Template.Index"
+msgid "Admin Templates"
+msgstr "قالب‌های ادمین"
+
 #. <h1>@RenderTitleSegments(T["Templates"])</h1>
-#: OrchardCore.Templates\Views\Template\Index.cshtml:3
+#: OrchardCore.Templates\Views\Template\Index.cshtml:18
 msgctxt "OrchardCore.Templates.Views.Template.Index"
 msgid "Templates"
 msgstr "قالب‌ها"
 
-#. <a asp-route-action="Create" asp-route-returnUrl="@FullRequestPath" class="btn btn-primary" role="button">@T["Add Template"]</a>
-#: OrchardCore.Templates\Views\Template\Index.cshtml:8
+#. <a asp-route-action="Create" asp-route-admintemplates="@Model.AdminTemplates" asp-route-returnUrl="@FullRequestPath" class="btn btn-primary" role="button">@T["Add Template"]</a>
+#: OrchardCore.Templates\Views\Template\Index.cshtml:23
 msgctxt "OrchardCore.Templates.Views.Template.Index"
 msgid "Add Template"
 msgstr "افزودن قالب"
 
-#. <a asp-action="Edit" asp-route-name="@entry.Name" asp-route-returnUrl="@FullRequestPath" class="btn btn-primary btn-sm">@T["Edit"]</a>
-#: OrchardCore.Templates\Views\Template\Index.cshtml:23
+#. <label id="items" for="select-all">@T.Plural(Model.Templates.Count, "1 item", "{0} items")<span class="text-muted" title="@T["Items {0} to {1}", startIndex, endIndex]">@T.Plural((int)Model.Pager.TotalItemCount, " / {0} item in total", " / {0} items in total")</span></label>
+#: OrchardCore.Templates\Views\Template\Index.cshtml:31
+msgctxt "OrchardCore.Templates.Views.Template.Index"
+msgid "1 item"
+msgid_plural "{0} items"
+msgstr[0] "1 آیتم"
+msgstr[1] "{0} آیتم"
+
+#. <label id="items" for="select-all">@T.Plural(Model.Templates.Count, "1 item", "{0} items")<span class="text-muted" title="@T["Items {0} to {1}", startIndex, endIndex]">@T.Plural((int)Model.Pager.TotalItemCount, " / {0} item in total", " / {0} items in total")</span></label>
+#: OrchardCore.Templates\Views\Template\Index.cshtml:31
+msgctxt "OrchardCore.Templates.Views.Template.Index"
+msgid "Items {0} to {1}"
+msgstr "آیتم‌های {0} تا {1}"
+
+#. <label id="items" for="select-all">@T.Plural(Model.Templates.Count, "1 item", "{0} items")<span class="text-muted" title="@T["Items {0} to {1}", startIndex, endIndex]">@T.Plural((int)Model.Pager.TotalItemCount, " / {0} item in total", " / {0} items in total")</span></label>
+#: OrchardCore.Templates\Views\Template\Index.cshtml:31
+msgctxt "OrchardCore.Templates.Views.Template.Index"
+msgid " / {0} item in total"
+msgid_plural " / {0} items in total"
+msgstr[0] " / {0} آیتم در مجموع"
+msgstr[1] " / {0} آیتم در مجموع"
+
+#. <a asp-action="Edit" asp-route-name="@entry.Name" asp-route-admintemplates="@Model.AdminTemplates" asp-route-returnUrl="@FullRequestPath" class="btn btn-primary btn-sm">@T["Edit"]</a>
+#: OrchardCore.Templates\Views\Template\Index.cshtml:43
 msgctxt "OrchardCore.Templates.Views.Template.Index"
 msgid "Edit"
 msgstr "ویرایش"
 
-#. <a asp-action="Delete" asp-route-name="@entry.Name" class="btn btn-danger btn-sm" itemprop="RemoveUrl UnsafeUrl">@T["Delete"]</a>
-#: OrchardCore.Templates\Views\Template\Index.cshtml:24
+#. <a asp-action="Delete" asp-route-name="@entry.Name" asp-route-admintemplates="@Model.AdminTemplates" class="btn btn-danger btn-sm" itemprop="RemoveUrl UnsafeUrl">@T["Delete"]</a>
+#: OrchardCore.Templates\Views\Template\Index.cshtml:44
 msgctxt "OrchardCore.Templates.Views.Template.Index"
 msgid "Delete"
 msgstr "پاک‌کردن"
 
 #. @T["<strong>Nothing here!</strong> There are no templates for the moment."]
-#: OrchardCore.Templates\Views\Template\Index.cshtml:41
+#: OrchardCore.Templates\Views\Template\Index.cshtml:61
 msgctxt "OrchardCore.Templates.Views.Template.Index"
 msgid "<strong>Nothing here!</strong> There are no templates for the moment."
 msgstr "<strong>چیزی اینجا نیست!<strong/> در این لحظه قالبی وجود ندارد."

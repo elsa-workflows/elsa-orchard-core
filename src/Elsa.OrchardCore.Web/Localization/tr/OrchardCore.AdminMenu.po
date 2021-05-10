@@ -1,67 +1,67 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: crowdin.com\n"
 "X-Crowdin-Project: orchard-core\n"
 "X-Crowdin-Language: tr\n"
 "X-Crowdin-File: /dev/Localization/OrchardCore.AdminMenu.pot\n"
 "Project-Id-Version: orchard-core\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Last-Translator: Antoine Griffard (agriffard)\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2019-09-21 09:04\n"
+"PO-Revision-Date: 2020-05-10 20:50\n"
 
-#. builder.Add(S["Configuration"], cfg => cfg
-#: OrchardCore.AdminMenu\AdminMenu.cs:30
+#. builder.Add(S["Configuration"], configuration => configuration
+#: OrchardCore.AdminMenu\AdminMenu.cs:29
 msgctxt "OrchardCore.AdminMenu.AdminMenu"
 msgid "Configuration"
-msgstr "Konfigürasyon"
+msgstr "Yapılandırma"
 
-#. .Add(S["Admin Menus"], "1.5", admt => admt
-#: OrchardCore.AdminMenu\AdminMenu.cs:31
+#. .Add(S["Admin Menus"], S["Admin Menus"].PrefixPosition(), admt => admt
+#. .Add(S["Admin Menus"], S["Admin Menus"].PrefixPosition(), admt => admt
+#: OrchardCore.AdminMenu\AdminMenu.cs:30
+#: OrchardCore.AdminMenu\AdminMenu.cs:30
 msgctxt "OrchardCore.AdminMenu.AdminMenu"
 msgid "Admin Menus"
 msgstr "Yönetici Menüsü"
 
 #. _notifier.Error(H["Error when retrieving the list of admin menus"]);
-#: OrchardCore.AdminMenu\Controllers\MenuController.cs:96
+#: OrchardCore.AdminMenu\Controllers\MenuController.cs:89
 msgctxt "OrchardCore.AdminMenu.Controllers.MenuController"
 msgid "Error when retrieving the list of admin menus"
 msgstr "Yönetici menü listesi alınırken hata oluştu"
 
 #. _notifier.Success(H["Admin menu updated successfully"]);
-#: OrchardCore.AdminMenu\Controllers\MenuController.cs:194
+#: OrchardCore.AdminMenu\Controllers\MenuController.cs:186
 msgctxt "OrchardCore.AdminMenu.Controllers.MenuController"
 msgid "Admin menu updated successfully"
 msgstr "Yönetici menüsü başarıyla güncellendi"
 
 #. _notifier.Error(H["Can't find the admin menu."]);
-#: OrchardCore.AdminMenu\Controllers\MenuController.cs:214
+#: OrchardCore.AdminMenu\Controllers\MenuController.cs:207
 msgctxt "OrchardCore.AdminMenu.Controllers.MenuController"
 msgid "Can't find the admin menu."
 msgstr "Yönetici menüsü bulunamıyor."
 
 #. _notifier.Success(H["Admin menu deleted successfully"]);
-#: OrchardCore.AdminMenu\Controllers\MenuController.cs:223
+#: OrchardCore.AdminMenu\Controllers\MenuController.cs:215
 msgctxt "OrchardCore.AdminMenu.Controllers.MenuController"
 msgid "Admin menu deleted successfully"
 msgstr "Yönetici menüsü başarıyla silindi"
 
 #. _notifier.Error(H["Can't delete the admin menu."]);
-#: OrchardCore.AdminMenu\Controllers\MenuController.cs:227
+#: OrchardCore.AdminMenu\Controllers\MenuController.cs:219
 msgctxt "OrchardCore.AdminMenu.Controllers.MenuController"
 msgid "Can't delete the admin menu."
 msgstr "Yönetici menüsü silinemiyor."
 
 #. _notifier.Success(H["Admin menu toggled successfully"]);
-#: OrchardCore.AdminMenu\Controllers\MenuController.cs:253
+#: OrchardCore.AdminMenu\Controllers\MenuController.cs:245
 msgctxt "OrchardCore.AdminMenu.Controllers.MenuController"
 msgid "Admin menu toggled successfully"
 msgstr "Yönetici menüsü başarıyla değiştirildi"
 
 #. _notifier.Success(H["Admin node added successfully"]);
-#: OrchardCore.AdminMenu\Controllers\NodeController.cs:154
+#: OrchardCore.AdminMenu\Controllers\NodeController.cs:152
 msgctxt "OrchardCore.AdminMenu.Controllers.NodeController"
 msgid "Admin node added successfully"
 msgstr "Yönetici düğümü başarıyla eklendi"
@@ -79,13 +79,13 @@ msgid "The admin node has validation errors"
 msgstr "Yönetici düğümünde doğrulama hataları var"
 
 #. _notifier.Success(H["Admin node deleted successfully"]);
-#: OrchardCore.AdminMenu\Controllers\NodeController.cs:272
+#: OrchardCore.AdminMenu\Controllers\NodeController.cs:273
 msgctxt "OrchardCore.AdminMenu.Controllers.NodeController"
 msgid "Admin node deleted successfully"
 msgstr "Yönetici düğümü başarıyla silindi"
 
 #. _notifier.Success(H["Admin node toggled successfully"]);
-#: OrchardCore.AdminMenu\Controllers\NodeController.cs:303
+#: OrchardCore.AdminMenu\Controllers\NodeController.cs:305
 msgctxt "OrchardCore.AdminMenu.Controllers.NodeController"
 msgid "Admin node toggled successfully"
 msgstr "Yönetici düğümü başarıyla değiştirildi"
@@ -107,26 +107,26 @@ msgstr "Etkinleştir"
 
 #. itemprop="RemoveUrl UnsafeUrl">@T["Delete"]</a>
 #. class="btn btn-danger" itemprop="RemoveUrl UnsafeUrl">@T["Delete"]</a>
-#: OrchardCore.AdminMenu\Views\MenuItem.TreeSummary.cshtml:34
-#: OrchardCore.AdminMenu\Views\MenuItem.TreeSummary.cshtml:53
+#: OrchardCore.AdminMenu\Views\MenuItem.TreeSummary.cshtml:33
+#: OrchardCore.AdminMenu\Views\MenuItem.TreeSummary.cshtml:52
 msgctxt "OrchardCore.AdminMenu.Views.MenuItem.TreeSummary"
 msgid "Delete"
 msgstr "Sil"
 
 #. <span class="text-warning">@T["Can't show the item of type: {0}. Maybe a required module has been disabled?", menuType]</span>
-#: OrchardCore.AdminMenu\Views\MenuItem.TreeSummary.cshtml:36
+#: OrchardCore.AdminMenu\Views\MenuItem.TreeSummary.cshtml:35
 msgctxt "OrchardCore.AdminMenu.Views.MenuItem.TreeSummary"
 msgid "Can't show the item of type: {0}. Maybe a required module has been disabled?"
 msgstr "Tür öğesi gösterilemiyor:{0}. Gerekli bir modül devre dışı bırakılmış olabilir mi?"
 
 #. class="btn btn-primary btn-sm">@T["Edit"]</a>
-#: OrchardCore.AdminMenu\Views\MenuItem.TreeSummary.cshtml:46
+#: OrchardCore.AdminMenu\Views\MenuItem.TreeSummary.cshtml:45
 msgctxt "OrchardCore.AdminMenu.Views.MenuItem.TreeSummary"
 msgid "Edit"
 msgstr "Düzenle"
 
 #. <span class="sr-only">@T["Toggle Dropdown"]</span>
-#: OrchardCore.AdminMenu\Views\MenuItem.TreeSummary.cshtml:55
+#: OrchardCore.AdminMenu\Views\MenuItem.TreeSummary.cshtml:54
 msgctxt "OrchardCore.AdminMenu.Views.MenuItem.TreeSummary"
 msgid "Toggle Dropdown"
 msgstr "Açılır Listeyi Aç/Kapa"
@@ -186,37 +186,37 @@ msgid "The Link Text as it will be shown in the tree."
 msgstr "Ağaçta gösterileceği şekliyle bağlantı metni."
 
 #. <label asp-for="LinkUrl">@T["Link Url"]</label>
-#: OrchardCore.AdminMenu\Views\Items\LinkAdminNode.Fields.TreeEdit.cshtml:21
+#: OrchardCore.AdminMenu\Views\Items\LinkAdminNode.Fields.TreeEdit.cshtml:20
 msgctxt "OrchardCore.AdminMenu.Views.Items.LinkAdminNode.Fields.TreeEdit"
 msgid "Link Url"
 msgstr "Bağlantı Adresi"
 
 #. <span class="hint">@T["The url of the link. A link will be shown only if it or one of their children have a url. The url will be relative to the root of the admin site"]</span>
-#: OrchardCore.AdminMenu\Views\Items\LinkAdminNode.Fields.TreeEdit.cshtml:23
+#: OrchardCore.AdminMenu\Views\Items\LinkAdminNode.Fields.TreeEdit.cshtml:22
 msgctxt "OrchardCore.AdminMenu.Views.Items.LinkAdminNode.Fields.TreeEdit"
 msgid "The url of the link. A link will be shown only if it or one of their children have a url. The url will be relative to the root of the admin site"
 msgstr "Bağlantının Url'si. Bir bağlantı yalnızca veya çocuklarından birinin Url'si varsa gösterilecektir. Url, yönetici sitesinin köküne göre olacaktır"
 
 #. <label asp-for="IconClass">@T["Icon"]</label>
-#: OrchardCore.AdminMenu\Views\Items\LinkAdminNode.Fields.TreeEdit.cshtml:27
+#: OrchardCore.AdminMenu\Views\Items\LinkAdminNode.Fields.TreeEdit.cshtml:26
 msgctxt "OrchardCore.AdminMenu.Views.Items.LinkAdminNode.Fields.TreeEdit"
 msgid "Icon"
 msgstr "İkon"
 
 #. @T["Pick"]
-#: OrchardCore.AdminMenu\Views\Items\LinkAdminNode.Fields.TreeEdit.cshtml:40
+#: OrchardCore.AdminMenu\Views\Items\LinkAdminNode.Fields.TreeEdit.cshtml:39
 msgctxt "OrchardCore.AdminMenu.Views.Items.LinkAdminNode.Fields.TreeEdit"
 msgid "Pick"
 msgstr "Seç"
 
 #. <span class="hint">@T["Select an icon to display when this link is a first level menu item."]</span>
-#: OrchardCore.AdminMenu\Views\Items\LinkAdminNode.Fields.TreeEdit.cshtml:54
+#: OrchardCore.AdminMenu\Views\Items\LinkAdminNode.Fields.TreeEdit.cshtml:53
 msgctxt "OrchardCore.AdminMenu.Views.Items.LinkAdminNode.Fields.TreeEdit"
 msgid "Select an icon to display when this link is a first level menu item."
 msgstr "Bu bağlantı ilk seviye menü maddesi olduğunda gösterilecek bir simge seçin."
 
 #. <h5 class="modal-title">@T["Pick an icon"]</h5>
-#: OrchardCore.AdminMenu\Views\Items\LinkAdminNode.Fields.TreeEdit.cshtml:62
+#: OrchardCore.AdminMenu\Views\Items\LinkAdminNode.Fields.TreeEdit.cshtml:61
 msgctxt "OrchardCore.AdminMenu.Views.Items.LinkAdminNode.Fields.TreeEdit"
 msgid "Pick an icon"
 msgstr "Bir simge seç"
@@ -276,7 +276,7 @@ msgid "Select an icon to display when this menu item is at the first level."
 msgstr "Bu menü maddesi birinci seviyede olduğunda görüntülemek için bir simge seçin."
 
 #. <h5 class="modal-title">@T["Pick an icon"]</h5>
-#: OrchardCore.AdminMenu\Views\Items\PlaceholderAdminNode.Fields.TreeEdit.cshtml:56
+#: OrchardCore.AdminMenu\Views\Items\PlaceholderAdminNode.Fields.TreeEdit.cshtml:54
 msgctxt "OrchardCore.AdminMenu.Views.Items.PlaceholderAdminNode.Fields.TreeEdit"
 msgid "Pick an icon"
 msgstr "Bir simge seç"
@@ -336,31 +336,31 @@ msgid "Edit Admin Menu: {0}"
 msgstr "{0} Yönetici Menüsünü Düzenle"
 
 #. <label asp-for="Name">@T["Name"]</label>
-#: OrchardCore.AdminMenu\Views\Menu\Edit.cshtml:10
+#: OrchardCore.AdminMenu\Views\Menu\Edit.cshtml:9
 msgctxt "OrchardCore.AdminMenu.Views.Menu.Edit"
 msgid "Name"
 msgstr "İsim"
 
 #. <span asp-validation-for="Name" class="text-danger">@T["The name is required"]</span>
-#: OrchardCore.AdminMenu\Views\Menu\Edit.cshtml:12
+#: OrchardCore.AdminMenu\Views\Menu\Edit.cshtml:11
 msgctxt "OrchardCore.AdminMenu.Views.Menu.Edit"
 msgid "The name is required"
 msgstr "Ad gerereklidir"
 
 #. <button class="btn btn-primary" type="submit">@T["Save"]</button>
-#: OrchardCore.AdminMenu\Views\Menu\Edit.cshtml:17
+#: OrchardCore.AdminMenu\Views\Menu\Edit.cshtml:14
 msgctxt "OrchardCore.AdminMenu.Views.Menu.Edit"
 msgid "Save"
 msgstr "Kaydet"
 
 #. <a class="btn btn-primary" asp-route-controller="Node" asp-route-action="List" asp-route-id="@Model.Id">@T["Edit Admin Nodes"] </a>
-#: OrchardCore.AdminMenu\Views\Menu\Edit.cshtml:18
+#: OrchardCore.AdminMenu\Views\Menu\Edit.cshtml:15
 msgctxt "OrchardCore.AdminMenu.Views.Menu.Edit"
 msgid "Edit Admin Nodes"
 msgstr "Yönetici Düğümünü Güncelle"
 
 #. <a class="btn btn-secondary" asp-route-action="List">@T["Cancel"]</a>
-#: OrchardCore.AdminMenu\Views\Menu\Edit.cshtml:19
+#: OrchardCore.AdminMenu\Views\Menu\Edit.cshtml:16
 msgctxt "OrchardCore.AdminMenu.Views.Menu.Edit"
 msgid "Cancel"
 msgstr "İptal"
@@ -381,9 +381,9 @@ msgstr "Yönetici Menüsü Ekle"
 #: OrchardCore.AdminMenu\Views\Menu\List.cshtml:22
 msgctxt "OrchardCore.AdminMenu.Views.Menu.List"
 msgid "Filter"
-msgstr ""
+msgstr "Filtrele"
 
-#. <input id="search-box" asp-for="Options.Search" class="form-control" placeholder="@T["Search"]" autofocus="autofocus" />
+#. <input id="search-box" asp-for="Options.Search" class="form-control" placeholder="@T["Search"]" type="search" autofocus />
 #. <button type="submit" class="btn btn-sm btn-secondary">@T["Search"]</button>
 #: OrchardCore.AdminMenu\Views\Menu\List.cshtml:24
 #: OrchardCore.AdminMenu\Views\Menu\List.cshtml:26
@@ -431,7 +431,7 @@ msgstr "Etkinleştir"
 #: OrchardCore.AdminMenu\Views\Menu\List.cshtml:67
 msgctxt "OrchardCore.AdminMenu.Views.Menu.List"
 msgid "<strong>Nothing here!</strong> Your search returned no results."
-msgstr ""
+msgstr "<strong>Bir şey bulunamadı!</strong> Arama sonucunda bir şey bulunamadı."
 
 #. <h1>@RenderTitleSegments(T["Create Node"])</h1>
 #: OrchardCore.AdminMenu\Views\Node\Create.cshtml:3
@@ -440,13 +440,13 @@ msgid "Create Node"
 msgstr "Düğüm oluştur"
 
 #. <button class="btn btn-primary" type="submit">@T["Create"]</button>
-#: OrchardCore.AdminMenu\Views\Node\Create.cshtml:15
+#: OrchardCore.AdminMenu\Views\Node\Create.cshtml:14
 msgctxt "OrchardCore.AdminMenu.Views.Node.Create"
 msgid "Create"
 msgstr "Oluştur"
 
 #. asp-route-id="@Model.AdminMenuId">@T["Cancel"]</a>
-#: OrchardCore.AdminMenu\Views\Node\Create.cshtml:19
+#: OrchardCore.AdminMenu\Views\Node\Create.cshtml:18
 msgctxt "OrchardCore.AdminMenu.Views.Node.Create"
 msgid "Cancel"
 msgstr "İptal"
@@ -458,43 +458,43 @@ msgid "Edit Node"
 msgstr "Düğümü Düzenle"
 
 #. <label asp-for="Priority">@T["Selection Priority"]</label>
-#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:15
+#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:14
 msgctxt "OrchardCore.AdminMenu.Views.Node.Edit"
 msgid "Selection Priority"
 msgstr "Seçim önceliği"
 
 #. <span class="hint">@T["The priority of this link to be displayed as active instead of another one when both are pointing to the same url. The link with the highest value has the active status in the navigation."]</span>
-#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:17
+#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:16
 msgctxt "OrchardCore.AdminMenu.Views.Node.Edit"
 msgid "The priority of this link to be displayed as active instead of another one when both are pointing to the same url. The link with the highest value has the active status in the navigation."
 msgstr "Her ikisi de aynı Url’yi işaret ederken, bu bağlantının önceliği başka biri yerine etkin olarak gösterilecektir. En yüksek değerli bağlantı, navigasyondaki aktif duruma sahiptir."
 
 #. <label asp-for="Position">@T["Position Order"]</label>
-#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:21
+#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:20
 msgctxt "OrchardCore.AdminMenu.Views.Node.Edit"
 msgid "Position Order"
 msgstr "Konum Sırası"
 
 #. <span class="hint">@T["The position order of this link in the admin menu."]</span>
-#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:23
+#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:22
 msgctxt "OrchardCore.AdminMenu.Views.Node.Edit"
 msgid "The position order of this link in the admin menu."
 msgstr "Yönetici menüsündeki bu linkin pozisyon sırası."
 
 #. <button class="btn btn-primary" type="submit">@T["Save"]</button>
-#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:27
+#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:26
 msgctxt "OrchardCore.AdminMenu.Views.Node.Edit"
 msgid "Save"
 msgstr "Kaydet"
 
 #. itemprop="RemoveUrl UnsafeUrl">@T["Delete"]</a>
-#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:34
+#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:33
 msgctxt "OrchardCore.AdminMenu.Views.Node.Edit"
 msgid "Delete"
 msgstr "Sil"
 
 #. asp-route-id="@Model.AdminMenuId">@T["Cancel"]</a>
-#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:38
+#: OrchardCore.AdminMenu\Views\Node\Edit.cshtml:37
 msgctxt "OrchardCore.AdminMenu.Views.Node.Edit"
 msgid "Cancel"
 msgstr "İptal"
@@ -524,19 +524,19 @@ msgid "Back"
 msgstr "Geri"
 
 #. <h5 class="modal-title">@T["Available Admin Nodes"]</h5>
-#: OrchardCore.AdminMenu\Views\Node\List.cshtml:67
+#: OrchardCore.AdminMenu\Views\Node\List.cshtml:66
 msgctxt "OrchardCore.AdminMenu.Views.Node.List"
 msgid "Available Admin Nodes"
 msgstr "Kullanılabilir Yönetici Düğümleri"
 
 #. <button type="button" class="btn btn-secondary" data-dismiss="modal">@T["Cancel"]</button>
-#: OrchardCore.AdminMenu\Views\Node\List.cshtml:83
+#: OrchardCore.AdminMenu\Views\Node\List.cshtml:82
 msgctxt "OrchardCore.AdminMenu.Views.Node.List"
 msgid "Cancel"
 msgstr "İptal"
 
 #. <div id="move-error-message" class="d-none" data-message="@T["There was an error when moving the tree node."]"></div>
-#: OrchardCore.AdminMenu\Views\Node\List.cshtml:90
+#: OrchardCore.AdminMenu\Views\Node\List.cshtml:88
 msgctxt "OrchardCore.AdminMenu.Views.Node.List"
 msgid "There was an error when moving the tree node."
 msgstr "Ağaç düğümü taşınırken hata oluştu."

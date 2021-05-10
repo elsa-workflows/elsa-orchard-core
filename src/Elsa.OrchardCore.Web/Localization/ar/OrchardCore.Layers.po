@@ -1,82 +1,80 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
-"X-Generator: crowdin.com\n"
 "X-Crowdin-Project: orchard-core\n"
 "X-Crowdin-Language: ar\n"
 "X-Crowdin-File: /dev/Localization/OrchardCore.Layers.pot\n"
 "Project-Id-Version: orchard-core\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Last-Translator: Antoine Griffard (agriffard)\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2019-09-14 23:42\n"
+"PO-Revision-Date: 2020-03-31 13:47\n"
 
-#. .Add(T["Configuration"], configuration => configuration
+#. .Add(S["Design"], design => design
 #: OrchardCore.Layers\AdminMenu.cs:26
 msgctxt "OrchardCore.Layers.AdminMenu"
-msgid "Configuration"
-msgstr "الإعدادات"
+msgid "Design"
+msgstr ""
 
-#. .Add(T["Settings"], settings => settings
+#. .Add(S["Settings"], settings => settings
 #: OrchardCore.Layers\AdminMenu.cs:27
 msgctxt "OrchardCore.Layers.AdminMenu"
 msgid "Settings"
 msgstr "الإعدادات"
 
-#. .Add(T["Zones"], T["Zones"], zones => zones
-#. .Add(T["Zones"], T["Zones"], zones => zones
+#. .Add(S["Zones"], S["Zones"], zones => zones
+#. .Add(S["Zones"], S["Zones"], zones => zones
 #: OrchardCore.Layers\AdminMenu.cs:28
 #: OrchardCore.Layers\AdminMenu.cs:28
 msgctxt "OrchardCore.Layers.AdminMenu"
 msgid "Zones"
 msgstr "المناطق"
 
-#. .Add(T["Layers"], T["Layers"], layers => layers
-#. .Add(T["Layers"], T["Layers"], layers => layers
+#. .Add(S["Widgets"], S["Widgets"], widgets => widgets
+#. .Add(S["Widgets"], S["Widgets"], widgets => widgets
 #: OrchardCore.Layers\AdminMenu.cs:33
 #: OrchardCore.Layers\AdminMenu.cs:33
 msgctxt "OrchardCore.Layers.AdminMenu"
-msgid "Layers"
-msgstr "الطبقات"
+msgid "Widgets"
+msgstr ""
 
 #. _notifier.Success(H["Layer deleted successfully."]);
-#: OrchardCore.Layers\Controllers\AdminController.cs:226
+#: OrchardCore.Layers\Controllers\AdminController.cs:228
 msgctxt "OrchardCore.Layers.Controllers.AdminController"
 msgid "Layer deleted successfully."
 msgstr "تم حذف الطبقة بنجاح."
 
 #. _notifier.Error(H["The layer couldn't be deleted: you must remove any associated widgets first."]);
-#: OrchardCore.Layers\Controllers\AdminController.cs:230
+#: OrchardCore.Layers\Controllers\AdminController.cs:232
 msgctxt "OrchardCore.Layers.Controllers.AdminController"
 msgid "The layer couldn't be deleted: you must remove any associated widgets first."
 msgstr "لا يمكن حذف الطبقة: عليك أولاً إزالة أي الحاجيات المرتبطة بها."
 
 #. ModelState.AddModelError(nameof(LayerEditViewModel.Name), S["The layer name is required."]);
-#: OrchardCore.Layers\Controllers\AdminController.cs:306
+#: OrchardCore.Layers\Controllers\AdminController.cs:308
 msgctxt "OrchardCore.Layers.Controllers.AdminController"
 msgid "The layer name is required."
 msgstr "إسم الطبقة مطلوب."
 
 #. ModelState.AddModelError(nameof(LayerEditViewModel.Name), S["The layer name already exists."]);
-#: OrchardCore.Layers\Controllers\AdminController.cs:310
+#: OrchardCore.Layers\Controllers\AdminController.cs:312
 msgctxt "OrchardCore.Layers.Controllers.AdminController"
 msgid "The layer name already exists."
 msgstr "إسم الطبقة موجود مسبقاً."
 
 #. ModelState.AddModelError(nameof(LayerEditViewModel.Rule), S["The rule is required."]);
-#: OrchardCore.Layers\Controllers\AdminController.cs:315
+#: OrchardCore.Layers\Controllers\AdminController.cs:317
 msgctxt "OrchardCore.Layers.Controllers.AdminController"
 msgid "The rule is required."
 msgstr "القاعدة مطلوبة."
 
 #. context.Updater.ModelState.AddModelError("LayerMetadata.Zone", S["Zone is missing"]);
-#: OrchardCore.Layers\Drivers\LayerMetadataWelder.cs:72
+#: OrchardCore.Layers\Drivers\LayerMetadataWelder.cs:76
 msgctxt "OrchardCore.Layers.Drivers.LayerMetadataWelder"
 msgid "Zone is missing"
 msgstr "المنطقة مفقوده"
 
-#. Description = T["Site layers define the rules and zone placement for widgets."],
+#. Description = S["Site layers define the rules and zone placement for widgets."],
 #: OrchardCore.Layers\GraphQL\SiteLayersQuery.cs:28
 msgctxt "OrchardCore.Layers.GraphQL.SiteLayersQuery"
 msgid "Site layers define the rules and zone placement for widgets."
@@ -178,62 +176,68 @@ msgctxt "OrchardCore.Layers.Views.Admin.Edit"
 msgid "Save"
 msgstr "حفظ"
 
-#. <h1>@RenderTitleSegments(T["Edit Widget Layers"])</h1>
-#: OrchardCore.Layers\Views\Admin\Index.cshtml:14
+#. <h1>@RenderTitleSegments(T["Edit Widgets and Layers"])</h1>
+#: OrchardCore.Layers\Views\Admin\Index.cshtml:15
 msgctxt "OrchardCore.Layers.Views.Admin.Index"
-msgid "Edit Widget Layers"
-msgstr "تحرير طبقات الـ widget"
+msgid "Edit Widgets and Layers"
+msgstr ""
 
 #. @T["Widget successfully moved. <a href=\"javascript:console.log('submit');$('#undo-form').submit();\"><strong>Undo</strong></a>."]
-#: OrchardCore.Layers\Views\Admin\Index.cshtml:21
+#: OrchardCore.Layers\Views\Admin\Index.cshtml:22
 msgctxt "OrchardCore.Layers.Views.Admin.Index"
 msgid "Widget successfully moved. <a href=\"javascript:console.log('submit');$('#undo-form').submit();\"><strong>Undo</strong></a>."
 msgstr "تم نقل الـ widgets بنجاح. <a href=\"javascript:console.log('submit');$('#undo-form').submit();\"><strong>تراجع</strong></a>."
 
 #. <h3>@T["Zones"]</h3>
-#: OrchardCore.Layers\Views\Admin\Index.cshtml:30
+#: OrchardCore.Layers\Views\Admin\Index.cshtml:31
 msgctxt "OrchardCore.Layers.Views.Admin.Index"
 msgid "Zones"
 msgstr "المناطق"
 
+#. <p class="alert alert-warning">@T["Please <a href=\"{0}\">define the available zones</a> before adding Widgets", Url.Action("Index", "Admin", new { area = "OrchardCore.Settings", groupId = LayerSiteSettingsDisplayDriver.GroupId })]</p>
+#: OrchardCore.Layers\Views\Admin\Index.cshtml:35
+msgctxt "OrchardCore.Layers.Views.Admin.Index"
+msgid "Please <a href=\"{0}\">define the available zones</a> before adding Widgets"
+msgstr ""
+
 #. @T["Add Widget"]
-#: OrchardCore.Layers\Views\Admin\Index.cshtml:65
+#: OrchardCore.Layers\Views\Admin\Index.cshtml:74
 msgctxt "OrchardCore.Layers.Views.Admin.Index"
 msgid "Add Widget"
 msgstr "إضافة Widget"
 
 #. <h3>@T["Layers"]</h3>
-#: OrchardCore.Layers\Views\Admin\Index.cshtml:88
+#: OrchardCore.Layers\Views\Admin\Index.cshtml:98
 msgctxt "OrchardCore.Layers.Views.Admin.Index"
 msgid "Layers"
 msgstr "الطبقات"
 
 #. <span class="hint">@T["Select a layer to reveal its associated widgets."]</span>
-#: OrchardCore.Layers\Views\Admin\Index.cshtml:90
+#: OrchardCore.Layers\Views\Admin\Index.cshtml:100
 msgctxt "OrchardCore.Layers.Views.Admin.Index"
 msgid "Select a layer to reveal its associated widgets."
 msgstr "اختر الطبقة للكشف عن الـ widgets المرتبطة بها."
 
 #. <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", "Admin", new { area = "OrchardCore.Layers", name = layer.Name })">@T["Edit"]</a>
-#: OrchardCore.Layers\Views\Admin\Index.cshtml:104
+#: OrchardCore.Layers\Views\Admin\Index.cshtml:114
 msgctxt "OrchardCore.Layers.Views.Admin.Index"
 msgid "Edit"
 msgstr "تحرير"
 
 #. <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "Admin", new { area = "OrchardCore.Layers", name = layer.Name })" itemprop="RemoveUrl UnsafeUrl">@T["Delete"]</a>
-#: OrchardCore.Layers\Views\Admin\Index.cshtml:105
+#: OrchardCore.Layers\Views\Admin\Index.cshtml:115
 msgctxt "OrchardCore.Layers.Views.Admin.Index"
 msgid "Delete"
 msgstr "حذف"
 
 #. <p class="alert alert-warning">@T["Please <a href=\"{0}\">create a layer</a> before adding Widgets", Url.Action("Create", "Admin", new { area = "OrchardCore.Layers" })]</p>
-#: OrchardCore.Layers\Views\Admin\Index.cshtml:118
+#: OrchardCore.Layers\Views\Admin\Index.cshtml:128
 msgctxt "OrchardCore.Layers.Views.Admin.Index"
 msgid "Please <a href=\"{0}\">create a layer</a> before adding Widgets"
 msgstr "الرجاء <a href=\"{0}\">إنشاء طبقة</a> قبل إضافة الـ Widgets"
 
 #. <a class="button btn-sm" href="@Url.Action("Create", "Admin", new { area = "OrchardCore.Layers" })">@T["Add"]</a>
-#: OrchardCore.Layers\Views\Admin\Index.cshtml:121
+#: OrchardCore.Layers\Views\Admin\Index.cshtml:131
 msgctxt "OrchardCore.Layers.Views.Admin.Index"
 msgid "Add"
 msgstr "إضافة"

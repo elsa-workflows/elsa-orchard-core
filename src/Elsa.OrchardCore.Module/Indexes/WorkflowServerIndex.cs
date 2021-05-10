@@ -5,7 +5,7 @@ namespace Elsa.OrchardCore.Indexes
 {
     public class WorkflowServerIndex : MapIndex
     {
-        public string WorkflowServerId { get; set; }
+        public string WorkflowServerId { get; set; } = default!;
     }
 
     public class WorkflowServerIndexProvider : IndexProvider<WorkflowServer>
