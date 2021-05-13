@@ -9,5 +9,6 @@ namespace Elsa.OrchardCore.ViewModels
         public bool IsSingleton { get; set; }
         public bool DeleteCompletedInstances { get; set; }
         public string? ReturnUrl { get; set; }
+        public string ServerId { get; set; } = default!;
     }
 }

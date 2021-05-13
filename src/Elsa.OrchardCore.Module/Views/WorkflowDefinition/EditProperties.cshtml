@@ -3,8 +3,9 @@
 <zone Name="Title"><h1>@RenderTitleSegments(T["Edit Workflow"])</h1></zone>
 
 <div asp-validation-summary="ModelOnly"></div>
-<form asp-action="EditProperties" method="post">
+<form asp-action="EditProperties" asp-route-serverId="@Model.ServerId" asp-route-id="new" method="post">
     <input type="hidden" asp-for="ReturnUrl" />
+    <input type="hidden" asp-for="ServerId" />
 
     <ul class="nav nav-tabs">
         <li class="nav-item pr-md-2">
@@ -40,8 +41,12 @@
                 </div>
             </div>
         </div>
+        
+        <div class="tab-pane fade" id="advanced" role="tabpanel" aria-labelledby="advanced-tab">
+            <pre>Variables and such can go here.</pre>
+        </div>
     </div>
-
+    
     <div class="form-group">
         <button class="btn btn-primary save" type="submit">@T["Save"]</button>
         <a class="btn btn-secondary cancel" role="button" href="@Model.ReturnUrl">@T["Cancel"]</a>

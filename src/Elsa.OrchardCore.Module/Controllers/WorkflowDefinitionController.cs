@@ -162,16 +162,17 @@ namespace Elsa.OrchardCore.Controllers
             return RedirectToAction(nameof(Index), new {serverId});
         }
 
-        [HttpGet("{id}/properties", Name = "EditProperties")]
+        [HttpGet("{id}/properties")]
         public async Task<IActionResult> EditProperties(string serverId, string? id, string? returnUrl = default, CancellationToken cancellationToken = default)
         {
             if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
                 return Forbid();
 
-            if (id == null)
+            if (id == null || id == "new")
                 return View(new WorkflowDefinitionPropertiesViewModel
                 {
-                    ReturnUrl = returnUrl
+                    ReturnUrl = returnUrl,
+                    ServerId = serverId
                 });
 
             var workflowServerClient = await _workflowServerClientFactory.CreateClientAsync(serverId, cancellationToken);
@@ -183,7 +184,8 @@ namespace Elsa.OrchardCore.Controllers
                 Name = workflowDefinition.Name ?? "Untitled",
                 IsSingleton = workflowDefinition.IsSingleton,
                 DeleteCompletedInstances = workflowDefinition.DeleteCompletedInstances,
-                ReturnUrl = returnUrl
+                ReturnUrl = returnUrl,
+                ServerId = serverId
             });
         }
 
@@ -196,7 +198,7 @@ namespace Elsa.OrchardCore.Controllers
             if (!ModelState.IsValid)
                 return View(viewModel);
 
-            var isNew = id == null;
+            var isNew = id == null || id == "new";
             WorkflowDefinition? workflowDefinition;
             var workflowServerClient = await _workflowServerClientFactory.CreateClientAsync(serverId, cancellationToken);
 
@@ -230,10 +232,10 @@ namespace Elsa.OrchardCore.Controllers
                 WorkflowDefinitionId = workflowDefinition.DefinitionId
             };
 
-            await workflowServerClient.SaveWorkflowDefinitionAsync(saveRequest, cancellationToken);
+            workflowDefinition = await workflowServerClient.SaveWorkflowDefinitionAsync(saveRequest, cancellationToken);
 
             return isNew
-                ? RedirectToAction(nameof(Edit), new {serverId, workflowDefinition.Id})
+                ? RedirectToAction(nameof(Edit), new {serverId, id = workflowDefinition.Id})
                 : Url.IsLocalUrl(viewModel.ReturnUrl)
                     ? Redirect(viewModel.ReturnUrl)
                     : RedirectToAction(nameof(Index));

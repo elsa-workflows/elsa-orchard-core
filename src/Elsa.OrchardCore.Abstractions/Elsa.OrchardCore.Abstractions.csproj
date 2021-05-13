@@ -8,7 +8,7 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Elsa.Client" Version="2.0.0-rc2-6" />
+        <PackageReference Include="Elsa.Client" Version="2.0.0-rc2-7" />
     </ItemGroup>
 
 </Project>
