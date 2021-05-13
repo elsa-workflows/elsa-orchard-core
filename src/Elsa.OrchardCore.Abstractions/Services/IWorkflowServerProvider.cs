@@ -7,6 +7,6 @@ namespace Elsa.OrchardCore.Services
 {
     public interface IWorkflowServerProvider
     {
-        Task<IEnumerable<WorkflowServer>> ListWorkflowServersAsync(CancellationToken cancellationToken = default);
+        ValueTask<IEnumerable<IWorkflowServer>> ListWorkflowServersAsync(CancellationToken cancellationToken = default);
     }
 }

@@ -3,18 +3,18 @@ using YesSql.Indexes;
 
 namespace Elsa.OrchardCore.Indexes
 {
-    public class WorkflowServerIndex : MapIndex
+    public class WorkflowServerRecordIndex : MapIndex
     {
         public string WorkflowServerId { get; set; } = default!;
     }
 
-    public class WorkflowServerIndexProvider : IndexProvider<WorkflowServer>
+    public class RemoteWorkflowServerIndexProvider : IndexProvider<RemoteWorkflowServerRecord>
     {
-        public override void Describe(DescribeContext<WorkflowServer> context)
+        public override void Describe(DescribeContext<RemoteWorkflowServerRecord> context)
         {
-            context.For<WorkflowServerIndex>()
+            context.For<WorkflowServerRecordIndex>()
                 .Map(workflowServer =>
-                    new WorkflowServerIndex
+                    new WorkflowServerRecordIndex
                     {
                         WorkflowServerId = workflowServer.WorkflowServerId,
                     }

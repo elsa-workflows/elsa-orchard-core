@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
@@ -12,19 +12,30 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Elsa.Designer.Components.Web" Version="2.0.0-rc1.41" />
-        <PackageReference Include="OrchardCore.Admin.Abstractions" Version="1.0.0-rc2-16189" />
-        <PackageReference Include="OrchardCore.Infrastructure" Version="1.0.0-rc2-16189" />
-        <PackageReference Include="OrchardCore.Module.Targets" Version="1.0.0-rc2-16189" />
-        <PackageReference Include="OrchardCore.ContentManagement" Version="1.0.0-rc2-16189" />
-        <PackageReference Include="OrchardCore.ContentTypes.Abstractions" Version="1.0.0-rc2-16189" />
-        <PackageReference Include="OrchardCore.DisplayManagement" Version="1.0.0-rc2-16189" />
-        <PackageReference Include="OrchardCore.Navigation.Core" Version="1.0.0-rc2-16189" />
-        <PackageReference Include="OrchardCore.ResourceManagement" Version="1.0.0-rc2-16189" />
+        <PackageReference Include="Elsa.Designer.Components.Web" Version="2.0.0-rc2-6" />
+        <PackageReference Include="OrchardCore.Admin.Abstractions" Version="1.0.0-rc2-16196" />
+        <PackageReference Include="OrchardCore.Infrastructure" Version="1.0.0-rc2-16196" />
+        <PackageReference Include="OrchardCore.Module.Targets" Version="1.0.0-rc2-16196" />
+        <PackageReference Include="OrchardCore.ContentManagement" Version="1.0.0-rc2-16196" />
+        <PackageReference Include="OrchardCore.ContentTypes.Abstractions" Version="1.0.0-rc2-16196" />
+        <PackageReference Include="OrchardCore.DisplayManagement" Version="1.0.0-rc2-16196" />
+        <PackageReference Include="OrchardCore.Navigation.Core" Version="1.0.0-rc2-16196" />
+        <PackageReference Include="OrchardCore.ResourceManagement" Version="1.0.0-rc2-16196" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Elsa.OrchardCore.Abstractions\Elsa.OrchardCore.Abstractions.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Views\WorkflowDefinition\Duplicate.cshtml" />
+      <Content Include="Views\WorkflowDefinition\Edit.cshtml" />
+      <Content Include="Views\WorkflowDefinition\EditProperties.cshtml" />
+      <Content Include="Views\WorkflowDefinition\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <RazorGenerate Remove="Views\WorkflowDashboard\Index.cshtml" />
     </ItemGroup>
 
 </Project>

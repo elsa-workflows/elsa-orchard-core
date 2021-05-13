@@ -8,7 +8,7 @@ namespace Elsa.OrchardCore
     {
         public int Create()
         {
-            SchemaBuilder.CreateMapIndexTable<WorkflowServerIndex>( table => table
+            SchemaBuilder.CreateMapIndexTable<WorkflowServerRecordIndex>( table => table
                 .Column<string>("WorkflowServerId")
             );
 

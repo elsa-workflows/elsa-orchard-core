@@ -1,11 +1,11 @@
-﻿using Elsa.OrchardCore.Features.WorkflowServer.Services;
+﻿using Elsa.OrchardCore.Features.LocalWorkflowServer.Services;
 using Elsa.OrchardCore.Services;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.Modules;
 
-namespace Elsa.OrchardCore.Features.WorkflowServer
+namespace Elsa.OrchardCore.Features.LocalWorkflowServer
 {
-    [Feature("Elsa.OrchardCore.Server")]
+    [Feature("Elsa.OrchardCore.LocalWorkflowServer")]
     public class Startup : StartupBase
     {
         public override void ConfigureServices(IServiceCollection services)

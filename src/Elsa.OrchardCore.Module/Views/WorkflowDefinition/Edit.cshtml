@@ -1,0 +1,22 @@
+@model WorkflowDefinitionViewModel
+
+<zone Name="Title"><h1>@RenderTitleSegments(Model.WorkflowDefinition.Name)</h1></zone>
+
+<zone name="Breadcrumbs">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-route-serverId="@Model.ServerId">@T["Workflows"]</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.WorkflowDefinition.Name</li>
+        </ol>
+    </nav>
+</zone>
+
+<style asp-name="elsa-inter" asp-src="/_content/Elsa.Designer.Components.Web/elsa-workflows-studio/assets/fonts/inter/inter.css"></style>
+<style asp-name="elsa-tailwind" asp-src="/_content/Elsa.Designer.Components.Web/elsa-workflows-studio/assets/styles/tailwind.css"></style>
+<style asp-src="~/Elsa.OrchardCore.Module/oc-elsa.css"></style>
+@* <script asp-name="monaco" depends-on="admin,jQuery"></script> *@
+<script asp-src="/_content/Elsa.Designer.Components.Web/elsa-workflows-studio/elsa-workflows-studio.esm.js" type="module" depends-on="jQuery"></script>
+
+<div class="elsa-root h-screen" style="background-size: 30px 30px; background-image: url(/_content/Elsa.Designer.Components.Web/elsa-workflows-studio/assets/images/tile.png); background-color: #FBFBFB;">
+    <elsa-workflow-definition-editor-screen server-url="@Model.ServerUrl" workflow-definition-id="@Model.WorkflowDefinition.DefinitionId" ></elsa-workflow-definition-editor-screen>
+</div>

@@ -20,10 +20,9 @@ namespace Elsa.OrchardCore
                 .AddIdGeneration()
                 .AddScoped<IDataMigration, Migrations>()
                 .AddScoped<INavigationProvider, AdminMenu>()
-                .AddScoped<IWorkflowServerStore, WorkflowServerStore>()
-                .AddScoped<IWorkflowServerProvider, StoreBasedWorkflowServerProvider>()
-                .AddScoped<IWorkflowServerService, WorkflowServerService>()
-                .AddSingleton<IIndexProvider, WorkflowServerIndexProvider>();
+                .AddScoped<IWorkflowServerManager, WorkflowServerManager>()
+                .AddScoped<IWorkflowServerClientFactory, WorkflowServerClientFactory>()
+                ;
         }
 
         public override void Configure(

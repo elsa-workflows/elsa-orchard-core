@@ -5,6 +5,6 @@ namespace Elsa.OrchardCore.ViewModels
 {
     public class WorkflowServersViewModel
     {
-        public ICollection<WorkflowServer> WorkflowServers { get; set; } = new List<WorkflowServer>();
+        public ICollection<RemoteWorkflowServerRecord> WorkflowServers { get; set; } = new List<RemoteWorkflowServerRecord>();
     }
 }

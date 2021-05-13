@@ -18,13 +18,13 @@ namespace Elsa.OrchardCore.Controllers
     [Route("admin/elsa/workflow-servers")]
     public class WorkflowServersController : Controller
     {
-        private readonly IWorkflowServerStore _store;
+        private readonly IRemoteWorkflowServerStore _store;
         private readonly IAuthorizationService _authorizationService;
         private readonly IIdGenerator _idGenerator;
         private readonly INotifier _notifier;
 
         public WorkflowServersController(
-            IWorkflowServerStore store,
+            IRemoteWorkflowServerStore store,
             IAuthorizationService authorizationService,
             IIdGenerator idGenerator,
             INotifier notifier,
@@ -91,7 +91,7 @@ namespace Elsa.OrchardCore.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create(WorkflowServerEditModel model, CancellationToken cancellationToken)
         {
-            var workflowServer = new WorkflowServer
+            var workflowServer = new RemoteWorkflowServerRecord
             {
                 WorkflowServerId = _idGenerator.GenerateUniqueId(),
                 Name = model.Name.Trim(),

@@ -9,11 +9,11 @@ namespace Elsa.OrchardCore
 {
     public class AdminMenu : INavigationProvider
     {
-        private readonly IWorkflowServerService _workflowServerService;
+        private readonly IWorkflowServerManager _workflowServerManager;
 
-        public AdminMenu(IStringLocalizer<AdminMenu> localizer, IWorkflowServerService workflowServerService)
+        public AdminMenu(IStringLocalizer<AdminMenu> localizer, IWorkflowServerManager workflowServerManager)
         {
-            _workflowServerService = workflowServerService;
+            _workflowServerManager = workflowServerManager;
             T = localizer;
         }
 
@@ -24,17 +24,17 @@ namespace Elsa.OrchardCore
             if (!string.Equals(name, "admin", StringComparison.OrdinalIgnoreCase))
                 return;
 
-            var servers = (await _workflowServerService.ListWorkflowServersAsync()).ToList();
+            var servers = (await _workflowServerManager.ListWorkflowServersAsync()).ToList();
 
             if (servers.Count == 1)
             {
                 var server = servers.First();
 
                 builder
-                    .Add(T["Workflows"], NavigationConstants.AdminMenuWorkflowsPosition, workflow => workflow
+                    .Add(T["Elsa Workflows"], NavigationConstants.AdminMenuWorkflowsPosition, workflow => workflow
                         .AddClass("elsa")
                         .Id("elsa")
-                        .Action("Index", "WorkflowDashboard", new { area = "Elsa.OrchardCore.Module", serverId = server.WorkflowServerId })
+                        .Action("Index", "WorkflowDefinition", new { area = "Elsa.OrchardCore.Module", serverId = server.Id })
                         .Permission(Permissions.ManageWorkflows)
                         .LocalNav());
             }
@@ -43,11 +43,11 @@ namespace Elsa.OrchardCore
                 foreach (var server in servers)
                 {
                     builder
-                        .Add(T["Workflows"], NavigationConstants.AdminMenuWorkflowsPosition, workflows => workflows
+                        .Add(T["Elsa Workflows"], NavigationConstants.AdminMenuWorkflowsPosition, workflows => workflows
                             .AddClass("elsa")
                             .Id("elsa")
                             .Add(T[server.Name],  workflow => workflow
-                                .Action("Index", "WorkflowDashboard", new { area = "Elsa.OrchardCore.Module", serverId = server.WorkflowServerId })
+                                .Action("Index", "WorkflowDefinition", new { area = "Elsa.OrchardCore.Module", serverId = server.Id })
                                 .Permission(Permissions.ManageWorkflows)
                                 .LocalNav()));
                 }
@@ -56,7 +56,7 @@ namespace Elsa.OrchardCore
             builder
                 .Add(T["Configuration"], configuration => configuration
                     .AddClass("menu-configuration").Id("configuration")
-                    .Add(T["Workflows"], workflows => workflows
+                    .Add(T["Elsa Workflows"], workflows => workflows
                         .Position("50")
                         .Add(T["Servers"], workflowServers => workflowServers
                             .Action("Index", "WorkflowServers", new { area = "Elsa.OrchardCore.Module" })
