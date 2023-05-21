@@ -1,5 +1,3 @@
-using Elsa.OrchardCore.Contracts;
-using Elsa.OrchardCore.Services;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.Entities;
@@ -21,7 +19,6 @@ public class Startup : StartupBase
     {
         services
             .AddIdGeneration()
-            .AddScoped<IWorkflowServerManager, WorkflowServerManager>()
             .AddScoped<INavigationProvider, AdminMenu>();
     }
 }

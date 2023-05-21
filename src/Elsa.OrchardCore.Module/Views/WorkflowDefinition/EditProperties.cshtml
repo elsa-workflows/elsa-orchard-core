@@ -1,0 +1,41 @@
+@model WorkflowDefinitionPropertiesViewModel
+
+<zone Name="Title">
+    <h1>@RenderTitleSegments(T["Edit Workflow"])</h1>
+</zone>
+
+<div asp-validation-summary="ModelOnly"></div>
+<form asp-action="EditProperties" method="post" class="no-multisubmit">
+    <input type="hidden" asp-for="ReturnUrl"/>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item pe-md-2">
+            <a class="nav-link active" id="properties-tab" data-bs-toggle="tab" href="#properties" role="tab" aria-controls="site" aria-selected="true">@T["Properties"]</a>
+        </li>
+        <li class="nav-item pe-md-2">
+            <a class="nav-link" id="advanced-tab" data-bs-toggle="tab" href="#advanced" role="tab" aria-controls="resources">@T["Advanced"]</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="tabs">
+        <div class="tab-pane fade show active" id="properties" role="tabpanel" aria-labelledby="properties-tab">
+            <div class="mb-3" asp-validation-class-for="Name">
+                <label asp-for="Name">@T["Name"]</label>
+                <input asp-for="Name" class="form-control" autofocus/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <div class="hint">@T["The name of the workflow."]</div>
+            </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="advanced" role="tabpanel" aria-labelledby="advanced-tab">
+            
+        </div>
+
+    </div>
+
+    <div class="mb-3">
+        <button class="btn btn-primary save" type="submit">@T["Save"]</button>
+        <a class="btn btn-secondary cancel" role="button" href="@Model.ReturnUrl">@T["Cancel"]</a>
+    </div>
+</form>

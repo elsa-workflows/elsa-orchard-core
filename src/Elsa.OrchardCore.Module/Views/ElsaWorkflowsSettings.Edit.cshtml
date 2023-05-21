@@ -1,8 +1,0 @@
-﻿@model ElsaWorkflowsSettingsViewModel
-
-<div class="form-group" asp-validation-class-for="WorkflowServerUrl">
-    <label asp-for="WorkflowServerUrl">@T["Workflow Server URL"]</label>
-    <input asp-for="WorkflowServerUrl" class="form-control" />
-    <span asp-validation-for="WorkflowServerUrl"></span>
-    <span class="hint">@T["The Workflow Server URL. Leave empty to use the current Orchard tenant as the workflow server."]</span>
-</div>

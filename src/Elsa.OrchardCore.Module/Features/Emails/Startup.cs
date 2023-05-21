@@ -7,7 +7,7 @@ using OrchardCore.Modules;
 
 namespace Elsa.OrchardCore.Features.Emails;
 
-[Feature("Elsa.OrchardCore.Email")]
+[Feature("Elsa.OrchardCore.Module.Email")]
 public class Startup : StartupBase
 {
     public override void ConfigureServices(IServiceCollection services)

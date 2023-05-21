@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="col-auto">
-                    <a asp-action="Index" asp-controller="WorkflowStudio" asp-route-returnUrl="@FullRequestPath" class="btn btn-secondary create" role="button">@T["Create Workflow"]</a>
+                    <a asp-action="EditProperties" asp-route-returnUrl="@FullRequestPath" class="btn btn-secondary create" role="button">@T["Create Workflow"]</a>
                 </div>
             </div>
         </div>
@@ -62,15 +62,16 @@
                 <li class="list-group-item">
                     <div class="properties">
                         <div class="float-end">
-                            <a asp-action="Index" asp-controller="WorkflowStudio" asp-route-id="@entry.WorkflowDefinitionSummary.DefinitionId" asp-route-returnUrl="@FullRequestPath" class="btn btn-primary btn-sm">@T["Edit"]</a>
-                            <a asp-action="Delete" asp-route-id="@entry.WorkflowDefinitionSummary.DefinitionId" class="btn btn-danger btn-sm" data-url-af="RemoveUrl UnsafeUrl">@T["Delete"]</a>
+                            <a asp-action="Edit" asp-route-definitionid="@entry.WorkflowDefinitionSummary.DefinitionId" asp-route-returnUrl="@FullRequestPath" class="btn btn-primary btn-sm">@T["Edit"]</a>
+                            <a asp-action="EditProperties" asp-route-definitionid="@entry.WorkflowDefinitionSummary.DefinitionId" asp-route-returnUrl="@FullRequestPath" class="btn btn-success btn-sm">@T["Properties"]</a>
+                            <a asp-action="Delete" asp-route-definitionid="@entry.WorkflowDefinitionSummary.DefinitionId" class="btn btn-danger btn-sm" data-url-af="RemoveUrl UnsafeUrl">@T["Delete"]</a>
                         </div>
 
                         <div class="form-check float-start">
                             <input type="checkbox" class="form-check-input" value="@entry.Id" name="itemIds" id="itemIds-@entry.Id">
                             <label class="form-check-label" for="itemIds-@entry.Id"></label>
                         </div>
-                        <a asp-action="Index" asp-route-id="@entry.WorkflowDefinitionSummary.DefinitionId" asp-route-returnUrl="@FullRequestPath">@entry.Name</a>
+                        <a asp-action="Edit" asp-route-definitionid="@entry.WorkflowDefinitionSummary.DefinitionId" asp-route-returnUrl="@FullRequestPath">@entry.Name</a>
                         
                         @if (entry.WorkflowInstanceCount > 0)
                         {

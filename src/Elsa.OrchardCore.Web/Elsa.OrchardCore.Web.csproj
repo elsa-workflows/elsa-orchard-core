@@ -5,8 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="OrchardCore.Application.Cms.Targets" Version="1.6.0-preview-17355" />
-      <PackageReference Include="OrchardCore.Logging.Serilog" Version="1.5.0" />
+      <PackageReference Include="OrchardCore.Application.Cms.Targets" Version="1.7.0-preview-17427" />
+      <PackageReference Include="OrchardCore.Logging.Serilog" Version="1.7.0-preview-17427" />
     </ItemGroup>
 
     <ItemGroup>

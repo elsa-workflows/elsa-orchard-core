@@ -6,34 +6,36 @@
  */
 import { HTMLStencilElement, JSXBase } from "./stencil-public-runtime";
 export namespace Components {
-    interface OcElsaWrapper {
+    interface OcElsaDefinitionEditor {
+        "definitionId"?: string;
         "serverUrl": string;
     }
 }
 declare global {
-    interface HTMLOcElsaWrapperElement extends Components.OcElsaWrapper, HTMLStencilElement {
+    interface HTMLOcElsaDefinitionEditorElement extends Components.OcElsaDefinitionEditor, HTMLStencilElement {
     }
-    var HTMLOcElsaWrapperElement: {
-        prototype: HTMLOcElsaWrapperElement;
-        new (): HTMLOcElsaWrapperElement;
+    var HTMLOcElsaDefinitionEditorElement: {
+        prototype: HTMLOcElsaDefinitionEditorElement;
+        new (): HTMLOcElsaDefinitionEditorElement;
     };
     interface HTMLElementTagNameMap {
-        "oc-elsa-wrapper": HTMLOcElsaWrapperElement;
+        "oc-elsa-definition-editor": HTMLOcElsaDefinitionEditorElement;
     }
 }
 declare namespace LocalJSX {
-    interface OcElsaWrapper {
+    interface OcElsaDefinitionEditor {
+        "definitionId"?: string;
         "serverUrl"?: string;
     }
     interface IntrinsicElements {
-        "oc-elsa-wrapper": OcElsaWrapper;
+        "oc-elsa-definition-editor": OcElsaDefinitionEditor;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "oc-elsa-wrapper": LocalJSX.OcElsaWrapper & JSXBase.HTMLAttributes<HTMLOcElsaWrapperElement>;
+            "oc-elsa-definition-editor": LocalJSX.OcElsaDefinitionEditor & JSXBase.HTMLAttributes<HTMLOcElsaDefinitionEditorElement>;
         }
     }
 }

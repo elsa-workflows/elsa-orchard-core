@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Elsa.Api.Client.Resources.WorkflowDefinitions.Models;
+using Elsa.Workflows.Management.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 

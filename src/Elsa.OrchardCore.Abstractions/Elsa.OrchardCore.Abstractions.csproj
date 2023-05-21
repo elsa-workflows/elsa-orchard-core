@@ -8,7 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\clients\Elsa.Api.Client\Elsa.Api.Client.csproj" />
+      <Folder Include="Contracts" />
+      <Folder Include="Models" />
     </ItemGroup>
 
 </Project>

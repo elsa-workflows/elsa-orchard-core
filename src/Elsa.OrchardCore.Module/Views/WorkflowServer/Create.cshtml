@@ -1,9 +1,0 @@
-﻿@model WorkflowServerEditModel
-
-<h1>@RenderTitleSegments(T["Add Remote Workflow Server"])</h1>
-
-<p class="lead">A workflow server is responsible for executing workflows. You can manage remote workflow servers by specifying their details below.</p>
-
-<form asp-action="Create" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]" method="post">
-    @Html.EditorForModel()
-</form>

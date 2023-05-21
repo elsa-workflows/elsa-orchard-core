@@ -12,31 +12,16 @@ using OrchardCore.Modules.Manifest;
 
 [assembly: Feature(
     Id = "Elsa.OrchardCore.Module",
-    Name = "Elsa Workflows",
-    Description = "Create workflow with Elsa.",
+    Name = "Workflows",
+    Description = "Create and manage workflows.",
     Category = "Elsa Workflows"
 )]
 
-[assembly: Feature(
-    Id = "Elsa.OrchardCore.RemoteWorkflowServers",
-    Name = "Remote Workflows",
-    Description = "Create & manage Elsa workflows on remote servers.",
-    Dependencies = new[] {"Elsa.OrchardCore.Module"},
-    Category = "Elsa Workflows"
-)]
 
 [assembly: Feature(
-    Id = "Elsa.OrchardCore.LocalWorkflowServer",
-    Name = "Workflow Server",
-    Description = "Create & manage Elsa workflows local to this tenant.",
-    Dependencies = new[] {"Elsa.OrchardCore.Module"},
-    Category = "Elsa Workflows"
-)]
-
-[assembly: Feature(
-    Id = "Elsa.OrchardCore.Email",
+    Id = "Elsa.OrchardCore.Module.Email",
     Name = "Email",
     Description = "Provides email activities.",
-    Dependencies = new[] {"Elsa.OrchardCore.LocalWorkflowServer", "OrchardCore.Email"},
+    Dependencies = new[] {"Elsa.OrchardCore.Module", "OrchardCore.Email"},
     Category = "Elsa Workflows"
 )]
