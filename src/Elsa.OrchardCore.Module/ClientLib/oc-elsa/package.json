@@ -1,0 +1,38 @@
+{
+  "name": "oc-elsa",
+  "version": "0.0.1",
+  "description": "Stencil Component Starter",
+  "main": "../../wwwroot/elsa/elsa-studio/index.cjs.js",
+  "module": "../../wwwroot/elsa/elsa-studio/index.js",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "collection": "../../wwwroot/elsa/elsa-studio/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/oc-elsa/oc-elsa.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ionic-team/stencil-component-starter.git"
+  },
+  "files": [
+    "../../wwwroot/elsa/elsa-studio/",
+    "../../wwwroot/elsa/loader/"
+  ],
+  "scripts": {
+    "build": "stencil build",
+    "build:dev": "stencil build --dev",
+    "start": "stencil build --dev --watch --serve",
+    "generate": "stencil generate"
+  },
+  "dependencies": {
+    "@stencil/core": "^3.2.2",
+    "@elsa-workflows/elsa-workflows-designer": "^3.0.3-preview.136"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.3",
+    "@types/jquery": "^3.5.16",
+    "@types/jquery-mousewheel": "^3.1.9",
+    "copy-webpack-plugin": "^11.0.0"
+  },
+  "license": "MIT"
+}

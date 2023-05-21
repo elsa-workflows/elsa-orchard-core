@@ -9,6 +9,8 @@
 *.userosscache
 *.sln.docstates
 App_Data/
+src/Elsa.OrchardCore.Web/Localization/
+.DS_store
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

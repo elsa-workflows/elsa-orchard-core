@@ -8,5 +8,6 @@ namespace Elsa.OrchardCore.Models
         public string WorkflowServerId { get; set; } = default!;
         public string Name { get; set; }= default!;
         public Uri Url { get; set; }= default!;
+        public string ApiKey { get; set; } = default!;
     }
 }

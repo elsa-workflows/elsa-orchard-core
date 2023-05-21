@@ -1,7 +1,6 @@
-﻿namespace Elsa.OrchardCore.ViewModels
+﻿namespace Elsa.OrchardCore.ViewModels;
+
+public class ElsaWorkflowsSettingsViewModel
 {
-    public class ElsaWorkflowsSettingsViewModel
-    {
-        public string WorkflowServerUrl { get; set; } = default!;
-    }
+    public string WorkflowServerUrl { get; set; } = default!;
 }

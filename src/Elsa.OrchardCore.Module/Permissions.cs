@@ -3,28 +3,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using OrchardCore.Security.Permissions;
 
-namespace Elsa.OrchardCore
+namespace Elsa.OrchardCore;
+
+public class Permissions : IPermissionProvider
 {
-    public class Permissions : IPermissionProvider
+    public static readonly Permission ManageWorkflowServers = new("ManageWorkflowServers", "Manage workflow servers", isSecurityCritical: true);
+    public static readonly Permission ManageWorkflows = new("ManageWorkflows", "Manage workflows", isSecurityCritical: true);
+
+    public Task<IEnumerable<Permission>> GetPermissionsAsync()
     {
-        public static readonly Permission ManageWorkflowServers = new Permission("ManageWorkflowServers", "Manage workflow servers", isSecurityCritical: true);
-        public static readonly Permission ManageWorkflows = new Permission("ManageWorkflows", "Manage workflows", isSecurityCritical: true);
+        return Task.FromResult(new[] { ManageWorkflowServers, ManageWorkflows }.AsEnumerable());
+    }
 
-        public Task<IEnumerable<Permission>> GetPermissionsAsync()
+    public IEnumerable<PermissionStereotype> GetDefaultStereotypes()
+    {
+        return new[]
         {
-            return Task.FromResult(new[] { ManageWorkflowServers, ManageWorkflows }.AsEnumerable());
-        }
-
-        public IEnumerable<PermissionStereotype> GetDefaultStereotypes()
-        {
-            return new[]
+            new PermissionStereotype
             {
-                new PermissionStereotype
-                {
-                    Name = "Administrator",
-                    Permissions = new[] { ManageWorkflowServers, ManageWorkflows }
-                }
-            };
-        }
+                Name = "Administrator",
+                Permissions = new[] { ManageWorkflowServers, ManageWorkflows }
+            }
+        };
     }
 }

@@ -3,24 +3,24 @@ using OrchardCore.Modules.Manifest;
 [assembly: Module(
     Id = "Elsa.OrchardCore.Module",
     Name = "Elsa Workflows",
-    Author = "Elsa Workflows Contributors",
+    Author = "Elsa community",
     Website = "https://elsa-workflows.github.io/elsa-core/",
     Version = "1.0.0",
-    Description = "Visually create workflows with Elsa Workflows.",
+    Description = "Create workflows with Elsa.",
     Category = "Elsa Workflows"
 )]
 
 [assembly: Feature(
     Id = "Elsa.OrchardCore.Module",
-    Name = "Elsa Workflow Server Management",
-    Description = "Create & manage workflow servers",
+    Name = "Elsa Workflows",
+    Description = "Create workflow with Elsa.",
     Category = "Elsa Workflows"
 )]
 
 [assembly: Feature(
     Id = "Elsa.OrchardCore.RemoteWorkflowServers",
     Name = "Remote Workflows",
-    Description = "Create & manage remote Elsa workflows using a dashboard.",
+    Description = "Create & manage Elsa workflows on remote servers.",
     Dependencies = new[] {"Elsa.OrchardCore.Module"},
     Category = "Elsa Workflows"
 )]
@@ -28,7 +28,15 @@ using OrchardCore.Modules.Manifest;
 [assembly: Feature(
     Id = "Elsa.OrchardCore.LocalWorkflowServer",
     Name = "Workflow Server",
-    Description = "Turn your Orchard Core tenant into an Elsa Workflow Server and process content, forms and more.",
+    Description = "Create & manage Elsa workflows local to this tenant.",
     Dependencies = new[] {"Elsa.OrchardCore.Module"},
+    Category = "Elsa Workflows"
+)]
+
+[assembly: Feature(
+    Id = "Elsa.OrchardCore.Email",
+    Name = "Email",
+    Description = "Provides email activities.",
+    Dependencies = new[] {"Elsa.OrchardCore.LocalWorkflowServer", "OrchardCore.Email"},
     Category = "Elsa Workflows"
 )]

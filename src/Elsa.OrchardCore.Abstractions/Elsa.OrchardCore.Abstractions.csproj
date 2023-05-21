@@ -6,9 +6,9 @@
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-    
+
     <ItemGroup>
-        <PackageReference Include="Elsa.Client" Version="2.0.0-rc2-7" />
+      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\clients\Elsa.Api.Client\Elsa.Api.Client.csproj" />
     </ItemGroup>
 
 </Project>

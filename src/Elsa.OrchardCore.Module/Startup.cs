@@ -1,35 +1,27 @@
-using System;
-using Elsa.OrchardCore.Indexes;
+using Elsa.OrchardCore.Contracts;
 using Elsa.OrchardCore.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Routing;
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
-using OrchardCore.Data.Migration;
 using OrchardCore.Entities;
 using OrchardCore.Modules;
 using OrchardCore.Navigation;
-using YesSql.Indexes;
 
-namespace Elsa.OrchardCore
+namespace Elsa.OrchardCore;
+
+[PublicAPI]
+public class Startup : StartupBase
 {
-    public class Startup : StartupBase
+    public Startup()
     {
-        public override void ConfigureServices(IServiceCollection services)
-        {
-            services
-                .AddIdGeneration()
-                .AddScoped<IDataMigration, Migrations>()
-                .AddScoped<INavigationProvider, AdminMenu>()
-                .AddScoped<IWorkflowServerManager, WorkflowServerManager>()
-                .AddScoped<IWorkflowServerClientFactory, WorkflowServerClientFactory>()
-                ;
-        }
+        // TODO: Remove this once we have integrated Orchard security.
+        EndpointSecurityOptions.DisableSecurity();
+    }
 
-        public override void Configure(
-            IApplicationBuilder builder,
-            IEndpointRouteBuilder routes,
-            IServiceProvider serviceProvider)
-        {
-        }
+    public override void ConfigureServices(IServiceCollection services)
+    {
+        services
+            .AddIdGeneration()
+            .AddScoped<IWorkflowServerManager, WorkflowServerManager>()
+            .AddScoped<INavigationProvider, AdminMenu>();
     }
 }

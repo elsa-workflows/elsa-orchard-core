@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using Elsa.Client.Models;
-using Elsa.OrchardCore.Services;
+using Elsa.Api.Client.Contracts;
+using Elsa.Api.Client.Resources.WorkflowDefinitions.Models;
+using Elsa.OrchardCore.Contracts;
 using Elsa.OrchardCore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,74 +12,105 @@ using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
 using OrchardCore.Admin;
 using OrchardCore.DisplayManagement;
 using OrchardCore.DisplayManagement.Notify;
 using OrchardCore.Navigation;
 using OrchardCore.Routing;
-using OrchardCore.Settings;
 
 namespace Elsa.OrchardCore.Controllers
 {
     [Admin]
-    [Route("admin/elsa/server/{serverId}/workflow-definition")]
     public class WorkflowDefinitionController : Controller
     {
+        private readonly PagerOptions _pagerOptions;
+        private readonly IElsaClient _elsaClient;
         private readonly IWorkflowServerManager _workflowServerManager;
-        private readonly IWorkflowServerClientFactory _workflowServerClientFactory;
-        private readonly ISiteService _siteService;
         private readonly IAuthorizationService _authorizationService;
         private readonly INotifier _notifier;
 
+        private readonly dynamic New;
+        private readonly IStringLocalizer S;
+        private readonly IHtmlLocalizer H;
+
         public WorkflowDefinitionController
         (
-            IWorkflowServerManager workflowServerManager,
-            IWorkflowServerClientFactory workflowServerClientFactory,
-            ISiteService siteService,
+            IElsaClient elsaClient,
+            IOptions<PagerOptions> pagerOptions,
             IAuthorizationService authorizationService,
             IShapeFactory shapeFactory,
             INotifier notifier,
             IStringLocalizer<WorkflowDefinitionController> s,
-            IHtmlLocalizer<WorkflowDefinitionController> h)
+            IHtmlLocalizer<WorkflowDefinitionController> h, IWorkflowServerManager workflowServerManager)
         {
-            _workflowServerManager = workflowServerManager;
-            _workflowServerClientFactory = workflowServerClientFactory;
-            _siteService = siteService;
+            _pagerOptions = pagerOptions.Value;
+            _elsaClient = elsaClient;
             _authorizationService = authorizationService;
             _notifier = notifier;
 
             New = shapeFactory;
             S = s;
             H = h;
+            _workflowServerManager = workflowServerManager;
         }
 
-        private dynamic New { get; }
-        private IStringLocalizer S { get; }
-        private IHtmlLocalizer H { get; }
-
-        [HttpGet("index")]
-        public async Task<IActionResult> Index(string serverId, WorkflowDefinitionIndexOptions? options, PagerParameters pagerParameters, CancellationToken cancellationToken)
+        
+        public async Task<IActionResult> Index(WorkflowDefinitionIndexOptions? options, PagerParameters pagerParameters)
         {
             if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
             {
                 return Forbid();
             }
 
-            var siteSettings = await _siteService.GetSiteSettingsAsync();
-            var pager = new Pager(pagerParameters, siteSettings.PageSize);
+            var pager = new Pager(pagerParameters, _pagerOptions.GetPageSize());
 
-            if (options == null)
-                options = new WorkflowDefinitionIndexOptions();
+            options ??= new WorkflowDefinitionIndexOptions();
 
-            var workflowServerClient = await _workflowServerClientFactory.CreateClientAsync(serverId, cancellationToken);
-            var workflowDefinitionPagedList = await workflowServerClient.ListWorkflowDefinitionsAsync(pagerParameters.Page, pagerParameters.PageSize, VersionOptions.All, cancellationToken);
+            //var query = _session.Query<WorkflowType, WorkflowTypeIndex>();
+
+            // switch (options.Filter)
+            // {
+            //     case WorkflowTypeFilter.All:
+            //     default:
+            //         break;
+            // }
+
+            // if (!string.IsNullOrWhiteSpace(options.Search))
+            // {
+            //     query = query.Where(x => x.Name.Contains(options.Search));
+            // }
+
+            // switch (options.Order)
+            // {
+            //     case WorkflowTypeOrder.Name:
+            //         query = query.OrderBy(u => u.Name);
+            //         break;
+            // }
+
+            // var count = await query.CountAsync();
+            //
+            // var workflowTypes = await query
+            //     .Skip(pager.GetStartIndex())
+            //     .Take(pager.PageSize)
+            //     .ListAsync();
+            //
+            // var workflowTypeIds = workflowTypes.Select(x => x.WorkflowTypeId).ToList();
+            // var workflowGroups = (await _session.QueryIndex<WorkflowIndex>(x => x.WorkflowTypeId.IsIn(workflowTypeIds))
+            //     .ListAsync())
+            //     .GroupBy(x => x.WorkflowTypeId)
+            //     .ToDictionary(x => x.Key);
+
+            var request = new ListWorkflowDefinitionsRequest
+            {
+                Page = pager.Page,
+                PageSize = pager.PageSize
+            };
             
-            var workflowGroups = workflowDefinitionPagedList.Items
-                .GroupBy(x => x.DefinitionId)
-                .ToDictionary(x => x.Key);
+            var response = await _elsaClient.WorkflowDefinitions.ListAsync(request);
+            var workflowDefinitions = response.Items;
+            var count = response.TotalCount;
             
-            var count = workflowGroups.Count;
-
             // Maintain previous route data when generating page links.
             var routeData = new RouteData();
             routeData.Values.Add("Options.Filter", options.Filter);
@@ -87,37 +118,24 @@ namespace Elsa.OrchardCore.Controllers
             routeData.Values.Add("Options.Order", options.Order);
 
             var pagerShape = (await New.Pager(pager)).TotalItemCount(count).RouteData(routeData);
-
-            var entries = workflowGroups
-                .Select(grouping =>
-                {
-                    var workflowDefinitionVersions = grouping;
-                    var latestVersion = workflowDefinitionVersions.Value.Where(x => x.IsLatest).OrderByDescending(x => x.Version).First();
-                    var publishedVersion = workflowDefinitionVersions.Value.Where(x => x.IsPublished).OrderByDescending(x => x.Version).FirstOrDefault();
-
-                    return new WorkflowDefinitionListEntry
-                    {
-                        Description = latestVersion.Description,
-                        Id = latestVersion.Id,
-                        Name = latestVersion.Name ?? "Untitled",
-                        DefinitionId = latestVersion.DefinitionId,
-                        LatestVersion = latestVersion.Version,
-                        PublishedVersion = publishedVersion?.Version
-                    };
-                })
-                .ToList();
-
+            
             var model = new WorkflowDefinitionIndexViewModel
             {
-                ServerId = serverId,
-                WorkflowDefinitions = entries,
+                WorkflowDefinitions = workflowDefinitions
+                    .Select(x => new WorkflowDefinitionEntry
+                    {
+                        WorkflowDefinitionSummary = x,
+                        Id = x.Id,
+                        WorkflowInstanceCount = 0,
+                        Name = x.Name
+                    })
+                    .ToList(),
                 Options = options,
                 Pager = pagerShape
             };
 
-            options.WorkflowTypesBulkAction = new List<SelectListItem>()
-            {
-                new() {Text = S["Delete"].Value, Value = nameof(WorkflowDefinitionBulkAction.Delete)}
+            model.Options.WorkflowDefinitionsBulkAction = new List<SelectListItem>() {
+                new() { Text = S["Delete"].Value, Value = nameof(WorkflowDefinitionBulkAction.Delete) }
             };
 
             return View(model);
@@ -127,214 +145,61 @@ namespace Elsa.OrchardCore.Controllers
         [FormValueRequired("submit.Filter")]
         public ActionResult IndexFilterPOST(WorkflowDefinitionIndexViewModel model)
         {
-            return RedirectToAction(nameof(Index), new RouteValueDictionary
-            {
-                {"serverId", model.ServerId},
-                {"Options.Search", model.Options.Search}
+            return RedirectToAction(nameof(Index), new RouteValueDictionary {
+                { "Options.Search", model.Options.Search }
             });
         }
 
         [HttpPost]
+        [ActionName(nameof(Index))]
         [FormValueRequired("submit.BulkAction")]
-        public async Task<IActionResult> BulkEdit(string serverId, WorkflowDefinitionIndexOptions options, IEnumerable<int>? itemIds)
+        public async Task<IActionResult> BulkEdit(WorkflowDefinitionIndexOptions options, IEnumerable<int>? ids)
+        {
+            if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
+                return Forbid();
+
+            var itemIds = ids?.ToArray() ?? Array.Empty<int>();
+
+            if (!itemIds.Any()) 
+                return RedirectToAction(nameof(Index));
+            
+            // var checkedEntries = await _session.Query<WorkflowType, WorkflowTypeIndex>().Where(x => x.DocumentId.IsIn(itemIds)).ListAsync();
+            // switch (options.BulkAction)
+            // {
+            //     case WorkflowTypeBulkAction.None:
+            //         break;
+            //     case WorkflowTypeBulkAction.Delete:
+            //         foreach (var entry in checkedEntries)
+            //         {
+            //             var workflowType = await _workflowTypeStore.GetAsync(entry.Id);
+            //
+            //             if (workflowType != null)
+            //             {
+            //                 await _workflowTypeStore.DeleteAsync(workflowType);
+            //                 await _notifier.SuccessAsync(H["Workflow {0} has been deleted.", workflowType.Name]);
+            //             }
+            //         }
+            //         break;
+            //
+            //     default:
+            //         throw new ArgumentOutOfRangeException();
+            // }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
             if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
             {
                 return Forbid();
             }
 
-            var itemIdList = itemIds?.ToList();
+            //await _workflowTypeStore.DeleteAsync(workflowDefinition);
+            //await _notifier.SuccessAsync(H["Workflow {0} deleted", workflowDefinition.Name]);
 
-            if (itemIdList?.Count > 0)
-            {
-                switch (options.BulkAction)
-                {
-                    case WorkflowDefinitionBulkAction.None:
-                        break;
-                    case WorkflowDefinitionBulkAction.Delete:
-                        break;
-
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            }
-
-            return RedirectToAction(nameof(Index), new {serverId});
-        }
-
-        [HttpGet("{id}/properties")]
-        public async Task<IActionResult> EditProperties(string serverId, string? id, string? returnUrl = default, CancellationToken cancellationToken = default)
-        {
-            if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
-                return Forbid();
-
-            if (id == null || id == "new")
-                return View(new WorkflowDefinitionPropertiesViewModel
-                {
-                    ReturnUrl = returnUrl,
-                    ServerId = serverId
-                });
-
-            var workflowServerClient = await _workflowServerClientFactory.CreateClientAsync(serverId, cancellationToken);
-            var workflowDefinition = await workflowServerClient.GetWorkflowDefinitionAsync(id, VersionOptions.Latest, cancellationToken);
-
-            return View(new WorkflowDefinitionPropertiesViewModel
-            {
-                Id = workflowDefinition!.Id,
-                Name = workflowDefinition.Name ?? "Untitled",
-                IsSingleton = workflowDefinition.IsSingleton,
-                DeleteCompletedInstances = workflowDefinition.DeleteCompletedInstances,
-                ReturnUrl = returnUrl,
-                ServerId = serverId
-            });
-        }
-
-        [HttpPost("{id}/properties")]
-        public async Task<IActionResult> EditProperties(string serverId, WorkflowDefinitionPropertiesViewModel viewModel, string? id, CancellationToken cancellationToken)
-        {
-            if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
-                return Forbid();
-
-            if (!ModelState.IsValid)
-                return View(viewModel);
-
-            var isNew = id == null || id == "new";
-            WorkflowDefinition? workflowDefinition;
-            var workflowServerClient = await _workflowServerClientFactory.CreateClientAsync(serverId, cancellationToken);
-
-            if (isNew)
-                workflowDefinition = new WorkflowDefinition();
-            else
-            {
-                workflowDefinition = await workflowServerClient.GetWorkflowDefinitionAsync(id!, cancellationToken);
-
-                if (workflowDefinition == null)
-                    return NotFound();
-            }
-
-            workflowDefinition.Name = viewModel.Name?.Trim();
-            workflowDefinition.IsSingleton = viewModel.IsSingleton;
-            workflowDefinition.DeleteCompletedInstances = viewModel.DeleteCompletedInstances;
-
-            var saveRequest = new SaveWorkflowDefinitionRequest
-            {
-                Activities = workflowDefinition.Activities,
-                Connections = workflowDefinition.Connections,
-                Description = workflowDefinition.Description,
-                Name = workflowDefinition.Name,
-                Publish = false,
-                Variables = workflowDefinition.Variables,
-                ContextOptions = workflowDefinition.ContextOptions,
-                DisplayName = workflowDefinition.DisplayName,
-                IsSingleton = workflowDefinition.IsSingleton,
-                PersistenceBehavior = workflowDefinition.PersistenceBehavior,
-                DeleteCompletedInstances = workflowDefinition.DeleteCompletedInstances,
-                WorkflowDefinitionId = workflowDefinition.DefinitionId
-            };
-
-            workflowDefinition = await workflowServerClient.SaveWorkflowDefinitionAsync(saveRequest, cancellationToken);
-
-            return isNew
-                ? RedirectToAction(nameof(Edit), new {serverId, id = workflowDefinition.Id})
-                : Url.IsLocalUrl(viewModel.ReturnUrl)
-                    ? Redirect(viewModel.ReturnUrl)
-                    : RedirectToAction(nameof(Index));
-        }
-
-        [HttpGet("{id}/duplicate")]
-        public async Task<IActionResult> Duplicate(string serverId, string id, string? returnUrl = null, CancellationToken cancellationToken = default)
-        {
-            if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
-                return Forbid();
-
-            var workflowServerClient = await _workflowServerClientFactory.CreateClientAsync(serverId, cancellationToken);
-            var workflowDefinition = await workflowServerClient.GetWorkflowDefinitionAsync(id, cancellationToken);
-
-            if (workflowDefinition == null)
-                return NotFound();
-
-            return View(new WorkflowDefinitionPropertiesViewModel
-            {
-                Id = id,
-                IsSingleton = workflowDefinition.IsSingleton,
-                Name = "Copy-" + workflowDefinition.Name,
-                ReturnUrl = returnUrl
-            });
-        }
-
-        [HttpPost("{id}/duplicate")]
-        public async Task<IActionResult> Duplicate(string serverId, WorkflowDefinitionPropertiesViewModel viewModel, string id, CancellationToken cancellationToken)
-        {
-            if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
-                return Forbid();
-
-            if (!ModelState.IsValid)
-                return View(viewModel);
-
-            var workflowServerClient = await _workflowServerClientFactory.CreateClientAsync(serverId, cancellationToken);
-            var existingWorkflowDefinition = await workflowServerClient.GetWorkflowDefinitionAsync(id, cancellationToken);
-
-            if (existingWorkflowDefinition == null)
-                return NotFound();
-
-            var workflowDefinition = new SaveWorkflowDefinitionRequest
-            {
-                Name = viewModel.Name.Trim(),
-                DisplayName = existingWorkflowDefinition.DisplayName,
-                Activities = existingWorkflowDefinition.Activities,
-                Connections = existingWorkflowDefinition.Connections,
-                Description = existingWorkflowDefinition.Description,
-                Variables = existingWorkflowDefinition.Variables,
-                ContextOptions = existingWorkflowDefinition.ContextOptions,
-                IsSingleton = viewModel.IsSingleton,
-                DeleteCompletedInstances = viewModel.DeleteCompletedInstances,
-                PersistenceBehavior = existingWorkflowDefinition.PersistenceBehavior
-            };
-
-            var savedWorkflowDefinition = await workflowServerClient.SaveWorkflowDefinitionAsync(workflowDefinition, cancellationToken);
-
-            return RedirectToAction(nameof(Edit), new {serverId, savedWorkflowDefinition.Id});
-        }
-
-        [HttpGet("{id}/edit")]
-        public async Task<IActionResult> Edit(string serverId, string id, CancellationToken cancellationToken)
-        {
-            if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
-                return Forbid();
-
-            var workflowServer = await _workflowServerManager.GetWorkflowServerAsync(serverId, cancellationToken);
-            var workflowServerClient = await _workflowServerClientFactory.CreateClientAsync(workflowServer!, cancellationToken);
-            var workflowDefinition = await workflowServerClient.GetWorkflowDefinitionAsync(id, cancellationToken);
-
-            if (workflowDefinition == null)
-                return NotFound();
-
-            var viewModel = new WorkflowDefinitionViewModel
-            {
-                WorkflowDefinition = workflowDefinition,
-                ServerId = serverId,
-                ServerUrl = await workflowServer!.GetServerUrlAsync(cancellationToken)
-            };
-
-            return View(viewModel);
-        }
-
-        [HttpPost("{id}/edit")]
-        public async Task<IActionResult> Delete(string serverId, string id, CancellationToken cancellationToken)
-        {
-            if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
-                return Forbid();
-
-            var workflowServerClient = await _workflowServerClientFactory.CreateClientAsync(serverId, cancellationToken);
-            var workflowDefinition = await workflowServerClient.GetWorkflowDefinitionAsync(id, cancellationToken);
-
-            if (workflowDefinition == null)
-                return NotFound();
-
-            await workflowServerClient.DeleteWorkflowDefinitionAsync(workflowDefinition.DefinitionId, cancellationToken);
-            _notifier.Success(H["Workflow {0} deleted", workflowDefinition.Name]);
-
-            return RedirectToAction(nameof(Index), new { serverId });
+            return RedirectToAction(nameof(Index));
         }
     }
 }
