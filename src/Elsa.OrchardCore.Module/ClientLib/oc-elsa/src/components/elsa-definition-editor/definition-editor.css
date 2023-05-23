@@ -6,7 +6,7 @@ elsa-studio {
     left: 261px;
 }
 
-body.left-sidebar-compact .elsa-studio {
+body.left-sidebar-compact elsa-studio {
     left: 49px;    
 }
 
@@ -17,10 +17,4 @@ body.left-sidebar-compact .elsa-studio {
 
 body.left-sidebar-compact .ta-navbar-brand span {
     display: none;
-}
-
-/* Undo style bleed from OC into Elsa */
-elsa-studio html[dir][data-theme=default] button
-{
-    border-radius: unset;
 }

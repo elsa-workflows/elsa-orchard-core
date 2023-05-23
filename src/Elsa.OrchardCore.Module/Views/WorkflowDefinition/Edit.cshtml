@@ -1,8 +1,13 @@
 ﻿@model WorkflowDefinitionEditViewModel
 
+<style asp-name="ElsaStudioReset"
+       asp-src="~/Elsa.OrchardCore.Module/oc-elsa.css"
+       depends-on="admin">
+</style>
+
 <style asp-name="ElsaStudio"
-       asp-src="~/Elsa.OrchardCore.Module/elsa/elsa-studio/oc-elsa/elsa-workflows-designer.css"
-       debug-src="~/Elsa.OrchardCore.Module/elsa/elsa-studio/oc-elsa/elsa-workflows-designer.css">
+       asp-src="~/Elsa.OrchardCore.Module/elsa/dist/oc-elsa/elsa-workflows-designer.css"
+       depends-on="admin">
 </style>
 
 <style asp-name="InterFont"
@@ -11,8 +16,7 @@
 </style>
 
 <script asp-name="ElsaStudio"
-        asp-src="~/Elsa.OrchardCore.Module/elsa/elsa-studio/oc-elsa/oc-elsa.esm.js"
-        debug-src="~/Elsa.OrchardCore.Module/elsa/elsa-studio/oc-elsa/oc-elsa.esm.js"
+        asp-src="~/Elsa.OrchardCore.Module/elsa/dist/oc-elsa/oc-elsa.esm.js"
         type="module"
         at="Foot">
 </script>

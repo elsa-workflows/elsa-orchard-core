@@ -11,6 +11,7 @@
 App_Data/
 src/Elsa.OrchardCore.Web/Localization/
 .DS_store
+elsa.sqlite.db
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -331,3 +332,5 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+src/Elsa.OrchardCore.Module/ClientLib/oc-elsa/dist/types/

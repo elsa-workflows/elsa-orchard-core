@@ -37,35 +37,7 @@
     </ItemGroup>
     
     <ItemGroup>
-      <RazorGenerate Remove="Views\WorkflowServer\Create.cshtml" />
-      <RazorGenerate Remove="Views\WorkflowServer\Edit.cshtml" />
-      <RazorGenerate Remove="Views\WorkflowServer\Index.cshtml" />
-      <RazorGenerate Remove="Views\WorkflowStudio\Index.cshtml" />
+      <Folder Include="wwwroot\elsa" />
     </ItemGroup>
     
-    <ItemGroup>
-      <Folder Include="Indexes" />
-      <Folder Include="Services" />
-      <Folder Include="Views\Shared" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <EmbeddedResource Update="Views\WorkflowDefinition\Edit.cshtml">
-        <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Update="ClientLib\oc-elsa\src\components\elsa-definition-editor\definition-editor.tsx">
-        <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Remove="wwwroot\elsa\**" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <EntityDeploy Remove="wwwroot\elsa\**" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Compile Remove="wwwroot\elsa\**" />
-    </ItemGroup>
-
-
 </Project>

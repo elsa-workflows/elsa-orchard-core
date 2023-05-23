@@ -2,21 +2,16 @@
   "name": "oc-elsa",
   "version": "0.0.1",
   "description": "Stencil Component Starter",
-  "main": "../../wwwroot/elsa/elsa-studio/index.cjs.js",
-  "module": "../../wwwroot/elsa/elsa-studio/index.js",
-  "es2015": "dist/esm/index.mjs",
-  "es2017": "dist/esm/index.mjs",
-  "types": "dist/types/index.d.ts",
-  "collection": "../../wwwroot/elsa/elsa-studio/collection/collection-manifest.json",
-  "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/oc-elsa/oc-elsa.esm.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ionic-team/stencil-component-starter.git"
-  },
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.js",
+  "es2015": "./dist/esm/index.mjs",
+  "es2017": "./dist/esm/index.mjs",
+  "types": "./dist/types/components.d.ts",
+  "collection": "./dist/collection/collection-manifest.json",
+  "collection:main": "./dist/collection/index.js",
   "files": [
-    "../../wwwroot/elsa/elsa-studio/",
-    "../../wwwroot/elsa/loader/"
+    "dist/",
+    "loader/"
   ],
   "scripts": {
     "build": "stencil build",
@@ -26,7 +21,7 @@
   },
   "dependencies": {
     "@stencil/core": "^3.2.2",
-    "@elsa-workflows/elsa-workflows-designer": "^3.0.3-preview.137"
+    "@elsa-workflows/elsa-workflows-designer": "^3.0.3-preview.140"
   },
   "devDependencies": {
     "@types/node": "^18.15.3",

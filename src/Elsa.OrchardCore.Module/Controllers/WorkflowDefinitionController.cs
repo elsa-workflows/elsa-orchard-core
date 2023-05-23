@@ -307,7 +307,7 @@ namespace Elsa.OrchardCore.Controllers
         [HttpGet("workflow-definitions/edit/{definitionId?}")]
         public ActionResult Edit(string definitionId)
         {
-            var serverUrl = new Uri("https://localhost:8090/elsa/api"); // TODO: Get from configuration.
+            var serverUrl = new Uri("https://localhost:8092/elsa/api"); // TODO: Get from configuration.
             var viewModel = new WorkflowDefinitionEditViewModel(serverUrl, definitionId);
 
             return View(viewModel);

@@ -1,7 +1,7 @@
 import {Config} from '@stencil/core';
 
 const CopyPlugin = require("copy-webpack-plugin");
-const targetDir = '../../wwwroot/elsa/elsa-studio';
+//const targetDir = '../../wwwroot/elsa/elsa-studio';
 
 export const config: Config = {
     namespace: 'oc-elsa',
@@ -9,14 +9,14 @@ export const config: Config = {
         {
             type: 'dist',
             esmLoaderPath: '../loader',
-            dir: targetDir,
+            //dir: targetDir,
             copy: [
                 {src: '../node_modules/@elsa-workflows/elsa-workflows-designer/dist/elsa-workflows-designer/elsa-workflows-designer.css', dest: 'elsa-workflows-designer.css'}
             ]
         },
         {
             type: 'dist-custom-elements',
-            dir: targetDir,
+            //dir: targetDir,
             copy: [
                 {src: '../node_modules/@elsa-workflows/elsa-workflows-designer/dist/elsa-workflows-designer/elsa-workflows-designer.css', dest: 'elsa-workflows-designer.css'}
             ]
@@ -24,7 +24,7 @@ export const config: Config = {
         {
             type: 'www',
             serviceWorker: null, // disable service workers
-            dir: targetDir,
+            //dir: targetDir,
             copy: [
                 {src: '../node_modules/@elsa-workflows/elsa-workflows-designer/dist/elsa-workflows-designer/elsa-workflows-designer.css', dest: 'elsa-workflows-designer.css'}
             ]
