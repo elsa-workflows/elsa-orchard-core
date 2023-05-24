@@ -32,10 +32,6 @@
       <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Quartz\Elsa.Quartz.csproj" />
       <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Scheduling\Elsa.Scheduling.csproj" />
       <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Workflows.Api\Elsa.Workflows.Api.csproj" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="Features\Contents\Activities" />
     </ItemGroup>    
     
 </Project>

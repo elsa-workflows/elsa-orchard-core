@@ -1,6 +1,7 @@
 ﻿using Elsa.Extensions;
 using Elsa.OrchardCore.Extensions;
 using Elsa.OrchardCore.Features.Contents.Activities.ContentItemCreated;
+using Elsa.OrchardCore.Services;
 using Elsa.Workflows.Core.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.ContentManagement;

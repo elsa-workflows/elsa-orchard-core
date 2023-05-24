@@ -6,7 +6,7 @@ using Elsa.Workflows.Core.Contracts;
 using Elsa.Workflows.Core.Models;
 using OrchardCore.ContentManagement.Metadata;
 
-namespace Elsa.OrchardCore.Features.Contents.Activities.ContentItemCreated;
+namespace Elsa.OrchardCore.Services;
 
 public class ContentTypeOptionsProvider : IActivityPropertyOptionsProvider
 {
@@ -20,7 +20,12 @@ public class ContentTypeOptionsProvider : IActivityPropertyOptionsProvider
     public ValueTask<object> GetOptionsAsync(PropertyInfo property, CancellationToken cancellationToken = default)
     {
         var contentTypes = _contentDefinitionManager.ListTypeDefinitions().ToList();
-        var selectListItems = contentTypes.Select(x => new SelectListItem(x.DisplayName, x.Name)).ToList();
+
+        var selectListItems = contentTypes
+            .Select(x => new SelectListItem(x.DisplayName, x.Name))
+            .OrderBy(x => x.Text)
+            .ToList();
+        
         return new(selectListItems);
     }
 }
