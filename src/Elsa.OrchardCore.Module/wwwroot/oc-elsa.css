@@ -1,6 +1,27 @@
 /************************************
 Overrides to play nice with TheAdmin.
 *************************************/
+elsa-studio {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    left: 261px;
+}
+
+body.left-sidebar-compact elsa-studio {
+    left: 49px;
+}
+
+/* Restore OC logo style */
+.ta-navbar-brand img {
+    display: inline;
+}
+
+body.left-sidebar-compact .ta-navbar-brand span {
+    display: none;
+}
+
 .ta-navbar-brand img {
     display: inline;
 }

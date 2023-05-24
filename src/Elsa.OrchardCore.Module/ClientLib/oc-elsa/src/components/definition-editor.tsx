@@ -1,9 +1,8 @@
 import {Component, Prop, h} from '@stencil/core';
-import {Container, StudioService, WorkflowDefinitionEditorService, WorkflowDefinitionManager} from "@elsa-workflows/elsa-workflows-designer";
+import {Container, ServerSettings, StudioService, WorkflowDefinitionEditorService, WorkflowDefinitionManager} from "@elsa-workflows/elsa-workflows-designer";
 
 @Component({
     tag: 'oc-elsa-definition-editor',
-    styleUrl: 'definition-editor.css',
     shadow: false,
 })
 export class DefinitionEditor {
@@ -15,7 +14,10 @@ export class DefinitionEditor {
         return <elsa-studio serverUrl={serverUrl} disableAuth={true}/>;
     }
 
-    async componentDidLoad() {
+    async componentWillLoad() {
+        const settings = Container.get(ServerSettings);
+        settings.baseAddress = this.serverUrl;
+
         const definitionId = this.definitionId;
         const definitionManager = Container.get(WorkflowDefinitionManager);
         const definition = await definitionManager.getWorkflow(definitionId, {isLatest: true});

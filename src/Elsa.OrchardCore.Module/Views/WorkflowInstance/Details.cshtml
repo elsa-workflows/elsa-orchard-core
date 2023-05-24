@@ -1,0 +1,97 @@
+@using Elsa.OrchardCore.Extensions
+@using Elsa.Workflows.Core.Models
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using OrchardCore.DisplayManagement.TagHelpers
+@using OrchardCore.ResourceManagement.TagHelpers
+@using ScriptTagHelper = Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper
+@model WorkflowInstanceViewModel
+@inject OrchardCore.Modules.ILocalClock LocalClock
+
+<zone Name="Title"><h1>@RenderTitleSegments(Model.WorkflowDefinition.Name)</h1></zone>
+
+<zone name="Breadcrumbs">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="WorkflowDefinition">@T["Workflows"]</a></li>
+        <li class="breadcrumb-item"><a asp-action="Edit" asp-controller="WorkflowDefinition" asp-route-definitionid="@Model.WorkflowDefinition.DefinitionId">@Model.WorkflowDefinition.Name</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="WorkflowInstance" asp-route-definitionid="@Model.WorkflowDefinition.DefinitionId">@T["Instances"]</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.WorkflowInstance.Id</li>
+    </ol>
+</nav>
+</zone>
+<nav class="mb-3">
+    <ul class="nav nav-pills" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="workflow-tab" data-bs-toggle="pill" href="#workflow" role="tab" aria-controls="workflow" aria-selected="true">Workflow</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="state-tab" data-bs-toggle="pill" href="#state" role="tab" aria-controls="state">@T["State"]</a>
+        </li>
+        @*TODO: Enable this when workflow logging is implemented.*@
+        @*<li class="nav-item">
+                <a class="nav-link" id="log-tab" data-bs-toggle="pill" href="#log" role="tab" aria-controls="log">Log</a>
+            </li>*@
+    </ul>
+</nav>
+<div class="tab-content">
+    <div id="workflow" class="tab-pane active" role="tabpanel" aria-labelledby="workflow-tab">
+        <div class="card mb-3 workflow-details">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <label>@T["Definition ID"]</label>
+                        <span>@Model.WorkflowInstance.DefinitionId</span>
+                    </div>
+                    <div class="col">
+                        <label>@T["Created"]</label>
+                        <span>@await LocalClock.ConvertToLocalAsync(Model.WorkflowInstance.CreatedAt)</span>
+                    </div>
+                    <div class="col">
+                        <label>@T["Status"]</label>
+                        <span>@T.GetLocalizedStatus(Model.WorkflowInstance.SubStatus)</span>
+                    </div>
+                    @if (Model.WorkflowInstance.SubStatus == WorkflowSubStatus.Faulted)
+                    {
+                        <div class="col">
+                            <label>@T["Fault Message"]</label>
+                            <span>@Model.WorkflowInstance.WorkflowState.Fault</span>
+                        </div>
+                    }
+                    <div class="col">
+                        <label>@T["Correlation ID"]</label>
+                        <span>@(Model.WorkflowInstance.CorrelationId ?? "None")</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="workflow-container">
+                <elsa-workflow-designer workflow-id="@Model.WorkflowInstance.Id" server-url="@Url.Content("~/elsa/api")" />
+            </div>
+        </div>
+    </div>
+    <div id="state" class="tab-pane" role="tabpanel" aria-labelledby="state-tab">
+        <div class="card">
+            <div class="card-body">
+                <pre>@Json.Serialize(Model.WorkflowInstance.WorkflowState)</pre>
+            </div>
+        </div>
+    </div>
+    @*TODO: Enable this when workflow logging is implemented.*@
+    @*<div id="log" class="tab-pane" role="tabpanel" aria-labelledby="log-tab">
+            <div class="card">
+                <div class="card-body">
+                    Pretty LOG goes here...
+                </div>
+            </div>
+        </div>*@
+</div>
+<div class="mb-3">
+    <a class="btn btn-secondary" asp-route-action="Index" asp-route-workflowTypeId="@Model.WorkflowDefinition.Id">@T["Back"]</a>
+    <a class="btn btn-danger" data-message="@T["Are you sure you want to delete this workflow instance?"]" data-url-af="RemoveUrl UnsafeUrl" asp-action="Delete" asp-route-id="@Model.WorkflowInstance.Id">@T["Delete"]</a>
+</div>
+
+<style asp-name="jsplumbtoolkit-defaults"></style>
+<style asp-src="~/OrchardCore.Workflows/Styles/orchard.workflows-viewer.min.css" debug-src="~/OrchardCore.Workflows/Styles/orchard.workflows-viewer.css"></style>
+<script asp-name="bootstrap" version="4" at="Foot"></script>
+<script depends-on="jsplumb" asp-src="~/OrchardCore.Workflows/Scripts/orchard.workflows-viewer.min.js" debug-src="~/OrchardCore.Workflows/Scripts/orchard.workflows-viewer.js" at="Foot"></script>

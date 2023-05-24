@@ -9,7 +9,7 @@ using OrchardCore.ContentManagement;
 
 namespace Elsa.OrchardCore.Features.Core.Activities.Contents.ContentItemCreated;
 
-[Activity("Elsa", "Content", "Triggered when a content item is created.", Kind = ActivityKind.Trigger)]
+[Activity("OrchardCore", "Content", "Triggered when a content item is created.", Kind = ActivityKind.Trigger)]
 public class ContentItemCreated : Trigger<ContentItem>
 {
     [Input(

@@ -29,6 +29,8 @@
       <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.EntityFrameworkCore.Sqlite\Elsa.EntityFrameworkCore.Sqlite.csproj" />
       <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.EntityFrameworkCore\Elsa.EntityFrameworkCore.csproj" />
       <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Identity\Elsa.Identity.csproj" />
+      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Quartz\Elsa.Quartz.csproj" />
+      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Scheduling\Elsa.Scheduling.csproj" />
       <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Workflows.Api\Elsa.Workflows.Api.csproj" />
     </ItemGroup>
     
@@ -38,6 +40,20 @@
     
     <ItemGroup>
       <Folder Include="wwwroot\elsa" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Content Include="Views\WorkflowInstance\Details.cshtml" />
+      <Content Include="Views\WorkflowInstance\Index.cshtml" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <EmbeddedResource Update="ClientLib\oc-elsa\src\components\definition-editor.tsx">
+        <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Update="ClientLib\oc-elsa\src\components\instance-viewer.tsx">
+        <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      </EmbeddedResource>
     </ItemGroup>
     
 </Project>
