@@ -1,5 +1,5 @@
 import {Component, Prop, h} from '@stencil/core';
-import {Container, ServerSettings, WorkflowDefinitionManager, WorkflowInstancesApi, WorkflowInstanceViewerService} from "@elsa-workflows/elsa-workflows-designer";
+import {Container, ServerSettings, StudioInitializingContext, WorkflowDefinitionManager, WorkflowInstancesApi, WorkflowInstanceViewerService} from "@elsa-workflows/elsa-workflows-designer";
 
 
 @Component({
@@ -12,7 +12,7 @@ export class InstanceViewer {
 
     render() {
         const serverUrl = this.serverUrl;
-        return <elsa-studio serverUrl={serverUrl} disableAuth={true}/>;
+        return <elsa-studio serverUrl={serverUrl} disableAuth={true} onInitializing={e => this.onInitializing(e)}/>;
     }
     
     async componentWillLoad() {
@@ -27,5 +27,10 @@ export class InstanceViewer {
         const definition = await definitionManager.getWorkflow(definitionId, {isLatest: true});
         const instanceViewerService = Container.get(WorkflowInstanceViewerService);
         instanceViewerService.show(definition, instance);
+    }
+
+    private onInitializing(e: CustomEvent<StudioInitializingContext>) {
+        e.detail.pluginRegistry.remove('home');
+        e.detail.pluginRegistry.remove('login');
     }
 }
