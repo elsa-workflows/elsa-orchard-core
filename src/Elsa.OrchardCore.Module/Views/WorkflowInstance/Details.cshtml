@@ -15,7 +15,7 @@
         <li class="breadcrumb-item"><a asp-action="Index" asp-controller="WorkflowDefinition">@T["Workflows"]</a></li>
         <li class="breadcrumb-item"><a asp-action="Edit" asp-controller="WorkflowDefinition" asp-route-definitionid="@Model.WorkflowDefinition.DefinitionId">@Model.WorkflowDefinition.Name</a></li>
         <li class="breadcrumb-item"><a asp-action="Index" asp-controller="WorkflowInstance" asp-route-definitionid="@Model.WorkflowDefinition.DefinitionId">@T["Instances"]</a></li>
-        <li class="breadcrumb-item active" aria-current="page">@Model.WorkflowInstance.Id</li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.InstanceId</li>
     </ol>
 </nav>
 </zone>
@@ -40,7 +40,7 @@
                 <div class="row">
                     <div class="col">
                         <label>@T["Definition ID"]</label>
-                        <span>@Model.WorkflowInstance.DefinitionId</span>
+                        <span>@Model.WorkflowDefinition.DefinitionId</span>
                     </div>
                     <div class="col">
                         <label>@T["Created"]</label>
@@ -66,7 +66,7 @@
         </div>
         <div class="mb-3">
             <div class="workflow-container">
-                <elsa-workflow-designer workflow-id="@Model.WorkflowInstance.Id" server-url="@Url.Content("~/elsa/api")" />
+                <oc-elsa-instance-viewer server-url="@Model.ServerUrl" instance-id="@Model.WorkflowInstance.Id"></oc-elsa-instance-viewer>
             </div>
         </div>
     </div>

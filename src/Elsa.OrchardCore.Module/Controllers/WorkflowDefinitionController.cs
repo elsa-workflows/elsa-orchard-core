@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elsa.Common.Models;
+using Elsa.OrchardCore.Contracts;
 using Elsa.OrchardCore.ViewModels;
 using Elsa.Workflows.Core.Activities.Flowchart.Activities;
 using Elsa.Workflows.Management.Contracts;
@@ -32,7 +33,7 @@ public class WorkflowDefinitionController : Controller
     private readonly IWorkflowDefinitionStore _workflowDefinitionStore;
     private readonly IDistributedLockProvider _distributedLockProvider;
     private readonly IWorkflowDefinitionPublisher _workflowDefinitionPublisher;
-    private readonly WorkflowDefinitionMapper _workflowDefinitionMapper;
+    private readonly IElsaServerUrlAccessor _elsaServerUrlAccessor;
     private readonly IAuthorizationService _authorizationService;
     private readonly INotifier _notifier;
 
@@ -45,7 +46,7 @@ public class WorkflowDefinitionController : Controller
         IWorkflowDefinitionStore workflowDefinitionStore,
         IDistributedLockProvider distributedLockProvider, 
         IWorkflowDefinitionPublisher workflowDefinitionPublisher,
-        WorkflowDefinitionMapper workflowDefinitionMapper,
+        IElsaServerUrlAccessor elsaServerUrlAccessor,
         IOptions<PagerOptions> pagerOptions,
         IAuthorizationService authorizationService,
         IShapeFactory shapeFactory,
@@ -61,9 +62,9 @@ public class WorkflowDefinitionController : Controller
         New = shapeFactory;
         S = s;
         H = h;
-        _workflowDefinitionMapper = workflowDefinitionMapper;
         _distributedLockProvider = distributedLockProvider;
         _workflowDefinitionPublisher = workflowDefinitionPublisher;
+        _elsaServerUrlAccessor = elsaServerUrlAccessor;
     }
 
 
@@ -306,9 +307,9 @@ public class WorkflowDefinitionController : Controller
     }
 
     [HttpGet("workflow-definitions/edit/{definitionId?}")]
-    public ActionResult Edit(string definitionId)
+    public async Task<ActionResult> Edit(string definitionId, CancellationToken cancellationToken)
     {
-        var serverUrl = new Uri("https://localhost:8092/elsa/api"); // TODO: Get from configuration.
+        var serverUrl = await _elsaServerUrlAccessor.GetServerUrlAsync(cancellationToken);
         var viewModel = new WorkflowDefinitionEditViewModel(serverUrl, definitionId);
 
         return View(viewModel);

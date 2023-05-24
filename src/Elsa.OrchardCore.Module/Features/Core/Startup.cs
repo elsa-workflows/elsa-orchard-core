@@ -3,8 +3,10 @@ using Elsa.EntityFrameworkCore.Extensions;
 using Elsa.EntityFrameworkCore.Modules.Management;
 using Elsa.EntityFrameworkCore.Modules.Runtime;
 using Elsa.Extensions;
+using Elsa.OrchardCore.Contracts;
 using Elsa.OrchardCore.Features.Core.Activities.Contents.ContentItemCreated;
 using Elsa.OrchardCore.Features.Core.Services;
+using Elsa.OrchardCore.Services;
 using Elsa.Workflows.Core.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
@@ -42,6 +44,7 @@ public class Startup : StartupBase
         services.AddScoped<IModularTenantEvents, RunHostedServicesStartupTask>();
         services.AddScoped<IActivityPropertyOptionsProvider, ContentTypeOptionsProvider>();
         services.AddScoped<IContentHandler, WorkflowContentItemHandler>();
+        services.AddScoped<IElsaServerUrlAccessor, DefaultElsaServerUrlAccessor>();
     }
 
     public override void Configure(IApplicationBuilder app, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)

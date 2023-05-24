@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Elsa.Common.Models;
+using Elsa.OrchardCore.Contracts;
 using Elsa.OrchardCore.ViewModels;
 using Elsa.Workflows.Management.Contracts;
 using Elsa.Workflows.Management.Filters;
@@ -16,12 +16,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using OrchardCore.Admin;
 using OrchardCore.DisplayManagement;
-using OrchardCore.DisplayManagement.ModelBinding;
 using OrchardCore.DisplayManagement.Notify;
+using OrchardCore.Environment.Shell;
 using OrchardCore.Navigation;
 using OrchardCore.Routing;
 
@@ -33,9 +31,9 @@ public class WorkflowInstanceController : Controller
     private readonly PagerOptions _pagerOptions;
     private readonly IWorkflowDefinitionService _workflowDefinitionService;
     private readonly IWorkflowInstanceStore _workflowInstanceStore;
+    private readonly IElsaServerUrlAccessor _elsaServerUrlAccessor;
     private readonly IAuthorizationService _authorizationService;
     private readonly INotifier _notifier;
-    private readonly IUpdateModelAccessor _updateModelAccessor;
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     private readonly IHtmlLocalizer H;
@@ -46,20 +44,20 @@ public class WorkflowInstanceController : Controller
     public WorkflowInstanceController(
         IWorkflowDefinitionService workflowDefinitionService,
         IWorkflowInstanceStore workflowInstanceStore,
+        IElsaServerUrlAccessor elsaServerUrlAccessor,
         IOptions<PagerOptions> pagerOptions,
         IAuthorizationService authorizationService,
         IShapeFactory shapeFactory,
         INotifier notifier,
         IHtmlLocalizer<WorkflowInstanceController> htmlLocalizer,
-        IStringLocalizer<WorkflowInstanceController> stringLocalizer,
-        IUpdateModelAccessor updateModelAccessor)
+        IStringLocalizer<WorkflowInstanceController> stringLocalizer)
     {
         _pagerOptions = pagerOptions.Value;
         _workflowDefinitionService = workflowDefinitionService;
         _workflowInstanceStore = workflowInstanceStore;
+        _elsaServerUrlAccessor = elsaServerUrlAccessor;
         _authorizationService = authorizationService;
         _notifier = notifier;
-        _updateModelAccessor = updateModelAccessor;
         New = shapeFactory;
         H = htmlLocalizer;
         S = stringLocalizer;
@@ -181,12 +179,9 @@ public class WorkflowInstanceController : Controller
         
         if(workflowDefinition == null)
             return NotFound();
-        
-        var viewModel = new WorkflowInstanceViewModel
-        {
-            WorkflowDefinition = workflowDefinition,
-            WorkflowInstance = workflowInstance
-        };
+
+        var serverUrl = await _elsaServerUrlAccessor.GetServerUrlAsync(cancellationToken);
+        var viewModel = new WorkflowInstanceViewModel(workflowDefinition, workflowInstance, serverUrl, workflowInstance.Id);
         return View(viewModel);
     }
 

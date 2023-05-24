@@ -36,24 +36,6 @@
     
     <ItemGroup>
         <ProjectReference Include="..\Elsa.OrchardCore.Abstractions\Elsa.OrchardCore.Abstractions.csproj" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="wwwroot\elsa" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Content Include="Views\WorkflowInstance\Details.cshtml" />
-      <Content Include="Views\WorkflowInstance\Index.cshtml" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <EmbeddedResource Update="ClientLib\oc-elsa\src\components\definition-editor.tsx">
-        <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Update="ClientLib\oc-elsa\src\components\instance-viewer.tsx">
-        <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-      </EmbeddedResource>
-    </ItemGroup>
+    </ItemGroup>    
     
 </Project>
