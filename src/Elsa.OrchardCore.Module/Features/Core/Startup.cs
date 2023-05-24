@@ -4,7 +4,7 @@ using Elsa.EntityFrameworkCore.Modules.Management;
 using Elsa.EntityFrameworkCore.Modules.Runtime;
 using Elsa.Extensions;
 using Elsa.OrchardCore.Features.Core.Activities.Contents.ContentItemCreated;
-using Elsa.OrchardCore.Features.Core.StartupTasks;
+using Elsa.OrchardCore.Features.Core.Services;
 using Elsa.Workflows.Core.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
@@ -34,19 +34,12 @@ public class Startup : StartupBase
                 runtime.UseExecutionLogRecords(e => e.UseEntityFrameworkCore(ef => ef.UseSqlite()));
                 runtime.UseDefaultWorkflowStateExporter();
             });
-            // elsa.UseIdentity(identity =>
-            // {
-            //     identity.TokenOptions = options => { options.SigningKey = "secret-signing-key"; };
-            //     identity.UseAdminUserProvider();
-            // });
-            //elsa.UseDefaultAuthentication();
             elsa.UseWorkflowsApi();
-            elsa.UseHttp();
+            elsa.UseHttp(http => http.ConfigureHttpOptions = options => options.BasePath = "/wf");
+            elsa.UseScheduling();
         });
 
-        services.AddScoped<IModularTenantEvents, RunMigrationsStartupTask<ManagementElsaDbContext>>();
-        services.AddScoped<IModularTenantEvents, RunMigrationsStartupTask<RuntimeElsaDbContext>>();
-        services.AddScoped<IModularTenantEvents, RegisterDescriptorsStartupTask>();
+        services.AddScoped<IModularTenantEvents, RunHostedServicesStartupTask>();
         services.AddScoped<IActivityPropertyOptionsProvider, ContentTypeOptionsProvider>();
         services.AddScoped<IContentHandler, WorkflowContentItemHandler>();
     }
@@ -54,5 +47,6 @@ public class Startup : StartupBase
     public override void Configure(IApplicationBuilder app, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
     {
         routes.MapWorkflowsApi();
+        app.UseWorkflows();
     }
 }

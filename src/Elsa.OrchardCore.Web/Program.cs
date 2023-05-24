@@ -12,11 +12,8 @@ builder.Host.UseSerilog((context, logger) =>
 });
 
 builder.Services
-    .AddMediator()
     .AddOrchardCms()
     .AddSetupFeatures("OrchardCore.AutoSetup");
-
-//builder.Services.AddCors(cors => cors.AddDefaultPolicy(policy => policy.AllowCredentials().AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3333")));
 
 var app = builder.Build();
 
@@ -26,7 +23,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseStaticFiles();
-//app.UseCors();
 app.UseOrchardCore();
 
 app.Run();
