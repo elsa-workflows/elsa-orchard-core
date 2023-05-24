@@ -35,7 +35,7 @@
     </ItemGroup>
     
     <ItemGroup>
-        <ProjectReference Include="..\Elsa.OrchardCore.Abstractions\Elsa.OrchardCore.Abstractions.csproj" />
+      <Folder Include="Features\Contents\Activities" />
     </ItemGroup>    
     
 </Project>

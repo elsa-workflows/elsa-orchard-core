@@ -1,8 +1,7 @@
-using Elsa.Email.Contracts;
+using Elsa.Extensions;
+using Elsa.OrchardCore.Extensions;
 using Elsa.OrchardCore.Features.Emails.Services;
-using Elsa.OrchardCore.Features.Emails.StartupTasks;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using OrchardCore.Modules;
 
 namespace Elsa.OrchardCore.Features.Emails;
@@ -12,7 +11,10 @@ public class Startup : StartupBase
 {
     public override void ConfigureServices(IServiceCollection services)
     {
-        services.Replace(ServiceDescriptor.Scoped<ISmtpService, WrappingSmtpService>());
-        services.AddScoped<IModularTenantEvents, RegisterActivitiesStartupTask>();
+        services.ConfigureElsa(elsa => elsa
+            .UseEmail(email => email.SmtpService = sp => sp.GetRequiredService<WrappingSmtpService>())
+            .AddActivitiesFrom<Startup>());
+
+        services.AddSingleton<WrappingSmtpService>();
     }
 }

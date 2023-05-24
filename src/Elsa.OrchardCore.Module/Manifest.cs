@@ -17,6 +17,13 @@ using OrchardCore.Modules.Manifest;
     Category = "Elsa Workflows"
 )]
 
+[assembly: Feature(
+    Id = "Elsa.OrchardCore.Module.Contents",
+    Name = "Contents",
+    Description = "Provides content activities.",
+    Dependencies = new[] {"Elsa.OrchardCore.Module", "OrchardCore.Contents"},
+    Category = "Elsa Workflows"
+)]
 
 [assembly: Feature(
     Id = "Elsa.OrchardCore.Module.Email",

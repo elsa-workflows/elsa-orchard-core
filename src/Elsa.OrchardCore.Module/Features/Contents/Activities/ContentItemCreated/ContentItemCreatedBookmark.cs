@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace Elsa.OrchardCore.Features.Core.Activities.Contents.ContentItemCreated;
+namespace Elsa.OrchardCore.Features.Contents.Activities.ContentItemCreated;
 
 /// <summary>
 /// A bookmark payload that contains the content type of the content item that triggered the workflow.

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using Elsa.Extensions;
 using Elsa.Features;
 using Elsa.Features.Services;
@@ -8,24 +10,26 @@ namespace Elsa.OrchardCore.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    private static IModule? _elsa;
+    private static readonly IDictionary<IServiceCollection, IModule> ElsaContainers = new ConcurrentDictionary<IServiceCollection, IModule>();
     
-    public static IServiceCollection ConfigureElsa(this IServiceCollection services, Action<IModule>? configure = default)
+    public static IModule ConfigureElsa(this IServiceCollection services, Action<IModule>? configure = default)
     {
         var module = GetOrCreateElsaModule(services);
-        configure?.Invoke(module);
-        module.Apply();
-        return services;
+        
+        if(configure != null)
+            module.Configure<AppFeature>(app => app.Configurator += configure);
+        
+        return module;
     }
 
     private static IModule GetOrCreateElsaModule(IServiceCollection services)
     {
-        if (_elsa != null) 
-            return _elsa;
+        if(ElsaContainers.TryGetValue(services, out var elsa))
+            return elsa;
         
-        _elsa = services.CreateModule();
-        _elsa.Configure<ElsaFeature>();
-
-        return _elsa;
+        elsa = services.CreateModule();
+        
+        ElsaContainers[services] = elsa;
+        return elsa;
     }
 }

@@ -5,7 +5,7 @@ using Elsa.Workflows.Runtime.Contracts;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Handlers;
 
-namespace Elsa.OrchardCore.Features.Core.Activities.Contents.ContentItemCreated;
+namespace Elsa.OrchardCore.Features.Contents.Activities.ContentItemCreated;
 
 public class WorkflowContentItemHandler : ContentHandlerBase
 {

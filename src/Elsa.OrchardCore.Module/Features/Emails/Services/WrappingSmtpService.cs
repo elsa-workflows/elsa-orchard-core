@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using MimeKit;
 using OrchardCore.Email;
 using ISmtpService = Elsa.Email.Contracts.ISmtpService;
@@ -9,11 +10,11 @@ namespace Elsa.OrchardCore.Features.Emails.Services;
 
 public class WrappingSmtpService : ISmtpService
 {
-    private readonly IWrappedSmtpService _wrappedSmtpService;
+    private readonly IServiceScopeFactory _scopeFactory;
 
-    public WrappingSmtpService(IWrappedSmtpService wrappedSmtpService)
+    public WrappingSmtpService(IServiceScopeFactory scopeFactory)
     {
-        _wrappedSmtpService = wrappedSmtpService;
+        _scopeFactory = scopeFactory;
     }
 
     public async Task SendAsync(MimeMessage message, CancellationToken cancellationToken)
@@ -43,6 +44,8 @@ public class WrappingSmtpService : ISmtpService
             });
         }
 
-        await _wrappedSmtpService.SendAsync(mailMessage);
+        using var scope = _scopeFactory.CreateScope();
+        var wrappedSmtpService = scope.ServiceProvider.GetRequiredService<IWrappedSmtpService>();
+        await wrappedSmtpService.SendAsync(mailMessage);
     }
 }

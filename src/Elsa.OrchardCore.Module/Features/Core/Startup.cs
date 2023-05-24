@@ -4,15 +4,12 @@ using Elsa.EntityFrameworkCore.Modules.Management;
 using Elsa.EntityFrameworkCore.Modules.Runtime;
 using Elsa.Extensions;
 using Elsa.OrchardCore.Contracts;
-using Elsa.OrchardCore.Features.Core.Activities.Contents.ContentItemCreated;
+using Elsa.OrchardCore.Extensions;
 using Elsa.OrchardCore.Features.Core.Services;
 using Elsa.OrchardCore.Services;
-using Elsa.Workflows.Core.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
-using OrchardCore.ContentManagement;
-using OrchardCore.ContentManagement.Handlers;
 using OrchardCore.Modules;
 
 namespace Elsa.OrchardCore.Features.Core;
@@ -20,15 +17,16 @@ namespace Elsa.OrchardCore.Features.Core;
 [Feature("Elsa.OrchardCore.Module")]
 public class Startup : StartupBase
 {
+    public override int Order => 9000;
+
     public override void ConfigureServices(IServiceCollection services)
     {
-        services.AddElsa(elsa =>
+        var elsaModule = services.ConfigureElsa(elsa =>
         {
             elsa.AddActivitiesFrom<Startup>();
             elsa.UseWorkflowManagement(management =>
             {
                 management.UseEntityFrameworkCore(m => m.UseSqlite());
-                management.AddVariableType<ContentItem>("Content");
             });
             elsa.UseWorkflowRuntime(runtime =>
             {
@@ -41,9 +39,9 @@ public class Startup : StartupBase
             elsa.UseScheduling();
         });
 
+        elsaModule.Apply();
+        
         services.AddScoped<IModularTenantEvents, RunHostedServicesStartupTask>();
-        services.AddScoped<IActivityPropertyOptionsProvider, ContentTypeOptionsProvider>();
-        services.AddScoped<IContentHandler, WorkflowContentItemHandler>();
         services.AddScoped<IElsaServerUrlAccessor, DefaultElsaServerUrlAccessor>();
     }
 

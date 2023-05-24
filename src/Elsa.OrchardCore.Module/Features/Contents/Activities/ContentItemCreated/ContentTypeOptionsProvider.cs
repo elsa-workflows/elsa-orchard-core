@@ -6,7 +6,7 @@ using Elsa.Workflows.Core.Contracts;
 using Elsa.Workflows.Core.Models;
 using OrchardCore.ContentManagement.Metadata;
 
-namespace Elsa.OrchardCore.Features.Core.Activities.Contents.ContentItemCreated;
+namespace Elsa.OrchardCore.Features.Contents.Activities.ContentItemCreated;
 
 public class ContentTypeOptionsProvider : IActivityPropertyOptionsProvider
 {

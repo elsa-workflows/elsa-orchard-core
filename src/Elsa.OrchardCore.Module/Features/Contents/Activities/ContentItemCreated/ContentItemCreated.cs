@@ -7,7 +7,7 @@ using Elsa.Workflows.Core.Attributes;
 using Elsa.Workflows.Core.Models;
 using OrchardCore.ContentManagement;
 
-namespace Elsa.OrchardCore.Features.Core.Activities.Contents.ContentItemCreated;
+namespace Elsa.OrchardCore.Features.Contents.Activities.ContentItemCreated;
 
 [Activity("OrchardCore", "Content", "Triggered when a content item is created.", Kind = ActivityKind.Trigger)]
 public class ContentItemCreated : Trigger<ContentItem>
