@@ -21,7 +21,9 @@
   },
   "dependencies": {
     "@stencil/core": "^3.2.2",
-    "@elsa-workflows/elsa-workflows-designer": "^3.0.3-preview.144"
+    "@elsa-workflows/elsa-workflows-designer": "^3.0.3-preview.146",
+    "axios": "^1.4.0",
+    "typedi": "^0.10.0"
   },
   "devDependencies": {
     "@types/node": "^18.15.3",
