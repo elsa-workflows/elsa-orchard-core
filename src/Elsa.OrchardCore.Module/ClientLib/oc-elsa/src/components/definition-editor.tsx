@@ -1,5 +1,6 @@
 import {Component, Prop, h} from '@stencil/core';
-import {Container, ServerSettings, StudioInitializingContext, WorkflowDefinitionEditorService, WorkflowDefinitionManager} from "@elsa-workflows/elsa-workflows-designer";
+import {Container, PluginRegistry, ServerSettings, StudioInitializingContext, WorkflowDefinitionEditorService, WorkflowDefinitionManager} from "@elsa-workflows/elsa-workflows-designer";
+import {CookiePlugin} from "../plugins/cookie-plugin";
 
 @Component({
     tag: 'oc-elsa-definition-editor',
@@ -26,7 +27,9 @@ export class DefinitionEditor {
     }
 
     private onInitializing(e: CustomEvent<StudioInitializingContext>) {
-        e.detail.pluginRegistry.remove('home');
-        e.detail.pluginRegistry.remove('login');
+        const pluginRegistry = e.detail.pluginRegistry as PluginRegistry;
+        pluginRegistry.remove('home');
+        pluginRegistry.remove('login');
+        pluginRegistry.add('cookie-credentials', CookiePlugin);
     }
 }

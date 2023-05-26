@@ -35,6 +35,11 @@ public class Startup : StartupBase
                 runtime.UseDefaultWorkflowStateExporter();
             });
             elsa.UseWorkflowsApi();
+            elsa.UseIdentity(identity =>
+            {
+                identity.TokenOptions = options => options.SigningKey = "unused-secret-key"; // TODO: Decouple token feature from Identity.
+            });
+            elsa.UseDefaultAuthentication();
             elsa.UseHttp(http => http.ConfigureHttpOptions = options => options.BasePath = "/wf");
             elsa.UseScheduling();
         });
