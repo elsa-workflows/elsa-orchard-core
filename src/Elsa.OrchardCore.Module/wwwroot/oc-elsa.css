@@ -9,6 +9,10 @@ elsa-studio {
     left: 261px;
 }
 
+elsa-studio select {
+    color: #000000;
+}
+
 body.left-sidebar-compact elsa-studio {
     left: 49px;
 }

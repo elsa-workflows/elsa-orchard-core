@@ -1,6 +1,9 @@
 ﻿using Elsa.Extensions;
+using Elsa.JavaScript.Extensions;
+using Elsa.Liquid.Notifications;
 using Elsa.OrchardCore.Extensions;
 using Elsa.OrchardCore.Features.Contents.Activities.ContentItemCreated;
+using Elsa.OrchardCore.Features.Contents.Scripting;
 using Elsa.OrchardCore.Services;
 using Elsa.Workflows.Core.Contracts;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,9 +25,11 @@ public class Startup : StartupBase
             {
                 management.AddVariableType<ContentItem>("Content");
             });
+            elsa.UseLiquid();
         });
         
         services.AddScoped<IActivityPropertyOptionsProvider, ContentTypeOptionsProvider>();
         services.AddScoped<IContentHandler, WorkflowContentItemHandler>();
+        services.AddTypeDefinitionProvider<ContentDefinitionProvider>();
     }
 }

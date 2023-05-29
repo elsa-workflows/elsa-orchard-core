@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Elsa.Extensions;
-using Elsa.OrchardCore.Features.Contents.Activities.ContentItemCreated;
 using Elsa.OrchardCore.Services;
 using Elsa.Workflows.Core;
 using Elsa.Workflows.Core.Activities.Flowchart.Attributes;
@@ -48,9 +47,6 @@ public class CreateContentItem : CodeActivity<ContentItem>
         var contentManager = context.GetRequiredService<IContentManager>();
         var contentItem = await contentManager.NewAsync(contentType);
 
-        // contentItem.Owner = "46bbgnr8nvx3b1hnf6kadhbn59";
-        // contentItem.Author = "admin";
-
         if (!string.IsNullOrWhiteSpace(contentProperties))
             contentItem.Merge(JObject.Parse(contentProperties));
 
@@ -64,7 +60,7 @@ public class CreateContentItem : CodeActivity<ContentItem>
                 await contentManager.PublishAsync(contentItem);
             else
                 await contentManager.SaveDraftAsync(contentItem);
-
+            
             context.SetResult(contentItem);
         }
 
