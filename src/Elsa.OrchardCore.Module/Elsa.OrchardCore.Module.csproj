@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Elsa.EntityFrameworkCore.Sqlite" Version="3.0.0-preview.432" />
         <PackageReference Include="OrchardCore.Admin.Abstractions" Version="1.7.0-preview-17439" />
         <PackageReference Include="OrchardCore.Email.Abstractions" Version="1.7.0-preview-17439" />
         <PackageReference Include="OrchardCore.Infrastructure" Version="1.7.0-preview-17439" />
@@ -22,20 +23,23 @@
         <PackageReference Include="OrchardCore.Navigation.Core" Version="1.7.0-preview-17439" />
         <PackageReference Include="OrchardCore.ResourceManagement" Version="1.7.0-preview-17439" />
     </ItemGroup>
-    
+
     <ItemGroup Label="Elsa">
-      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\bundles\Elsa\Elsa.csproj" />
-      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Email\Elsa.Email.csproj" />
-      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.EntityFrameworkCore.Sqlite\Elsa.EntityFrameworkCore.Sqlite.csproj" />
-      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.EntityFrameworkCore\Elsa.EntityFrameworkCore.csproj" />
-      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Identity\Elsa.Identity.csproj" />
-      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Quartz\Elsa.Quartz.csproj" />
-      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Scheduling\Elsa.Scheduling.csproj" />
-      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Workflows.Api\Elsa.Workflows.Api.csproj" />
+        <PackageReference Include="Elsa" Version="3.0.0-preview.432" />
+        <PackageReference Include="Elsa.Email" Version="3.0.0-preview.432" />
+        <PackageReference Include="Elsa.EntityFrameworkCore" Version="3.0.0-preview.432" />
+        <PackageReference Include="Elsa.Identity" Version="3.0.0-preview.432" />
+        <PackageReference Include="Elsa.Scheduling" Version="3.0.0-preview.432" />
+        <PackageReference Include="Elsa.Workflows.Api" Version="3.0.0-preview.432" />
     </ItemGroup>
-    
-    <ItemGroup>
-      <TypeScriptCompile Include="ClientLib\oc-elsa\src\plugins\cookie-plugin.ts" />
-    </ItemGroup>    
-    
+
+    <!--    <ItemGroup Label="Elsa">-->
+    <!--      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\bundles\Elsa\Elsa.csproj" />-->
+    <!--      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Email\Elsa.Email.csproj" />-->
+    <!--      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.EntityFrameworkCore\Elsa.EntityFrameworkCore.csproj" />-->
+    <!--      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Identity\Elsa.Identity.csproj" />-->
+    <!--      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Scheduling\Elsa.Scheduling.csproj" />-->
+    <!--      <ProjectReference Include="..\..\..\..\elsa-core\v3\src\modules\Elsa.Workflows.Api\Elsa.Workflows.Api.csproj" />-->
+    <!--    </ItemGroup>-->
+
 </Project>

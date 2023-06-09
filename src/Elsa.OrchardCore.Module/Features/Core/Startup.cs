@@ -1,5 +1,4 @@
 ﻿using System;
-using Elsa.EntityFrameworkCore.Extensions;
 using Elsa.EntityFrameworkCore.Modules.Management;
 using Elsa.EntityFrameworkCore.Modules.Runtime;
 using Elsa.Extensions;
@@ -24,14 +23,11 @@ public class Startup : StartupBase
         var elsaModule = services.ConfigureElsa(elsa =>
         {
             elsa.AddActivitiesFrom<Startup>();
-            elsa.UseWorkflowManagement(management =>
-            {
-                management.UseEntityFrameworkCore(m => m.UseSqlite());
-            });
+            elsa.UseWorkflowManagement(management => { management.UseEntityFrameworkCore(); });
             elsa.UseWorkflowRuntime(runtime =>
             {
-                runtime.UseDefaultRuntime(dr => dr.UseEntityFrameworkCore(ef => ef.UseSqlite()));
-                runtime.UseExecutionLogRecords(e => e.UseEntityFrameworkCore(ef => ef.UseSqlite()));
+                runtime.UseDefaultRuntime(dr => dr.UseEntityFrameworkCore());
+                runtime.UseExecutionLogRecords(e => e.UseEntityFrameworkCore());
                 runtime.UseDefaultWorkflowStateExporter();
             });
             elsa.UseWorkflowsApi();
@@ -45,7 +41,7 @@ public class Startup : StartupBase
         });
 
         elsaModule.Apply();
-        
+
         services.AddScoped<IModularTenantEvents, RunHostedServicesStartupTask>();
         services.AddScoped<IElsaServerUrlAccessor, DefaultElsaServerUrlAccessor>();
     }
