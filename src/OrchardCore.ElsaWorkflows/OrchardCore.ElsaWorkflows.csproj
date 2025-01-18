@@ -33,9 +33,20 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Include="ClientApp\Designer\webpack.config.js" />
       <Content Include="Views\WorkflowDefinitions\Create.cshtml" />
       <Content Include="Views\WorkflowDefinitions\Edit.cshtml" />
       <Content Include="Views\WorkflowDefinitions\List.cshtml" />
+      <Content Include="wwwroot\test.dat" />
+      <Content Include="wwwroot\test.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <TypeScriptCompile Include="ClientApp\Designer\src\designer.ts" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="ResourceManagementOptionsConfiguration.cs" />
     </ItemGroup>
 
 </Project>

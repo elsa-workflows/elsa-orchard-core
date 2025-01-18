@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.ContentManagement.Handlers;
 using OrchardCore.Data;
@@ -17,7 +19,20 @@ public class Startup : StartupBase
             .AddDataMigration<Migrations>()
             .AddScoped<INavigationProvider, AdminMenu>()
             .AddScoped<IContentHandler, WorkflowDefinitionContentHandler>()
-            .AddIndexProvider<WorkflowDefinitionIndexProvider>()
+            .AddIndexProvider<WorkflowDefinitionIndexProvider>();
             ;
+            
+            services.Configure<StaticFileOptions>(options =>
+            {
+                var provider = new FileExtensionContentTypeProvider
+                {
+                    Mappings =
+                    {
+                        // Add custom MIME type mappings
+                        [".dat"] = "application/octet-stream" // Adjust the MIME type as needed
+                    }
+                };
+                options.ContentTypeProvider = provider;
+            });
     }
 }

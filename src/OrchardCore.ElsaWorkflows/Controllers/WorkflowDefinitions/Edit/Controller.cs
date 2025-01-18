@@ -15,7 +15,10 @@ public class WorkflowDefinitionsController(IAuthorizationService authorizationSe
         if (!await authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
             return Forbid();
 
-        return View(new EditViewModel());
+        return View(new EditViewModel
+        {
+            DefinitionId = id
+        });
     }
 
     [HttpPost]
