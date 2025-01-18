@@ -9,7 +9,7 @@
 *.userosscache
 *.sln.docstates
 App_Data/
-src/Elsa.OrchardCore.Web/Localization/
+src/OrchardCore.ElsaWorkflows.Web/Localization/
 .DS_store
 elsa.sqlite.db
 

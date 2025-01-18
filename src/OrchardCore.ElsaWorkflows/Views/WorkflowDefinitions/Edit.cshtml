@@ -1,0 +1,25 @@
+@model OrchardCore.ElsaWorkflows.Controllers.WorkflowDefinitions.Create.CreateViewModel
+
+<zone Name="Title"><h1>@RenderTitleSegments(T["Edit Workflow Definition"])</h1></zone>
+
+<div asp-validation-summary="ModelOnly"></div>
+<form asp-action="Create" method="post" class="no-multisubmit">
+    <ul class="nav nav-tabs">
+        <li class="nav-item pe-md-2">
+            <a class="nav-link active" id="designer-tab" data-bs-toggle="tab" href="#designer" role="tab" aria-controls="site" aria-selected="true">@T["Designer"]</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="tabs">
+        <div class="tab-pane fade show active" id="designer" role="tabpanel" aria-labelledby="designer-tab">
+            <div class="mb-3" asp-validation-class-for="Name">
+                Designer goes here.
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <button class="btn btn-primary save" type="submit">@T["Save"]</button>
+        <a class="btn btn-secondary cancel" role="button" href="@Url.Action("List")">@T["Cancel"]</a>
+    </div>
+</form>

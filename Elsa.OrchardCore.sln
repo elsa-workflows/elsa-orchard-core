@@ -9,9 +9,9 @@ ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elsa.OrchardCore.Web", "src\Elsa.OrchardCore.Web\Elsa.OrchardCore.Web.csproj", "{1A1E1268-8752-46D3-838F-DE6E664274A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.ElsaWorkflows.Web", "src\OrchardCore.ElsaWorkflows.Web\OrchardCore.ElsaWorkflows.Web.csproj", "{1A1E1268-8752-46D3-838F-DE6E664274A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elsa.OrchardCore.Module", "src\Elsa.OrchardCore.Module\Elsa.OrchardCore.Module.csproj", "{5F5FEB49-12AC-448C-82F0-197A77002BAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.ElsaWorkflows", "src\OrchardCore.ElsaWorkflows\OrchardCore.ElsaWorkflows.csproj", "{5F5FEB49-12AC-448C-82F0-197A77002BAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
