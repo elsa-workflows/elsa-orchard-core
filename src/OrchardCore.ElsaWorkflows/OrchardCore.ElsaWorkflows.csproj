@@ -24,29 +24,41 @@
         <PackageReference Include="OrchardCore.Title" Version="3.0.0-preview-18479" />
     </ItemGroup>
 
+<!--    <ItemGroup Label="Elsa">-->
+<!--        <PackageReference Include="Elsa" Version="3.3.0-rc8" />-->
+<!--        <PackageReference Include="Elsa.Workflows.Api" Version="3.3.0-rc8" />-->
+<!--    </ItemGroup>-->
+
     <ItemGroup Label="Elsa">
-        <PackageReference Include="Elsa" Version="3.3.0-rc8" />
+      <ProjectReference Include="..\..\..\..\elsa-core\main\src\modules\Elsa.Workflows.Api\Elsa.Workflows.Api.csproj" />
+      <ProjectReference Include="..\..\..\..\elsa-core\main\src\modules\Elsa\Elsa.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Services\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Include="ClientApp\Designer\webpack.config.js" />
+      <Content Include="ClientApp\webpack.config.js" />
       <Content Include="Views\WorkflowDefinitions\Create.cshtml" />
       <Content Include="Views\WorkflowDefinitions\Edit.cshtml" />
       <Content Include="Views\WorkflowDefinitions\List.cshtml" />
-      <Content Include="wwwroot\test.dat" />
-      <Content Include="wwwroot\test.txt" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <TypeScriptCompile Include="ClientApp\Designer\src\designer.ts" />
     </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="ResourceManagementOptionsConfiguration.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="ClientApp\package.json">
+        <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Update="ClientApp\package-lock.json">
+        <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Update="ClientApp\tsconfig.json">
+        <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>

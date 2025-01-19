@@ -19,6 +19,6 @@
     "webpack-dev-server": "^5.2.0"
   },
   "dependencies": {
-    "@elsa-workflows/elsa-studio-wasm": "^3.3.0-rc8"
+    "@elsa-workflows/elsa-studio-wasm": "^3.3.0-custom-elements.728"
   }
 }

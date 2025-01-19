@@ -1,5 +1,7 @@
-@using OrchardCore.ElsaWorkflows.Endpoints.WorkflowDefinitions.List
-@model ListViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using OrchardCore.DisplayManagement.TagHelpers
+@model OrchardCore.ElsaWorkflows.Controllers.WorkflowDefinitions.List.ListViewModel
 @{
     var startIndex = ((int)Model.Pager.Page - 1) * (int)Model.Pager.PageSize + 1;
     var endIndex = startIndex + Model.Items.Count - 1;

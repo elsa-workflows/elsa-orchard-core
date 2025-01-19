@@ -1,3 +1,4 @@
+@using OrchardCore.Mvc.Core.Utilities
 @model OrchardCore.ElsaWorkflows.Controllers.WorkflowDefinitions.Edit.EditViewModel
 
 <link rel="manifest" asp-src="~/OrchardCore.ElsaWorkflows/_content/Elsa.Studio.Shell/site.webmanifest"/>
@@ -14,6 +15,7 @@
 <link asp-src="~/OrchardCore.ElsaWorkflows/_content/Elsa.Studio.Shell/css/shell.css" rel="stylesheet"/>
 <link asp-src="~/OrchardCore.ElsaWorkflows/Elsa.Studio.Host.CustomElements.styles.css" rel="stylesheet"/>
 
+<elsa-backend-provider remote-endpoint="@Url.ToAbsoluteUrl("~/elsa/api")"></elsa-backend-provider>
 <elsa-workflow-definition-editor definition-id="@Model.DefinitionId"></elsa-workflow-definition-editor>
 <div id="blazor-error-ui">
     An unhandled error has occurred.
@@ -21,17 +23,17 @@
     <a class="dismiss">🗙</a>
 </div>
 <script asp-src="~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/jsInterop.js" at="Foot"></script>
-@* <script asp-src="~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/lib/monaco-editor/min/vs/loader.js" at="Foot"></script> *@
-@* <script asp-src="~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/lib/monaco-editor/min/vs/editor/editor.main.js" at="Foot"></script> *@
+<script asp-src="~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/lib/monaco-editor/min/vs/loader.js" at="Foot"></script>
+<script asp-src="~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/lib/monaco-editor/min/vs/editor/editor.main.js" at="Foot"></script>
 <script asp-src="~/OrchardCore.ElsaWorkflows/_content/MudBlazor/MudBlazor.min.js" at="Foot"></script>
 <script asp-src="~/OrchardCore.ElsaWorkflows/_content/CodeBeam.MudBlazor.Extensions/MudExtensions.min.js"
         at="Foot"></script>
 <script asp-src="~/OrchardCore.ElsaWorkflows/_content/Radzen.Blazor/Radzen.Blazor.js" at="Foot"></script>
 <script asp-src="~/OrchardCore.ElsaWorkflows/_framework/blazor.webassembly.js" autostart="false" at="Foot"></script>
 
-<script at="Foot">
-    document.addEventListener('DOMContentLoaded', function () {
-        const basePath = '@Url.Content("~/OrchardCore.ElsaWorkflows")';
+<script at="Head">
+    
+        const basePath = '@Url.Content("~/OrchardCore.ElsaWorkflows/")';
         const base = document.createElement('base');
         base.href = basePath;
         const head = document.querySelector('head');
@@ -41,9 +43,15 @@
         } else {
             head.appendChild(base);
         }
+</script>
+
+<script at="Foot">
+    document.addEventListener('DOMContentLoaded', function () {
+        const basePath = '@Url.Content("~/OrchardCore.ElsaWorkflows")';
         
         Blazor.start({
             loadBootResource: function (type, name, defaultUri, integrity) {
+                console.log('loadBootResource', type, name, defaultUri, integrity);
                 switch (name) {
                     case 'dotnet.js':
                         return `${basePath}/${defaultUri}`;

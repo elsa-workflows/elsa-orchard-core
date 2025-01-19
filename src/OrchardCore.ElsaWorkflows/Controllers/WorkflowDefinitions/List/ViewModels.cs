@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OrchardCore.ContentManagement;
 
-namespace OrchardCore.ElsaWorkflows.Endpoints.WorkflowDefinitions.List;
+namespace OrchardCore.ElsaWorkflows.Controllers.WorkflowDefinitions.List;
 
 public class ListViewModel
 {

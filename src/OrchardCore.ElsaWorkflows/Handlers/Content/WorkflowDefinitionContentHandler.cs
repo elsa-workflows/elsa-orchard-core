@@ -3,7 +3,7 @@ using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Handlers;
 using OrchardCore.ElsaWorkflows.Parts;
 
-namespace OrchardCore.ElsaWorkflows.Handlers;
+namespace OrchardCore.ElsaWorkflows.Handlers.Content;
 
 public class WorkflowDefinitionContentHandler : ContentHandlerBase
 {
@@ -21,7 +21,7 @@ public class WorkflowDefinitionContentHandler : ContentHandlerBase
                 { "Area", Constants.Area },
                 { "Controller", "WorkflowDefinitions" },
                 { "Action", "Create" },
-                { "Id", context.ContentItem.ContentType },
+                { "ContentType", context.ContentItem.ContentType },
             };
 
             metadata.EditorRouteValues = new()

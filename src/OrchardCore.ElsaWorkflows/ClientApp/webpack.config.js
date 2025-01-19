@@ -1,6 +1,6 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const destinationFolder = path.resolve(__dirname, '..', '..', 'wwwroot/elsa-studio');
+const destinationFolder = path.resolve(__dirname, '..', 'wwwroot');
 
 module.exports = {
     mode: 'development', // Use 'production' for optimized builds

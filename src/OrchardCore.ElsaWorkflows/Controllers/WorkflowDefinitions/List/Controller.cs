@@ -15,7 +15,7 @@ using OrchardCore.ElsaWorkflows.Indexes;
 using OrchardCore.Navigation;
 using YesSql;
 
-namespace OrchardCore.ElsaWorkflows.Endpoints.WorkflowDefinitions.List;
+namespace OrchardCore.ElsaWorkflows.Controllers.WorkflowDefinitions.List;
 
 [Admin("ElsaWorkflows/WorkflowDefinitions/List")]
 public class WorkflowDefinitionsController(
