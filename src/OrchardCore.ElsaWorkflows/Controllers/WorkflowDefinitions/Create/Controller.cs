@@ -14,8 +14,8 @@ namespace OrchardCore.ElsaWorkflows.Controllers.WorkflowDefinitions.Create;
 
 public class WorkflowDefinitionsController(IAuthorizationService authorizationService, IContentManager contentManager, IApiSerializer apiSerializer) : Controller
 {
-    [Admin("ElsaWorkflows/WorkflowDefinitions/Create/{contentType}")]
-    public async Task<IActionResult> Create(string contentType)
+    [Admin("ElsaWorkflows/WorkflowDefinitions/Create/{id}")]
+    public async Task<IActionResult> Create(string id)
     {
         if (!await authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
             return Forbid();
@@ -24,7 +24,7 @@ public class WorkflowDefinitionsController(IAuthorizationService authorizationSe
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(string contentType, CreateViewModel viewModel)
+    public async Task<IActionResult> Create(string id, CreateViewModel viewModel)
     {
         if (!await authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
             return Forbid();
@@ -41,7 +41,7 @@ public class WorkflowDefinitionsController(IAuthorizationService authorizationSe
             ToolVersion = new(3, 3, 0)
         };
 
-        var contentItem = await contentManager.NewAsync(contentType);
+        var contentItem = await contentManager.NewAsync(id);
         contentItem.Alter<TitlePart>(part => part.Title = viewModel.Name.Trim());
         contentItem.Alter<WorkflowDefinitionPart>(part => { part.SerializedData = apiSerializer.Serialize(workflowDefinitionModel); });
         await contentManager.CreateAsync(contentItem, VersionOptions.Draft);

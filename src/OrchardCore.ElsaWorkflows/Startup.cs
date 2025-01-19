@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Elsa;
 using Elsa.Extensions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,6 +49,9 @@ public class Startup : StartupBase
 
     public override ValueTask ConfigureAsync(IApplicationBuilder app, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
     {
+        // In Startup.Configure (or Program.cs in minimal hosting):
+        
+        
         routes.MapWorkflowsApi();
         return ValueTask.CompletedTask;
     }

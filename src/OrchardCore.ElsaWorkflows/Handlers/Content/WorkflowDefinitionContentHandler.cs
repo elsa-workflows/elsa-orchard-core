@@ -21,7 +21,7 @@ public class WorkflowDefinitionContentHandler : ContentHandlerBase
                 { "Area", Constants.Area },
                 { "Controller", "WorkflowDefinitions" },
                 { "Action", "Create" },
-                { "ContentType", context.ContentItem.ContentType },
+                { "Id", context.ContentItem.ContentType },
             };
 
             metadata.EditorRouteValues = new()
@@ -29,7 +29,7 @@ public class WorkflowDefinitionContentHandler : ContentHandlerBase
                 { "Area", Constants.Area },
                 { "Controller", "WorkflowDefinitions" },
                 { "Action", "Edit" },
-                { "ContentItemId", context.ContentItem.ContentItemId },
+                { "Id", context.ContentItem.ContentItemId },
             };
 
             metadata.AdminRouteValues = new()
@@ -37,7 +37,7 @@ public class WorkflowDefinitionContentHandler : ContentHandlerBase
                 { "Area", Constants.Area },
                 { "Controller", "WorkflowDefinitions" },
                 { "Action", "Edit" },
-                { "ContentItemId", context.ContentItem.ContentItemId },
+                { "Id", context.ContentItem.ContentItemId },
             };
 
             return Task.CompletedTask;

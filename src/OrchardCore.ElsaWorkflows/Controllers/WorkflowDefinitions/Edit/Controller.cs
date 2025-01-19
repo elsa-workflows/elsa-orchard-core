@@ -8,8 +8,8 @@ namespace OrchardCore.ElsaWorkflows.Controllers.WorkflowDefinitions.Edit;
 
 public class WorkflowDefinitionsController(IAuthorizationService authorizationService, IContentManager contentManager) : Controller
 {
-    [Admin("ElsaWorkflows/WorkflowDefinitions/Edit/{contentItemId}")]
-    public async Task<IActionResult> Edit(string contentItemId)
+    [Admin("ElsaWorkflows/WorkflowDefinitions/Edit/{id}")]
+    public async Task<IActionResult> Edit(string id)
 
     {
         if (!await authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
@@ -17,7 +17,7 @@ public class WorkflowDefinitionsController(IAuthorizationService authorizationSe
 
         return View(new EditViewModel
         {
-            DefinitionId = contentItemId
+            DefinitionId = id
         });
     }
 

@@ -22,33 +22,50 @@
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>
 </div>
-<script asp-src="~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/jsInterop.js" at="Foot"></script>
-<script asp-src="~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/lib/monaco-editor/min/vs/loader.js" at="Foot"></script>
-<script asp-src="~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/lib/monaco-editor/min/vs/editor/editor.main.js" at="Foot"></script>
+
+@* <script at="Head"> *@
+@*     window.MonacoEnvironment = { *@
+@*         baseUrl: '@Url.Content("~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/lib/monaco-editor/min/")' *@
+@*     }; *@
+@* *@
+@*     require = { *@
+@*         // Tell require.js where "vs" lives. *@
+@*         paths: { *@
+@*             'vs': window.MonacoEnvironment.baseUrl + 'vs' *@
+@*         } *@
+@*     }; *@
+@* *@
+@* </script> *@
+
+<script at="Foot" depends-on="monaco, admin" asp-name="elsamonaco">
+    require(['vs/editor/editor.main'], function () {
+    });
+
+</script>
+<script asp-src="~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/jsInterop.js" at="Foot" depends-on="elsamonaco"></script>
+@* <script asp-name="monaco" at="Foot" depends-on="jsInterop"></script> *@
+@* <script at="Foot" depends-on="jsInterop" asp-name="vs"> *@
+@*      *@
+@*     if (window.require && window.require.paths) { *@
+@*         window.require.paths.vs = '@Url.Content("~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/lib/monaco-editor/min/vs")'; *@
+@*     } *@
+@* </script> *@
+
+@* <script asp-src="~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/lib/monaco-editor/min/vs/loader.js" at="Foot" depends-on="vs"></script> *@
+@* <script asp-src="~/OrchardCore.ElsaWorkflows/_content/BlazorMonaco/lib/monaco-editor/min/vs/editor/editor.main.js" at="Foot" depends-on="vs"></script> *@
+
+
+
 <script asp-src="~/OrchardCore.ElsaWorkflows/_content/MudBlazor/MudBlazor.min.js" at="Foot"></script>
 <script asp-src="~/OrchardCore.ElsaWorkflows/_content/CodeBeam.MudBlazor.Extensions/MudExtensions.min.js"
         at="Foot"></script>
 <script asp-src="~/OrchardCore.ElsaWorkflows/_content/Radzen.Blazor/Radzen.Blazor.js" at="Foot"></script>
 <script asp-src="~/OrchardCore.ElsaWorkflows/_framework/blazor.webassembly.js" autostart="false" at="Foot"></script>
 
-<script at="Head">
-    
-        const basePath = '@Url.Content("~/OrchardCore.ElsaWorkflows/")';
-        const base = document.createElement('base');
-        base.href = basePath;
-        const head = document.querySelector('head');
-        const existingBase = document.querySelector('base');
-        if (existingBase) {
-            head.replaceChild(base, existingBase);
-        } else {
-            head.appendChild(base);
-        }
-</script>
-
 <script at="Foot">
+    const basePath = '@Url.Content("~/OrchardCore.ElsaWorkflows")';
+    
     document.addEventListener('DOMContentLoaded', function () {
-        const basePath = '@Url.Content("~/OrchardCore.ElsaWorkflows")';
-        
         Blazor.start({
             loadBootResource: function (type, name, defaultUri, integrity) {
                 console.log('loadBootResource', type, name, defaultUri, integrity);
@@ -61,4 +78,6 @@
             }
         });
     });
+    
+    
 </script>
