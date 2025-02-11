@@ -12,16 +12,16 @@
 
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
-        <PackageReference Include="OrchardCore.Admin.Abstractions" Version="3.0.0-preview-18479" />
-        <PackageReference Include="OrchardCore.Contents" Version="3.0.0-preview-18479" />
-        <PackageReference Include="OrchardCore.Infrastructure" Version="3.0.0-preview-18479" />
-        <PackageReference Include="OrchardCore.Module.Targets" Version="3.0.0-preview-18479" />
-        <PackageReference Include="OrchardCore.ContentManagement" Version="3.0.0-preview-18479" />
-        <PackageReference Include="OrchardCore.ContentTypes.Abstractions" Version="3.0.0-preview-18479" />
-        <PackageReference Include="OrchardCore.DisplayManagement" Version="3.0.0-preview-18479" />
-        <PackageReference Include="OrchardCore.Navigation.Core" Version="3.0.0-preview-18479" />
-        <PackageReference Include="OrchardCore.ResourceManagement" Version="3.0.0-preview-18479" />
-        <PackageReference Include="OrchardCore.Title" Version="3.0.0-preview-18479" />
+        <PackageReference Include="OrchardCore.Admin.Abstractions" Version="3.0.0-preview-18503" />
+        <PackageReference Include="OrchardCore.Contents" Version="3.0.0-preview-18503" />
+        <PackageReference Include="OrchardCore.Infrastructure" Version="3.0.0-preview-18503" />
+        <PackageReference Include="OrchardCore.Module.Targets" Version="3.0.0-preview-18503" />
+        <PackageReference Include="OrchardCore.ContentManagement" Version="3.0.0-preview-18503" />
+        <PackageReference Include="OrchardCore.ContentTypes.Abstractions" Version="3.0.0-preview-18503" />
+        <PackageReference Include="OrchardCore.DisplayManagement" Version="3.0.0-preview-18503" />
+        <PackageReference Include="OrchardCore.Navigation.Core" Version="3.0.0-preview-18503" />
+        <PackageReference Include="OrchardCore.ResourceManagement" Version="3.0.0-preview-18503" />
+        <PackageReference Include="OrchardCore.Title" Version="3.0.0-preview-18503" />
     </ItemGroup>
 
 <!--    <ItemGroup Label="Elsa">-->
@@ -32,13 +32,6 @@
     <ItemGroup Label="Elsa">
       <ProjectReference Include="..\..\..\..\elsa-core\main\src\modules\Elsa.Workflows.Api\Elsa.Workflows.Api.csproj" />
       <ProjectReference Include="..\..\..\..\elsa-core\main\src\modules\Elsa\Elsa.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Include="ClientApp\webpack.config.js" />
-      <Content Include="Views\WorkflowDefinitions\Create.cshtml" />
-      <Content Include="Views\WorkflowDefinitions\Edit.cshtml" />
-      <Content Include="Views\WorkflowDefinitions\List.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
