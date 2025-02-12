@@ -9,7 +9,7 @@ using Elsa.Workflows.Management.Requests;
 using OrchardCore.ContentManagement;
 using OrchardCore.ElsaWorkflows.Parts;
 
-namespace OrchardCore.ElsaWorkflows.Handlers.Notification;
+namespace OrchardCore.ElsaWorkflows.Handlers.Requests;
 
 public class FindWorkflowDefinitionHandler(IContentManager contentManager, WorkflowDefinitionMapper mapper, IApiSerializer apiSerializer) : IRequestHandler<FindWorkflowDefinitionRequest, WorkflowDefinition?>
 {

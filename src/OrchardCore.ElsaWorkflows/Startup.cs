@@ -1,18 +1,15 @@
 using System;
 using System.Threading.Tasks;
-using Elsa;
 using Elsa.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.ContentManagement.Handlers;
 using OrchardCore.Data;
 using OrchardCore.Data.Migration;
-using OrchardCore.ElsaWorkflows.Handlers;
 using OrchardCore.ElsaWorkflows.Handlers.Content;
-using OrchardCore.ElsaWorkflows.Handlers.Notification;
+using OrchardCore.ElsaWorkflows.Handlers.Requests;
 using OrchardCore.ElsaWorkflows.Indexes;
 using OrchardCore.ElsaWorkflows.Security;
 using OrchardCore.Modules;
@@ -39,7 +36,10 @@ public class Startup : StartupBase
             {
                 workflowManagement.UseWorkflowDefinitions(workflowDefinitions =>
                 {
-                    workflowDefinitions.FindWorkflowDefinitionHandler = () => typeof(FindWorkflowDefinitionHandler);
+                    workflowDefinitions.FindWorkflowDefinitionHandler = typeof(FindWorkflowDefinitionHandler);
+                    workflowDefinitions.FindLastVersionOfWorkflowDefinitionHandler = typeof(FindLastVersionOfWorkflowDefinitionHandler);
+                    workflowDefinitions.FindLatestOrPublishedWorkflowDefinitionsHandler = typeof(FindLatestOrPublishedWorkflowDefinitionsHandler);
+                    workflowDefinitions.SaveWorkflowDefinitionHandler = typeof(SaveWorkflowDefinitionHandler);
                 });
             });
             elsa.UseWorkflowRuntime();
@@ -49,9 +49,6 @@ public class Startup : StartupBase
 
     public override ValueTask ConfigureAsync(IApplicationBuilder app, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
     {
-        // In Startup.Configure (or Program.cs in minimal hosting):
-        
-        
         routes.MapWorkflowsApi();
         return ValueTask.CompletedTask;
     }
