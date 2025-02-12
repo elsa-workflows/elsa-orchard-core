@@ -42,13 +42,22 @@ public class WorkflowDefinitionsController(IAuthorizationService authorizationSe
         };
 
         var contentItem = await contentManager.NewAsync(id);
+        workflowDefinitionModel.DefinitionId = contentItem.ContentItemId;
+        workflowDefinitionModel.IsLatest = true;
+        workflowDefinitionModel.IsPublished = false;
+        workflowDefinitionModel.Version = 1;
         contentItem.Alter<TitlePart>(part => part.Title = viewModel.Name.Trim());
         contentItem.Alter<WorkflowDefinitionPart>(part => { part.SerializedData = apiSerializer.Serialize(workflowDefinitionModel); });
         await contentManager.CreateAsync(contentItem, VersionOptions.Draft);
+        
+        workflowDefinitionModel.Id = contentItem.ContentItemVersionId;
+        workflowDefinitionModel.CreatedAt = contentItem.CreatedUtc!.Value;
+        contentItem.Alter<WorkflowDefinitionPart>(part => { part.SerializedData = apiSerializer.Serialize(workflowDefinitionModel); });
+        await contentManager.SaveDraftAsync(contentItem);
 
         return RedirectToAction("Edit", new
         {
-            contentItem.ContentItemId
+            Id = contentItem.ContentItemId
         });
     }
 }

@@ -12,6 +12,7 @@ using OrchardCore.ElsaWorkflows.Handlers.Content;
 using OrchardCore.ElsaWorkflows.Handlers.Requests;
 using OrchardCore.ElsaWorkflows.Indexes;
 using OrchardCore.ElsaWorkflows.Security;
+using OrchardCore.ElsaWorkflows.StartupTasks;
 using OrchardCore.Modules;
 using OrchardCore.Navigation;
 using OrchardCore.Users.Services;
@@ -25,6 +26,7 @@ public class Startup : StartupBase
         services
             .AddDataMigration<Migrations>()
             .AddScoped<INavigationProvider, AdminMenu>()
+            .AddScoped<IModularTenantEvents, PopulateRegistriesTask>()
             .AddScoped<IContentHandler, WorkflowDefinitionContentHandler>()
             .AddScoped<IUserClaimsProvider, PermissionsClaimsProvider>()
             .AddIndexProvider<WorkflowDefinitionIndexProvider>()

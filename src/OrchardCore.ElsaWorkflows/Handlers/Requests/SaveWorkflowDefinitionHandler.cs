@@ -25,7 +25,10 @@ public class SaveWorkflowDefinitionHandler(IContentManager contentManager, Workf
         var workflowDefinitionModel = await mapper.MapAsync(command.WorkflowDefinition, cancellationToken);
         contentItem.Alter<WorkflowDefinitionPart>(part => { part.SerializedData = apiSerializer.Serialize(workflowDefinitionModel); });
         
-        await contentManager.SaveDraftAsync(contentItem);
+        if(command.WorkflowDefinition.IsPublished)
+            await contentManager.PublishAsync(contentItem);
+        else
+            await contentManager.SaveDraftAsync(contentItem);
         
         return Unit.Instance;
     }

@@ -10,7 +10,6 @@ public class WorkflowDefinitionsController(IAuthorizationService authorizationSe
 {
     [Admin("ElsaWorkflows/WorkflowDefinitions/Edit/{id}")]
     public async Task<IActionResult> Edit(string id)
-
     {
         if (!await authorizationService.AuthorizeAsync(User, Permissions.ManageWorkflows))
             return Forbid();
