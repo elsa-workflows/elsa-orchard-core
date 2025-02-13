@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Elsa.Workflows;
 using Elsa.Workflows.Activities.Flowchart.Activities;
@@ -8,11 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using OrchardCore.Admin;
 using OrchardCore.ContentManagement;
 using OrchardCore.ElsaWorkflows.Parts;
+using OrchardCore.ElsaWorkflows.Services;
 using OrchardCore.Title.Models;
 
 namespace OrchardCore.ElsaWorkflows.Controllers.WorkflowDefinitions.Create;
 
-public class WorkflowDefinitionsController(IAuthorizationService authorizationService, IContentManager contentManager, IApiSerializer apiSerializer) : Controller
+public class WorkflowDefinitionsController(IAuthorizationService authorizationService, IContentManager contentManager, IApiSerializer apiSerializer, WorkflowDefinitionPartMapper definitionPartMapper) : Controller
 {
     [Admin("ElsaWorkflows/WorkflowDefinitions/Create/{id}")]
     public async Task<IActionResult> Create(string id)
@@ -32,8 +32,14 @@ public class WorkflowDefinitionsController(IAuthorizationService authorizationSe
         if (!ModelState.IsValid)
             return View(viewModel);
 
+        var contentItem = await contentManager.NewAsync(id);
+        await contentManager.CreateAsync(contentItem, VersionOptions.Draft);
+
         var workflowDefinitionModel = new WorkflowDefinitionModel
         {
+            DefinitionId = contentItem.ContentItemId,
+            Id = contentItem.ContentItemVersionId,
+            CreatedAt = contentItem.CreatedUtc!.Value,
             Name = viewModel.Name.Trim(),
             Root = new Flowchart(),
             Version = 1,
@@ -41,18 +47,8 @@ public class WorkflowDefinitionsController(IAuthorizationService authorizationSe
             ToolVersion = new(3, 3, 0)
         };
 
-        var contentItem = await contentManager.NewAsync(id);
-        workflowDefinitionModel.DefinitionId = contentItem.ContentItemId;
-        workflowDefinitionModel.IsLatest = true;
-        workflowDefinitionModel.IsPublished = false;
-        workflowDefinitionModel.Version = 1;
         contentItem.Alter<TitlePart>(part => part.Title = viewModel.Name.Trim());
-        contentItem.Alter<WorkflowDefinitionPart>(part => { part.SerializedData = apiSerializer.Serialize(workflowDefinitionModel); });
-        await contentManager.CreateAsync(contentItem, VersionOptions.Draft);
-        
-        workflowDefinitionModel.Id = contentItem.ContentItemVersionId;
-        workflowDefinitionModel.CreatedAt = contentItem.CreatedUtc!.Value;
-        contentItem.Alter<WorkflowDefinitionPart>(part => { part.SerializedData = apiSerializer.Serialize(workflowDefinitionModel); });
+        contentItem.Alter<WorkflowDefinitionPart>(part => { definitionPartMapper.Map(workflowDefinitionModel, part); });
         await contentManager.SaveDraftAsync(contentItem);
 
         return RedirectToAction("Edit", new

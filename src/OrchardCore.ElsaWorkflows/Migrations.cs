@@ -16,16 +16,33 @@ public class Migrations(IContentDefinitionManager contentDefinitionManager) : Da
     public async Task<int> CreateAsync()
     {
         await SchemaBuilder.CreateMapIndexTableAsync<WorkflowDefinitionIndex>(table => table
-            .Column<string>(nameof(WorkflowDefinitionIndex.WorkflowDefinitionId), c => c.WithLength(32))
+            .Column<string>(nameof(WorkflowDefinitionIndex.DefinitionId), c => c.WithLength(32))
+            .Column<string>(nameof(WorkflowDefinitionIndex.DefinitionVersionId), c => c.WithLength(32))
+            .Column<string>(nameof(WorkflowDefinitionIndex.Description))
+            .Column<int>(nameof(WorkflowDefinitionIndex.Version))
+            .Column<bool>(nameof(WorkflowDefinitionIndex.IsLatest))
+            .Column<bool>(nameof(WorkflowDefinitionIndex.IsPublished))
+            .Column<bool>(nameof(WorkflowDefinitionIndex.IsReadonly))
+            .Column<bool>(nameof(WorkflowDefinitionIndex.IsSystem))
+            .Column<string>(nameof(WorkflowDefinitionIndex.MaterializerName))
+            .Column<bool>(nameof(WorkflowDefinitionIndex.UsableAsActivity))
             .Column<string>(nameof(WorkflowDefinitionIndex.Name))
         );
-        
+
         await SchemaBuilder.AlterIndexTableAsync<WorkflowDefinitionIndex>(table =>
         {
-            table.CreateIndex("IDX_WorkflowDefinitionIndex_WorkflowDefinitionId", nameof(WorkflowDefinitionIndex.WorkflowDefinitionId));
+            table.CreateIndex("IDX_WorkflowDefinitionIndex_DefinitionId", nameof(WorkflowDefinitionIndex.DefinitionId));
+            table.CreateIndex("IDX_WorkflowDefinitionIndex_DefinitionVersionId", nameof(WorkflowDefinitionIndex.DefinitionVersionId));
+            table.CreateIndex("IDX_WorkflowDefinitionIndex_UsableAsActivity", nameof(WorkflowDefinitionIndex.UsableAsActivity));
+            table.CreateIndex("IDX_WorkflowDefinitionIndex_IsPublished", nameof(WorkflowDefinitionIndex.IsPublished));
+            table.CreateIndex("IDX_WorkflowDefinitionIndex_IsLatest", nameof(WorkflowDefinitionIndex.IsLatest));
+            table.CreateIndex("IDX_WorkflowDefinitionIndex_Version", nameof(WorkflowDefinitionIndex.Version));
+            table.CreateIndex("IDX_WorkflowDefinitionIndex_IsSystem", nameof(WorkflowDefinitionIndex.IsSystem));
+            table.CreateIndex("IDX_WorkflowDefinitionIndex_MaterializerName", nameof(WorkflowDefinitionIndex.MaterializerName));
             table.CreateIndex("IDX_WorkflowDefinitionIndex_Name", nameof(WorkflowDefinitionIndex.Name));
+            table.CreateIndex("IDX_WorkflowDefinitionIndex_Description", nameof(WorkflowDefinitionIndex.Description));
         });
-        
+
         await contentDefinitionManager.AlterPartDefinitionAsync("WorkflowDefinitionPart", part => part
             .Attachable()
             .WithDisplayName("Workflow Definition")

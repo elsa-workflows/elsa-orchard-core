@@ -1,21 +1,29 @@
 using System;
 using System.Threading.Tasks;
 using Elsa.Extensions;
+using Elsa.Workflows;
+using Elsa.Workflows.Management;
+using Elsa.Workflows.Management.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.DependencyInjection;
+using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Handlers;
+using OrchardCore.ContentManagement.Metadata;
 using OrchardCore.Data;
 using OrchardCore.Data.Migration;
 using OrchardCore.ElsaWorkflows.Handlers.Content;
 using OrchardCore.ElsaWorkflows.Handlers.Requests;
 using OrchardCore.ElsaWorkflows.Indexes;
 using OrchardCore.ElsaWorkflows.Security;
+using OrchardCore.ElsaWorkflows.Services;
 using OrchardCore.ElsaWorkflows.StartupTasks;
+using OrchardCore.ElsaWorkflows.Stores;
 using OrchardCore.Modules;
 using OrchardCore.Navigation;
 using OrchardCore.Users.Services;
+using YesSql;
 
 namespace OrchardCore.ElsaWorkflows;
 
@@ -29,6 +37,8 @@ public class Startup : StartupBase
             .AddScoped<IModularTenantEvents, PopulateRegistriesTask>()
             .AddScoped<IContentHandler, WorkflowDefinitionContentHandler>()
             .AddScoped<IUserClaimsProvider, PermissionsClaimsProvider>()
+            .AddScoped<WorkflowDefinitionPartMapper>()
+            //.AddScoped<ContentItemWorkflowDefinitionStore>()
             .AddIndexProvider<WorkflowDefinitionIndexProvider>()
             .Configure<StaticFileOptions>(ConfigureStaticFileOptions);
 
@@ -38,10 +48,11 @@ public class Startup : StartupBase
             {
                 workflowManagement.UseWorkflowDefinitions(workflowDefinitions =>
                 {
-                    workflowDefinitions.FindWorkflowDefinitionHandler = typeof(FindWorkflowDefinitionHandler);
-                    workflowDefinitions.FindLastVersionOfWorkflowDefinitionHandler = typeof(FindLastVersionOfWorkflowDefinitionHandler);
-                    workflowDefinitions.FindLatestOrPublishedWorkflowDefinitionsHandler = typeof(FindLatestOrPublishedWorkflowDefinitionsHandler);
-                    workflowDefinitions.SaveWorkflowDefinitionHandler = typeof(SaveWorkflowDefinitionHandler);
+                    workflowDefinitions.WorkflowDefinitionStore = sp => ActivatorUtilities.CreateInstance<ContentItemWorkflowDefinitionStore>(sp);
+                    // workflowDefinitions.FindWorkflowDefinitionHandler = typeof(FindWorkflowDefinitionHandler);
+                    // workflowDefinitions.FindLastVersionOfWorkflowDefinitionHandler = typeof(FindLastVersionOfWorkflowDefinitionHandler);
+                    // workflowDefinitions.FindLatestOrPublishedWorkflowDefinitionsHandler = typeof(FindLatestOrPublishedWorkflowDefinitionsHandler);
+                    // workflowDefinitions.SaveWorkflowDefinitionHandler = typeof(SaveWorkflowDefinitionHandler);
                 });
             });
             elsa.UseWorkflowRuntime();

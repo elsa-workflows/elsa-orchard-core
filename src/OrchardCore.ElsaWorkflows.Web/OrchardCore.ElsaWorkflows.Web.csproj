@@ -13,4 +13,8 @@
       <ProjectReference Include="..\OrchardCore.ElsaWorkflows\OrchardCore.ElsaWorkflows.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="App_Data\Sites\Default\OrchardCore.db" />
+    </ItemGroup>
+
 </Project>
