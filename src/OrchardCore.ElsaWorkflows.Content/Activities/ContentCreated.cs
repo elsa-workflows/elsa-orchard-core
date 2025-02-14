@@ -46,6 +46,7 @@ public class ContentCreated : Trigger<ContentItem>
     private async ValueTask ExecuteInternalAsync(ActivityExecutionContext context)
     {
         var contentItem = context.GetWorkflowInput<ContentItem>();
-        await context.CompleteActivityAsync(contentItem);
+        context.SetResult(contentItem);
+        await context.CompleteActivityAsync();
     }
 }

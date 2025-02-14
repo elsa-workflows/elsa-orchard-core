@@ -12,6 +12,10 @@ public class WorkflowDefinitionIndexProvider : IndexProvider<ContentItem>
             .Map(contentItem =>
             {
                 var workflowDefinitionPart = contentItem.As<WorkflowDefinitionPart>();
+                
+                if(workflowDefinitionPart == null)
+                    return null!;
+                
                 return new()
                 {
                     DefinitionId = contentItem.ContentItemId,
