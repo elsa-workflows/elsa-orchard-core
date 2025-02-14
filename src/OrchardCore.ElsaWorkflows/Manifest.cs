@@ -3,7 +3,7 @@ using OrchardCore.Modules.Manifest;
 [assembly: Module(
     Id = "OrchardCore.ElsaWorkflows",
     Name = "Elsa Workflows",
-    Author = "Elsa community",
+    Author = "Orchard community",
     Website = "https://elsa-workflows.github.io/elsa-core/",
     Version = "1.0.0",
     Description = "Create workflows with Elsa.",

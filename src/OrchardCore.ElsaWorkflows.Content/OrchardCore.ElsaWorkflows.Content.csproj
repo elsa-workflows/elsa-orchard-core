@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
+        <PackageReference Include="OrchardCore.Contents" Version="3.0.0-preview-18507" />
+        <PackageReference Include="OrchardCore.Module.Targets" Version="3.0.0-preview-18507" />
+        <PackageReference Include="OrchardCore.ContentManagement" Version="3.0.0-preview-18507" />
+    </ItemGroup>
+
+    <!--    <ItemGroup Label="Elsa">-->
+    <!--        <PackageReference Include="Elsa.Workflows.Core" Version="3.3.0-rc8" />-->
+    <!--        <PackageReference Include="Elsa.Workflows.Management" Version="3.3.0-rc8" />-->
+    <!--        <PackageReference Include="Elsa.Workflows.Runtime" Version="3.3.0-rc8" />-->
+    <!--        <PackageReference Include="Elsa" Version="3.3.0-rc8" />-->
+    <!--    </ItemGroup>-->
+
+    <ItemGroup Label="Elsa">
+        <ProjectReference Include="..\..\..\..\elsa-core\main\src\modules\Elsa.Workflows.Core\Elsa.Workflows.Core.csproj" />
+        <ProjectReference Include="..\..\..\..\elsa-core\main\src\modules\Elsa.Workflows.Management\Elsa.Workflows.Management.csproj" />
+        <ProjectReference Include="..\..\..\..\elsa-core\main\src\modules\Elsa.Workflows.Runtime\Elsa.Workflows.Runtime.csproj" />
+        <ProjectReference Include="..\..\..\..\elsa-core\main\src\modules\Elsa\Elsa.csproj" />
+    </ItemGroup>
+
+</Project>

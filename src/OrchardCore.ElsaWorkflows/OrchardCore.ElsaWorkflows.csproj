@@ -21,7 +21,6 @@
         <PackageReference Include="OrchardCore.DisplayManagement" Version="3.0.0-preview-18507" />
         <PackageReference Include="OrchardCore.Navigation.Core" Version="3.0.0-preview-18507" />
         <PackageReference Include="OrchardCore.ResourceManagement" Version="3.0.0-preview-18507" />
-        <PackageReference Include="OrchardCore.Title" Version="3.0.0-preview-18507" />
     </ItemGroup>
 
 <!--    <ItemGroup Label="Elsa">-->
@@ -32,10 +31,6 @@
     <ItemGroup Label="Elsa">
       <ProjectReference Include="..\..\..\..\elsa-core\main\src\modules\Elsa.Workflows.Api\Elsa.Workflows.Api.csproj" />
       <ProjectReference Include="..\..\..\..\elsa-core\main\src\modules\Elsa\Elsa.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="ResourceManagementOptionsConfiguration.cs" />
     </ItemGroup>
 
     <ItemGroup>

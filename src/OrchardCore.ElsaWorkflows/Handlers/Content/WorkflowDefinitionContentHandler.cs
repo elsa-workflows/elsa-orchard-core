@@ -9,7 +9,6 @@ using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Handlers;
 using OrchardCore.ElsaWorkflows.Parts;
 using OrchardCore.ElsaWorkflows.Services;
-using OrchardCore.Title.Models;
 
 namespace OrchardCore.ElsaWorkflows.Handlers.Content;
 

@@ -7,7 +7,6 @@ using OrchardCore.Admin;
 using OrchardCore.ContentManagement;
 using OrchardCore.ElsaWorkflows.Parts;
 using OrchardCore.ElsaWorkflows.Services;
-using OrchardCore.Title.Models;
 
 namespace OrchardCore.ElsaWorkflows.Controllers.WorkflowDefinitions.Create;
 

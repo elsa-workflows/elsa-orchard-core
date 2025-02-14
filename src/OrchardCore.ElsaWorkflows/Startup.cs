@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Elsa.Extensions;
+using Elsa.Features;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.StaticFiles;
@@ -22,6 +23,8 @@ namespace OrchardCore.ElsaWorkflows;
 
 public class Startup : StartupBase
 {
+    public override int Order => int.MaxValue; // Run after all other modules.
+    
     public override void ConfigureServices(IServiceCollection services)
     {
         services.AddElsa(elsa =>
@@ -32,6 +35,8 @@ public class Startup : StartupBase
                 workflowManagement.UseWorkflowDefinitions(workflowDefinitions => workflowDefinitions.WorkflowDefinitionStore = sp => ActivatorUtilities.CreateInstance<ContentItemWorkflowDefinitionStore>(sp));
             });
             elsa.UseWorkflowRuntime();
+            elsa.UseJavaScript();
+            elsa.UseLiquid();
             elsa.UseWorkflowsApi(api => api.AddFastEndpointsAssembly<Startup>());
         });
         

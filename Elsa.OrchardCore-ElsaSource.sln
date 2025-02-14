@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elsa.EntityFrameworkCore", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elsa.EntityFrameworkCore.Common", "..\..\elsa-core\main\src\modules\Elsa.EntityFrameworkCore.Common\Elsa.EntityFrameworkCore.Common.csproj", "{4B1315BA-2E14-44F5-8A17-55E182E7E7B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.ElsaWorkflows.Content", "src\OrchardCore.ElsaWorkflows.Content\OrchardCore.ElsaWorkflows.Content.csproj", "{70237703-41E5-4A6C-B646-11B151A12A47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -149,6 +151,10 @@ Global
 		{4B1315BA-2E14-44F5-8A17-55E182E7E7B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B1315BA-2E14-44F5-8A17-55E182E7E7B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B1315BA-2E14-44F5-8A17-55E182E7E7B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70237703-41E5-4A6C-B646-11B151A12A47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70237703-41E5-4A6C-B646-11B151A12A47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70237703-41E5-4A6C-B646-11B151A12A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70237703-41E5-4A6C-B646-11B151A12A47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1A1E1268-8752-46D3-838F-DE6E664274A2} = {9AD6C839-C8CC-4D31-BC86-99B25CEEDC4F}
@@ -173,5 +179,6 @@ Global
 		{6C3CA510-FAC2-4C43-8D2A-E236D860EB5F} = {C20FF74F-3D07-4D81-A85A-DA818C42D30A}
 		{5FE10518-56CB-4477-919B-F36D9B78ABA7} = {C20FF74F-3D07-4D81-A85A-DA818C42D30A}
 		{4B1315BA-2E14-44F5-8A17-55E182E7E7B9} = {C20FF74F-3D07-4D81-A85A-DA818C42D30A}
+		{70237703-41E5-4A6C-B646-11B151A12A47} = {9AD6C839-C8CC-4D31-BC86-99B25CEEDC4F}
 	EndGlobalSection
 EndGlobal
