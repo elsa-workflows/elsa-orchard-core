@@ -45,8 +45,8 @@ public class WorkflowDefinitionsController(IAuthorizationService authorizationSe
             IsLatest = true,
             ToolVersion = new(3, 3, 0)
         };
-
-        contentItem.Alter<TitlePart>(part => part.Title = viewModel.Name.Trim());
+        
+        contentItem.DisplayText = workflowDefinitionModel.Name;
         contentItem.Alter<WorkflowDefinitionPart>(part => { definitionPartMapper.Map(workflowDefinitionModel, part); });
         await contentManager.SaveDraftAsync(contentItem);
 

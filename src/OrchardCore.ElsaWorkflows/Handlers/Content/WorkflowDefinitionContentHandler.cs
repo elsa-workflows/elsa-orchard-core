@@ -9,6 +9,7 @@ using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Handlers;
 using OrchardCore.ElsaWorkflows.Parts;
 using OrchardCore.ElsaWorkflows.Services;
+using OrchardCore.Title.Models;
 
 namespace OrchardCore.ElsaWorkflows.Handlers.Content;
 
@@ -60,6 +61,16 @@ public class WorkflowDefinitionContentHandler(
         });
     }
 
+    public override Task UpdatingAsync(UpdateContentContext context)
+    {
+        if (!context.ContentItem.Has<WorkflowDefinitionPart>())
+            return Task.CompletedTask;
+        
+        var workflowDefinitionPart = context.ContentItem.As<WorkflowDefinitionPart>();
+        context.ContentItem.DisplayText = workflowDefinitionPart.Name;
+        return Task.CompletedTask;
+    }
+
     public override async Task PublishingAsync(PublishContentContext context)
     {
         if (!context.ContentItem.Has<WorkflowDefinitionPart>())
@@ -67,12 +78,13 @@ public class WorkflowDefinitionContentHandler(
 
         var newItem = context.ContentItem;
         var previousItem = context.PreviousItem;
-
+        
         await newItem.AlterAsync<WorkflowDefinitionPart>(async part =>
         {
             part.DefinitionVersionId = newItem.ContentItemVersionId;
             part.IsLatest = true;
             part.IsPublished = true;
+            newItem.DisplayText = part.Name;
             var definitionModel = WorkflowDefinitionPartSerializer.UpdateSerializedData(part);
             var definition = WorkflowDefinitionMapper.MapToWorkflowDefinition(definitionModel);
             await mediator.SendAsync(new WorkflowDefinitionPublishing(definition));
@@ -103,6 +115,9 @@ public class WorkflowDefinitionContentHandler(
 
     public override Task UnpublishingAsync(PublishContentContext context)
     {
+        if (!context.ContentItem.Has<WorkflowDefinitionPart>())
+            return Task.CompletedTask;
+
         context.ContentItem.Alter<WorkflowDefinitionPart>(part =>
         {
             part.IsPublished = false;

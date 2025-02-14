@@ -131,6 +131,7 @@ public class ContentItemWorkflowDefinitionStore(
         }
         
         var workflowDefinitionModel = await WorkflowDefinitionMapper.MapAsync(definition, cancellationToken);
+        contentItem.DisplayText = definition.Name;
         contentItem.Alter<WorkflowDefinitionPart>(part =>
         {
             part.Name = definition.Name;

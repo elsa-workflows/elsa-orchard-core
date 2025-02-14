@@ -49,10 +49,6 @@ public class Migrations(IContentDefinitionManager contentDefinitionManager) : Da
             .WithDescription("Turns your content item into a workflow definition."));
 
         await contentDefinitionManager.AlterTypeDefinitionAsync("WorkflowDefinition", type => type
-            .WithPart("TitlePart", part => part
-                .WithSettings(new TitlePartSettings { RenderTitle = false })
-                .WithPosition("0")
-            )
             .WithPart("CommonPart", part => part
                 .WithPosition("10")
             )
