@@ -12,7 +12,7 @@ using OrchardCore.Title.Models;
 
 namespace OrchardCore.ElsaWorkflows.Controllers.WorkflowDefinitions.Create;
 
-public class WorkflowDefinitionsController(IAuthorizationService authorizationService, IContentManager contentManager, IApiSerializer apiSerializer, WorkflowDefinitionPartMapper definitionPartMapper) : Controller
+public class WorkflowDefinitionsController(IAuthorizationService authorizationService, IContentManager contentManager, WorkflowDefinitionPartMapper definitionPartMapper) : Controller
 {
     [Admin("ElsaWorkflows/WorkflowDefinitions/Create/{id}")]
     public async Task<IActionResult> Create(string id)

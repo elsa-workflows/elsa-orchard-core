@@ -1,20 +1,14 @@
 using System;
 using System.Threading.Tasks;
 using Elsa.Extensions;
-using Elsa.Workflows;
-using Elsa.Workflows.Management;
-using Elsa.Workflows.Management.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.DependencyInjection;
-using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Handlers;
-using OrchardCore.ContentManagement.Metadata;
 using OrchardCore.Data;
 using OrchardCore.Data.Migration;
 using OrchardCore.ElsaWorkflows.Handlers.Content;
-using OrchardCore.ElsaWorkflows.Handlers.Requests;
 using OrchardCore.ElsaWorkflows.Indexes;
 using OrchardCore.ElsaWorkflows.Security;
 using OrchardCore.ElsaWorkflows.Services;
@@ -23,7 +17,6 @@ using OrchardCore.ElsaWorkflows.Stores;
 using OrchardCore.Modules;
 using OrchardCore.Navigation;
 using OrchardCore.Users.Services;
-using YesSql;
 
 namespace OrchardCore.ElsaWorkflows;
 
@@ -31,6 +24,17 @@ public class Startup : StartupBase
 {
     public override void ConfigureServices(IServiceCollection services)
     {
+        services.AddElsa(elsa =>
+        {
+            elsa.UseWorkflowManagement(workflowManagement =>
+            {
+                workflowManagement.WithWorkflowDefinitionPublisher(sp => ActivatorUtilities.CreateInstance<ContentItemWorkflowDefinitionPublisher>(sp));
+                workflowManagement.UseWorkflowDefinitions(workflowDefinitions => workflowDefinitions.WorkflowDefinitionStore = sp => ActivatorUtilities.CreateInstance<ContentItemWorkflowDefinitionStore>(sp));
+            });
+            elsa.UseWorkflowRuntime();
+            elsa.UseWorkflowsApi(api => api.AddFastEndpointsAssembly<Startup>());
+        });
+        
         services
             .AddDataMigration<Migrations>()
             .AddScoped<INavigationProvider, AdminMenu>()
@@ -38,26 +42,9 @@ public class Startup : StartupBase
             .AddScoped<IContentHandler, WorkflowDefinitionContentHandler>()
             .AddScoped<IUserClaimsProvider, PermissionsClaimsProvider>()
             .AddScoped<WorkflowDefinitionPartMapper>()
-            //.AddScoped<ContentItemWorkflowDefinitionStore>()
+            .AddScoped<WorkflowDefinitionPartSerializer>()
             .AddIndexProvider<WorkflowDefinitionIndexProvider>()
             .Configure<StaticFileOptions>(ConfigureStaticFileOptions);
-
-        services.AddElsa(elsa =>
-        {
-            elsa.UseWorkflowManagement(workflowManagement =>
-            {
-                workflowManagement.UseWorkflowDefinitions(workflowDefinitions =>
-                {
-                    workflowDefinitions.WorkflowDefinitionStore = sp => ActivatorUtilities.CreateInstance<ContentItemWorkflowDefinitionStore>(sp);
-                    // workflowDefinitions.FindWorkflowDefinitionHandler = typeof(FindWorkflowDefinitionHandler);
-                    // workflowDefinitions.FindLastVersionOfWorkflowDefinitionHandler = typeof(FindLastVersionOfWorkflowDefinitionHandler);
-                    // workflowDefinitions.FindLatestOrPublishedWorkflowDefinitionsHandler = typeof(FindLatestOrPublishedWorkflowDefinitionsHandler);
-                    // workflowDefinitions.SaveWorkflowDefinitionHandler = typeof(SaveWorkflowDefinitionHandler);
-                });
-            });
-            elsa.UseWorkflowRuntime();
-            elsa.UseWorkflowsApi(api => api.AddFastEndpointsAssembly<Startup>());
-        });
     }
 
     public override ValueTask ConfigureAsync(IApplicationBuilder app, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)

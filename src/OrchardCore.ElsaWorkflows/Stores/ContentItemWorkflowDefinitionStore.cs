@@ -23,13 +23,14 @@ using VersionOptions = OrchardCore.ContentManagement.VersionOptions;
 namespace OrchardCore.ElsaWorkflows.Stores;
 
 public class ContentItemWorkflowDefinitionStore(
-    IContentManager contentManager,
     ISession session,
     IApiSerializer apiSerializer,
     IServiceProvider serviceProvider) : IWorkflowDefinitionStore
 {
+    private readonly Lazy<IContentManager> _contentManager = new(serviceProvider.GetRequiredService<IContentManager>);
     private readonly Lazy<WorkflowDefinitionMapper> _workflowDefinitionMapper = new(serviceProvider.GetRequiredService<WorkflowDefinitionMapper>);
     private readonly Lazy<WorkflowDefinitionPartMapper> _workflowDefinitionPartMapper = new(serviceProvider.GetRequiredService<WorkflowDefinitionPartMapper>);
+    private IContentManager ContentManager => _contentManager.Value;
     private WorkflowDefinitionMapper WorkflowDefinitionMapper => _workflowDefinitionMapper.Value;
     private WorkflowDefinitionPartMapper WorkflowDefinitionPartMapper => _workflowDefinitionPartMapper.Value;
 
@@ -121,16 +122,14 @@ public class ContentItemWorkflowDefinitionStore(
 
     public async Task SaveAsync(WorkflowDefinition definition, CancellationToken cancellationToken = default)
     {
-        var contentItem = await contentManager.GetVersionAsync(definition.Id);
+        var contentItem = await ContentManager.GetVersionAsync(definition.Id);
 
         if (contentItem == null)
         {
-            contentItem = await contentManager.NewAsync("WorkflowDefinition");
-            await contentManager.CreateAsync(contentItem, VersionOptions.Draft);
+            contentItem = await ContentManager.NewAsync("WorkflowDefinition");
+            await ContentManager.CreateAsync(contentItem, VersionOptions.Draft);
+            definition.Id = contentItem.ContentItemVersionId;
         }
-
-        // Overwrite the version ID with the content item's version ID.
-        definition.Id = contentItem.ContentItemVersionId;
         
         var workflowDefinitionModel = await WorkflowDefinitionMapper.MapAsync(definition, cancellationToken);
         contentItem.Alter<WorkflowDefinitionPart>(part =>
@@ -151,7 +150,7 @@ public class ContentItemWorkflowDefinitionStore(
             part.SerializedData = apiSerializer.Serialize(workflowDefinitionModel);
         });
 
-        await contentManager.SaveDraftAsync(contentItem);
+        await ContentManager.SaveDraftAsync(contentItem);
     }
 
     public async Task SaveManyAsync(IEnumerable<WorkflowDefinition> definitions, CancellationToken cancellationToken = default)
@@ -167,7 +166,7 @@ public class ContentItemWorkflowDefinitionStore(
 
         foreach (var part in query)
         {
-            await contentManager.RemoveAsync(part.ContentItem);
+            await ContentManager.RemoveAsync(part.ContentItem);
             count++;
         }
 

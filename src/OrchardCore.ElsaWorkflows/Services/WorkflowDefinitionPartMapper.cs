@@ -11,10 +11,50 @@ public class WorkflowDefinitionPartMapper(IApiSerializer apiSerializer, Workflow
 {
     public WorkflowDefinition Map(WorkflowDefinitionPart part)
     {
-        var json = part.SerializedData;
-        var definitionModel = apiSerializer.Deserialize<WorkflowDefinitionModel>(json);
-        var workflowDefinition = mapper.MapToWorkflowDefinition(definitionModel);
-        return workflowDefinition;
+        var definitionModel = MapModel(part);
+        definitionModel.Id = part.DefinitionVersionId;
+        definitionModel.DefinitionId = part.DefinitionId;
+        definitionModel.Version = part.Version;
+        definitionModel.ToolVersion = part.ToolVersion;
+        definitionModel.Name = part.Name;
+        definitionModel.Description = part.Description;
+        definitionModel.IsLatest = part.IsLatest;
+        definitionModel.IsPublished = part.IsPublished;
+        definitionModel.IsReadonly = part.IsReadonly;
+        definitionModel.IsSystem = part.IsSystem;
+        
+        if(part.ContentItem.CreatedUtc != null)
+            definitionModel.CreatedAt = (DateTimeOffset)part.ContentItem.CreatedUtc;
+        
+        return mapper.MapToWorkflowDefinition(definitionModel);
+    }
+    
+    public WorkflowDefinitionModel MapModel(WorkflowDefinitionPart part)
+    {
+        var model = apiSerializer.Deserialize<WorkflowDefinitionModel>(part.SerializedData);
+        
+        return new()
+        {
+            CreatedAt = (DateTimeOffset)part.ContentItem.CreatedUtc!,
+            Version = part.Version,
+            Description = part.Description,
+            Name = part.Name,
+            Id = part.DefinitionVersionId,
+            DefinitionId = part.DefinitionId,
+            IsLatest = part.IsLatest,
+            IsPublished = part.IsPublished,
+            IsReadonly = part.IsReadonly,
+            ToolVersion = part.ToolVersion,
+            IsSystem = part.IsSystem,
+            Inputs = model.Inputs,
+            Options = model.Options,
+            Outcomes = model.Outcomes,
+            Outputs = model.Outputs,
+            Root = model.Root,
+            Variables = model.Variables,
+            CustomProperties = model.CustomProperties,
+            TenantId = model.TenantId
+        };
     }
 
     public void Map(WorkflowDefinitionModel source, WorkflowDefinitionPart target)
