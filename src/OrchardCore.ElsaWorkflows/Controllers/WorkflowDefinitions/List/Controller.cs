@@ -38,7 +38,7 @@ public class WorkflowDefinitionsController(
 
         if (!string.IsNullOrWhiteSpace(options.Search))
         {
-            query = query.Where(x => x.Name.Contains(options.Search));
+            query = query.Where(x => x.Name!.Contains(options.Search));
         }
 
         switch (options.Order)

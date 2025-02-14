@@ -1,7 +1,6 @@
 using Elsa.Workflows.Management.Filters;
 using OrchardCore.ContentManagement;
 using OrchardCore.ElsaWorkflows.Indexes;
-using OrchardCore.ElsaWorkflows.Parts;
 using YesSql;
 using YesSql.Services;
 

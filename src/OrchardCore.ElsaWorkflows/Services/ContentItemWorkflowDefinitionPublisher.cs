@@ -8,34 +8,29 @@ using Elsa.Workflows;
 using Elsa.Workflows.Activities;
 using Elsa.Workflows.Management;
 using Elsa.Workflows.Management.Entities;
-using Elsa.Workflows.Management.Mappers;
 using Elsa.Workflows.Management.Materializers;
 using Elsa.Workflows.Management.Models;
 using Elsa.Workflows.Management.Notifications;
 using Elsa.Workflows.Models;
 using OrchardCore.ContentManagement;
 using OrchardCore.ElsaWorkflows.Parts;
-using YesSql;
 
 namespace OrchardCore.ElsaWorkflows.Services;
 
 public class ContentItemWorkflowDefinitionPublisher(
     IContentManager contentManager,
-    ISession session,
     ISystemClock systemClock,
     IActivitySerializer activitySerializer,
-    IApiSerializer apiSerializer,
     IWorkflowDefinitionStore workflowDefinitionStore,
     IWorkflowDefinitionService workflowDefinitionService,
     IWorkflowValidator workflowValidator,
     IMediator mediator,
-    WorkflowDefinitionMapper workflowDefinitionMapper,
     WorkflowDefinitionPartMapper workflowDefinitionPartMapper,
     WorkflowDefinitionPartSerializer workflowDefinitionPartSerializer) : IWorkflowDefinitionPublisher
 {
     public WorkflowDefinition New(IActivity? root = null)
     {
-        throw new System.NotImplementedException();
+        throw new("Not implemented. Use NewAsync instead.");
     }
 
     public async Task<WorkflowDefinition> NewAsync(IActivity? root = null, CancellationToken cancellationToken = default)

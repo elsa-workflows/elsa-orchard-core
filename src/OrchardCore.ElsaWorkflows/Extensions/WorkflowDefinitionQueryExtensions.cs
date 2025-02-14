@@ -3,7 +3,6 @@ using Elsa.Workflows.Management.Entities;
 using Elsa.Workflows.Management.Filters;
 using OrchardCore.ContentManagement;
 using OrchardCore.ElsaWorkflows.Indexes;
-using OrchardCore.ElsaWorkflows.Parts;
 using YesSql;
 using VersionOptions = Elsa.Common.Models.VersionOptions;
 

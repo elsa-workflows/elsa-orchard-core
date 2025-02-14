@@ -17,7 +17,6 @@ using OrchardCore.ElsaWorkflows.Indexes;
 using OrchardCore.ElsaWorkflows.Parts;
 using OrchardCore.ElsaWorkflows.Services;
 using YesSql;
-using YesSql.Services;
 using VersionOptions = OrchardCore.ContentManagement.VersionOptions;
 
 namespace OrchardCore.ElsaWorkflows.Stores;

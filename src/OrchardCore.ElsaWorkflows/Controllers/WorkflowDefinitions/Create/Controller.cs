@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Elsa.Workflows;
 using Elsa.Workflows.Activities.Flowchart.Activities;
 using Elsa.Workflows.Management.Models;
 using Microsoft.AspNetCore.Authorization;
