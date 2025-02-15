@@ -1,34 +1,17 @@
 using OrchardCore.Modules.Manifest;
+using OrchardCore.OpenId;
 
 [assembly: Module(
-    Id = "OrchardCore.ElsaWorkflows",
-    Name = "Elsa Workflows",
-    Author = "Orchard community",
-    Website = "https://elsa-workflows.github.io/elsa-core/",
-    Version = "1.0.0",
-    Description = "Create workflows with Elsa.",
-    Category = "Elsa Workflows"
+    Author = ManifestConstants.OrchardCoreTeam,
+    Website = ManifestConstants.OrchardCoreWebsite,
+    Version = ManifestConstants.OrchardCoreVersion,
+    Name = "Elsa Workflows"
 )]
 
 [assembly: Feature(
     Id = "OrchardCore.ElsaWorkflows",
-    Name = "Elsa Workflows",
-    Description = "Create and manage workflows.",
-    Category = "Elsa Workflows"
+    Name = "Elsa Workflows Core Services",
+    Description = "Provides the foundational services for Elsa Workflows.",
+    Category = "Elsa Workflows",
+    Dependencies = [OpenIdConstants.Features.Core]
 )]
-
-// [assembly: Feature(
-//     Id = "OrchardCore.ElsaWorkflows.Contents",
-//     Name = "Contents",
-//     Description = "Provides content activities.",
-//     Dependencies = new[] {"OrchardCore.ElsaWorkflows", "OrchardCore.Contents"},
-//     Category = "Elsa Workflows"
-// )]
-//
-// [assembly: Feature(
-//     Id = "OrchardCore.ElsaWorkflows.Email",
-//     Name = "Email",
-//     Description = "Provides email activities.",
-//     Dependencies = new[] {"OrchardCore.ElsaWorkflows", "OrchardCore.Email"},
-//     Category = "Elsa Workflows"
-// )]

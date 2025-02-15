@@ -32,7 +32,8 @@ public class Startup : StartupBase
             elsa.UseWorkflowManagement(workflowManagement =>
             {
                 workflowManagement.WithWorkflowDefinitionPublisher(sp => ActivatorUtilities.CreateInstance<ContentItemWorkflowDefinitionPublisher>(sp));
-                workflowManagement.UseWorkflowDefinitions(workflowDefinitions => workflowDefinitions.WorkflowDefinitionStore = sp => ActivatorUtilities.CreateInstance<ContentItemWorkflowDefinitionStore>(sp));
+                workflowManagement.UseWorkflowDefinitions(workflowDefinitions => workflowDefinitions.WorkflowDefinitionStore = sp => ActivatorUtilities.CreateInstance<ElsaWorkflowDefinitionStore>(sp));
+                workflowManagement.UseWorkflowInstances(workflowInstances => workflowInstances.WorkflowInstanceStore = sp => ActivatorUtilities.CreateInstance<ElsaWorkflowInstanceStore>(sp));
             });
             elsa.UseWorkflowRuntime();
             elsa.UseJavaScript();
@@ -49,6 +50,7 @@ public class Startup : StartupBase
             .AddScoped<WorkflowDefinitionPartMapper>()
             .AddScoped<WorkflowDefinitionPartSerializer>()
             .AddIndexProvider<WorkflowDefinitionIndexProvider>()
+            .AddIndexProvider<WorkflowInstanceIndexProvider>()
             .Configure<StaticFileOptions>(ConfigureStaticFileOptions);
     }
 

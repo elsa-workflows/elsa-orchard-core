@@ -9,7 +9,7 @@ public class PermissionsClaimsProvider : IUserClaimsProvider
 {
     public Task GenerateAsync(IUser user, ClaimsIdentity claims)
     {
-        claims.AddClaim(new Claim("permissions", "*"));
+        claims.AddClaim(new("permissions", "*"));
         return Task.CompletedTask;
     }
 }

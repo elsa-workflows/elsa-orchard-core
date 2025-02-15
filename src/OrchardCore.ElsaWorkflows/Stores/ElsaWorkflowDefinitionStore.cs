@@ -21,7 +21,7 @@ using VersionOptions = OrchardCore.ContentManagement.VersionOptions;
 
 namespace OrchardCore.ElsaWorkflows.Stores;
 
-public class ContentItemWorkflowDefinitionStore(
+public class ElsaWorkflowDefinitionStore(
     ISession session,
     IApiSerializer apiSerializer,
     IServiceProvider serviceProvider) : IWorkflowDefinitionStore
@@ -195,22 +195,12 @@ public class ContentItemWorkflowDefinitionStore(
 
     private IQuery<ContentItem, WorkflowDefinitionIndex> Query(WorkflowDefinitionFilter filter, PageArgs? pageArgs = null)
     {
-        var query = session.Query<ContentItem, WorkflowDefinitionIndex>().Apply(filter);
-
-        if (pageArgs != null)
-        {
-            if (pageArgs.Offset != null) query.Skip(pageArgs.Offset.Value);
-            if (pageArgs.Limit != null) query.Take(pageArgs.Limit.Value);
-        }
-
-        return query;
+        return Query<string>(filter, null, pageArgs);
     }
 
     private IQuery<ContentItem, WorkflowDefinitionIndex> Query<TOrderBy>(WorkflowDefinitionFilter filter, WorkflowDefinitionOrder<TOrderBy>? order = null, PageArgs? pageArgs = null)
     {
-        var query = session.Query<ContentItem, WorkflowDefinitionIndex>();
-
-        query.Apply(filter);
+        var query = session.Query<ContentItem, WorkflowDefinitionIndex>().Apply(filter);
         if (order != null) query = query.Apply(order);
 
         if (pageArgs != null)
