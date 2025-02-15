@@ -27,7 +27,7 @@ public class WorkflowDefinitionIndexProvider : IndexProvider<ContentItem>
                     MaterializerName = workflowDefinitionPart.MaterializerName,
                     IsReadonly = workflowDefinitionPart.IsReadonly,
                     Version = workflowDefinitionPart.Version,
-                    Name = contentItem.DisplayText,
+                    Name = workflowDefinitionPart.Name,
                     Description = workflowDefinitionPart.Description,
                 };
             });

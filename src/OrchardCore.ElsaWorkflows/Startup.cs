@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using Elsa.Extensions;
-using Elsa.Features;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.StaticFiles;
@@ -11,6 +10,7 @@ using OrchardCore.Data;
 using OrchardCore.Data.Migration;
 using OrchardCore.ElsaWorkflows.Handlers.Content;
 using OrchardCore.ElsaWorkflows.Indexes;
+using OrchardCore.ElsaWorkflows.Migrations;
 using OrchardCore.ElsaWorkflows.Security;
 using OrchardCore.ElsaWorkflows.Services;
 using OrchardCore.ElsaWorkflows.StartupTasks;
@@ -35,14 +35,23 @@ public class Startup : StartupBase
                 workflowManagement.UseWorkflowDefinitions(workflowDefinitions => workflowDefinitions.WorkflowDefinitionStore = sp => ActivatorUtilities.CreateInstance<ElsaWorkflowDefinitionStore>(sp));
                 workflowManagement.UseWorkflowInstances(workflowInstances => workflowInstances.WorkflowInstanceStore = sp => ActivatorUtilities.CreateInstance<ElsaWorkflowInstanceStore>(sp));
             });
-            elsa.UseWorkflowRuntime();
+            elsa.UseWorkflowRuntime(workflowRuntime =>
+            {
+                workflowRuntime.TriggerStore = sp => ActivatorUtilities.CreateInstance<ElsaTriggerStore>(sp);
+                workflowRuntime.BookmarkStore = sp => ActivatorUtilities.CreateInstance<ElsaBookmarkStore>(sp);
+            });
             elsa.UseJavaScript();
             elsa.UseLiquid();
             elsa.UseWorkflowsApi(api => api.AddFastEndpointsAssembly<Startup>());
         });
         
+        services.Configure<StoreCollectionOptions>(o => o.Collections.Add("Elsa"));
+        
         services
-            .AddDataMigration<Migrations>()
+            .AddDataMigration<WorkflowDefinitionMigrations>()
+            .AddDataMigration<WorkflowInstanceMigrations>()
+            .AddDataMigration<StoredTriggerMigrations>()
+            .AddDataMigration<StoredBookmarkMigrations>()
             .AddScoped<INavigationProvider, AdminMenu>()
             .AddScoped<IModularTenantEvents, PopulateRegistriesTask>()
             .AddScoped<IContentHandler, WorkflowDefinitionContentHandler>()
@@ -51,6 +60,8 @@ public class Startup : StartupBase
             .AddScoped<WorkflowDefinitionPartSerializer>()
             .AddIndexProvider<WorkflowDefinitionIndexProvider>()
             .AddIndexProvider<WorkflowInstanceIndexProvider>()
+            .AddIndexProvider<StoredTriggerIndexProvider>()
+            .AddIndexProvider<StoredBookmarkIndexProvider>()
             .Configure<StaticFileOptions>(ConfigureStaticFileOptions);
     }
 

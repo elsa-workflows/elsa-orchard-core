@@ -8,10 +8,10 @@ public class WorkflowDefinitionPart : ContentPart
     public string DefinitionId { get; set; } = null!;
     public string DefinitionVersionId { get; set; } = null!;
     public int Version { get; set; }
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
     public string? Description { get; set; }
     public string? ProviderName { get; set; }
-    public string MaterializerName { get; set; }
+    public string MaterializerName { get; set; } = null!;
     public bool IsPublished { get; set; }
     public bool IsLatest { get; set; }
     public bool UsableAsActivity { get; set; }

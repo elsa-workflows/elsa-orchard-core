@@ -1,4 +1,5 @@
 using System;
+using Elsa.Common;
 using Elsa.Workflows;
 using Elsa.Workflows.Management.Entities;
 using Elsa.Workflows.Management.Mappers;
@@ -7,7 +8,7 @@ using OrchardCore.ElsaWorkflows.Parts;
 
 namespace OrchardCore.ElsaWorkflows.Services;
 
-public class WorkflowDefinitionPartMapper(IApiSerializer apiSerializer, WorkflowDefinitionMapper mapper)
+public class WorkflowDefinitionPartMapper(IApiSerializer apiSerializer, WorkflowDefinitionMapper mapper, ISystemClock systemClock)
 {
     public WorkflowDefinition Map(WorkflowDefinitionPart part)
     {
@@ -31,11 +32,11 @@ public class WorkflowDefinitionPartMapper(IApiSerializer apiSerializer, Workflow
     
     public WorkflowDefinitionModel MapModel(WorkflowDefinitionPart part)
     {
-        var model = apiSerializer.Deserialize<WorkflowDefinitionModel>(part.SerializedData);
+        var model = part.SerializedData != null! ? apiSerializer.Deserialize<WorkflowDefinitionModel>(part.SerializedData) : new();
         
         return new()
         {
-            CreatedAt = (DateTimeOffset)part.ContentItem.CreatedUtc!,
+            CreatedAt = part.ContentItem.CreatedUtc ?? systemClock.UtcNow,
             Version = part.Version,
             Description = part.Description,
             Name = part.Name,
@@ -65,7 +66,7 @@ public class WorkflowDefinitionPartMapper(IApiSerializer apiSerializer, Workflow
         target.IsPublished = source.IsPublished;
         target.Version = source.Version;
         target.ToolVersion = source.ToolVersion;
-        target.Name = source.Name;
+        target.Name = source.Name!;
         target.Description = source.Description;
         target.IsReadonly = source.IsReadonly;
         target.IsSystem = source.IsSystem;

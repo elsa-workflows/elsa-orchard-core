@@ -1,16 +1,21 @@
 using System.Threading.Tasks;
+using Elsa.Common;
+using Elsa.Workflows;
 using Elsa.Workflows.Activities.Flowchart.Activities;
-using Elsa.Workflows.Management.Models;
+using Elsa.Workflows.Management;
+using Elsa.Workflows.Management.Entities;
+using Elsa.Workflows.Management.Materializers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrchardCore.Admin;
-using OrchardCore.ContentManagement;
-using OrchardCore.ElsaWorkflows.Parts;
-using OrchardCore.ElsaWorkflows.Services;
 
 namespace OrchardCore.ElsaWorkflows.Controllers.WorkflowDefinitions.Create;
 
-public class WorkflowDefinitionsController(IAuthorizationService authorizationService, IContentManager contentManager, WorkflowDefinitionPartMapper definitionPartMapper) : Controller
+public class WorkflowDefinitionsController(
+    IAuthorizationService authorizationService, 
+    IWorkflowDefinitionStore workflowDefinitionStore,
+    ISystemClock systemClock,
+    IApiSerializer apiSerializer) : Controller
 {
     [Admin("ElsaWorkflows/WorkflowDefinitions/Create/{id}")]
     public async Task<IActionResult> Create(string id)
@@ -30,28 +35,22 @@ public class WorkflowDefinitionsController(IAuthorizationService authorizationSe
         if (!ModelState.IsValid)
             return View(viewModel);
 
-        var contentItem = await contentManager.NewAsync(id);
-        await contentManager.CreateAsync(contentItem, VersionOptions.Draft);
-
-        var workflowDefinitionModel = new WorkflowDefinitionModel
+        var workflowDefinition = new WorkflowDefinition
         {
-            DefinitionId = contentItem.ContentItemId,
-            Id = contentItem.ContentItemVersionId,
-            CreatedAt = contentItem.CreatedUtc!.Value,
+            CreatedAt = systemClock.UtcNow,
             Name = viewModel.Name.Trim(),
-            Root = new Flowchart(),
+            StringData = apiSerializer.Serialize(new Flowchart()),
             Version = 1,
             IsLatest = true,
+            MaterializerName = JsonWorkflowMaterializer.MaterializerName,
             ToolVersion = new(3, 3, 0)
         };
         
-        contentItem.DisplayText = workflowDefinitionModel.Name;
-        contentItem.Alter<WorkflowDefinitionPart>(part => { definitionPartMapper.Map(workflowDefinitionModel, part); });
-        await contentManager.SaveDraftAsync(contentItem);
-
+        await workflowDefinitionStore.SaveAsync(workflowDefinition);
+        
         return RedirectToAction("Edit", new
         {
-            Id = contentItem.ContentItemId
+            Id = workflowDefinition.DefinitionId
         });
     }
 }

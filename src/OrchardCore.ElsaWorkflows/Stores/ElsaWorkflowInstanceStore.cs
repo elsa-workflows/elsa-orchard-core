@@ -17,6 +17,8 @@ namespace OrchardCore.ElsaWorkflows.Stores;
 
 public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStore
 {
+    private const string Collection = ElsaCollections.WorkflowInstances;
+    
     public async ValueTask<WorkflowInstance?> FindAsync(WorkflowInstanceFilter filter, CancellationToken cancellationToken = default)
     {
         return await Query(filter).FirstOrDefaultAsync();
@@ -118,28 +120,28 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
 
     public async ValueTask SaveAsync(WorkflowInstance instance, CancellationToken cancellationToken = default)
     {
-        await session.SaveAsync(instance);
-        await session.FlushAsync();
+        await session.SaveAsync(instance, Collection);
+        await session.SaveChangesAsync();
     }
 
     public async ValueTask AddAsync(WorkflowInstance instance, CancellationToken cancellationToken = default)
     {
-        await session.SaveAsync(instance);
-        await session.FlushAsync();
+        await session.SaveAsync(instance, Collection);
+        await session.SaveChangesAsync();
     }
 
     public async ValueTask UpdateAsync(WorkflowInstance instance, CancellationToken cancellationToken = default)
     {
-        await session.SaveAsync(instance);
-        await session.FlushAsync();
+        await session.SaveAsync(instance, Collection);
+        await session.SaveChangesAsync();
     }
 
     public async ValueTask SaveManyAsync(IEnumerable<WorkflowInstance> instances, CancellationToken cancellationToken = default)
     {
         foreach (var instance in instances) 
-            await session.SaveAsync(instance);
+            await session.SaveAsync(instance, Collection);
         
-        await session.FlushAsync();
+        await session.SaveChangesAsync();
     }
 
     public async ValueTask<long> DeleteAsync(WorkflowInstanceFilter filter, CancellationToken cancellationToken = default)
@@ -158,11 +160,12 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
                 break;
 
             foreach (var record in records) 
-                session.Delete(record);
+                session.Delete(record, Collection);
             
             pageArgs = pageArgs.Next();
         }
         
+        await session.SaveChangesAsync();
         return count;
     }
 
@@ -173,7 +176,7 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
 
     private IQuery<WorkflowInstance, WorkflowInstanceIndex> Query<TOrderBy>(WorkflowInstanceFilter filter, WorkflowInstanceOrder<TOrderBy>? order = null, PageArgs? pageArgs = null)
     {
-        var query = session.Query<WorkflowInstance, WorkflowInstanceIndex>().Apply(filter);
+        var query = session.Query<WorkflowInstance, WorkflowInstanceIndex>(Collection).Apply(filter);
         if (order != null) query = query.Apply(order);
 
         if (pageArgs != null)
@@ -192,7 +195,7 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
 
     private IQueryIndex<WorkflowInstanceIndex> QueryIndex<TOrderBy>(WorkflowInstanceFilter filter, WorkflowInstanceOrder<TOrderBy>? order = null, PageArgs? pageArgs = null)
     {
-        var query = session.QueryIndex<WorkflowInstanceIndex>().Apply(filter);
+        var query = session.QueryIndex<WorkflowInstanceIndex>(Collection).Apply(filter);
         if (order != null) query = query.Apply(order);
 
         if (pageArgs != null)
