@@ -3,8 +3,9 @@ namespace OrchardCore.ElsaWorkflows;
 public static class ElsaCollections
 {
     public const string WorkflowDefinitions = null!;
-    public const string WorkflowInstances = "Elsa";
-    public const string WorkflowExecutionLogs = "Elsa";
-    public const string StoredTriggers = "Elsa";
-    public const string StoredBookmarks = "Elsa";
+    public const string WorkflowInstances = "ElsaInstances";
+    public const string WorkflowExecutionLogs = "ElsaExecutionLogs";
+    public const string ActivityExecutionLogs = "ElsaActivityLogs";
+    public const string StoredTriggers = "ElsaTriggers";
+    public const string StoredBookmarks = "ElsaBookmarks";
 }

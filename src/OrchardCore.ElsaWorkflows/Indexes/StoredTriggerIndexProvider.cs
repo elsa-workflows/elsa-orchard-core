@@ -14,6 +14,7 @@ public class StoredTriggerIndexProvider : IndexProvider<StoredTrigger>
     {
         context.For<StoredTriggerIndex>().Map(trigger => new()
         {
+            TriggerId = trigger.Id,
             WorkflowDefinitionId = trigger.WorkflowDefinitionId,
             WorkflowDefinitionVersionId = trigger.WorkflowDefinitionVersionId,
             Name = trigger.Name,

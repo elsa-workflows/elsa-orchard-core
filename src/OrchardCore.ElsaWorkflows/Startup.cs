@@ -45,7 +45,14 @@ public class Startup : StartupBase
             elsa.UseWorkflowsApi(api => api.AddFastEndpointsAssembly<Startup>());
         });
         
-        services.Configure<StoreCollectionOptions>(o => o.Collections.Add("Elsa"));
+        services.Configure<StoreCollectionOptions>(o =>
+        {
+            o.Collections.Add(ElsaCollections.WorkflowInstances);
+            o.Collections.Add(ElsaCollections.StoredTriggers);
+            o.Collections.Add(ElsaCollections.StoredBookmarks);
+            o.Collections.Add(ElsaCollections.WorkflowExecutionLogs);
+            o.Collections.Add(ElsaCollections.ActivityExecutionLogs);
+        });
         
         services
             .AddDataMigration<WorkflowDefinitionMigrations>()
