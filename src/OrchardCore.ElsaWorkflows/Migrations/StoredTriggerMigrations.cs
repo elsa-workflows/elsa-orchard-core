@@ -15,9 +15,10 @@ public class StoredTriggerMigrations : DataMigration
     public async Task<int> CreateAsync()
     {
         await SchemaBuilder.CreateMapIndexTableAsync<StoredTriggerIndex>(table => table
-            .Column<string>(nameof(StoredTriggerIndex.Name), c => c.NotNull())
+            .Column<string>(nameof(StoredTriggerIndex.TriggerId), c => c.NotNull())
             .Column<string>(nameof(StoredTriggerIndex.WorkflowDefinitionId), c => c.NotNull())
             .Column<string>(nameof(StoredTriggerIndex.WorkflowDefinitionVersionId), c => c.NotNull())
+            .Column<string>(nameof(StoredTriggerIndex.Name), c => c.NotNull())
             .Column<string>(nameof(StoredTriggerIndex.ActivityId), c => c.NotNull())
             .Column<string>(nameof(StoredTriggerIndex.Hash), c => c.Nullable())
         , Collection);
