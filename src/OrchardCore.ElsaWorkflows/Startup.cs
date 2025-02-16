@@ -39,6 +39,7 @@ public class Startup : StartupBase
             {
                 workflowRuntime.TriggerStore = sp => ActivatorUtilities.CreateInstance<ElsaTriggerStore>(sp);
                 workflowRuntime.BookmarkStore = sp => ActivatorUtilities.CreateInstance<ElsaBookmarkStore>(sp);
+                workflowRuntime.WorkflowExecutionLogStore = sp => ActivatorUtilities.CreateInstance<ElsaWorkflowExecutionLogStore>(sp);
             });
             elsa.UseJavaScript();
             elsa.UseLiquid();
@@ -59,6 +60,7 @@ public class Startup : StartupBase
             .AddDataMigration<WorkflowInstanceMigrations>()
             .AddDataMigration<StoredTriggerMigrations>()
             .AddDataMigration<StoredBookmarkMigrations>()
+            .AddDataMigration<WorkflowExecutionLogRecordMigrations>()
             .AddScoped<INavigationProvider, AdminMenu>()
             .AddScoped<IModularTenantEvents, PopulateRegistriesTask>()
             .AddScoped<IContentHandler, WorkflowDefinitionContentHandler>()
@@ -69,6 +71,7 @@ public class Startup : StartupBase
             .AddIndexProvider<WorkflowInstanceIndexProvider>()
             .AddIndexProvider<StoredTriggerIndexProvider>()
             .AddIndexProvider<StoredBookmarkIndexProvider>()
+            .AddIndexProvider<WorkflowExecutionLogIndexProvider>()
             .Configure<StaticFileOptions>(ConfigureStaticFileOptions);
     }
 
