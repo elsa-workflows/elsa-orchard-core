@@ -40,6 +40,7 @@ public class Startup : StartupBase
                 workflowRuntime.TriggerStore = sp => ActivatorUtilities.CreateInstance<ElsaTriggerStore>(sp);
                 workflowRuntime.BookmarkStore = sp => ActivatorUtilities.CreateInstance<ElsaBookmarkStore>(sp);
                 workflowRuntime.WorkflowExecutionLogStore = sp => ActivatorUtilities.CreateInstance<ElsaWorkflowExecutionLogStore>(sp);
+                workflowRuntime.ActivityExecutionLogStore = sp => ActivatorUtilities.CreateInstance<ElsaActivityExecutionRecordStore>(sp);
             });
             elsa.UseJavaScript();
             elsa.UseLiquid();
@@ -51,8 +52,8 @@ public class Startup : StartupBase
             o.Collections.Add(ElsaCollections.WorkflowInstances);
             o.Collections.Add(ElsaCollections.StoredTriggers);
             o.Collections.Add(ElsaCollections.StoredBookmarks);
-            o.Collections.Add(ElsaCollections.WorkflowExecutionLogs);
-            o.Collections.Add(ElsaCollections.ActivityExecutionLogs);
+            o.Collections.Add(ElsaCollections.WorkflowExecutionLogRecords);
+            o.Collections.Add(ElsaCollections.ActivityExecutionRecords);
         });
         
         services
@@ -61,6 +62,7 @@ public class Startup : StartupBase
             .AddDataMigration<StoredTriggerMigrations>()
             .AddDataMigration<StoredBookmarkMigrations>()
             .AddDataMigration<WorkflowExecutionLogRecordMigrations>()
+            .AddDataMigration<ActivityExecutionRecordMigrations>()
             .AddScoped<INavigationProvider, AdminMenu>()
             .AddScoped<IModularTenantEvents, PopulateRegistriesTask>()
             .AddScoped<IContentHandler, WorkflowDefinitionContentHandler>()
@@ -71,7 +73,8 @@ public class Startup : StartupBase
             .AddIndexProvider<WorkflowInstanceIndexProvider>()
             .AddIndexProvider<StoredTriggerIndexProvider>()
             .AddIndexProvider<StoredBookmarkIndexProvider>()
-            .AddIndexProvider<WorkflowExecutionLogIndexProvider>()
+            .AddIndexProvider<WorkflowExecutionLogRecordIndexProvider>()
+            .AddIndexProvider<ActivityExecutionRecordIndexProvider>()
             .Configure<StaticFileOptions>(ConfigureStaticFileOptions);
     }
 

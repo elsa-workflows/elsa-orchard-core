@@ -10,10 +10,10 @@ public static class WorkflowExecutionLogRecordFilterExtensions
 {
     public static IQuery<WorkflowExecutionLogRecord, WorkflowExecutionLogRecordIndex> Apply(this WorkflowExecutionLogRecordFilter filter, IQuery<WorkflowExecutionLogRecord, WorkflowExecutionLogRecordIndex> query)
     {
-        if (filter.Id != null) query = query.Where(x => x.WorkflowExecutionLogRecordId == filter.Id);
-        if (filter.Ids != null) query = query.Where(x => x.WorkflowExecutionLogRecordId.IsIn(filter.Ids));
+        if (filter.Id != null) query = query.Where(x => x.RecordId == filter.Id);
+        if (filter.Ids != null) query = query.Where(x => x.RecordId.IsIn(filter.Ids));
         if (filter.WorkflowInstanceId != null) query = query.Where(x => x.WorkflowInstanceId == filter.WorkflowInstanceId);
-        if (filter.WorkflowInstanceIds != null) query = query.Where(x => x.WorkflowExecutionLogRecordId.IsIn(filter.WorkflowInstanceIds));
+        if (filter.WorkflowInstanceIds != null) query = query.Where(x => x.RecordId.IsIn(filter.WorkflowInstanceIds));
         if (filter.ParentActivityInstanceId != null) query = query.Where(x => x.ParentActivityInstanceId == filter.ParentActivityInstanceId);
         if (filter.ActivityId != null) query = query.Where(x => x.ActivityId == filter.ActivityId);
         if (filter.ActivityIds != null) query = query.Where(x => x.ActivityId.IsIn(filter.ActivityIds));

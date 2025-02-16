@@ -15,7 +15,7 @@ namespace OrchardCore.ElsaWorkflows.Stores;
 
 public class ElsaWorkflowExecutionLogStore(ISession session) : IWorkflowExecutionLogStore
 {
-    private const string Collection = ElsaCollections.WorkflowExecutionLogs;
+    private const string Collection = ElsaCollections.WorkflowExecutionLogRecords;
     
     public async Task SaveManyAsync(IEnumerable<WorkflowExecutionLogRecord> records, CancellationToken cancellationToken = default)
     {
@@ -98,7 +98,7 @@ public class ElsaWorkflowExecutionLogStore(ISession session) : IWorkflowExecutio
     
     private IQuery<WorkflowExecutionLogRecord, WorkflowExecutionLogRecordIndex> Query(WorkflowExecutionLogRecordFilter filter, PageArgs? pageArgs = null)
     {
-        return Query<string><WorkflowExecutionLogRecord, WorkflowExecutionLogRecordIndex>(filter, pageArgs: pageArgs);
+        return Query<string>(filter, pageArgs: pageArgs);
     }
 
     private IQuery<WorkflowExecutionLogRecord, WorkflowExecutionLogRecordIndex> Query<TOrderBy>(WorkflowExecutionLogRecordFilter filter, WorkflowExecutionLogRecordOrder<TOrderBy>? order = null, PageArgs? pageArgs = null)
