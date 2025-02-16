@@ -19,7 +19,9 @@ public class WorkflowExecutionLogRecordIndexProvider : IndexProvider<WorkflowExe
             EventName = record.EventName,
             ActivityNodeId = record.ActivityNodeId,
             ParentActivityInstanceId = record.ParentActivityInstanceId,
-            ActivityId = record.ActivityId
+            ActivityId = record.ActivityId,
+            Timestamp = record.Timestamp,
+            Sequence = record.Sequence,
         });
     }
 }

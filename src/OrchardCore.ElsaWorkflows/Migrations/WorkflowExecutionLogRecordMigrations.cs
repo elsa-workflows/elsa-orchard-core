@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using OrchardCore.Data.Migration;
@@ -21,9 +22,11 @@ public class WorkflowExecutionLogRecordMigrations : DataMigration
                 .Column<string>(nameof(WorkflowExecutionLogRecordIndex.ActivityId), c => c.NotNull())
                 .Column<string>(nameof(WorkflowExecutionLogRecordIndex.ActivityNodeId), c => c.NotNull())
                 .Column<string>(nameof(WorkflowExecutionLogRecordIndex.EventName), c => c.NotNull())
+                .Column<DateTimeOffset>(nameof(WorkflowExecutionLogRecordIndex.Timestamp), c => c.NotNull())
+                .Column<long>(nameof(WorkflowExecutionLogRecordIndex.Sequence), c => c.NotNull())
             , Collection);
 
-        await SchemaBuilder.AlterIndexTableAsync<WorkflowInstanceIndex>(table =>
+        await SchemaBuilder.AlterIndexTableAsync<WorkflowExecutionLogRecordIndex>(table =>
         {
             table.CreateIndex("IDX_WorkflowExecutionLogRecordIndex_RecordId", nameof(WorkflowExecutionLogRecordIndex.RecordId));
             table.CreateIndex("IDX_WorkflowExecutionLogRecordIndex_WorkflowInstanceId", nameof(WorkflowExecutionLogRecordIndex.WorkflowInstanceId));
@@ -31,6 +34,8 @@ public class WorkflowExecutionLogRecordMigrations : DataMigration
             table.CreateIndex("IDX_WorkflowExecutionLogRecordIndex_ActivityId", nameof(WorkflowExecutionLogRecordIndex.ActivityId));
             table.CreateIndex("IDX_WorkflowExecutionLogRecordIndex_ActivityNodeId", nameof(WorkflowExecutionLogRecordIndex.ActivityNodeId));
             table.CreateIndex("IDX_WorkflowExecutionLogRecordIndex_EventName", nameof(WorkflowExecutionLogRecordIndex.EventName));
+            table.CreateIndex("IDX_WorkflowExecutionLogRecordIndex_Timestamp", nameof(WorkflowExecutionLogRecordIndex.Timestamp));
+            table.CreateIndex("IDX_WorkflowExecutionLogRecordIndex_Sequence", nameof(WorkflowExecutionLogRecordIndex.Sequence));
         }, Collection);
 
         return 1;

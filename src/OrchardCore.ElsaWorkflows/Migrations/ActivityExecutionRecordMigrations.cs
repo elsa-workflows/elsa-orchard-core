@@ -31,7 +31,7 @@ public class ActivityExecutionRecordMigrations : DataMigration
                 .Column<DateTimeOffset>(nameof(ActivityExecutionRecordIndex.CompletedAt), c => c.Nullable())
             , Collection);
 
-        await SchemaBuilder.AlterIndexTableAsync<WorkflowInstanceIndex>(table =>
+        await SchemaBuilder.AlterIndexTableAsync<ActivityExecutionRecordIndex>(table =>
         {
             table.CreateIndex("IDX_ActivityExecutionRecordIndex_RecordId", nameof(ActivityExecutionRecordIndex.RecordId));
             table.CreateIndex("IDX_ActivityExecutionRecordIndex_WorkflowInstanceId", nameof(ActivityExecutionRecordIndex.WorkflowInstanceId));

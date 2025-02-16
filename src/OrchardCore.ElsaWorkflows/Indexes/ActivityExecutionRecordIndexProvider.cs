@@ -7,7 +7,7 @@ public class ActivityExecutionRecordIndexProvider : IndexProvider<ActivityExecut
 {
     public ActivityExecutionRecordIndexProvider()
     {
-        CollectionName = ElsaCollections.WorkflowExecutionLogRecords;
+        CollectionName = ElsaCollections.ActivityExecutionRecords;
     }
 
     public override void Describe(DescribeContext<ActivityExecutionRecord> context)
