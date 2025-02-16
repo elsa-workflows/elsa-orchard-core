@@ -27,7 +27,7 @@ public class AdminMenu(IStringLocalizer<AdminMenu> localizer) : INavigationProvi
                             .Permission(Permissions.ManageWorkflows)
                             .LocalNav())
                         .Add(T["Workflow Instances"], workflowInstances => workflowInstances
-                            .Action("Index", "WorkflowInstance", new { area = Constants.Area })
+                            .Action("List", "WorkflowInstances", new { area = Constants.Area })
                             .Permission(Permissions.ManageWorkflows)
                             .LocalNav());
                 });
@@ -47,7 +47,7 @@ public class AdminMenu(IStringLocalizer<AdminMenu> localizer) : INavigationProvi
                             .Permission(Permissions.ManageWorkflows)
                             .LocalNav())
                         .Add(T["Instances"], workflowInstances => workflowInstances
-                            .Action("Index", "WorkflowInstance", new { area = Constants.Area })
+                            .Action("List", "WorkflowInstances", new { area = Constants.Area })
                             .Permission(Permissions.ManageWorkflows)
                             .LocalNav());
                 })

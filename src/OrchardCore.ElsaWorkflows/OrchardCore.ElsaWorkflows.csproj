@@ -45,6 +45,13 @@
       <EmbeddedResource Update="ClientApp\tsconfig.json">
         <CopyToPublishDirectory>Never</CopyToPublishDirectory>
       </EmbeddedResource>
+      <EmbeddedResource Update="Views\WorkflowInstances\Details.cshtml">
+        <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Views\WorkflowInstances\List.cshtml" />
     </ItemGroup>
 
 </Project>
