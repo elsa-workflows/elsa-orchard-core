@@ -11,7 +11,7 @@ namespace OrchardCore.ElsaWorkflows.Contents.Handlers;
 public class ContentEventHandler(IStimulusSender stimulusSender) : ContentHandlerBase
 {
     public override Task CreatedAsync(CreateContentContext context) => TriggerActivity<ContentCreated>(context);
-    public override Task DraftSavedAsync(SaveDraftContentContext context) => TriggerActivity<ContentCreated>(context);
+    public override Task DraftSavedAsync(SaveDraftContentContext context) => TriggerActivity<ContentDraftSaved>(context);
     public override Task RemovedAsync(RemoveContentContext context) => TriggerActivity<ContentDeleted>(context);
     public override Task PublishedAsync(PublishContentContext context) => TriggerActivity<ContentPublished>(context);
     public override Task UnpublishedAsync(PublishContentContext context) => TriggerActivity<ContentUnpublished>(context);
