@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.ElsaWorkflows.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.ElsaWorkflows", "src\OrchardCore.ElsaWorkflows\OrchardCore.ElsaWorkflows.csproj", "{5F5FEB49-12AC-448C-82F0-197A77002BAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.ElsaWorkflows.Contents", "src\OrchardCore.ElsaWorkflows.Contents\OrchardCore.ElsaWorkflows.Contents.csproj", "{1153B6DD-8006-47F8-A9BB-E41665102095}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +29,14 @@ Global
 		{5F5FEB49-12AC-448C-82F0-197A77002BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F5FEB49-12AC-448C-82F0-197A77002BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F5FEB49-12AC-448C-82F0-197A77002BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1153B6DD-8006-47F8-A9BB-E41665102095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1153B6DD-8006-47F8-A9BB-E41665102095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1153B6DD-8006-47F8-A9BB-E41665102095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1153B6DD-8006-47F8-A9BB-E41665102095}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1A1E1268-8752-46D3-838F-DE6E664274A2} = {9AD6C839-C8CC-4D31-BC86-99B25CEEDC4F}
 		{5F5FEB49-12AC-448C-82F0-197A77002BAE} = {9AD6C839-C8CC-4D31-BC86-99B25CEEDC4F}
+		{1153B6DD-8006-47F8-A9BB-E41665102095} = {9AD6C839-C8CC-4D31-BC86-99B25CEEDC4F}
 	EndGlobalSection
 EndGlobal
