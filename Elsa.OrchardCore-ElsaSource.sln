@@ -55,7 +55,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elsa.EntityFrameworkCore", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elsa.EntityFrameworkCore.Common", "..\..\elsa-core\main\src\modules\Elsa.EntityFrameworkCore.Common\Elsa.EntityFrameworkCore.Common.csproj", "{4B1315BA-2E14-44F5-8A17-55E182E7E7B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.ElsaWorkflows.Content", "src\OrchardCore.ElsaWorkflows.Content\OrchardCore.ElsaWorkflows.Content.csproj", "{70237703-41E5-4A6C-B646-11B151A12A47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.ElsaWorkflows.Contents", "src\OrchardCore.ElsaWorkflows.Contents\OrchardCore.ElsaWorkflows.Contents.csproj", "{70237703-41E5-4A6C-B646-11B151A12A47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

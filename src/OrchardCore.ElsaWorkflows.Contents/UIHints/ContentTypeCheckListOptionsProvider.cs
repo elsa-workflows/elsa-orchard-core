@@ -8,7 +8,7 @@ using Open.Linq.AsyncExtensions;
 using OrchardCore.ContentManagement.Metadata;
 using OrchardCore.ContentManagement.Metadata.Settings;
 
-namespace OrchardCore.ElsaWorkflows.Content.UIHints;
+namespace OrchardCore.ElsaWorkflows.Contents.UIHints;
 
 public class ContentTypeCheckListOptionsProvider(IContentDefinitionManager contentDefinitionManager) : CheckListOptionsProviderBase
 {

@@ -10,7 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\OrchardCore.ElsaWorkflows.Content\OrchardCore.ElsaWorkflows.Content.csproj" />
+      <ProjectReference Include="..\OrchardCore.ElsaWorkflows.Contents\OrchardCore.ElsaWorkflows.Contents.csproj" />
       <ProjectReference Include="..\OrchardCore.ElsaWorkflows\OrchardCore.ElsaWorkflows.csproj" />
     </ItemGroup>
 

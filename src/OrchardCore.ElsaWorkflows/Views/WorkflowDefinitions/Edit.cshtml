@@ -16,6 +16,7 @@
 <link asp-src="~/OrchardCore.ElsaWorkflows/Elsa.Studio.Host.CustomElements.styles.css" rel="stylesheet"/>
 
 <elsa-workflow-definition-editor
+    id="workflow-definition-editor"
     remote-endpoint="@Url.ToAbsoluteUrl("~/elsa/api")"
     definition-id="@Model.DefinitionId"></elsa-workflow-definition-editor>
 <div id="blazor-error-ui">
@@ -48,6 +49,16 @@
                 
                 return defaultUri;
             }
+        }).then(() => {
+            const component = document.querySelector("elsa-workflow-definition-editor");
+
+            if (component) {
+                component.onClicked = () => {
+                    alert('Clicked');
+                };
+
+               
+            } 
         });
     });
 </script>

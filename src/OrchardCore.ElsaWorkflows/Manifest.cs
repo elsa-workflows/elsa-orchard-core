@@ -10,7 +10,7 @@ using OrchardCore.OpenId;
 
 [assembly: Feature(
     Id = "OrchardCore.ElsaWorkflows",
-    Name = "Elsa Workflows Core Services",
+    Name = "Core Services",
     Description = "Provides the foundational services for Elsa Workflows.",
     Category = "Elsa Workflows",
     Dependencies = [OpenIdConstants.Features.Core]

@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elsa.Workflows.Runtime;
 using OrchardCore.ContentManagement.Handlers;
-using OrchardCore.ElsaWorkflows.Content.Activities;
-using OrchardCore.ElsaWorkflows.Content.Stimuli;
+using OrchardCore.ElsaWorkflows.Contents.Activities;
+using OrchardCore.ElsaWorkflows.Contents.Stimuli;
 
-namespace OrchardCore.ElsaWorkflows.Content.Handlers;
+namespace OrchardCore.ElsaWorkflows.Contents.Handlers;
 
 public class ContentEventHandler(IStimulusSender stimulusSender) : ContentHandlerBase
 {

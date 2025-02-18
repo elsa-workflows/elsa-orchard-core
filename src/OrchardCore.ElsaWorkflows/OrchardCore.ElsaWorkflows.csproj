@@ -46,4 +46,8 @@
         <CopyToPublishDirectory>Never</CopyToPublishDirectory>
       </EmbeddedResource>
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\" />
+    </ItemGroup>
 </Project>

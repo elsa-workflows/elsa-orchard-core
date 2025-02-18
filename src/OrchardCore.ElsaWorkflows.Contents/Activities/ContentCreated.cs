@@ -8,10 +8,10 @@ using Elsa.Workflows.Attributes;
 using Elsa.Workflows.Models;
 using Elsa.Workflows.UIHints;
 using OrchardCore.ContentManagement;
-using OrchardCore.ElsaWorkflows.Content.Stimuli;
-using OrchardCore.ElsaWorkflows.Content.UIHints;
+using OrchardCore.ElsaWorkflows.Contents.Stimuli;
+using OrchardCore.ElsaWorkflows.Contents.UIHints;
 
-namespace OrchardCore.ElsaWorkflows.Content.Activities;
+namespace OrchardCore.ElsaWorkflows.Contents.Activities;
 
 [Activity("OrchardCore.Content", "Content", "Triggered when a content item is created.")]
 public class ContentCreated : Trigger<ContentItem>

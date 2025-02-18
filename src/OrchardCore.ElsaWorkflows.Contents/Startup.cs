@@ -3,11 +3,11 @@ using Elsa.Workflows;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Handlers;
-using OrchardCore.ElsaWorkflows.Content.Handlers;
-using OrchardCore.ElsaWorkflows.Content.UIHints;
+using OrchardCore.ElsaWorkflows.Contents.Handlers;
+using OrchardCore.ElsaWorkflows.Contents.UIHints;
 using OrchardCore.Modules;
 
-namespace OrchardCore.ElsaWorkflows.Content;
+namespace OrchardCore.ElsaWorkflows.Contents;
 
 public class Startup : StartupBase
 {

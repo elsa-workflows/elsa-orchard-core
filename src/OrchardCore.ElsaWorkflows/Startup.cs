@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Elsa.Extensions;
+using Elsa.Workflows.Activities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.StaticFiles;
@@ -29,6 +30,7 @@ public class Startup : StartupBase
     {
         services.AddElsa(elsa =>
         {
+            elsa.AddActivitiesFrom<Startup>();
             elsa.UseWorkflowManagement(workflowManagement =>
             {
                 workflowManagement.WithWorkflowDefinitionPublisher(sp => ActivatorUtilities.CreateInstance<ContentItemWorkflowDefinitionPublisher>(sp));

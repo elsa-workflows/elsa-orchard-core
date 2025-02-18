@@ -16,6 +16,7 @@
 <link asp-src="~/OrchardCore.ElsaWorkflows/Elsa.Studio.Host.CustomElements.styles.css" rel="stylesheet"/>
 
 <elsa-workflow-instance-viewer
+    id="workflow-instance-viewer"
     remote-endpoint="@Url.ToAbsoluteUrl("~/elsa/api")"
     instance-id="@Model.WorkflowInstance.Id"></elsa-workflow-instance-viewer>
 <div id="blazor-error-ui">
@@ -50,4 +51,8 @@
             }
         });
     });
+    
+    document.getElementById('workflow-instance-viewer').addEventListener('editworkflowdefinition', function (e) {
+        alert('Edit workflow definition: ' + e.detail);
+    })
 </script>
