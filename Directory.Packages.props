@@ -1,0 +1,28 @@
+<Project>
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+        <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageVersion Include="Elsa" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Workflows.Api" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Workflows.Core" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Workflows.Management" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Workflows.Runtime" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="OrchardCore.Admin.Abstractions" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Contents" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Infrastructure" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Module.Targets" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Application.Cms.Targets" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Logging.Serilog" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.ContentManagement" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.ContentTypes.Abstractions" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.DisplayManagement" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Navigation.Core" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.OpenId.Core" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.ResourceManagement" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="JetBrains.Annotations" Version="2024.3.0"/>
+        <PackageVersion Include="System.Linq.Dynamic.Core" Version="1.6.3"/>
+    </ItemGroup>
+</Project>

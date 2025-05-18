@@ -7,6 +7,8 @@ ProjectSection(SolutionItems) = preProject
 	README.md = README.md
 	NuGet.config = NuGet.config
 	.gitignore = .gitignore
+	Directory.Packages.props = Directory.Packages.props
+	Directory.Build.props = Directory.Build.props
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.ElsaWorkflows.Web", "src\OrchardCore.ElsaWorkflows.Web\OrchardCore.ElsaWorkflows.Web.csproj", "{1A1E1268-8752-46D3-838F-DE6E664274A2}"

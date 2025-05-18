@@ -3,7 +3,6 @@
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,17 +10,17 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="JetBrains.Annotations" Version="2024.3.0"/>
-        <PackageReference Include="OrchardCore.Contents" Version="3.0.0-preview-18507"/>
-        <PackageReference Include="OrchardCore.Module.Targets" Version="3.0.0-preview-18507"/>
-        <PackageReference Include="OrchardCore.ContentManagement" Version="3.0.0-preview-18507"/>
+        <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="OrchardCore.Contents"/>
+        <PackageReference Include="OrchardCore.Module.Targets"/>
+        <PackageReference Include="OrchardCore.ContentManagement"/>
     </ItemGroup>
 
     <ItemGroup Label="Elsa">
-        <PackageReference Include="Elsa.Workflows.Core" Version="3.4.0-preview.2649"/>
-        <PackageReference Include="Elsa.Workflows.Management" Version="3.4.0-preview.2649"/>
-        <PackageReference Include="Elsa.Workflows.Runtime" Version="3.4.0-preview.2649"/>
-        <PackageReference Include="Elsa" Version="3.4.0-preview.2649"/>
+        <PackageReference Include="Elsa.Workflows.Core"/>
+        <PackageReference Include="Elsa.Workflows.Management"/>
+        <PackageReference Include="Elsa.Workflows.Runtime"/>
+        <PackageReference Include="Elsa"/>
     </ItemGroup>
 
     <!--    <ItemGroup Label="Elsa">-->

@@ -18,7 +18,7 @@ namespace OrchardCore.ElsaWorkflows.Stores;
 public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStore
 {
     private const string Collection = ElsaCollections.WorkflowInstances;
-    
+
     public async ValueTask<WorkflowInstance?> FindAsync(WorkflowInstanceFilter filter, CancellationToken cancellationToken = default)
     {
         return await Query(filter).FirstOrDefaultAsync();
@@ -83,7 +83,7 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
 
         return Page.Of(instanceIds, count);
     }
-    
+
     public async ValueTask<Page<WorkflowInstanceSummary>> SummarizeManyAsync(WorkflowInstanceFilter filter, PageArgs pageArgs, CancellationToken cancellationToken = default)
     {
         var query = QueryIndex(filter, pageArgs);
@@ -138,9 +138,9 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
 
     public async ValueTask SaveManyAsync(IEnumerable<WorkflowInstance> instances, CancellationToken cancellationToken = default)
     {
-        foreach (var instance in instances) 
+        foreach (var instance in instances)
             await session.SaveAsync(instance, Collection);
-        
+
         await session.SaveChangesAsync();
     }
 
@@ -149,24 +149,34 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
         var pageArgs = PageArgs.FromRange(0, 100);
         var order = new WorkflowInstanceOrder<string>(x => x.Id, OrderDirection.Ascending);
         var count = 0;
-        
+
         while (true)
         {
             var query = Query(filter, order, pageArgs);
             var records = await query.ListAsync().ToList();
             count += records.Count;
-            
+
             if (records.Count == 0)
                 break;
 
-            foreach (var record in records) 
+            foreach (var record in records)
                 session.Delete(record, Collection);
-            
+
             pageArgs = pageArgs.Next();
         }
-        
+
         await session.SaveChangesAsync();
         return count;
+    }
+
+    public async Task UpdateUpdatedTimestampAsync(string workflowInstanceId, DateTimeOffset value, CancellationToken cancellationToken = new CancellationToken())
+    {
+        var instance = await session.Query<WorkflowInstance, WorkflowInstanceIndex>(Collection).Where(x => x.InstanceId == workflowInstanceId).FirstOrDefaultAsync();
+        if (instance == null)
+            return;
+        instance.UpdatedAt = value;
+        await session.SaveAsync(instance, Collection);
+        await session.SaveChangesAsync();
     }
 
     private IQuery<WorkflowInstance, WorkflowInstanceIndex> Query(WorkflowInstanceFilter filter, PageArgs? pageArgs = null)
