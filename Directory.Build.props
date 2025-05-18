@@ -38,6 +38,6 @@
     </PropertyGroup>
     <PropertyGroup>
         <ElsaVersion>3.6.0-preview.2950</ElsaVersion>
-        <OrchardVersion>3.0.0-preview-18507</OrchardVersion>
+        <OrchardVersion>3.0.0-preview-18611</OrchardVersion>
     </PropertyGroup>
 </Project>
