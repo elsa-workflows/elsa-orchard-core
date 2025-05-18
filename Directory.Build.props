@@ -12,7 +12,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
 
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageIcon>..\..\icon.png</PackageIcon>
+        <PackageIcon>icon.png</PackageIcon>
 
         <!-- For NuGet browsers that currently don't support <PackageIcon> yet -->
         <PackageIconUrl>https://github.com/elsa-workflows/elsa-orchard-core/blob/main/icon.png</PackageIconUrl>
@@ -36,6 +36,9 @@
         <!-- IL trimming warnings -->
         <NoWarn>$(NoWarn);IL2026;IL2046;IL2057;IL2067;IL2070;IL2072;IL2075;IL2087;IL2091</NoWarn>
     </PropertyGroup>
+    <ItemGroup Label="Files">
+        <None Include="..\..\icon.png" Pack="true" PackagePath="\"/>
+    </ItemGroup>
     <PropertyGroup>
         <ElsaVersion>3.6.0-preview.2950</ElsaVersion>
         <OrchardVersion>3.0.0-preview-18611</OrchardVersion>
