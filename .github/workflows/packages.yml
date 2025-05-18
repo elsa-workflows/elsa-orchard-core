@@ -1,0 +1,109 @@
+name: Elsa Studio 3 Packages
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+  release:
+    types: [ prereleased, published ]
+env:
+  base_version: '3.6.0'
+  nuget_feed_feedzio: 'https://f.feedz.io/elsa-workflows/elsa-3/nuget/index.json'
+  nuget_feed_nuget: 'https://api.nuget.org/v3/index.json'
+
+jobs:
+  build:
+    name: Build packages
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Extract branch name
+        run: |
+          BRANCH_NAME=${{ github.ref }} # e.g., refs/heads/main
+          BRANCH_NAME=${BRANCH_NAME#refs/heads/} # remove the refs/heads/ prefix
+          # Extract the last part after the last slash of the branch name, if any, e.g., feature/issue-123 -> issue-123 and use it as the version prefix.
+          PACKAGE_PREFIX=$(echo $BRANCH_NAME | rev | cut -d/ -f1 | rev | tr '_' '-')
+
+          # If the branch name is main, use the preview version. Otherwise, use the branch name as the version prefix.
+          if [[ "${BRANCH_NAME}" == "main" || "${BRANCH_NAME}" =~ ^rc/ || "${BRANCH_NAME}" =~ ^develop/ ]]; then
+              PACKAGE_PREFIX="preview"
+          fi
+
+          echo "Ref: ${{ github.ref }}"
+          echo "Branch name: ${BRANCH_NAME}"
+          echo "Package prefix: ${PACKAGE_PREFIX}"
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
+          echo "PACKAGE_PREFIX=${PACKAGE_PREFIX}" >> $GITHUB_ENV
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Verify commit exists in remote branch
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* && "${{ github.event_name }}" == "release" && ("${{ github.event.action }}" == "published" || "${{ github.event.action }}" == "prereleased") ]]; then
+            git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+            git branch --remote --contains | grep origin/main
+          else
+            git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+            git branch --remote --contains | grep origin/${BRANCH_NAME}
+          fi
+      - name: Set VERSION variable
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* && "${{ github.event_name }}" == "release" && ("${{ github.event.action }}" == "published" || "${{ github.event.action }}" == "prereleased") ]]; then
+            TAG_NAME=${{ github.ref }} # e.g., refs/tags/3.0.0
+            TAG_NAME=${TAG_NAME#refs/tags/} # remove the refs/tags/ prefix
+            echo "VERSION=${TAG_NAME}" >> $GITHUB_ENV
+          else
+            echo "VERSION=${{env.base_version}}-${PACKAGE_PREFIX}.${{github.run_number}}" >> $GITHUB_ENV
+          fi
+      - name: Build workflow designer client assets
+        working-directory: ./src/OrchardCore.ElsaWorkflows/ClientLib
+        run: |
+          npm install --force
+          npm run build
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.x
+      - name: Build nuget packages
+        run: dotnet build Elsa.OrchardCore.sln --configuration Release /p:Version=${VERSION}
+      - name: Test
+        run: dotnet test Elsa.OrchardCore.sln --configuration Release /p:Version=${VERSION} --no-build
+      - name: Pack nuget packages
+        run: dotnet pack Elsa.OrchardCore.sln --configuration Release /p:Version=${VERSION} /p:PackageOutputPath=$(pwd)/packages/nuget
+      
+      # Upload nuget packages
+      - name: Upload nuget packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: elsa-studio-nuget-packages
+          path: ./packages/nuget/*nupkg
+      
+  publish_nuget_preview_feedzio:
+    name: Publish nuget packages to feedz.io
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: ${{ github.event_name == 'release' || github.event_name == 'push'}}
+    steps:
+      - name: Download Packages
+        uses: actions/download-artifact@v4
+        with:
+          name: elsa-orchardcore-nuget-packages
+          path: elsa-orchardcore-nuget-packages
+
+      - name: Publish to feedz.io
+        run: dotnet nuget push ./elsa-orchardcore-nuget-packages/*.nupkg -k ${{ secrets.FEEDZ_API_KEY }} -s ${{ env.nuget_feed_feedzio }} --skip-duplicate
+
+  publish_nuget_nuget:
+    name: Publish to nuget.org
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: ${{ github.event_name == 'release' && github.event.action == 'published' }}
+    steps:
+      - name: Download Packages
+        uses: actions/download-artifact@v4
+        with:
+          name: elsa-orchardcore-nuget-packages
+          path: elsa-orchardcore-nuget-packages
+
+      - name: Publish to nuget.org
+        run: dotnet nuget push ./elsa-orchardcore-nuget-packages/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s ${{ env.nuget_feed_nuget }} --skip-duplicate
