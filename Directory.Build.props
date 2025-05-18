@@ -12,10 +12,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
 
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageIcon>logo.png</PackageIcon>
+        <PackageIcon>..\..\icon.png</PackageIcon>
 
         <!-- For NuGet browsers that currently don't support <PackageIcon> yet -->
-        <PackageIconUrl>https://github.com/elsa-workflows/elsa-orchard-core/blob/main/logo.png</PackageIconUrl>
+        <PackageIconUrl>https://github.com/elsa-workflows/elsa-orchard-core/blob/main/icon.png</PackageIconUrl>
 
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <AnalysisModeDocumentation>Default</AnalysisModeDocumentation>
