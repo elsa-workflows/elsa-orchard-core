@@ -73,7 +73,7 @@ jobs:
       - name: Upload nuget packages
         uses: actions/upload-artifact@v4
         with:
-          name: elsa-studio-nuget-packages
+          name: elsa-orchardcore-nuget-packages
           path: ./packages/nuget/*nupkg
       
   publish_nuget_preview_feedzio:
