@@ -9,7 +9,6 @@
         <PackageVersion Include="Elsa.Workflows.Core" Version="$(ElsaVersion)"/>
         <PackageVersion Include="Elsa.Workflows.Management" Version="$(ElsaVersion)"/>
         <PackageVersion Include="Elsa.Workflows.Runtime" Version="$(ElsaVersion)"/>
-        <PackageVersion Include="Elsa" Version="$(ElsaVersion)"/>
         <PackageVersion Include="OrchardCore.Admin.Abstractions" Version="$(OrchardVersion)"/>
         <PackageVersion Include="OrchardCore.Contents" Version="$(OrchardVersion)"/>
         <PackageVersion Include="OrchardCore.Infrastructure" Version="$(OrchardVersion)"/>
