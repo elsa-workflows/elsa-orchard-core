@@ -19,10 +19,10 @@
 <link asp-src="~/_content/Elsa.Studio.Shell/css/shell.css" rel="stylesheet" />
 
 <!-- Blazor WASM component -->
-<component type="typeof(WorkflowInstanceViewerWrapper)"
+<component type="typeof(WorkflowEditorOrInstanceWrapper)"
            render-mode="WebAssembly"
            param-RemoteEndpoint="@Url.ToAbsoluteUrl("~/elsa/api")"
-           param-InstanceId="@Model.WorkflowInstance.Id" />
+           param-WorkflowInstanceId="@Model.WorkflowInstance.Id" />
 
 <!-- Error UI -->
 <div id="blazor-error-ui">

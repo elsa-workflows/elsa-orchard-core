@@ -2,9 +2,11 @@
 @using Elsa.Api.Client.Resources.WorkflowDefinitions.Models
 @inherits BackendComponentBase
 
+@inject IJSRuntime JS
+
 <ThemedComponentWrapper>
     <WorkflowDefinitionEditor DefinitionId="@DefinitionId"
-                              WorkflowDefinitionExecuted="WorkflowDefinitionExecuted"
+                              WorkflowDefinitionExecuted="OnWorkflowDefinitionExecuted"
                               WorkflowDefinitionVersionSelected="WorkflowDefinitionVersionSelected"
                               ActivitySelected="ActivitySelected"/>
 </ThemedComponentWrapper>
@@ -50,5 +52,12 @@
         if (!_shouldRender) return false;
         _shouldRender = false;
         return true;
+    }
+
+    private async Task OnWorkflowDefinitionExecuted(string workflowInstanceId)
+    {
+        // Call the .NET event if set
+        if (WorkflowDefinitionExecuted != null)
+            await WorkflowDefinitionExecuted(workflowInstanceId);
     }
 }

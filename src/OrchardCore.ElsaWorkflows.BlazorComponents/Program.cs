@@ -5,6 +5,8 @@ using Elsa.Studio.Core.BlazorWasm.Extensions;
 using Elsa.Studio.Extensions;
 using Elsa.Studio.Localization.Time;
 using Elsa.Studio.Localization.Time.Providers;
+using Elsa.Studio.Login.BlazorWasm.Extensions;
+using Elsa.Studio.Login.Extensions;
 using Elsa.Studio.Models;
 using Elsa.Studio.Workflows.Designer.Extensions;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -27,6 +29,7 @@ var backendApiConfig = new BackendApiConfig
 builder.Services.AddCore();
 builder.Services.AddShell();
 builder.Services.AddRemoteBackend(backendApiConfig);
+builder.Services.AddScoped<IAuthenticationProviderManager, NoopAuthenticationProviderManager>();
 builder.Services.Replace(ServiceDescriptor.Scoped<IRemoteBackendAccessor, ComponentRemoteBackendAccessor>());
 builder.Services.AddWorkflowsModule();
 builder.Services.AddScoped<ITimeZoneProvider, LocalTimeZoneProvider>();
@@ -36,3 +39,11 @@ var app = builder.Build();
 var startupTask = app.Services.GetServices<IStartupTask>();
 foreach (var task in startupTask) await task.ExecuteAsync();
 await app.RunAsync();
+
+public class NoopAuthenticationProviderManager : IAuthenticationProviderManager
+{
+    public Task<string?> GetAuthenticationTokenAsync(string? tokenName, CancellationToken cancellationToken = new CancellationToken())
+    {
+        throw new NotImplementedException();
+    }
+}

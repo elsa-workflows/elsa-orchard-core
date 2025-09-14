@@ -1,0 +1,49 @@
+@inherits BackendComponentBase
+
+@code {
+    [Parameter] public string? DefinitionId { get; set; }
+    [Parameter] public string? WorkflowInstanceId { get; set; }
+
+    private string? _definitionId;
+    private string? _workflowInstanceId;
+
+    protected override void OnParametersSet()
+    {
+        // If WorkflowInstanceId is set, show instance viewer; otherwise, show editor.
+        if (!string.IsNullOrWhiteSpace(WorkflowInstanceId))
+        {
+            _workflowInstanceId = WorkflowInstanceId;
+            _definitionId = null;
+        }
+        else
+        {
+            _workflowInstanceId = null;
+            _definitionId = DefinitionId;
+        }
+    }
+
+    private Task HandleWorkflowDefinitionExecuted(string workflowInstanceId)
+    {
+        _workflowInstanceId = workflowInstanceId;
+        _definitionId = null;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    private Task HandleEditWorkflowDefinition(string definitionId)
+    {
+        _definitionId = definitionId;
+        _workflowInstanceId = null;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+}
+
+@if (_workflowInstanceId == null)
+{
+    <WorkflowDefinitionEditorWrapper DefinitionId="@_definitionId" RemoteEndpoint="@RemoteEndpoint" WorkflowDefinitionExecuted="HandleWorkflowDefinitionExecuted" />
+}
+else
+{
+    <WorkflowInstanceViewerWrapper InstanceId="@_workflowInstanceId" RemoteEndpoint="@RemoteEndpoint" EditWorkflowDefinition="HandleEditWorkflowDefinition" />
+}
