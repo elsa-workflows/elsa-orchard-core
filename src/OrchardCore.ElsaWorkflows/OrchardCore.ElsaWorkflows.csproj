@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server"/>
         <PackageReference Include="OrchardCore.Admin.Abstractions"/>
         <PackageReference Include="OrchardCore.Contents"/>
         <PackageReference Include="OrchardCore.Infrastructure"/>
@@ -27,7 +28,13 @@
 
     <ItemGroup Label="Elsa">
         <PackageReference Include="Elsa"/>
+        <PackageReference Include="Elsa.Expressions.JavaScript"/>
+        <PackageReference Include="Elsa.Expressions.Liquid"/>
         <PackageReference Include="Elsa.Workflows.Api"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\OrchardCore.ElsaWorkflows.BlazorComponents\OrchardCore.ElsaWorkflows.BlazorComponents.csproj" />
     </ItemGroup>
 
     <!--    <ItemGroup Label="Elsa">-->
@@ -35,19 +42,4 @@
     <!--      <ProjectReference Include="..\..\..\..\elsa-core\main\src\modules\Elsa\Elsa.csproj" />-->
     <!--    </ItemGroup>-->
 
-    <ItemGroup>
-        <EmbeddedResource Update="ClientApp\package.json">
-            <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-        </EmbeddedResource>
-        <EmbeddedResource Update="ClientApp\package-lock.json">
-            <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-        </EmbeddedResource>
-        <EmbeddedResource Update="ClientApp\tsconfig.json">
-            <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-        </EmbeddedResource>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="wwwroot\"/>
-    </ItemGroup>
 </Project>

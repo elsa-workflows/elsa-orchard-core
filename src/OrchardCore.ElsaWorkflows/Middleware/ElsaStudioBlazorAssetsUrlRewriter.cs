@@ -20,11 +20,21 @@ public class ElsaStudioBlazorAssetsUrlRewriter(RequestDelegate next)
             if (index >= 0)
             {
                 var resourcePath = path.Substring(index); // e.g. "/_content/Elsa.Studio.DomInterop/dom.entry.js"
-                var newPath = "/OrchardCore.ElsaWorkflows" + resourcePath;
+                var newPath = resourcePath;
                 context.Request.Path = newPath;
 
                 // Optionally clear the query string if you don't want it carried forward.
                 context.Request.QueryString = QueryString.Empty;
+            }
+        }
+        else if (path.Contains("OrchardCore.ElsaWorkflows", StringComparison.OrdinalIgnoreCase))
+        {
+            var index = path.IndexOf("/_content/", StringComparison.OrdinalIgnoreCase);
+            if (index >= 0)
+            {
+                // Strip off the /OrchardCore.ElsaWorkflows prefix.
+                var newPath = path.Substring("/OrchardCore.ElsaWorkflows".Length);
+                context.Request.Path = newPath;
             }
         }
         else
@@ -38,7 +48,7 @@ public class ElsaStudioBlazorAssetsUrlRewriter(RequestDelegate next)
                 if (index >= 0)
                 {
                     var resourcePath = returnUrl.Substring(index); // e.g. "/_content/Microsoft.AspNetCore.Components.CustomElements/..."
-                    var newPath = "/OrchardCore.ElsaWorkflows" + resourcePath;
+                    var newPath = resourcePath;
                     context.Request.Path = newPath;
 
                     // Remove the query string so the static file middleware sees a clean path.
@@ -53,7 +63,7 @@ public class ElsaStudioBlazorAssetsUrlRewriter(RequestDelegate next)
 
 public static class ElsaStudioBlazorAssetsUrlRewriterExtensions
 {
-    public static IApplicationBuilder UseElsaStudioBlazorAssetsUrlRewriter(this IApplicationBuilder builder)
+    public static IApplicationBuilder RewriteElsaStudioWebAssemblyAssets(this IApplicationBuilder builder)
     {
         return builder.UseMiddleware<ElsaStudioBlazorAssetsUrlRewriter>();
     }

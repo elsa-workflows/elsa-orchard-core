@@ -1,11 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Elsa.Common.Models;
 using Elsa.Workflows.Runtime;
 using Elsa.Workflows.Runtime.Entities;
 using Elsa.Workflows.Runtime.Filters;
+using Elsa.Workflows.Runtime.OrderDefinitions;
 using Open.Linq.AsyncExtensions;
 using OrchardCore.ElsaWorkflows.Extensions;
 using OrchardCore.ElsaWorkflows.Indexes;
@@ -20,7 +17,7 @@ public class ElsaTriggerStore(ISession session) : ITriggerStore
     public async ValueTask SaveAsync(StoredTrigger record, CancellationToken cancellationToken = default)
     {
         await session.SaveAsync(record, Collection);
-        await session.SaveChangesAsync();
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask SaveManyAsync(IEnumerable<StoredTrigger> records, CancellationToken cancellationToken = default)
@@ -28,17 +25,27 @@ public class ElsaTriggerStore(ISession session) : ITriggerStore
         foreach (var record in records) 
             await session.SaveAsync(record, Collection);
         
-        await session.SaveChangesAsync();
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask<StoredTrigger?> FindAsync(TriggerFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).FirstOrDefaultAsync();
+        return await Query(filter).FirstOrDefaultAsync(cancellationToken);
     }
 
     public async ValueTask<IEnumerable<StoredTrigger>> FindManyAsync(TriggerFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).ListAsync();
+        return await Query(filter).ListAsync(cancellationToken);
+    }
+
+    public ValueTask<Page<StoredTrigger>> FindManyAsync(TriggerFilter filter, PageArgs pageArgs, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<Page<StoredTrigger>> FindManyAsync<TProp>(TriggerFilter filter, PageArgs pageArgs, StoredTriggerOrder<TProp> order, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
     }
 
     public async ValueTask ReplaceAsync(IEnumerable<StoredTrigger> removed, IEnumerable<StoredTrigger> added, CancellationToken cancellationToken = default)
@@ -62,7 +69,7 @@ public class ElsaTriggerStore(ISession session) : ITriggerStore
         while (true)
         {
             var query = Query(filter).OrderBy(x => x.Id).Skip(pageArgs.Offset!.Value).Take(pageArgs.Limit!.Value);
-            var records = await query.ListAsync().ToList();
+            var records = await query.ListAsync(cancellationToken).ToList();
             count += records.Count;
             
             if (records.Count == 0)

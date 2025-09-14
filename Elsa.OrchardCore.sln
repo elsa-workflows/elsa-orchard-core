@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C40CA786
 		.github\workflows\packages.yml = .github\workflows\packages.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.ElsaWorkflows.BlazorComponents", "src\OrchardCore.ElsaWorkflows.BlazorComponents\OrchardCore.ElsaWorkflows.BlazorComponents.csproj", "{90CE1A9E-D2FA-4954-82C0-61B0BF82D627}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,10 +42,15 @@ Global
 		{1153B6DD-8006-47F8-A9BB-E41665102095}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1153B6DD-8006-47F8-A9BB-E41665102095}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1153B6DD-8006-47F8-A9BB-E41665102095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90CE1A9E-D2FA-4954-82C0-61B0BF82D627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90CE1A9E-D2FA-4954-82C0-61B0BF82D627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90CE1A9E-D2FA-4954-82C0-61B0BF82D627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90CE1A9E-D2FA-4954-82C0-61B0BF82D627}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1A1E1268-8752-46D3-838F-DE6E664274A2} = {9AD6C839-C8CC-4D31-BC86-99B25CEEDC4F}
 		{5F5FEB49-12AC-448C-82F0-197A77002BAE} = {9AD6C839-C8CC-4D31-BC86-99B25CEEDC4F}
 		{1153B6DD-8006-47F8-A9BB-E41665102095} = {9AD6C839-C8CC-4D31-BC86-99B25CEEDC4F}
+		{90CE1A9E-D2FA-4954-82C0-61B0BF82D627} = {9AD6C839-C8CC-4D31-BC86-99B25CEEDC4F}
 	EndGlobalSection
 EndGlobal

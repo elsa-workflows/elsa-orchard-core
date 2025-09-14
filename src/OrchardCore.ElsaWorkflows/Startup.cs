@@ -1,7 +1,4 @@
-using System;
-using System.Threading.Tasks;
 using Elsa.Extensions;
-using Elsa.Workflows.Activities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.StaticFiles;
@@ -33,7 +30,7 @@ public class Startup : StartupBase
             elsa.AddActivitiesFrom<Startup>();
             elsa.UseWorkflowManagement(workflowManagement =>
             {
-                workflowManagement.WithWorkflowDefinitionPublisher(sp => ActivatorUtilities.CreateInstance<ContentItemWorkflowDefinitionPublisher>(sp));
+                workflowManagement.UseWorkflowDefinitionPublisher(sp => ActivatorUtilities.CreateInstance<ContentItemWorkflowDefinitionPublisher>(sp));
                 workflowManagement.UseWorkflowDefinitions(workflowDefinitions => workflowDefinitions.WorkflowDefinitionStore = sp => ActivatorUtilities.CreateInstance<ElsaWorkflowDefinitionStore>(sp));
                 workflowManagement.UseWorkflowInstances(workflowInstances => workflowInstances.WorkflowInstanceStore = sp => ActivatorUtilities.CreateInstance<ElsaWorkflowInstanceStore>(sp));
             });
@@ -77,25 +74,26 @@ public class Startup : StartupBase
             .AddIndexProvider<StoredBookmarkIndexProvider>()
             .AddIndexProvider<WorkflowExecutionLogRecordIndexProvider>()
             .AddIndexProvider<ActivityExecutionRecordIndexProvider>()
-            .Configure<StaticFileOptions>(ConfigureStaticFileOptions);
+            ;
+        
+        services.Configure<StaticFileOptions>(options =>
+        {
+            var provider = options.ContentTypeProvider as FileExtensionContentTypeProvider
+                           ?? new FileExtensionContentTypeProvider();
+
+            provider.Mappings[".pdb"]  = "application/octet-stream";
+            provider.Mappings[".wasm"] = "application/wasm";
+            provider.Mappings[".dat"]  = "application/octet-stream"; // you already had this
+
+            options.ContentTypeProvider = provider;
+        });
     }
 
     public override ValueTask ConfigureAsync(IApplicationBuilder app, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
     {
+        app.UseBlazorFrameworkFiles();
         routes.MapWorkflowsApi();
+        
         return ValueTask.CompletedTask;
-    }
-
-    private void ConfigureStaticFileOptions(StaticFileOptions options)
-    {
-        var provider = new FileExtensionContentTypeProvider
-        {
-            Mappings =
-            {
-                // Add custom MIME type mappings for WASM
-                [".dat"] = "application/octet-stream" // Adjust the MIME type as needed
-            }
-        };
-        options.ContentTypeProvider = provider;
     }
 }

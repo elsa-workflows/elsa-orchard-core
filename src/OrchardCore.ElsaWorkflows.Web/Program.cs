@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using OrchardCore.ElsaWorkflows.Extensions;
 using OrchardCore.ElsaWorkflows.Middleware;
 using Serilog;
 
@@ -15,6 +13,8 @@ builder.Host.UseSerilog((context, logger) =>
 builder.Services
     .AddOrchardCms();
 
+builder.Services.ConfigureWebAssemblyStaticFiles();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -22,8 +22,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
 }
 
-// Insert this BEFORE UseStaticFiles or Orchard's static file pipeline to allow rewriting of wasm asset requests.
-app.UseElsaStudioBlazorAssetsUrlRewriter();
+app.RewriteElsaStudioWebAssemblyAssets();
 app.UseStaticFiles();
 app.UseOrchardCore();
 

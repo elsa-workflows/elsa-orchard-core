@@ -1,13 +1,14 @@
-﻿using System.Threading.Tasks;
-using Elsa.Extensions;
+﻿using Elsa.Extensions;
 using Elsa.Workflows;
 using Elsa.Workflows.Attributes;
 using Elsa.Workflows.Models;
+using JetBrains.Annotations;
 using OrchardCore.DisplayManagement.Notify;
 
 namespace OrchardCore.ElsaWorkflows.Activities;
 
 [Activity("OrchardCore.UI", "UI", "Displays a notification.")]
+[UsedImplicitly]
 public class DisplayNotification : CodeActivity
 {
     [Input(Description = "The notification type to display.")]
