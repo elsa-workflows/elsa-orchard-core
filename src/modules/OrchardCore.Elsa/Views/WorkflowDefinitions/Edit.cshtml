@@ -19,9 +19,6 @@
 <link asp-src="/_content/Elsa.Studio.Shell/css/shell.css" rel="stylesheet"/>
 
 <!-- Blazor WASM component -->
-<div>
-    @Url.ToAbsoluteUrl("~/elsa/api")
-</div>
 <component type="typeof(WorkflowEditorOrInstanceWrapper)"
            render-mode="WebAssembly"
            param-RemoteEndpoint="@Url.ToAbsoluteUrl("~/elsa/api")"
