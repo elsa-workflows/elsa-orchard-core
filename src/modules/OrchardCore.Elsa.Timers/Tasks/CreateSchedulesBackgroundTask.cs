@@ -3,7 +3,7 @@ using Elsa.Workflows.Runtime;
 using Elsa.Workflows.Runtime.Filters;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
-using OrchardCore.BackgroundTasks;
+using OrchardCore.Modules;
 
 namespace OrchardCore.Elsa.Timers.Tasks;
 
@@ -11,9 +11,9 @@ namespace OrchardCore.Elsa.Timers.Tasks;
 /// Creates new schedules when using the default scheduler (which doesn't have its own persistence layer like Quartz or Hangfire).
 /// </summary>
 [UsedImplicitly]
-public class CreateSchedulesBackgroundTask : IBackgroundTask
+public class CreateSchedulesBackgroundTask(IServiceScopeFactory scopeFactory) : ModularTenantEvents
 {
-    public async Task DoWorkAsync(IServiceProvider serviceProvider, CancellationToken cancellationToken)
+    public override async Task ActivatingAsync()
     {
         var stimulusNames = new[]
         {
@@ -27,14 +27,16 @@ public class CreateSchedulesBackgroundTask : IBackgroundTask
         {
             Names = stimulusNames
         };
-
+        
+        using var scope = scopeFactory.CreateScope();
+        var serviceProvider = scope.ServiceProvider;
         var triggerStore = serviceProvider.GetRequiredService<ITriggerStore>();
         var bookmarkStore = serviceProvider.GetRequiredService<IBookmarkStore>();
-        var triggers = (await triggerStore.FindManyAsync(triggerFilter, cancellationToken)).ToList();
-        var bookmarks = (await bookmarkStore.FindManyAsync(bookmarkFilter, cancellationToken)).ToList();
+        var triggers = (await triggerStore.FindManyAsync(triggerFilter)).ToList();
+        var bookmarks = (await bookmarkStore.FindManyAsync(bookmarkFilter)).ToList();
         var triggerScheduler = serviceProvider.GetRequiredService<ITriggerScheduler>();
         var bookmarkScheduler = serviceProvider.GetRequiredService<IBookmarkScheduler>();
-        await triggerScheduler.ScheduleAsync(triggers, cancellationToken);
-        await bookmarkScheduler.ScheduleAsync(bookmarks, cancellationToken);
+        await triggerScheduler.ScheduleAsync(triggers);
+        await bookmarkScheduler.ScheduleAsync(bookmarks);
     }
 }

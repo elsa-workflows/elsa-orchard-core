@@ -32,21 +32,21 @@ public class ElsaWorkflowDefinitionStore(
 
     public async Task<WorkflowDefinition?> FindAsync(WorkflowDefinitionFilter filter, CancellationToken cancellationToken = default)
     {
-        var part = await Query(filter).FirstOrDefaultAsync();
+        var part = await Query(filter).FirstOrDefaultAsync(cancellationToken);
         return Map(part);
     }
 
     public async Task<WorkflowDefinition?> FindAsync<TOrderBy>(WorkflowDefinitionFilter filter, WorkflowDefinitionOrder<TOrderBy> order, CancellationToken cancellationToken = default)
     {
-        var part = await Query(filter, order).FirstOrDefaultAsync();
+        var part = await Query(filter, order).FirstOrDefaultAsync(cancellationToken);
         return Map(part);
     }
 
     public async Task<Page<WorkflowDefinition>> FindManyAsync(WorkflowDefinitionFilter filter, PageArgs pageArgs, CancellationToken cancellationToken = default)
     {
         var query = Query(filter, pageArgs);
-        var count = await query.CountAsync();
-        var parts = await query.ListAsync();
+        var count = await query.CountAsync(cancellationToken);
+        var parts = await query.ListAsync(cancellationToken);
         var definitions = Map(parts).ToList();
 
         return Page.Of(definitions, count);
@@ -55,8 +55,8 @@ public class ElsaWorkflowDefinitionStore(
     public async Task<Page<WorkflowDefinition>> FindManyAsync<TOrderBy>(WorkflowDefinitionFilter filter, WorkflowDefinitionOrder<TOrderBy> order, PageArgs pageArgs, CancellationToken cancellationToken = default)
     {
         var query = Query(filter, order, pageArgs);
-        var count = await query.CountAsync();
-        var parts = await query.ListAsync();
+        var count = await query.CountAsync(cancellationToken);
+        var parts = await query.ListAsync(cancellationToken);
         var definitions = Map(parts).ToList();
 
         return Page.Of(definitions, count);
@@ -65,22 +65,22 @@ public class ElsaWorkflowDefinitionStore(
     public async Task<IEnumerable<WorkflowDefinition>> FindManyAsync(WorkflowDefinitionFilter filter, CancellationToken cancellationToken = default)
     {
         var query = Query(filter);
-        var parts = await query.ListAsync();
+        var parts = await query.ListAsync(cancellationToken);
         return Map(parts);
     }
 
     public async Task<IEnumerable<WorkflowDefinition>> FindManyAsync<TOrderBy>(WorkflowDefinitionFilter filter, WorkflowDefinitionOrder<TOrderBy> order, CancellationToken cancellationToken = default)
     {
         var query = Query(filter, order);
-        var parts = await query.ListAsync();
+        var parts = await query.ListAsync(cancellationToken);
         return Map(parts);
     }
 
     public async Task<Page<WorkflowDefinitionSummary>> FindSummariesAsync(WorkflowDefinitionFilter filter, PageArgs pageArgs, CancellationToken cancellationToken = default)
     {
         var query = Query(filter, pageArgs);
-        var count = await query.CountAsync();
-        var parts = await query.ListAsync();
+        var count = await query.CountAsync(cancellationToken);
+        var parts = await query.ListAsync(cancellationToken);
         var definitions = MapSummaries(parts).ToList();
 
         return Page.Of(definitions, count);
@@ -89,8 +89,8 @@ public class ElsaWorkflowDefinitionStore(
     public async Task<Page<WorkflowDefinitionSummary>> FindSummariesAsync<TOrderBy>(WorkflowDefinitionFilter filter, WorkflowDefinitionOrder<TOrderBy> order, PageArgs pageArgs, CancellationToken cancellationToken = default)
     {
         var query = Query(filter, order, pageArgs);
-        var count = await query.CountAsync();
-        var parts = await query.ListAsync();
+        var count = await query.CountAsync(cancellationToken);
+        var parts = await query.ListAsync(cancellationToken);
         var definitions = MapSummaries(parts).ToList();
 
         return Page.Of(definitions, count);
@@ -99,20 +99,20 @@ public class ElsaWorkflowDefinitionStore(
     public async Task<IEnumerable<WorkflowDefinitionSummary>> FindSummariesAsync(WorkflowDefinitionFilter filter, CancellationToken cancellationToken = default)
     {
         var query = Query(filter);
-        var parts = await query.ListAsync();
+        var parts = await query.ListAsync(cancellationToken);
         return MapSummaries(parts);
     }
 
     public async Task<IEnumerable<WorkflowDefinitionSummary>> FindSummariesAsync<TOrderBy>(WorkflowDefinitionFilter filter, WorkflowDefinitionOrder<TOrderBy> order, CancellationToken cancellationToken = default)
     {
         var query = Query(filter, order);
-        var parts = await query.ListAsync();
+        var parts = await query.ListAsync(cancellationToken);
         return MapSummaries(parts);
     }
 
     public async Task<WorkflowDefinition?> FindLastVersionAsync(WorkflowDefinitionFilter filter, CancellationToken cancellationToken)
     {
-        var part = await Query(filter).OrderByDescending(x => x.Version).FirstOrDefaultAsync();
+        var part = await Query(filter).OrderByDescending(x => x.Version).FirstOrDefaultAsync(cancellationToken);
         return Map(part);
     }
 
@@ -158,7 +158,7 @@ public class ElsaWorkflowDefinitionStore(
 
     public async Task<long> DeleteAsync(WorkflowDefinitionFilter filter, CancellationToken cancellationToken = default)
     {
-        var query = await Query(filter).ListAsync();
+        var query = await Query(filter).ListAsync(cancellationToken);
         var count = 0;
 
         foreach (var part in query)
@@ -172,12 +172,12 @@ public class ElsaWorkflowDefinitionStore(
 
     public async Task<bool> AnyAsync(WorkflowDefinitionFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).CountAsync() > 0;
+        return await Query(filter).CountAsync(cancellationToken) > 0;
     }
 
     public async Task<long> CountDistinctAsync(CancellationToken cancellationToken = default)
     {
-        return await session.Query<WorkflowDefinitionPart, WorkflowDefinitionIndex>(Collection).CountAsync();
+        return await session.Query<WorkflowDefinitionPart, WorkflowDefinitionIndex>(Collection).CountAsync(cancellationToken);
     }
 
     public async Task<bool> GetIsNameUnique(string name, string? definitionId = null, CancellationToken cancellationToken = default)
@@ -187,7 +187,7 @@ public class ElsaWorkflowDefinitionStore(
         if (definitionId != null)
             query = query.Where(x => x.DefinitionId != definitionId);
 
-        return await query.CountAsync() == 0;
+        return await query.CountAsync(cancellationToken) == 0;
     }
 
     private IQuery<ContentItem, WorkflowDefinitionIndex> Query(WorkflowDefinitionFilter filter, PageArgs? pageArgs = null)

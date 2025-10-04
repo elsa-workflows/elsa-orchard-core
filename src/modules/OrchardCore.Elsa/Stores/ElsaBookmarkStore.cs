@@ -16,7 +16,7 @@ public class ElsaBookmarkStore(ISession session) : IBookmarkStore
     public async ValueTask SaveAsync(StoredBookmark record, CancellationToken cancellationToken = default)
     {
         await session.SaveAsync(record, Collection);
-        await session.SaveChangesAsync();
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask SaveManyAsync(IEnumerable<StoredBookmark> records, CancellationToken cancellationToken)
@@ -24,17 +24,17 @@ public class ElsaBookmarkStore(ISession session) : IBookmarkStore
         foreach (var record in records) 
             await session.SaveAsync(record, Collection);
         
-        await session.SaveChangesAsync();
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask<StoredBookmark?> FindAsync(BookmarkFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).FirstOrDefaultAsync();
+        return await Query(filter).FirstOrDefaultAsync(cancellationToken);
     }
 
     public async ValueTask<IEnumerable<StoredBookmark>> FindManyAsync(BookmarkFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).ListAsync();
+        return await Query(filter).ListAsync(cancellationToken);
     }
 
     public async ValueTask<long> DeleteAsync(BookmarkFilter filter, CancellationToken cancellationToken = default)
@@ -45,7 +45,7 @@ public class ElsaBookmarkStore(ISession session) : IBookmarkStore
         while (true)
         {
             var query = Query(filter).OrderBy(x => x.Id).Skip(pageArgs.Offset!.Value).Take(pageArgs.Limit!.Value);
-            var records = await query.ListAsync().ToList();
+            var records = await query.ListAsync(cancellationToken).ToList();
             count += records.Count;
             
             if (records.Count == 0)
@@ -57,7 +57,7 @@ public class ElsaBookmarkStore(ISession session) : IBookmarkStore
             pageArgs = pageArgs.Next();
         }
         
-        await session.SaveChangesAsync();
+        await session.SaveChangesAsync(cancellationToken);
         return count;
     }
     

@@ -19,7 +19,7 @@ public class ElsaActivityExecutionRecordStore(ISession session) : IActivityExecu
         foreach (var record in records)
             await session.SaveAsync(record, Collection);
 
-        await session.FlushAsync();
+        await session.FlushAsync(cancellationToken);
     }
 
     public Task AddManyAsync(IEnumerable<ActivityExecutionRecord> records, CancellationToken cancellationToken = new CancellationToken())
@@ -30,41 +30,41 @@ public class ElsaActivityExecutionRecordStore(ISession session) : IActivityExecu
     public async Task SaveAsync(ActivityExecutionRecord record, CancellationToken cancellationToken = default)
     {
         await session.SaveAsync(record, Collection);
-        await session.FlushAsync();
+        await session.FlushAsync(cancellationToken);
     }
 
     public async Task<ActivityExecutionRecord?> FindAsync(ActivityExecutionRecordFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).FirstOrDefaultAsync();
+        return await Query(filter).FirstOrDefaultAsync(cancellationToken);
     }
 
     public async Task<IEnumerable<ActivityExecutionRecord>> FindManyAsync<TOrderBy>(ActivityExecutionRecordFilter filter, ActivityExecutionRecordOrder<TOrderBy> order, CancellationToken cancellationToken = default)
     {
-        return await Query(filter, order).ListAsync();
+        return await Query(filter, order).ListAsync(cancellationToken);
     }
 
     public async Task<IEnumerable<ActivityExecutionRecord>> FindManyAsync(ActivityExecutionRecordFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).ListAsync();
+        return await Query(filter).ListAsync(cancellationToken);
     }
 
     public async Task<IEnumerable<ActivityExecutionRecordSummary>> FindManySummariesAsync<TOrderBy>(ActivityExecutionRecordFilter filter, ActivityExecutionRecordOrder<TOrderBy> order, CancellationToken cancellationToken = default)
     {
         var query = QueryIndex(filter, order);
-        var indexes = await query.ListAsync().ToList();
+        var indexes = await query.ListAsync(cancellationToken).ToList();
         return MapSummaries(indexes).ToList();
     }
 
     public async Task<IEnumerable<ActivityExecutionRecordSummary>> FindManySummariesAsync(ActivityExecutionRecordFilter filter, CancellationToken cancellationToken = default)
     {
         var query = QueryIndex(filter);
-        var indexes = await query.ListAsync().ToList();
+        var indexes = await query.ListAsync(cancellationToken).ToList();
         return MapSummaries(indexes).ToList();
     }
 
     public async Task<long> CountAsync(ActivityExecutionRecordFilter filter, CancellationToken cancellationToken = default)
     {
-        return await QueryIndex(filter).CountAsync();
+        return await QueryIndex(filter).CountAsync(cancellationToken);
     }
 
     public async Task<long> DeleteManyAsync(ActivityExecutionRecordFilter filter, CancellationToken cancellationToken = default)
@@ -75,7 +75,7 @@ public class ElsaActivityExecutionRecordStore(ISession session) : IActivityExecu
         while (true)
         {
             var query = Query(filter).OrderBy(x => x.Id).Skip(pageArgs.Offset!.Value).Take(pageArgs.Limit!.Value);
-            var records = await query.ListAsync().ToList();
+            var records = await query.ListAsync(cancellationToken).ToList();
             count += records.Count;
             
             if (records.Count == 0)

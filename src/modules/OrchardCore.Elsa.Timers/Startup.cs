@@ -31,7 +31,7 @@ public class Startup : StartupBase
             .AddSingleton<IScheduler, LocalScheduler>()
             .AddSingleton<CronosCronParser>()
             .AddSingleton<ICronParser, CrontabCronParser>()
-            .AddSingleton<IBackgroundTask, CreateSchedulesBackgroundTask>()
+            .AddSingleton<IModularTenantEvents, CreateSchedulesBackgroundTask>()
             .AddScoped<ITriggerScheduler, DefaultTriggerScheduler>()
             .AddScoped<IBookmarkScheduler, DefaultBookmarkScheduler>()
             .AddScoped<DefaultWorkflowScheduler>()

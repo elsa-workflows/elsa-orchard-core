@@ -17,14 +17,14 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
 
     public async ValueTask<WorkflowInstance?> FindAsync(WorkflowInstanceFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).FirstOrDefaultAsync();
+        return await Query(filter).FirstOrDefaultAsync(cancellationToken);
     }
 
     public async ValueTask<Page<WorkflowInstance>> FindManyAsync(WorkflowInstanceFilter filter, PageArgs pageArgs, CancellationToken cancellationToken = default)
     {
         var query = Query(filter, pageArgs);
-        var count = await query.CountAsync();
-        var records = await query.ListAsync().ToList();
+        var count = await query.CountAsync(cancellationToken);
+        var records = await query.ListAsync(cancellationToken).ToList();
 
         return Page.Of(records, count);
     }
@@ -32,39 +32,39 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
     public async ValueTask<Page<WorkflowInstance>> FindManyAsync<TOrderBy>(WorkflowInstanceFilter filter, PageArgs pageArgs, WorkflowInstanceOrder<TOrderBy> order, CancellationToken cancellationToken = default)
     {
         var query = Query(filter, order, pageArgs);
-        var count = await query.CountAsync();
-        var records = await query.ListAsync().ToList();
+        var count = await query.CountAsync(cancellationToken);
+        var records = await query.ListAsync(cancellationToken).ToList();
 
         return Page.Of(records, count);
     }
 
     public async ValueTask<IEnumerable<WorkflowInstance>> FindManyAsync(WorkflowInstanceFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).ListAsync();
+        return await Query(filter).ListAsync(cancellationToken);
     }
 
     public async ValueTask<IEnumerable<WorkflowInstance>> FindManyAsync<TOrderBy>(WorkflowInstanceFilter filter, WorkflowInstanceOrder<TOrderBy> order, CancellationToken cancellationToken = default)
     {
-        return await Query(filter, order).ListAsync();
+        return await Query(filter, order).ListAsync(cancellationToken);
     }
 
     public async ValueTask<long> CountAsync(WorkflowInstanceFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).CountAsync();
+        return await Query(filter).CountAsync(cancellationToken);
     }
 
     public async ValueTask<IEnumerable<string>> FindManyIdsAsync(WorkflowInstanceFilter filter, CancellationToken cancellationToken = default)
     {
         var query = QueryIndex(filter);
-        var indexes = await query.ListAsync().ToList();
+        var indexes = await query.ListAsync(cancellationToken).ToList();
         return indexes.Select(x => x.InstanceId);
     }
 
     public async ValueTask<Page<string>> FindManyIdsAsync(WorkflowInstanceFilter filter, PageArgs pageArgs, CancellationToken cancellationToken = default)
     {
         var query = QueryIndex(filter, pageArgs);
-        var count = await query.CountAsync();
-        var indexes = await query.ListAsync().ToList();
+        var count = await query.CountAsync(cancellationToken);
+        var indexes = await query.ListAsync(cancellationToken).ToList();
         var instanceIds = indexes.Select(x => x.InstanceId).ToList();
 
         return Page.Of(instanceIds, count);
@@ -73,8 +73,8 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
     public async ValueTask<Page<string>> FindManyIdsAsync<TOrderBy>(WorkflowInstanceFilter filter, PageArgs pageArgs, WorkflowInstanceOrder<TOrderBy> order, CancellationToken cancellationToken = default)
     {
         var query = QueryIndex(filter, order, pageArgs);
-        var count = await query.CountAsync();
-        var indexes = await query.ListAsync().ToList();
+        var count = await query.CountAsync(cancellationToken);
+        var indexes = await query.ListAsync(cancellationToken).ToList();
         var instanceIds = indexes.Select(x => x.InstanceId).ToList();
 
         return Page.Of(instanceIds, count);
@@ -83,7 +83,7 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
     public async ValueTask<Page<WorkflowInstanceSummary>> SummarizeManyAsync(WorkflowInstanceFilter filter, PageArgs pageArgs, CancellationToken cancellationToken = default)
     {
         var query = QueryIndex(filter, pageArgs);
-        var count = await query.CountAsync();
+        var count = await query.CountAsync(cancellationToken);
         var indexes = await query.ListAsync().ToList();
         var summaries = MapSummaries(indexes).ToList();
 
@@ -93,8 +93,8 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
     public async ValueTask<Page<WorkflowInstanceSummary>> SummarizeManyAsync<TOrderBy>(WorkflowInstanceFilter filter, PageArgs pageArgs, WorkflowInstanceOrder<TOrderBy> order, CancellationToken cancellationToken = default)
     {
         var query = QueryIndex(filter, order, pageArgs);
-        var count = await query.CountAsync();
-        var indexes = await query.ListAsync().ToList();
+        var count = await query.CountAsync(cancellationToken);
+        var indexes = await query.ListAsync(cancellationToken).ToList();
         var summaries = MapSummaries(indexes).ToList();
 
         return Page.Of(summaries, count);
@@ -103,33 +103,33 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
     public async ValueTask<IEnumerable<WorkflowInstanceSummary>> SummarizeManyAsync(WorkflowInstanceFilter filter, CancellationToken cancellationToken = default)
     {
         var query = QueryIndex(filter);
-        var indexes = await query.ListAsync().ToList();
+        var indexes = await query.ListAsync(cancellationToken).ToList();
         return MapSummaries(indexes);
     }
 
     public async ValueTask<IEnumerable<WorkflowInstanceSummary>> SummarizeManyAsync<TOrder>(WorkflowInstanceFilter filter, WorkflowInstanceOrder<TOrder> order, CancellationToken cancellationToken = default)
     {
         var query = QueryIndex(filter, order);
-        var indexes = await query.ListAsync().ToList();
+        var indexes = await query.ListAsync(cancellationToken).ToList();
         return MapSummaries(indexes);
     }
 
     public async ValueTask SaveAsync(WorkflowInstance instance, CancellationToken cancellationToken = default)
     {
         await session.SaveAsync(instance, Collection);
-        await session.SaveChangesAsync();
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask AddAsync(WorkflowInstance instance, CancellationToken cancellationToken = default)
     {
         await session.SaveAsync(instance, Collection);
-        await session.SaveChangesAsync();
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask UpdateAsync(WorkflowInstance instance, CancellationToken cancellationToken = default)
     {
         await session.SaveAsync(instance, Collection);
-        await session.SaveChangesAsync();
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask SaveManyAsync(IEnumerable<WorkflowInstance> instances, CancellationToken cancellationToken = default)
@@ -137,7 +137,7 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
         foreach (var instance in instances)
             await session.SaveAsync(instance, Collection);
 
-        await session.SaveChangesAsync();
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask<long> DeleteAsync(WorkflowInstanceFilter filter, CancellationToken cancellationToken = default)
@@ -149,7 +149,7 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
         while (true)
         {
             var query = Query(filter, order, pageArgs);
-            var records = await query.ListAsync().ToList();
+            var records = await query.ListAsync(cancellationToken).ToList();
             count += records.Count;
 
             if (records.Count == 0)
@@ -161,18 +161,18 @@ public class ElsaWorkflowInstanceStore(ISession session) : IWorkflowInstanceStor
             pageArgs = pageArgs.Next();
         }
 
-        await session.SaveChangesAsync();
+        await session.SaveChangesAsync(cancellationToken);
         return count;
     }
 
-    public async Task UpdateUpdatedTimestampAsync(string workflowInstanceId, DateTimeOffset value, CancellationToken cancellationToken = new CancellationToken())
+    public async Task UpdateUpdatedTimestampAsync(string workflowInstanceId, DateTimeOffset value, CancellationToken cancellationToken = default)
     {
-        var instance = await session.Query<WorkflowInstance, WorkflowInstanceIndex>(Collection).Where(x => x.InstanceId == workflowInstanceId).FirstOrDefaultAsync();
+        var instance = await session.Query<WorkflowInstance, WorkflowInstanceIndex>(Collection).Where(x => x.InstanceId == workflowInstanceId).FirstOrDefaultAsync(cancellationToken);
         if (instance == null)
             return;
         instance.UpdatedAt = value;
         await session.SaveAsync(instance, Collection);
-        await session.SaveChangesAsync();
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     private IQuery<WorkflowInstance, WorkflowInstanceIndex> Query(WorkflowInstanceFilter filter, PageArgs? pageArgs = null)

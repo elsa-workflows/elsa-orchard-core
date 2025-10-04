@@ -16,8 +16,4 @@
       <ProjectReference Include="..\..\modules\OrchardCore.Elsa\OrchardCore.Elsa.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Content Include="App_Data\Sites\Default\OrchardCore.db" />
-    </ItemGroup>
-
 </Project>
