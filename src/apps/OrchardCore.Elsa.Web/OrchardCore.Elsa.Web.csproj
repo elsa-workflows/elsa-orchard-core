@@ -5,15 +5,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="OrchardCore.Application.Cms.Targets"/>
-      <PackageReference Include="OrchardCore.Logging.Serilog"/>
+        <PackageReference Include="OrchardCore.Application.Cms.Targets"/>
+        <PackageReference Include="OrchardCore.Logging.Serilog"/>
+        <PackageReference Include="Quartz"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\modules\OrchardCore.Elsa.Contents\OrchardCore.Elsa.Contents.csproj" />
-      <ProjectReference Include="..\..\modules\OrchardCore.Elsa.Timers\OrchardCore.Elsa.Timers.csproj" />
-      <ProjectReference Include="..\..\modules\OrchardCore.Elsa.UI\OrchardCore.Elsa.UI.csproj" />
-      <ProjectReference Include="..\..\modules\OrchardCore.Elsa\OrchardCore.Elsa.csproj" />
+        <ProjectReference Include="..\..\modules\OrchardCore.Elsa.Contents\OrchardCore.Elsa.Contents.csproj"/>
+        <ProjectReference Include="..\..\modules\OrchardCore.Elsa.Timers\OrchardCore.Elsa.Timers.csproj"/>
+        <ProjectReference Include="..\..\modules\OrchardCore.Elsa.UI\OrchardCore.Elsa.UI.csproj"/>
+        <ProjectReference Include="..\..\modules\OrchardCore.Elsa\OrchardCore.Elsa.csproj"/>
     </ItemGroup>
 
 </Project>

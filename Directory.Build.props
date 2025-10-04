@@ -42,7 +42,7 @@
     <PropertyGroup>
         <ElsaVersion>3.6.0-preview.3494</ElsaVersion>
         <ElsaStudioVersion>3.6.0-preview.1239</ElsaStudioVersion>
-        <ElsaExtensionsVersion>3.6.0-preview.156</ElsaExtensionsVersion>
+        <ElsaExtensionsVersion>3.6.0-preview.158</ElsaExtensionsVersion>
         <OrchardVersion>3.0.0-preview-18758</OrchardVersion>
         <MicrosoftVersion>9.0.9</MicrosoftVersion>
     </PropertyGroup>

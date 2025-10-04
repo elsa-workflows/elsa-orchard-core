@@ -14,10 +14,12 @@
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="ncrontab"/>
         <PackageReference Include="OrchardCore.Module.Targets"/>
+        <PackageReference Include="Quartz"/>
     </ItemGroup>
 
     <ItemGroup Label="Elsa">
         <PackageReference Include="Elsa.Scheduling"/>
+        <PackageReference Include="Elsa.Scheduling.Quartz"/>
         <PackageReference Include="Elsa"/>
     </ItemGroup>
 

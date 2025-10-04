@@ -1,5 +1,6 @@
 using OrchardCore.Elsa.Extensions;
 using OrchardCore.Elsa.Middleware;
+using Quartz;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Host.UseSerilog((context, logger) =>
 });
 
 builder.Services
+    .AddQuartz()
+    .AddQuartzHostedService()
     .AddOrchardCms();
 
 builder.Services.ConfigureWebAssemblyStaticFiles();

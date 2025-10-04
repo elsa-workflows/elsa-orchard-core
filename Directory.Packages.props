@@ -24,6 +24,10 @@
         <PackageVersion Include="Elsa.Studio.Shell" Version="$(ElsaStudioVersion)"/>
     </ItemGroup>
 
+    <ItemGroup Label="Elsa Extensions">
+        <PackageVersion Include="Elsa.Scheduling.Quartz" Version="$(ElsaExtensionsVersion)"/>
+    </ItemGroup>
+
     <ItemGroup Label="Orchard">
         <PackageVersion Include="OrchardCore.Admin.Abstractions" Version="$(OrchardVersion)"/>
         <PackageVersion Include="OrchardCore.Contents" Version="$(OrchardVersion)"/>
@@ -49,5 +53,7 @@
         <PackageVersion Include="ncrontab" Version="3.3.3"/>
         <PackageVersion Include="JetBrains.Annotations" Version="2025.2.2"/>
         <PackageVersion Include="System.Linq.Dynamic.Core" Version="1.6.7"/>
+        <PackageVersion Include="Quartz" Version="3.15.0"/>
+        <PackageVersion Include="Quartz.Extensions.Hosting" Version="3.15.0"/>
     </ItemGroup>
 </Project>

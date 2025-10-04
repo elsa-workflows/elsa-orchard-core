@@ -8,17 +8,17 @@ using OrchardCore.Modules.Manifest;
 )]
 
 [assembly: Feature(
-    Id = "OrchardCore.Elsa.Timers.Local",
-    Name = "Local Timer Activities",
-    Description = "Provides timer related activities using local scheduling. Not suitable for clustered hosting.",
+    Id = "OrchardCore.Elsa.Timers",
+    Name = "Timer Services and Activities",
+    Description = "Provides common timer services and activities.",
     Category = "Elsa",
     Dependencies = ["OrchardCore.Elsa"]
 )]
 
 [assembly: Feature(
-    Id = "OrchardCore.Elsa.Timers.Orchard",
-    Name = "Orchard Timer Activities",
-    Description = "Provides timer related activities using Orchard's background scheduling. Not suitable for high-frequency timers below 1 minute.",
+    Id = "OrchardCore.Elsa.Timers.Quartz",
+    Name = "Quartz Timer Provider",
+    Description = "Provides Quartz-based timer services. Suitable for clustered deployments.",
     Category = "Elsa",
-    Dependencies = ["OrchardCore.Elsa"]
+    Dependencies = ["OrchardCore.Elsa.Timers"]
 )]

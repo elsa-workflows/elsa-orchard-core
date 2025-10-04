@@ -7,13 +7,11 @@ using Elsa.Scheduling.Handlers;
 using Elsa.Scheduling.Services;
 using Elsa.Scheduling.TriggerPayloadValidators;
 using Microsoft.Extensions.DependencyInjection;
-using OrchardCore.Elsa.Timers.Local.Services;
-using OrchardCore.Elsa.Timers.Local.Tasks;
 using OrchardCore.Modules;
 
-namespace OrchardCore.Elsa.Timers.Local;
+namespace OrchardCore.Elsa.Timers.Common;
 
-[Feature("OrchardCore.Elsa.Timers.Local")]
+[Feature("OrchardCore.Elsa.Timers")]
 public class Startup : StartupBase
 {
     public override void ConfigureServices(IServiceCollection services)
@@ -27,10 +25,8 @@ public class Startup : StartupBase
             .AddSingleton<UpdateTenantSchedules>()
             .AddSingleton<ITenantActivatedEvent>(sp => sp.GetRequiredService<UpdateTenantSchedules>())
             .AddSingleton<ITenantDeletedEvent>(sp => sp.GetRequiredService<UpdateTenantSchedules>())
+            .AddSingleton<IModularTenantEvents, CreateSchedules>()
             .AddSingleton<IScheduler, LocalScheduler>()
-            .AddSingleton<CronosCronParser>()
-            .AddSingleton<ICronParser, CrontabCronParser>()
-            .AddSingleton<IModularTenantEvents, CreateSchedulesBackgroundTask>()
             .AddScoped<ITriggerScheduler, DefaultTriggerScheduler>()
             .AddScoped<IBookmarkScheduler, DefaultBookmarkScheduler>()
             .AddScoped<DefaultWorkflowScheduler>()
