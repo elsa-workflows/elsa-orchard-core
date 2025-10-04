@@ -11,7 +11,8 @@
 App_Data/
 src/apps/OrchardCore.Elsa.Web/Localization/
 .DS_store
-elsa.sqlite.db
+*.sqlite
+*.db
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

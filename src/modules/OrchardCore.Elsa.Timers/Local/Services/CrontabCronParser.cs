@@ -1,7 +1,7 @@
 using Elsa.Scheduling;
 using OrchardCore.Modules;
 
-namespace OrchardCore.Elsa.Timers.Services;
+namespace OrchardCore.Elsa.Timers.Local.Services;
 
 public class CrontabCronParser(IClock clock) : ICronParser
 {

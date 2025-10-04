@@ -1,6 +1,8 @@
 using Elsa.Mediator.Contracts;
 using Elsa.Workflows;
+using Elsa.Workflows.Management.Entities;
 using Elsa.Workflows.Management.Mappers;
+using Elsa.Workflows.Management.Models;
 using Elsa.Workflows.Management.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.ContentManagement;
@@ -108,12 +110,17 @@ public class WorkflowDefinitionContentHandler(
             var previousDefinition = WorkflowDefinitionPartMapper.Map(previousDefinitionPart);
             await mediator.SendAsync(new WorkflowDefinitionVersionRetracted(previousDefinition));
         }
+        
+        var workflowDefinitionPart = context.ContentItem.As<WorkflowDefinitionPart>();
+        var workflowDefinition = WorkflowDefinitionPartMapper.Map(workflowDefinitionPart);
+        var affectedWorkflows = new AffectedWorkflows(new List<WorkflowDefinition>());
+        await mediator.SendAsync(new WorkflowDefinitionPublished(workflowDefinition, affectedWorkflows));
     }
 
-    public override Task UnpublishingAsync(PublishContentContext context)
+    public override async Task UnpublishingAsync(PublishContentContext context)
     {
         if (!context.ContentItem.Has<WorkflowDefinitionPart>())
-            return Task.CompletedTask;
+            return;
 
         context.ContentItem.Alter<WorkflowDefinitionPart>(part =>
         {
@@ -122,6 +129,14 @@ public class WorkflowDefinitionContentHandler(
             WorkflowDefinitionPartSerializer.UpdateSerializedData(part);
         });
 
-        return Task.CompletedTask;
+        var workflowDefinitionPart = context.ContentItem.As<WorkflowDefinitionPart>();
+        var workflowDefinition = WorkflowDefinitionPartMapper.Map(workflowDefinitionPart);
+        await mediator.SendAsync(new WorkflowDefinitionRetracted(workflowDefinition));
+    }
+
+    public override async Task RemovingAsync(RemoveContentContext context)
+    {
+        var workflowDefinitionPart = context.ContentItem.As<WorkflowDefinitionPart>();
+        await mediator.SendAsync(new WorkflowDefinitionDeleting(workflowDefinitionPart.DefinitionId));
     }
 }

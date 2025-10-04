@@ -142,8 +142,8 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
 
     private StoredTrigger? OnLoad(StoredTrigger? record)
     {
-        if (record?.Payload != null)
-            record.Payload = payloadSerializer.Deserialize((string)record.Payload);
+        if (record?.Payload is string serializedPayload)
+            record.Payload = payloadSerializer.Deserialize(serializedPayload);
 
         return record;
     }

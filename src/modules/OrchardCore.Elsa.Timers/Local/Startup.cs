@@ -7,20 +7,19 @@ using Elsa.Scheduling.Handlers;
 using Elsa.Scheduling.Services;
 using Elsa.Scheduling.TriggerPayloadValidators;
 using Microsoft.Extensions.DependencyInjection;
-using OrchardCore.BackgroundTasks;
-using OrchardCore.Elsa.Timers.Services;
-using OrchardCore.Elsa.Timers.Tasks;
+using OrchardCore.Elsa.Timers.Local.Services;
+using OrchardCore.Elsa.Timers.Local.Tasks;
 using OrchardCore.Modules;
 
-namespace OrchardCore.Elsa.Timers;
+namespace OrchardCore.Elsa.Timers.Local;
 
+[Feature("OrchardCore.Elsa.Timers.Local")]
 public class Startup : StartupBase
 {
     public override void ConfigureServices(IServiceCollection services)
     {
         services.ConfigureElsa(elsa =>
         {
-            elsa.AddActivitiesFrom<Startup>();
             elsa.AddActivitiesFrom<SchedulingFeature>();
         });   
         

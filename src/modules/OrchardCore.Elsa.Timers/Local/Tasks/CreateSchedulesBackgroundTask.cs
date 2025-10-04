@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.Modules;
 
-namespace OrchardCore.Elsa.Timers.Tasks;
+namespace OrchardCore.Elsa.Timers.Local.Tasks;
 
 /// <summary>
 /// Creates new schedules when using the default scheduler (which doesn't have its own persistence layer like Quartz or Hangfire).
