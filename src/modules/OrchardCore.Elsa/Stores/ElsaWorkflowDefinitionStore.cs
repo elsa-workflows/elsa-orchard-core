@@ -5,11 +5,15 @@ using Elsa.Workflows.Management.Filters;
 using Elsa.Workflows.Management.Mappers;
 using Elsa.Workflows.Management.Models;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using OrchardCore.ContentManagement;
+using OrchardCore.ContentManagement.Handlers;
+using OrchardCore.ContentManagement.Records;
 using OrchardCore.Elsa.Indexes;
 using OrchardCore.Elsa.Parts;
 using OrchardCore.Elsa.Services;
 using OrchardCore.Elsa.Extensions;
+using OrchardCore.Modules;
 using YesSql;
 using VersionOptions = OrchardCore.ContentManagement.VersionOptions;
 
@@ -17,7 +21,8 @@ namespace OrchardCore.Elsa.Stores;
 
 public class ElsaWorkflowDefinitionStore(
     ISession session,
-    IServiceProvider serviceProvider) : IWorkflowDefinitionStore
+    IServiceProvider serviceProvider,
+    ILogger<ElsaWorkflowDefinitionStore> logger) : IWorkflowDefinitionStore
 {
     private const string Collection = ElsaCollections.WorkflowDefinitions;
 
@@ -25,10 +30,14 @@ public class ElsaWorkflowDefinitionStore(
     private readonly Lazy<WorkflowDefinitionMapper> _workflowDefinitionMapper = new(serviceProvider.GetRequiredService<WorkflowDefinitionMapper>);
     private readonly Lazy<WorkflowDefinitionPartMapper> _workflowDefinitionPartMapper = new(serviceProvider.GetRequiredService<WorkflowDefinitionPartMapper>);
     private readonly Lazy<WorkflowDefinitionPartSerializer> _workflowDefinitionPartSerializer = new(serviceProvider.GetRequiredService<WorkflowDefinitionPartSerializer>);
+    private IEnumerable<IContentHandler>? _contentHandlers;
+    private IEnumerable<IContentHandler>? _reversedHandlers;
     private IContentManager ContentManager => _contentManager.Value;
     private WorkflowDefinitionMapper WorkflowDefinitionMapper => _workflowDefinitionMapper.Value;
     private WorkflowDefinitionPartMapper WorkflowDefinitionPartMapper => _workflowDefinitionPartMapper.Value;
     private WorkflowDefinitionPartSerializer WorkflowDefinitionPartSerializer => _workflowDefinitionPartSerializer.Value;
+    private IEnumerable<IContentHandler> ContentHandlers => _contentHandlers ??= serviceProvider.GetServices<IContentHandler>().ToArray();
+    private IEnumerable<IContentHandler> ReversedHandlers => _reversedHandlers ??= ContentHandlers.Reverse().ToArray();
 
     public async Task<WorkflowDefinition?> FindAsync(WorkflowDefinitionFilter filter, CancellationToken cancellationToken = default)
     {
@@ -120,9 +129,9 @@ public class ElsaWorkflowDefinitionStore(
     {
         var contentItem = definition.Id != null! ? await ContentManager.GetVersionAsync(definition.Id) : null;
 
-        if (contentItem == null) 
+        if (contentItem == null)
             contentItem = await ContentManager.NewAsync("WorkflowDefinition");
-        
+
         contentItem.DisplayText = definition.Name;
         await contentItem.AlterAsync<WorkflowDefinitionPart>(async part =>
         {
@@ -145,7 +154,7 @@ public class ElsaWorkflowDefinitionStore(
         }
 
         await ContentManager.SaveDraftAsync(contentItem);
-        
+
         definition.Id = contentItem.ContentItemVersionId!;
         definition.DefinitionId = contentItem.ContentItemId!;
     }
@@ -161,12 +170,13 @@ public class ElsaWorkflowDefinitionStore(
         var query = await Query(filter).ListAsync(cancellationToken);
         var count = 0;
 
-        foreach (var part in query)
+        foreach (var contentItem in query)
         {
-            await ContentManager.RemoveAsync(part.ContentItem);
+            await RemoveContentItemVersionAsync(contentItem, cancellationToken);
             count++;
         }
 
+        await session.SaveChangesAsync(cancellationToken);
         return count;
     }
 
@@ -219,19 +229,9 @@ public class ElsaWorkflowDefinitionStore(
         return part == null ? null : WorkflowDefinitionPartMapper.Map(part);
     }
 
-    private WorkflowDefinitionSummary? MapSummary(WorkflowDefinitionPart? part)
-    {
-        return part == null ? null : WorkflowDefinitionPartMapper.MapSummary(part);
-    }
-
     private IEnumerable<WorkflowDefinition> Map(IEnumerable<ContentItem> contentItems)
     {
         return contentItems.Select(x => WorkflowDefinitionPartMapper.Map(x.As<WorkflowDefinitionPart>()));
-    }
-
-    private IEnumerable<WorkflowDefinition> Map(IEnumerable<WorkflowDefinitionPart> parts)
-    {
-        return parts.Select(WorkflowDefinitionPartMapper.Map);
     }
 
     private IEnumerable<WorkflowDefinitionSummary> MapSummaries(IEnumerable<ContentItem> contentItems)
@@ -239,8 +239,11 @@ public class ElsaWorkflowDefinitionStore(
         return contentItems.Select(x => WorkflowDefinitionPartMapper.MapSummary(x.As<WorkflowDefinitionPart>()));
     }
 
-    private IEnumerable<WorkflowDefinitionSummary> MapSummaries(IEnumerable<WorkflowDefinitionPart> parts)
+    private async Task RemoveContentItemVersionAsync(ContentItem contentItem, CancellationToken cancellationToken = default)
     {
-        return parts.Select(WorkflowDefinitionPartMapper.MapSummary);
+        var removeContext = new RemoveContentContext(contentItem);
+        await ContentHandlers.InvokeAsync((handler, context) => handler.RemovingAsync(context), removeContext, logger);
+        session.Delete(contentItem, Collection);
+        await ReversedHandlers.InvokeAsync((handler, context) => handler.RemovedAsync(context), removeContext, logger);
     }
 }

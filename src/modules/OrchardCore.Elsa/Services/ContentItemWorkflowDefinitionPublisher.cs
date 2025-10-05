@@ -8,8 +8,10 @@ using Elsa.Workflows.Management.Materializers;
 using Elsa.Workflows.Management.Models;
 using Elsa.Workflows.Management.Notifications;
 using Elsa.Workflows.Models;
+using Open.Linq.AsyncExtensions;
 using OrchardCore.ContentManagement;
 using OrchardCore.Elsa.Parts;
+using Parallel = System.Threading.Tasks.Parallel;
 
 namespace OrchardCore.Elsa.Services;
 
@@ -120,6 +122,46 @@ public class ContentItemWorkflowDefinitionPublisher(
         var contentItem = await contentManager.GetAsync(definition.DefinitionId, VersionOptions.Latest);
         await contentManager.UnpublishAsync(contentItem);
         return workflowDefinitionPartMapper.Map(contentItem.As<WorkflowDefinitionPart>());
+    }
+
+    public async Task<WorkflowDefinition> RevertVersionAsync(string definitionId, int version, CancellationToken cancellationToken = default)
+    {
+        var allVersions = (await contentManager.GetAllVersionsAsync(definitionId)).Select(x => x.As<WorkflowDefinitionPart>()).ToList();
+        var specifiedVersion = allVersions.FirstOrDefault(x => x.Version == version);
+        
+        if (specifiedVersion == null)
+            throw new ArgumentException($"Workflow definition version {version} not found.");
+
+        var latestVersion = allVersions.OrderByDescending(x => x.Version).First();
+        
+        latestVersion.ContentItem.Alter<WorkflowDefinitionPart>(part =>
+        {
+            part.IsLatest = false;
+        });
+        
+        var draft = await contentManager.GetAsync(definitionId, VersionOptions.DraftRequired);
+        
+        draft.Alter<WorkflowDefinitionPart>(part =>
+        {
+            part.DefinitionVersionId = draft.ContentItemVersionId;
+            part.Version = latestVersion.Version + 1;
+            part.SerializedData = specifiedVersion.SerializedData;
+            part.Description = specifiedVersion.Description;
+            part.Name = specifiedVersion.Name;
+            part.IsLatest = true;
+            part.IsPublished = false;
+            part.IsReadonly = specifiedVersion.IsReadonly;
+            part.IsSystem = specifiedVersion.IsSystem;
+            part.MaterializerName = specifiedVersion.MaterializerName;
+            part.ProviderName = specifiedVersion.ProviderName;
+            part.ToolVersion = specifiedVersion.ToolVersion;
+            part.UsableAsActivity = specifiedVersion.UsableAsActivity;
+        });
+
+        await contentManager.SaveDraftAsync(latestVersion.ContentItem);
+        await contentManager.SaveDraftAsync(draft);
+        
+        return workflowDefinitionPartMapper.Map(specifiedVersion);
     }
 
     public async Task<WorkflowDefinition?> GetDraftAsync(string definitionId, global::Elsa.Common.Models.VersionOptions versionOptions, CancellationToken cancellationToken = default)

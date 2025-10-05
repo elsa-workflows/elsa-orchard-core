@@ -33,7 +33,7 @@ public class Startup : StartupBase
             .AddScoped<DefaultWorkflowScheduler>()
             .AddScoped<IWorkflowScheduler, DefaultWorkflowScheduler>()
             .AddHandlersFrom<ScheduleWorkflows>()
-            .AddTriggerPaylodValidator<CronTriggerPayloadValidator, CronTriggerPayload>()
+            .AddTriggerPayloadValidator<CronTriggerPayloadValidator, CronTriggerPayload>()
             ;
     }
 }

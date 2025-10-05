@@ -13,5 +13,5 @@ using OrchardCore.OpenId;
     Name = "Core Elsa Services",
     Description = "Provides the foundational services for Elsa.",
     Category = "Elsa",
-    Dependencies = [OpenIdConstants.Features.Core]
+    Dependencies = ["OrchardCore.Contents", OpenIdConstants.Features.Core]
 )]

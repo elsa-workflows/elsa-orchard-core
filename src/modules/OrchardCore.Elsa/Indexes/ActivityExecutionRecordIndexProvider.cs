@@ -1,20 +1,20 @@
-using Elsa.Workflows.Runtime.Entities;
+using OrchardCore.Elsa.Documents;
 using YesSql.Indexes;
 
 namespace OrchardCore.Elsa.Indexes;
 
-public class ActivityExecutionRecordIndexProvider : IndexProvider<ActivityExecutionRecord>
+public class ActivityExecutionRecordIndexProvider : IndexProvider<ActivityExecutionRecordDocument>
 {
     public ActivityExecutionRecordIndexProvider()
     {
         CollectionName = ElsaCollections.ActivityExecutionRecords;
     }
 
-    public override void Describe(DescribeContext<ActivityExecutionRecord> context)
+    public override void Describe(DescribeContext<ActivityExecutionRecordDocument> context)
     {
         context.For<ActivityExecutionRecordIndex>().Map(record => new()
         {
-            RecordId = record.Id,
+            RecordId = record.RecordId,
             WorkflowInstanceId = record.WorkflowInstanceId,
             ActivityNodeId = record.ActivityNodeId,
             ActivityId = record.ActivityId,

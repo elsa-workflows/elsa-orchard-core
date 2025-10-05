@@ -18,7 +18,9 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
 
     public async ValueTask SaveAsync(StoredTrigger record, CancellationToken cancellationToken = default)
     {
-        var serializedRecord = OnSave(record);
+        var existingRecord = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
+        existingRecord = MapRecord(existingRecord, record);
+        var serializedRecord = OnSave(existingRecord);
         await session.SaveAsync(serializedRecord, Collection);
         await session.SaveChangesAsync(cancellationToken);
     }
@@ -27,8 +29,18 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
     {
         foreach (var record in records)
         {
-            var serializedRecord = OnSave(record);
-            await session.SaveAsync(serializedRecord, Collection);
+            var existingRecord = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
+            if (existingRecord != null)
+            {
+                var mappedRecord = MapRecord(existingRecord, record);
+                var serializedRecord = OnSave(mappedRecord);
+                await session.SaveAsync(serializedRecord, Collection);
+            }
+            else
+            {
+                var serializedRecord = OnSave(record);
+                await session.SaveAsync(serializedRecord, Collection);
+            }
         }
 
         await session.SaveChangesAsync(cancellationToken);
@@ -146,5 +158,21 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
             record.Payload = payloadSerializer.Deserialize(serializedPayload);
 
         return record;
+    }
+
+    private StoredTrigger MapRecord(StoredTrigger? target, StoredTrigger source)
+    {
+        if (target == null)
+            return source;
+
+        target.ActivityId = source.ActivityId;
+        target.Payload = source.Payload;
+        target.Hash = source.Hash;
+        target.Id = source.Id;
+        target.Name = source.Name;
+        target.TenantId = source.TenantId;
+        target.WorkflowDefinitionId = source.WorkflowDefinitionId;
+        target.WorkflowDefinitionVersionId = source.WorkflowDefinitionVersionId;
+        return target;
     }
 }

@@ -6,6 +6,13 @@ namespace OrchardCore.Elsa.Controllers.WorkflowInstances.List;
 
 public class WorkflowIndexViewModel
 {
+    public IDictionary<string, WorkflowDefinitionSummary> WorkflowDefinitions { get; set; } = new Dictionary<string, WorkflowDefinitionSummary>();
+    
+    public ICollection<SelectListItem> WorkflowDefinitionItems => WorkflowDefinitions
+        .Select(x => new SelectListItem(x.Value.Name, x.Key))
+        .Prepend(new() { Text = "All", Value = string.Empty })
+        .ToList();
+    
     public IList<WorkflowInstanceEntry> Entries { get; set; } = [];
     public WorkflowIndexOptions Options { get; set; } = new();
     public dynamic Pager { get; set; } = null!;
@@ -14,6 +21,7 @@ public class WorkflowIndexViewModel
 
 public class WorkflowIndexOptions
 {
+    public string? SelectedWorkflowDefinitionId { get; set; }
     public WorkflowInstanceBulkAction InstanceBulkAction { get; set; }
     public WorkflowInstanceFilter InstanceFilter { get; set; } = WorkflowInstanceFilter.All;
 

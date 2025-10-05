@@ -1,8 +1,10 @@
 using Elsa.Common.Entities;
 using Elsa.Common.Models;
+using Elsa.Extensions;
 using Elsa.Workflows;
 using Elsa.Workflows.Management;
 using Elsa.Workflows.Management.Filters;
+using Elsa.Workflows.Management.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
@@ -21,6 +23,7 @@ namespace OrchardCore.Elsa.Controllers.WorkflowInstances.List;
 public sealed class WorkflowInstancesController(
     IWorkflowInstanceManager workflowInstanceManager,
     IWorkflowInstanceStore workflowInstanceStore,
+    IWorkflowDefinitionStore workflowDefinitionStore,
     IOptions<PagerOptions> pagerOptions,
     IAuthorizationService authorizationService,
     IShapeFactory shapeFactory,
@@ -44,6 +47,7 @@ public sealed class WorkflowInstancesController(
 
         var filter = new global::Elsa.Workflows.Management.Filters.WorkflowInstanceFilter
         {
+            DefinitionId = model.Options.SelectedWorkflowDefinitionId,
             WorkflowSubStatus = model.Options.InstanceFilter switch
             {
                 WorkflowInstanceFilter.Finished => WorkflowSubStatus.Finished,
@@ -69,6 +73,7 @@ public sealed class WorkflowInstancesController(
 
         var viewModel = new WorkflowIndexViewModel
         {
+            WorkflowDefinitions = (await GetWorkflowDefinitionSummariesAsync(cancellationToken)).ToDictionary(x => x.DefinitionId),
             Entries = workflowInstances.Select(x => new WorkflowInstanceEntry { WorkflowInstance = x, Id = x.Id }).ToList(),
             Options = model.Options,
             Pager = pagerShape,
@@ -157,5 +162,22 @@ public sealed class WorkflowInstancesController(
         }
         
         return RedirectToAction(nameof(List), new { page = pagerParameters.Page, pageSize = pagerParameters.PageSize });
+    }
+    
+    private async Task<IList<WorkflowDefinitionSummary>> GetWorkflowDefinitionSummariesAsync(CancellationToken cancellationToken = default)
+    {
+        var filter = new WorkflowDefinitionFilter
+        {
+            VersionOptions = VersionOptions.LatestOrPublished
+        };
+        var summaries = await workflowDefinitionStore.FindSummariesAsync(filter, cancellationToken);
+
+        // Filter the definitions to ensure only the one with the highest version for each DefinitionId remains
+        var filteredSummaries = summaries
+            .GroupBy(definition => definition.DefinitionId) // Group by DefinitionId
+            .Select(group => group.OrderByDescending(definition => definition.Version).First()) // Get the highest version in each group
+            .ToList();
+
+        return filteredSummaries;
     }
 }
