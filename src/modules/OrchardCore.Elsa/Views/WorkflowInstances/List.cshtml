@@ -43,7 +43,7 @@
                     </div>
                     <div class="col mb-1 filter">
                         <div class="btn-group filter float-end mt-1">
-                            <select asp-for="Options.SelectedWorkflowDefinitionId" asp-items="Model.WorkflowDefinitionItems" class="selectpicker workflowdefinition-selectpicker show-tick me-2" data-header="@T["Filter by Definition"]" data-selected-text-format="static" data-width="fit" data-dropdown-align-right="auto" title="@T["Workflow Definition"]" data-style="btn-sm" data-live-search="true"></select>
+                            <select asp-for="Options.SelectedWorkflowDefinitionId" asp-items="Model.WorkflowDefinitionItems" class="selectpicker workflowdefinition-selectpicker show-tick me-2" data-header="@T["Workflow Definition"]" data-selected-text-format="static" data-width="fit" data-dropdown-align-right="auto" title="@T["Workflow Definition"]" data-style="btn-sm" data-live-search="true"></select>
                             <select asp-for="Options.InstanceFilter" asp-items="Model.Options.WorkflowsStatuses" class="selectpicker show-tick me-2" data-header="@T["Filter by status"]" data-live-search="true" data-selected-text-format="static" data-dropdown-align-right="true" data-width="fit" title="@T["Status"]" data-style="btn-sm"></select>
                             <select asp-for="Options.InstanceOrderBy" asp-items="@Model.Options.WorkflowsSorts" class="selectpicker show-tick" data-header="@T["Sort by"]" data-width="fit" data-selected-text-format="static" data-dropdown-align-right="true" title="@T["Sort"]" data-style="btn-sm"></select>
                         </div>
@@ -97,7 +97,7 @@
                                     <div class="workflowdefinition me-1">
                                         <span class="badge ta-badge font-weight-normal">
                                             <i class="fa-regular fa-file-alt text-secondary" aria-hidden="true"></i> 
-                                            <a data-bs-toggle="tooltip" title="@T["Workflow Definition"]">@workflowDefinition.Name</a>
+                                            <a asp-route-options.selectedworkflowdefinitionid=@entry.WorkflowInstance.DefinitionId data-bs-toggle="tooltip" title="@T["Workflow Definition"]">@workflowDefinition.Name</a>
                                         </span>
                                     </div>
                                     <div class="tags me-1">
