@@ -17,47 +17,26 @@ public class ElsaActivityExecutionRecordStore(ISession session) : IActivityExecu
     public async Task SaveManyAsync(IEnumerable<ActivityExecutionRecord> records, CancellationToken cancellationToken = default)
     {
         foreach (var record in records)
+        {
+            var existingRecord = await Query(new() { Id = record.Id }).FirstOrDefaultAsync(cancellationToken);
+            existingRecord = MapRecord(existingRecord, record);
+            await session.SaveAsync(existingRecord, Collection);
+        }
+        await session.FlushAsync(cancellationToken);
+    }
+
+    public async Task AddManyAsync(IEnumerable<ActivityExecutionRecord> records, CancellationToken cancellationToken = default)
+    {
+        foreach (var record in records)
             await session.SaveAsync(record, Collection);
 
         await session.FlushAsync(cancellationToken);
     }
 
-    public Task AddManyAsync(IEnumerable<ActivityExecutionRecord> records, CancellationToken cancellationToken = default)
-    {
-        return SaveManyAsync(records, cancellationToken);
-    }
-
     public async Task SaveAsync(ActivityExecutionRecord record, CancellationToken cancellationToken = default)
     {
         var recordToSave = await Query(new() { Id = record.Id }).FirstOrDefaultAsync(cancellationToken);
-        if (recordToSave != null)
-        {
-            record.Id = recordToSave.Id;
-            record.ActivityId = recordToSave.ActivityId;
-            record.ActivityType = recordToSave.ActivityType;
-            record.ActivityName = recordToSave.ActivityName;
-            record.ActivityTypeVersion = recordToSave.ActivityTypeVersion;
-            record.ActivityNodeId = recordToSave.ActivityNodeId;
-            record.WorkflowInstanceId = recordToSave.WorkflowInstanceId;
-            record.Status = recordToSave.Status;
-            record.StartedAt = recordToSave.StartedAt;
-            record.CompletedAt = recordToSave.CompletedAt;
-            record.HasBookmarks = recordToSave.HasBookmarks;
-            record.TenantId = recordToSave.TenantId;
-            record.Payload = recordToSave.Payload;
-            record.Exception = recordToSave.Exception;
-            record.ActivityState = recordToSave.ActivityState;
-            record.AggregateFaultCount = recordToSave.AggregateFaultCount;
-            record.Metadata = recordToSave.Metadata;
-            record.Outputs = recordToSave.Outputs;
-            record.Properties = recordToSave.Properties;
-            record.SerializedSnapshot = recordToSave.SerializedSnapshot;
-        }
-        else
-        {
-            recordToSave = record;
-        }
-        
+        recordToSave = MapRecord(recordToSave, record);
         await session.SaveAsync(recordToSave, Collection);
         await session.FlushAsync(cancellationToken);
     }
@@ -181,5 +160,34 @@ public class ElsaActivityExecutionRecordStore(ISession session) : IActivityExecu
             ActivityTypeVersion = index.ActivityTypeVersion,
             Status = index.Status
         };
+    }
+    
+    private ActivityExecutionRecord MapRecord(ActivityExecutionRecord? target, ActivityExecutionRecord source)
+    {
+        if (target == null)
+            return source;
+        
+        target.Id = source.Id;
+        target.ActivityId = source.ActivityId;
+        target.ActivityType = source.ActivityType;
+        target.ActivityName = source.ActivityName;
+        target.ActivityTypeVersion = source.ActivityTypeVersion;
+        target.ActivityNodeId = source.ActivityNodeId;
+        target.WorkflowInstanceId = source.WorkflowInstanceId;
+        target.Status = source.Status;
+        target.StartedAt = source.StartedAt;
+        target.CompletedAt = source.CompletedAt;
+        target.HasBookmarks = source.HasBookmarks;
+        target.TenantId = source.TenantId;
+        target.Payload = source.Payload;
+        target.Exception = source.Exception;
+        target.ActivityState = source.ActivityState;
+        target.AggregateFaultCount = source.AggregateFaultCount;
+        target.Metadata = source.Metadata;
+        target.Outputs = source.Outputs;
+        target.Properties = source.Properties;
+        target.SerializedSnapshot = source.SerializedSnapshot;
+        
+        return target;       
     }
 }
