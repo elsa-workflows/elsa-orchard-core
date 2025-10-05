@@ -1,4 +1,5 @@
 using Elsa.Common.Models;
+using Elsa.Workflows;
 using Elsa.Workflows.Runtime;
 using Elsa.Workflows.Runtime.Entities;
 using Elsa.Workflows.Runtime.Filters;
@@ -9,32 +10,38 @@ using YesSql;
 
 namespace OrchardCore.Elsa.Stores;
 
-public class ElsaBookmarkStore(ISession session) : IBookmarkStore
+public class ElsaBookmarkStore(ISession session, IPayloadSerializer payloadSerializer) : IBookmarkStore
 {
     private const string Collection = ElsaCollections.StoredBookmarks;
     
     public async ValueTask SaveAsync(StoredBookmark record, CancellationToken cancellationToken = default)
     {
-        await session.SaveAsync(record, Collection);
+        var serializedRecord = OnSave(record);
+        await session.SaveAsync(serializedRecord, Collection);
         await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask SaveManyAsync(IEnumerable<StoredBookmark> records, CancellationToken cancellationToken)
     {
-        foreach (var record in records) 
-            await session.SaveAsync(record, Collection);
+        foreach (var record in records)
+        {
+            var serializedRecord = OnSave(record);
+            await session.SaveAsync(serializedRecord, Collection);
+        }
         
         await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask<StoredBookmark?> FindAsync(BookmarkFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).FirstOrDefaultAsync(cancellationToken);
+        var record = await Query(filter).FirstOrDefaultAsync(cancellationToken);
+        return OnLoad(record);
     }
 
     public async ValueTask<IEnumerable<StoredBookmark>> FindManyAsync(BookmarkFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).ListAsync(cancellationToken);
+        var records = await Query(filter).ListAsync(cancellationToken);
+        return OnLoad(records);
     }
 
     public async ValueTask<long> DeleteAsync(BookmarkFilter filter, CancellationToken cancellationToken = default)
@@ -64,5 +71,41 @@ public class ElsaBookmarkStore(ISession session) : IBookmarkStore
     private IQuery<StoredBookmark, StoredBookmarkIndex> Query(BookmarkFilter filter)
     {
         return session.Query<StoredBookmark, StoredBookmarkIndex>(Collection).Apply(filter);
+    }
+    
+    private StoredBookmark OnSave(StoredBookmark record)
+    {
+        var serializedRecord = new StoredBookmark
+        {
+            Payload = record.Payload,
+            Hash = record.Hash,
+            Id = record.Id,
+            Name = record.Name,
+            TenantId = record.TenantId,
+            WorkflowInstanceId = record.WorkflowInstanceId,
+            ActivityInstanceId = record.ActivityInstanceId,
+            CorrelationId = record.CorrelationId,
+            CreatedAt = record.CreatedAt,
+            Metadata = record.Metadata,
+            ActivityTypeName = record.ActivityTypeName
+        };
+
+        if (serializedRecord.Payload != null)
+            serializedRecord.Payload = payloadSerializer.Serialize(serializedRecord.Payload);
+
+        return serializedRecord;
+    }
+
+    private IEnumerable<StoredBookmark> OnLoad(IEnumerable<StoredBookmark> records)
+    {
+        return records.Select(record => OnLoad(record)!);
+    }
+
+    private StoredBookmark? OnLoad(StoredBookmark? record)
+    {
+        if (record?.Payload is string serializedPayload)
+            record.Payload = payloadSerializer.Deserialize(serializedPayload);
+
+        return record;
     }
 }

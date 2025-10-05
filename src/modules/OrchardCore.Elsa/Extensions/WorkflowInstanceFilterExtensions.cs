@@ -76,12 +76,12 @@ public static class WorkflowInstanceFilterExtensions
     
     public static IQueryIndex<WorkflowInstanceIndex> Apply(this WorkflowInstanceFilter filter, IQueryIndex<WorkflowInstanceIndex> query)
     {
-        if (filter.Id != null) query = query.Where(x => x.DefinitionVersionId == filter.Id);
-        if (filter.Ids != null) query = query.Where(x => x.DefinitionVersionId.IsIn(filter.Ids));
+        if (filter.Id != null) query = query.Where(x => x.InstanceId == filter.Id);
+        if (filter.Ids != null) query = query.Where(x => x.InstanceId.IsIn(filter.Ids));
         if (filter.DefinitionId != null) query = query.Where(x => x.DefinitionId == filter.DefinitionId);
         if (filter.DefinitionIds != null) query = query.Where(x => x.DefinitionId.IsIn(filter.DefinitionIds));
-        if (filter.DefinitionVersionId != null) query = query.Where(x => x.DefinitionId == filter.DefinitionVersionId);
-        if (filter.DefinitionVersionIds != null) query = query.Where(x => x.DefinitionId.IsIn(filter.DefinitionVersionIds));
+        if (filter.DefinitionVersionId != null) query = query.Where(x => x.DefinitionVersionId == filter.DefinitionVersionId);
+        if (filter.DefinitionVersionIds != null) query = query.Where(x => x.DefinitionVersionId.IsIn(filter.DefinitionVersionIds));
         if (filter.CorrelationId != null) query = query.Where(x => x.CorrelationId == filter.CorrelationId);
         if (filter.CorrelationIds != null) query = query.Where(x => x.CorrelationId.IsIn(filter.CorrelationIds));
         if (filter.Name != null) query = query.Where(x => x.Name == filter.Name);

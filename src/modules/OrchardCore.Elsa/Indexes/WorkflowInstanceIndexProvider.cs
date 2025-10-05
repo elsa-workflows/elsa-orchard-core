@@ -1,8 +1,10 @@
 using Elsa.Workflows.Management.Entities;
+using JetBrains.Annotations;
 using YesSql.Indexes;
 
 namespace OrchardCore.Elsa.Indexes;
 
+[UsedImplicitly]
 public class WorkflowInstanceIndexProvider : IndexProvider<WorkflowInstance>
 {
     public WorkflowInstanceIndexProvider()

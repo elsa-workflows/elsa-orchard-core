@@ -29,23 +29,55 @@ public class ElsaActivityExecutionRecordStore(ISession session) : IActivityExecu
 
     public async Task SaveAsync(ActivityExecutionRecord record, CancellationToken cancellationToken = default)
     {
-        await session.SaveAsync(record, Collection);
+        var recordToSave = await Query(new() { ActivityId = record.ActivityId }).FirstOrDefaultAsync(cancellationToken);
+        if (recordToSave != null)
+        {
+            record.Id = recordToSave.Id;
+            record.ActivityId = recordToSave.ActivityId;
+            record.ActivityType = recordToSave.ActivityType;
+            record.ActivityName = recordToSave.ActivityName;
+            record.ActivityTypeVersion = recordToSave.ActivityTypeVersion;
+            record.ActivityNodeId = recordToSave.ActivityNodeId;
+            record.WorkflowInstanceId = recordToSave.WorkflowInstanceId;
+            record.Status = recordToSave.Status;
+            record.StartedAt = recordToSave.StartedAt;
+            record.CompletedAt = recordToSave.CompletedAt;
+            record.HasBookmarks = recordToSave.HasBookmarks;
+            record.TenantId = recordToSave.TenantId;
+            record.Payload = recordToSave.Payload;
+            record.Exception = recordToSave.Exception;
+            record.ActivityState = recordToSave.ActivityState;
+            record.AggregateFaultCount = recordToSave.AggregateFaultCount;
+            record.Metadata = recordToSave.Metadata;
+            record.Outputs = recordToSave.Outputs;
+            record.Properties = recordToSave.Properties;
+            record.SerializedSnapshot = recordToSave.SerializedSnapshot;
+        }
+        else
+        {
+            recordToSave = record;
+        }
+        
+        await session.SaveAsync(recordToSave, Collection);
         await session.FlushAsync(cancellationToken);
     }
 
     public async Task<ActivityExecutionRecord?> FindAsync(ActivityExecutionRecordFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).FirstOrDefaultAsync(cancellationToken);
+        var result = await Query(filter).FirstOrDefaultAsync(cancellationToken);
+        return result;
     }
 
     public async Task<IEnumerable<ActivityExecutionRecord>> FindManyAsync<TOrderBy>(ActivityExecutionRecordFilter filter, ActivityExecutionRecordOrder<TOrderBy> order, CancellationToken cancellationToken = default)
     {
-        return await Query(filter, order).ListAsync(cancellationToken);
+        var results = await Query(filter, order).ListAsync(cancellationToken);
+        return results;
     }
 
     public async Task<IEnumerable<ActivityExecutionRecord>> FindManyAsync(ActivityExecutionRecordFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).ListAsync(cancellationToken);
+        var results = await Query(filter).ListAsync(cancellationToken);
+        return results;
     }
 
     public async Task<IEnumerable<ActivityExecutionRecordSummary>> FindManySummariesAsync<TOrderBy>(ActivityExecutionRecordFilter filter, ActivityExecutionRecordOrder<TOrderBy> order, CancellationToken cancellationToken = default)
@@ -71,22 +103,22 @@ public class ElsaActivityExecutionRecordStore(ISession session) : IActivityExecu
     {
         var pageArgs = PageArgs.FromRange(0, 100);
         var count = 0;
-        
+
         while (true)
         {
             var query = Query(filter).OrderBy(x => x.Id).Skip(pageArgs.Offset!.Value).Take(pageArgs.Limit!.Value);
             var records = await query.ListAsync(cancellationToken).ToList();
             count += records.Count;
-            
+
             if (records.Count == 0)
                 break;
 
-            foreach (var record in records) 
+            foreach (var record in records)
                 session.Delete(record, Collection);
-            
+
             pageArgs = pageArgs.Next();
         }
-        
+
         return count;
     }
 
@@ -108,7 +140,7 @@ public class ElsaActivityExecutionRecordStore(ISession session) : IActivityExecu
 
         return query;
     }
-    
+
     private IQueryIndex<ActivityExecutionRecordIndex> QueryIndex(ActivityExecutionRecordFilter filter, PageArgs? pageArgs = null)
     {
         return QueryIndex<string>(filter, null, pageArgs);
@@ -127,12 +159,12 @@ public class ElsaActivityExecutionRecordStore(ISession session) : IActivityExecu
 
         return query;
     }
-    
+
     private IEnumerable<ActivityExecutionRecordSummary> MapSummaries(IEnumerable<ActivityExecutionRecordIndex> indexes)
     {
         return indexes.Select(MapSummary);
     }
-    
+
     private ActivityExecutionRecordSummary MapSummary(ActivityExecutionRecordIndex index)
     {
         return new()

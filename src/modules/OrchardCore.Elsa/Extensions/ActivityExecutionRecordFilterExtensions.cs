@@ -13,7 +13,7 @@ public static class ActivityExecutionRecordFilterExtensions
         if (filter.Id != null) query = query.Where(x => x.RecordId == filter.Id);
         if (filter.Ids != null) query = query.Where(x => x.RecordId.IsIn(filter.Ids));
         if (filter.WorkflowInstanceId != null) query = query.Where(x => x.WorkflowInstanceId == filter.WorkflowInstanceId);
-        if (filter.WorkflowInstanceIds != null) query = query.Where(x => x.RecordId.IsIn(filter.WorkflowInstanceIds));
+        if (filter.WorkflowInstanceIds != null) query = query.Where(x => x.WorkflowInstanceId.IsIn(filter.WorkflowInstanceIds));
         if (filter.ActivityId != null) query = query.Where(x => x.ActivityId == filter.ActivityId);
         if (filter.ActivityIds != null) query = query.Where(x => x.ActivityId.IsIn(filter.ActivityIds));
         if (filter.ActivityNodeId != null) query = query.Where(x => x.ActivityNodeId == filter.ActivityNodeId);
@@ -31,7 +31,7 @@ public static class ActivityExecutionRecordFilterExtensions
         if (filter.Id != null) query = query.Where(x => x.RecordId == filter.Id);
         if (filter.Ids != null) query = query.Where(x => x.RecordId.IsIn(filter.Ids));
         if (filter.WorkflowInstanceId != null) query = query.Where(x => x.WorkflowInstanceId == filter.WorkflowInstanceId);
-        if (filter.WorkflowInstanceIds != null) query = query.Where(x => x.RecordId.IsIn(filter.WorkflowInstanceIds));
+        if (filter.WorkflowInstanceIds != null) query = query.Where(x => x.WorkflowInstanceId.IsIn(filter.WorkflowInstanceIds));
         if (filter.ActivityId != null) query = query.Where(x => x.ActivityId == filter.ActivityId);
         if (filter.ActivityIds != null) query = query.Where(x => x.ActivityId.IsIn(filter.ActivityIds));
         if (filter.ActivityNodeId != null) query = query.Where(x => x.ActivityNodeId == filter.ActivityNodeId);
