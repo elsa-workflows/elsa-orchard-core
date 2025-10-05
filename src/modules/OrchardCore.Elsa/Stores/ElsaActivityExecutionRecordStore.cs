@@ -29,7 +29,7 @@ public class ElsaActivityExecutionRecordStore(ISession session) : IActivityExecu
 
     public async Task SaveAsync(ActivityExecutionRecord record, CancellationToken cancellationToken = default)
     {
-        var recordToSave = await Query(new() { ActivityId = record.ActivityId }).FirstOrDefaultAsync(cancellationToken);
+        var recordToSave = await Query(new() { Id = record.Id }).FirstOrDefaultAsync(cancellationToken);
         if (recordToSave != null)
         {
             record.Id = recordToSave.Id;
