@@ -1,4 +1,6 @@
 using Elsa.Extensions;
+using Elsa.Resilience.Extensions;
+using Elsa.Workflows.Runtime.Distributed.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.StaticFiles;
@@ -40,9 +42,11 @@ public class Startup : StartupBase
                 workflowRuntime.BookmarkStore = sp => ActivatorUtilities.CreateInstance<ElsaBookmarkStore>(sp);
                 workflowRuntime.WorkflowExecutionLogStore = sp => ActivatorUtilities.CreateInstance<ElsaWorkflowExecutionLogStore>(sp);
                 workflowRuntime.ActivityExecutionLogStore = sp => ActivatorUtilities.CreateInstance<ElsaActivityExecutionRecordStore>(sp);
+                workflowRuntime.UseDistributedRuntime();
             });
             elsa.UseJavaScript();
             elsa.UseLiquid();
+            elsa.UseResilience();
             elsa.UseWorkflowsApi(api => api.AddFastEndpointsAssembly<Startup>());
         });
         

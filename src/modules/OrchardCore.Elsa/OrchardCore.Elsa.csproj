@@ -31,6 +31,8 @@
         <PackageReference Include="Elsa.Expressions.JavaScript"/>
         <PackageReference Include="Elsa.Expressions.Liquid"/>
         <PackageReference Include="Elsa.Workflows.Api"/>
+        <PackageReference Include="Elsa.Workflows.Runtime.Distributed"/>
+        <PackageReference Include="Elsa.Resilience"/>
     </ItemGroup>
 
     <ItemGroup>

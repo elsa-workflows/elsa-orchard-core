@@ -11,7 +11,9 @@
         <PackageVersion Include="Elsa.Workflows.Api" Version="$(ElsaVersion)"/>
         <PackageVersion Include="Elsa.Workflows.Core" Version="$(ElsaVersion)"/>
         <PackageVersion Include="Elsa.Workflows.Management" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Resilience" Version="$(ElsaVersion)"/>
         <PackageVersion Include="Elsa.Workflows.Runtime" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Workflows.Runtime.Distributed" Version="$(ElsaVersion)"/>
     </ItemGroup>
 
     <ItemGroup Label="Elsa Studio">

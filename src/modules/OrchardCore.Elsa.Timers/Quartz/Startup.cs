@@ -1,3 +1,4 @@
+using Elsa.Scheduling;
 using Elsa.Scheduling.Quartz.Contracts;
 using Elsa.Scheduling.Quartz.Handlers;
 using Elsa.Scheduling.Quartz.Services;
@@ -14,7 +15,7 @@ public class Startup : StartupBase
     {
         services
             .AddSingleton<IActivityDescriptorModifier, CronActivityDescriptorModifier>()
-            .AddSingleton<QuartzCronParser>()
+            .AddSingleton<ICronParser, QuartzCronParser>()
             .AddScoped<QuartzWorkflowScheduler>()
             .AddScoped<IJobKeyProvider, JobKeyProvider>()
             .AddSingleton<IModularTenantEvents, RegisterJobs>();

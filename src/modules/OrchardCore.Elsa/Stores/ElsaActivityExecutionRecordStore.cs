@@ -22,7 +22,7 @@ public class ElsaActivityExecutionRecordStore(ISession session) : IActivityExecu
         await session.FlushAsync(cancellationToken);
     }
 
-    public Task AddManyAsync(IEnumerable<ActivityExecutionRecord> records, CancellationToken cancellationToken = new CancellationToken())
+    public Task AddManyAsync(IEnumerable<ActivityExecutionRecord> records, CancellationToken cancellationToken = default)
     {
         return SaveManyAsync(records, cancellationToken);
     }

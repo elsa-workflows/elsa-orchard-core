@@ -27,6 +27,7 @@ public class Startup : StartupBase
             .AddSingleton<ITenantDeletedEvent>(sp => sp.GetRequiredService<UpdateTenantSchedules>())
             .AddSingleton<IModularTenantEvents, CreateSchedules>()
             .AddSingleton<IScheduler, LocalScheduler>()
+            .AddSingleton<ICronParser, CronosCronParser>()
             .AddScoped<ITriggerScheduler, DefaultTriggerScheduler>()
             .AddScoped<IBookmarkScheduler, DefaultBookmarkScheduler>()
             .AddScoped<DefaultWorkflowScheduler>()
