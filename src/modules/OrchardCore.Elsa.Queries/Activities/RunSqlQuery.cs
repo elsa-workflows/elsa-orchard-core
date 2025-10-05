@@ -52,7 +52,7 @@ public class RunSqlQuery : CodeActivity<ICollection<dynamic>>
         }
         else
         {
-            throw new SqlParserException("Failed to parse SQL query.");
+            throw new SqlParserException(string.Join(", ", messages));
         }
     }
 }
