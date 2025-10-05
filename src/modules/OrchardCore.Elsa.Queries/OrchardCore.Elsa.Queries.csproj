@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="OrchardCore.DisplayManagement" />
+        <PackageReference Include="OrchardCore.Module.Targets"/>
+        <PackageReference Include="OrchardCore.Queries" />
+        <PackageReference Include="YesSql.Abstractions" />
+    </ItemGroup>
+
+    <ItemGroup Label="Elsa">
+        <PackageReference Include="Elsa.Sql"/>
+        <PackageReference Include="Elsa"/>
+    </ItemGroup>
+
+</Project>

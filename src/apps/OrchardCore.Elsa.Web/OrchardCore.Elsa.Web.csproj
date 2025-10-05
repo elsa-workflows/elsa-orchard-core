@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\modules\OrchardCore.Elsa.Contents\OrchardCore.Elsa.Contents.csproj"/>
+        <ProjectReference Include="..\..\modules\OrchardCore.Elsa.Queries\OrchardCore.Elsa.Queries.csproj" />
         <ProjectReference Include="..\..\modules\OrchardCore.Elsa.Timers\OrchardCore.Elsa.Timers.csproj"/>
         <ProjectReference Include="..\..\modules\OrchardCore.Elsa.UI\OrchardCore.Elsa.UI.csproj"/>
         <ProjectReference Include="..\..\modules\OrchardCore.Elsa\OrchardCore.Elsa.csproj"/>

@@ -15,7 +15,6 @@
         <PackageVersion Include="Elsa.Workflows.Runtime" Version="$(ElsaVersion)"/>
         <PackageVersion Include="Elsa.Workflows.Runtime.Distributed" Version="$(ElsaVersion)"/>
     </ItemGroup>
-
     <ItemGroup Label="Elsa Studio">
         <PackageVersion Include="Elsa.Studio.Core" Version="$(ElsaStudioVersion)"/>
         <PackageVersion Include="Elsa.Studio.Core.BlazorWasm" Version="$(ElsaStudioVersion)"/>
@@ -25,11 +24,10 @@
         <PackageVersion Include="Elsa.Studio.Workflows.Core" Version="$(ElsaStudioVersion)"/>
         <PackageVersion Include="Elsa.Studio.Shell" Version="$(ElsaStudioVersion)"/>
     </ItemGroup>
-
     <ItemGroup Label="Elsa Extensions">
         <PackageVersion Include="Elsa.Scheduling.Quartz" Version="$(ElsaExtensionsVersion)"/>
+        <PackageVersion Include="Elsa.Sql" Version="$(ElsaExtensionsVersion)"/>
     </ItemGroup>
-
     <ItemGroup Label="Orchard">
         <PackageVersion Include="OrchardCore.Admin.Abstractions" Version="$(OrchardVersion)"/>
         <PackageVersion Include="OrchardCore.Contents" Version="$(OrchardVersion)"/>
@@ -42,19 +40,19 @@
         <PackageVersion Include="OrchardCore.DisplayManagement" Version="$(OrchardVersion)"/>
         <PackageVersion Include="OrchardCore.Navigation.Core" Version="$(OrchardVersion)"/>
         <PackageVersion Include="OrchardCore.OpenId.Core" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Queries" Version="$(OrchardVersion)"/>
         <PackageVersion Include="OrchardCore.ResourceManagement" Version="$(OrchardVersion)"/>
     </ItemGroup>
-
     <ItemGroup Label="Microsoft">
         <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(MicrosoftVersion)"/>
         <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(MicrosoftVersion)" PrivateAssets="all"/>
         <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.8"/>
     </ItemGroup>
-
     <ItemGroup>
         <PackageVersion Include="ncrontab" Version="3.3.3"/>
         <PackageVersion Include="JetBrains.Annotations" Version="2025.2.2"/>
         <PackageVersion Include="System.Linq.Dynamic.Core" Version="1.6.7"/>
+        <PackageVersion Include="YesSql.Abstractions" Version="5.4.6"/>
         <PackageVersion Include="Quartz" Version="3.15.0"/>
         <PackageVersion Include="Quartz.Extensions.Hosting" Version="3.15.0"/>
     </ItemGroup>
