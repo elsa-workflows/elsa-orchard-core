@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" />
+    <PackageReference Include="OrchardCore.Module.Targets" />
+    <PackageReference Include="OrchardCore.ContentManagement" />
+    <PackageReference Include="OrchardCore.Contents" />
+    <PackageReference Include="OrchardCore.DisplayManagement" />
+    <PackageReference Include="OrchardCore.Navigation.Core" />
+    <PackageReference Include="OrchardCore.ResourceManagement" />
+    <PackageReference Include="OrchardCore.Settings" />
+    <PackageReference Include="YesSql.Abstractions" />
+  </ItemGroup>
+  <ItemGroup Label="Elsa">
+    <PackageReference Include="Elsa" />
+    <PackageReference Include="Elsa.Agents" />
+    <PackageReference Include="Elsa.Agents.Activities" />
+    <PackageReference Include="Elsa.Agents.Core" />
+    <PackageReference Include="Elsa.Agents.Models" />
+    <PackageReference Include="Elsa.Agents.Persistence" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,129 @@
+@model AgentListViewModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer T
+@{
+    var totalCount = Model?.Items?.Count ?? 0;
+}
+
+<zone Name="Title"><h1>@T["Agents"]</h1></zone>
+
+<form asp-action="List" method="post" id="agents-form" class="no-multisubmit">
+    @Html.AntiForgeryToken()
+    <div class="card text-bg-theme mb-3 position-sticky action-bar">
+        <div class="card-body">
+            <div class="row gx-3 align-items-end">
+                <div class="col-md">
+                    <label asp-for="Options.Search" class="form-label">@T["Search"]</label>
+                    <input asp-for="Options.Search" class="form-control" type="search" />
+                </div>
+                <div class="col-md-auto">
+                    <label asp-for="Options.Filter" class="form-label">@T["Status"]</label>
+                    <select asp-for="Options.Filter" class="form-select">
+                        <option value="@AgentFilter.All">@T["All"]</option>
+                        <option value="@AgentFilter.Published">@T["Published"]</option>
+                        <option value="@AgentFilter.Draft">@T["Draft"]</option>
+                    </select>
+                </div>
+                <div class="col-md-auto">
+                    <button class="btn btn-secondary" name="submit.Filter" type="submit">@T["Filter"]</button>
+                </div>
+                <div class="col-md-auto text-end">
+                    <a asp-action="Create" class="btn btn-primary">@T["Create Agent"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width:2rem;">
+                                <input type="checkbox" class="form-check-input" id="select-all" />
+                            </th>
+                            <th>@T["Name"]</th>
+                            <th>@T["Description"]</th>
+                            <th class="text-center">@T["Status"]</th>
+                            <th class="text-end">@T["Actions"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Items.Count == 0)
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-4">@T["No agents found."]</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="form-check-input item-select" name="itemIds" value="@item.AgentId" />
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.AgentId">@item.Name</a>
+                                    </td>
+                                    <td>@item.Description</td>
+                                    <td class="text-center">
+                                        @if (item.IsPublished)
+                                        {
+                                            <span class="badge text-bg-success">@T["Published"]</span>
+                                        }
+                                        else if (item.IsLatest)
+                                        {
+                                            <span class="badge text-bg-warning">@T["Draft"]</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge text-bg-secondary">@T["Archived"]</span>
+                                        }
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a asp-action="Edit" asp-route-id="@item.AgentId" class="btn btn-outline-secondary">@T["Edit"]</a>
+                                            <button type="submit" name="id" value="@item.AgentId" formaction="@Url.Action("Delete", "AgentAdmin", new { area = Constants.Area })" class="btn btn-outline-danger" data-url-af="RemoveUrl UnsafeUrl" data-title="@T["Delete Agent"]" data-message="@T["Are you sure you want to delete this agent?"]">@T["Delete"]</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+            <div>
+                <select asp-for="Options.BulkAction" class="form-select form-select-sm d-inline-block w-auto me-2">
+                    <option value="@AgentBulkAction.None">@T["Bulk actions"]</option>
+                    @foreach (var action in Model.Options.BulkActions)
+                    {
+                        <option value="@action.Value">@action.Text</option>
+                    }
+                </select>
+                <button class="btn btn-sm btn-outline-secondary" type="submit" name="submit.BulkAction">@T["Apply"]</button>
+            </div>
+            <div class="text-muted">@T["{0} item(s)", totalCount]</div>
+        </div>
+    </div>
+</form>
+
+@if (Model.Pager != null)
+{
+    @await DisplayAsync(Model.Pager)
+}
+
+<script at="Foot">
+    (function () {
+        const selectAll = document.getElementById('select-all');
+        if (!selectAll) {
+            return;
+        }
+        const checkboxes = document.querySelectorAll('#agents-form .item-select');
+        selectAll.addEventListener('change', function () {
+            checkboxes.forEach(cb => cb.checked = selectAll.checked);
+        });
+    })();
+</script>
