@@ -25,6 +25,10 @@
         <PackageVersion Include="Elsa.Studio.Shell" Version="$(ElsaStudioVersion)"/>
     </ItemGroup>
     <ItemGroup Label="Elsa Extensions">
+        <PackageVersion Include="Elsa.Agents.Activities" Version="$(ElsaExtensionsVersion)"/>
+        <PackageVersion Include="Elsa.Agents.Models" Version="$(ElsaExtensionsVersion)"/>
+        <PackageVersion Include="Elsa.Agents.Core" Version="$(ElsaExtensionsVersion)"/>
+        <PackageVersion Include="Elsa.Agents.Persistence" Version="$(ElsaExtensionsVersion)"/>
         <PackageVersion Include="Elsa.Scheduling.Quartz" Version="$(ElsaExtensionsVersion)"/>
         <PackageVersion Include="Elsa.Sql" Version="$(ElsaExtensionsVersion)"/>
     </ItemGroup>

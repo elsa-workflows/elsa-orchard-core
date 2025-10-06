@@ -8,4 +8,5 @@ public static class ElsaCollections
     public const string ActivityExecutionRecords = "Elsa_ActivityExecutionRecords";
     public const string StoredTriggers = "Elsa_Triggers";
     public const string StoredBookmarks = "Elsa_Bookmarks";
+    public const string AgentDefinitions = "Elsa_AgentDefinitions";
 }
