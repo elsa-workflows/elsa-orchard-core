@@ -1,0 +1,79 @@
+@model AgentEditViewModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer T
+@{
+    var isNew = string.IsNullOrEmpty(Model.Id);
+    ViewData["Title"] = isNew ? T["Create Agent"] : T["Edit Agent"];
+}
+
+<zone Name="Title"><h1>@ViewData["Title"]</h1></zone>
+
+<form asp-action="@(isNew ? "Create" : "Edit")" method="post" class="needs-validation" novalidate>
+    @Html.AntiForgeryToken()
+    @if (!isNew)
+    {
+        <input type="hidden" asp-for="Id" />
+    }
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">@T["Name"]</label>
+        <input asp-for="Name" class="form-control" required />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">@T["Description"]</label>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="FunctionName" class="form-label">@T["Function name"]</label>
+            <input asp-for="FunctionName" class="form-control" />
+            <span asp-validation-for="FunctionName" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Services" class="form-label">@T["Services (comma separated)"]</label>
+            <input asp-for="Services" class="form-control" />
+            <span asp-validation-for="Services" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row g-3 mt-0">
+        <div class="col-md-6">
+            <label asp-for="Plugins" class="form-label">@T["Plugins (comma separated)"]</label>
+            <input asp-for="Plugins" class="form-control" />
+            <span asp-validation-for="Plugins" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Agents" class="form-label">@T["Agents (comma separated)"]</label>
+            <input asp-for="Agents" class="form-control" />
+            <span asp-validation-for="Agents" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="mb-3 mt-3">
+        <label asp-for="PromptTemplate" class="form-label">@T["Prompt template"]</label>
+        <textarea asp-for="PromptTemplate" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="PromptTemplate" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="InputVariablesJson" class="form-label">@T["Input variables (JSON array)"]</label>
+        <textarea asp-for="InputVariablesJson" class="form-control font-monospace" rows="6"></textarea>
+        <span asp-validation-for="InputVariablesJson" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="OutputVariableJson" class="form-label">@T["Output variable (JSON object)"]</label>
+        <textarea asp-for="OutputVariableJson" class="form-control font-monospace" rows="4"></textarea>
+        <span asp-validation-for="OutputVariableJson" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ExecutionSettingsJson" class="form-label">@T["Execution settings (JSON object)"]</label>
+        <textarea asp-for="ExecutionSettingsJson" class="form-control font-monospace" rows="4"></textarea>
+        <span asp-validation-for="ExecutionSettingsJson" class="text-danger"></span>
+    </div>
+    <div class="btn-toolbar gap-2">
+        <button type="submit" name="submit" value="save" class="btn btn-primary">@T["Save"]</button>
+        <button type="submit" name="submit" value="publish" class="btn btn-success">@T["Save & Publish"]</button>
+        @if (!isNew)
+        {
+            <button type="submit" name="submit" value="unpublish" class="btn btn-outline-warning">@T["Save & Unpublish"]</button>
+        }
+        <a asp-action="List" class="btn btn-secondary">@T["Cancel"]</a>
+    </div>
+</form>

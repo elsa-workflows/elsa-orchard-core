@@ -46,6 +46,7 @@
         <PackageVersion Include="OrchardCore.OpenId.Core" Version="$(OrchardVersion)"/>
         <PackageVersion Include="OrchardCore.Queries" Version="$(OrchardVersion)"/>
         <PackageVersion Include="OrchardCore.ResourceManagement" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Settings" Version="$(OrchardVersion)"/>
     </ItemGroup>
     <ItemGroup Label="Microsoft">
         <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(MicrosoftVersion)"/>

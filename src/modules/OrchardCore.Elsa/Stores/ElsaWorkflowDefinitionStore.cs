@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Handlers;
-using OrchardCore.ContentManagement.Records;
 using OrchardCore.Elsa.Indexes;
 using OrchardCore.Elsa.Parts;
 using OrchardCore.Elsa.Services;

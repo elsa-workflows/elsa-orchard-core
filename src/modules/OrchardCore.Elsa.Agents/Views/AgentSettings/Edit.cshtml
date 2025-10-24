@@ -1,0 +1,133 @@
+@model AgentSettingsViewModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer T
+@{
+    var jsonOptions = new System.Text.Json.JsonSerializerOptions { WriteIndented = true };
+}
+
+<zone Name="Title"><h1>@T["Agent settings"]</h1></zone>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<section class="mb-5">
+    <h2 class="h4 mb-3">@T["API keys"]</h2>
+    @if (Model.ApiKeys.Count == 0)
+    {
+        <p class="text-muted">@T["No API keys configured."]</p>
+    }
+    else
+    {
+        <div class="list-group mb-4">
+            @foreach (var apiKey in Model.ApiKeys)
+            {
+                <div class="list-group-item">
+                    <form asp-action="UpdateApiKey" method="post" class="row g-3 align-items-end">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="Id" value="@apiKey.Id" />
+                        <div class="col-md-4">
+                            <label class="form-label" for="api-name-@apiKey.Id">@T["Name"]</label>
+                            <input class="form-control" id="api-name-@apiKey.Id" name="Name" value="@apiKey.Name" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="api-value-@apiKey.Id">@T["Value"]</label>
+                            <input class="form-control" id="api-value-@apiKey.Id" name="Value" value="@apiKey.Value" />
+                        </div>
+                        <div class="col-md-2 text-end">
+                            <button type="submit" class="btn btn-sm btn-primary">@T["Update"]</button>
+                            <a asp-action="DeleteApiKey" asp-route-id="@apiKey.Id" class="btn btn-outline-danger" data-message="@T["Are you sure you want to delete this API key?"]" data-url-af="RemoveUrl UnsafeUrl">@T["Delete"]</a>
+                        </div>
+                    </form>
+                </div>
+            }
+        </div>
+    }
+    <div class="card">
+        <div class="card-body">
+            <h3 class="h5">@T["Add API key"]</h3>
+            <form asp-action="AddApiKey" method="post" class="row g-3">
+                @Html.AntiForgeryToken()
+                <div class="col-md-4">
+                    <label asp-for="NewApiKey.Name" class="form-label">@T["Name"]</label>
+                    <input asp-for="NewApiKey.Name" class="form-control" />
+                    <span asp-validation-for="NewApiKey.Name" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="NewApiKey.Value" class="form-label">@T["Value"]</label>
+                    <input asp-for="NewApiKey.Value" class="form-control" />
+                    <span asp-validation-for="NewApiKey.Value" class="text-danger"></span>
+                </div>
+                <div class="col-md-2 align-self-end text-end">
+                    <button class="btn btn-success" type="submit">@T["Add"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2 class="h4 mb-3">@T["Services"]</h2>
+    @if (Model.Services.Count == 0)
+    {
+        <p class="text-muted">@T["No services configured."]</p>
+    }
+    else
+    {
+        <div class="list-group mb-4">
+            @foreach (var service in Model.Services)
+            {
+                var settingsJson = System.Text.Json.JsonSerializer.Serialize(service.Settings ?? new Dictionary<string, object>(), jsonOptions);
+                <div class="list-group-item">
+                    <form asp-action="UpdateService" method="post" class="row g-3">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="Id" value="@service.Id" />
+                        <div class="col-md-4">
+                            <label class="form-label" for="service-name-@service.Id">@T["Name"]</label>
+                            <input class="form-control" id="service-name-@service.Id" name="Name" value="@service.Name" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="service-type-@service.Id">@T["Type"]</label>
+                            <input class="form-control" id="service-type-@service.Id" name="Type" value="@service.Type" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="service-settings-@service.Id">@T["Settings (JSON)"]</label>
+                            <textarea class="form-control font-monospace" id="service-settings-@service.Id" name="SettingsJson" rows="4">@settingsJson</textarea>
+                        </div>
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn btn-sm btn-primary">@T["Update"]</button>
+                            <a asp-action="DeleteService" asp-route-id="@service.Id" class="btn btn-outline-danger" data-message="@T["Are you sure you want to delete this service?"]" data-url-af="RemoveUrl UnsafeUrl">@T["Delete"]</a>
+                        </div>
+                    </form>
+                </div>
+            }
+        </div>
+    }
+    <div class="card">
+        <div class="card-body">
+            <h3 class="h5">@T["Add service"]</h3>
+            <form asp-action="AddService" method="post" class="row g-3">
+                @Html.AntiForgeryToken()
+                <div class="col-md-4">
+                    <label asp-for="NewService.Name" class="form-label">@T["Name"]</label>
+                    <input asp-for="NewService.Name" class="form-control" />
+                    <span asp-validation-for="NewService.Name" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="NewService.Type" class="form-label">@T["Type"]</label>
+                    <input asp-for="NewService.Type" class="form-control" />
+                    <span asp-validation-for="NewService.Type" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="NewService.SettingsJson" class="form-label">@T["Settings (JSON)"]</label>
+                    <textarea asp-for="NewService.SettingsJson" class="form-control font-monospace" rows="4"></textarea>
+                    <span asp-validation-for="NewService.SettingsJson" class="text-danger"></span>
+                </div>
+                <div class="col-12 text-end">
+                    <button class="btn btn-success" type="submit">@T["Add"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

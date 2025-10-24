@@ -14,7 +14,6 @@ namespace OrchardCore.Elsa.Handlers.Content;
 
 public class WorkflowDefinitionContentHandler(
     IMediator mediator,
-    IApiSerializer apiSerializer,
     IServiceProvider serviceProvider
 ) : ContentHandlerBase
 {

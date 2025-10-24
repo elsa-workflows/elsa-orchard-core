@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9AD6C839-C8CC-4D31-BC86-99B25CEEDC4F}"
 EndProject
@@ -34,7 +34,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.Elsa.Timers", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.Elsa.Queries", "src\modules\OrchardCore.Elsa.Queries\OrchardCore.Elsa.Queries.csproj", "{351D3442-BF36-4C79-A222-7E23D90AE986}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.Elsa.Agents", "src\modules\OrchardCore.Elsa.Agents\OrchardCore.Elsa.Agents.csproj", "{1D6ADDC6-257E-41CC-8C5B-AEDC5454F906}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.Elsa.Agents", "src\modules\OrchardCore.Elsa.Agents\OrchardCore.Elsa.Agents.csproj", "{050EFBA3-0526-4F49-9337-5BF55B9AD83A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OC", "OC", "{3BCAA08F-8718-4AE9-B5CA-24DB60333E9B}"
+	ProjectSection(SolutionItems) = preProject
+		OC\HtmlBodyPart.cs = OC\HtmlBodyPart.cs
+		OC\HtmlBodyPartDisplayDriver.cs = OC\HtmlBodyPartDisplayDriver.cs
+		OC\AdminController.cs = OC\AdminController.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,10 +77,10 @@ Global
 		{351D3442-BF36-4C79-A222-7E23D90AE986}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{351D3442-BF36-4C79-A222-7E23D90AE986}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{351D3442-BF36-4C79-A222-7E23D90AE986}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D6ADDC6-257E-41CC-8C5B-AEDC5454F906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D6ADDC6-257E-41CC-8C5B-AEDC5454F906}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D6ADDC6-257E-41CC-8C5B-AEDC5454F906}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D6ADDC6-257E-41CC-8C5B-AEDC5454F906}.Release|Any CPU.Build.0 = Release|Any CPU
+																{050EFBA3-0526-4F49-9337-5BF55B9AD83A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+																{050EFBA3-0526-4F49-9337-5BF55B9AD83A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+																{050EFBA3-0526-4F49-9337-5BF55B9AD83A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+																{050EFBA3-0526-4F49-9337-5BF55B9AD83A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{04CB7635-7DE1-429B-9F83-9DB75F9D01AB} = {9AD6C839-C8CC-4D31-BC86-99B25CEEDC4F}
@@ -85,6 +92,6 @@ Global
 		{4AD0CF24-8A17-4FDC-85BC-6C26E434FF8E} = {BF82FD42-730E-48F3-9572-2FEEC9BF7298}
 		{2D666284-F836-4D36-A632-9B3FAB9BEF27} = {04CB7635-7DE1-429B-9F83-9DB75F9D01AB}
 		{351D3442-BF36-4C79-A222-7E23D90AE986} = {04CB7635-7DE1-429B-9F83-9DB75F9D01AB}
-		{1D6ADDC6-257E-41CC-8C5B-AEDC5454F906} = {04CB7635-7DE1-429B-9F83-9DB75F9D01AB}
+		{050EFBA3-0526-4F49-9337-5BF55B9AD83A} = {04CB7635-7DE1-429B-9F83-9DB75F9D01AB}
 	EndGlobalSection
 EndGlobal
