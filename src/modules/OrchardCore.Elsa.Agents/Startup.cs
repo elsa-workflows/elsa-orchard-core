@@ -1,9 +1,11 @@
 using Elsa.Agents;
-using Elsa.Agents.Persistence.Contracts;
 using Elsa.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using OrchardCore.ContentManagement;
+using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.Data;
 using OrchardCore.Data.Migration;
+using OrchardCore.Elsa.Agents.Migrations;
 using OrchardCore.Modules;
 using OrchardCore.Navigation;
 using OrchardCore.Security.Permissions;
@@ -14,7 +16,7 @@ public class Startup : StartupBase
 {
     public override void ConfigureServices(IServiceCollection services)
     {
-        services.AddElsa(elsa =>
+        services.ConfigureElsa(elsa =>
         {
             elsa.UseAgentActivities();
             elsa.UseAgentPersistence(feature =>
@@ -25,16 +27,18 @@ public class Startup : StartupBase
                     .UseServiceStore(sp => ActivatorUtilities.CreateInstance<Stores.ElsaServiceStore>(sp));
             });
         });
-
+        
         services.Configure<StoreCollectionOptions>(options =>
         {
             options.Collections.Add(ElsaAgentCollections.AgentApiKeys);
             options.Collections.Add(ElsaAgentCollections.AgentServices);
         });
+        
+        services.AddContentPart<Parts.AgentPart>()
+            .UseDisplayDriver<Drivers.AgentPartDriver>();
 
         services
-            .AddContentPart<Parts.AgentPart>()
-            .AddDataMigration<Migrations.AgentMigrations>()
+            .AddDataMigration<AgentMigrations>()
             .AddScoped<IPermissionProvider, Permissions>()
             .AddScoped<INavigationProvider, AdminMenu>()
             .AddIndexProvider<Indexes.AgentIndexProvider>()

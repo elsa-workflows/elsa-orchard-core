@@ -3,7 +3,6 @@ using OrchardCore.ContentManagement.Metadata;
 using OrchardCore.ContentManagement.Metadata.Settings;
 using OrchardCore.Data.Migration;
 using OrchardCore.Elsa.Agents.Indexes;
-using OrchardCore.Elsa.Agents.Parts;
 using YesSql.Sql;
 
 namespace OrchardCore.Elsa.Agents.Migrations;

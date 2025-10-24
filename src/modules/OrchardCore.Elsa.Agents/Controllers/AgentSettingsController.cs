@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using Elsa.Agents.Persistence.Contracts;
 using Elsa.Agents.Persistence.Entities;
@@ -12,7 +10,6 @@ using OrchardCore.Elsa.Agents.ViewModels;
 namespace OrchardCore.Elsa.Agents.Controllers;
 
 [Admin("ElsaWorkflows/Agents/Settings")]
-[Area(Constants.Area)]
 public class AgentSettingsController(
     IAuthorizationService authorizationService,
     IApiKeyStore apiKeyStore,

@@ -13,6 +13,7 @@ using OrchardCore.Modules.Manifest;
     Description = "Provides UI and persistence for Elsa agents.",
     Category = "Elsa",
     Dependencies = [
+        "OrchardCore.Elsa",
         "OrchardCore.Contents",
         "OrchardCore.ContentTypes",
         "OrchardCore.ContentFields",

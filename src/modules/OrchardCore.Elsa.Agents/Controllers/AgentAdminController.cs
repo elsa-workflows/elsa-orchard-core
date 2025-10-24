@@ -16,12 +16,11 @@ using OrchardCore.Elsa.Agents.ViewModels;
 using OrchardCore.Navigation;
 using YesSql;
 using VersionOptions = OrchardCore.ContentManagement.VersionOptions;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using OrchardCore.Routing;
 
 namespace OrchardCore.Elsa.Agents.Controllers;
 
-[Admin("ElsaWorkflows/Agents")]
-[Area(Constants.Area)]
+[Admin("ElsaWorkflows/Agents/{action}")]
 public class AgentAdminController(
     IAuthorizationService authorizationService,
     ISession session,
@@ -105,6 +104,7 @@ public class AgentAdminController(
 
     [HttpPost]
     [ActionName(nameof(List))]
+    [FormValueRequired("submit.BulkAction")]
     public async Task<IActionResult> BulkAction(AgentListOptions options, PagerParameters pagerParameters, string[] itemIds)
     {
         if (!await AuthorizeAsync())
@@ -317,8 +317,11 @@ public class AgentAdminController(
         return values;
     }
 
-    private static List<string> Split(string value)
+    private static List<string> Split(string? value)
     {
+        if (string.IsNullOrWhiteSpace(value))
+            return [];
+        
         return value
             .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .Distinct(StringComparer.OrdinalIgnoreCase)
@@ -336,7 +339,7 @@ public class AgentAdminController(
         }
         catch (JsonException ex)
         {
-            ModelState.AddModelError(fieldName, T["Invalid JSON: {0}", ex.Message]);
+            ModelState.AddModelError(fieldName, this.T["Invalid JSON: {0}", ex.Message]);
             return default;
         }
     }

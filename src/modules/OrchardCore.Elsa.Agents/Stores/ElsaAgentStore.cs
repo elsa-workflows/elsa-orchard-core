@@ -1,7 +1,7 @@
-using System.Linq;
 using Elsa.Agents.Persistence.Contracts;
 using Elsa.Agents.Persistence.Entities;
 using Elsa.Agents.Persistence.Filters;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OrchardCore.ContentManagement;
 using OrchardCore.Elsa.Agents.Extensions;
@@ -15,16 +15,19 @@ namespace OrchardCore.Elsa.Agents.Stores;
 
 public class ElsaAgentStore(
     ISession session,
-    IContentManager contentManager,
     ShellSettings shellSettings,
+    IServiceProvider serviceProvider,
     ILogger<ElsaAgentStore> logger) : IAgentStore
 {
+    private readonly Lazy<IContentManager> _contentManager = new(serviceProvider.GetRequiredService<IContentManager>);
+    private IContentManager ContentManager => _contentManager.Value;
+    
     public async Task AddAsync(AgentDefinition entity, CancellationToken cancellationToken = default)
     {
-        var contentItem = await contentManager.NewAsync(AgentConstants.AgentContentType);
-        await ApplyDefinitionAsync(contentItem, entity, cancellationToken);
-        await contentManager.CreateAsync(contentItem, VersionOptions.Draft);
-        await contentManager.PublishAsync(contentItem);
+        var contentItem = await ContentManager.NewAsync(AgentConstants.AgentContentType);
+        ApplyDefinition(contentItem, entity);
+        await ContentManager.CreateAsync(contentItem, VersionOptions.Draft);
+        await ContentManager.PublishAsync(contentItem);
 
         var part = contentItem.As<AgentPart>()!;
         entity.Id = part.AgentId;
@@ -42,11 +45,11 @@ public class ElsaAgentStore(
         }
 
         var wasPublished = contentItem.Published;
-        await ApplyDefinitionAsync(contentItem, entity, cancellationToken);
-        await contentManager.SaveDraftAsync(contentItem);
+        ApplyDefinition(contentItem, entity);
+        await ContentManager.SaveDraftAsync(contentItem);
 
         if (wasPublished)
-            await contentManager.PublishAsync(contentItem);
+            await ContentManager.PublishAsync(contentItem);
     }
 
     public async Task<AgentDefinition?> GetAsync(string id, CancellationToken cancellationToken = default)
@@ -64,7 +67,7 @@ public class ElsaAgentStore(
             return null;
 
         var version = index.Latest ? VersionOptions.Latest : VersionOptions.Published;
-        var contentItem = await contentManager.GetAsync(index.ContentItemId, version);
+        var contentItem = await ContentManager.GetAsync(index.ContentItemId, version);
         return contentItem == null ? null : Map(contentItem.As<AgentPart>());
     }
 
@@ -79,7 +82,7 @@ public class ElsaAgentStore(
 
         foreach (var index in indexes)
         {
-            var contentItem = await contentManager.GetAsync(index.ContentItemId, VersionOptions.Published);
+            var contentItem = await ContentManager.GetAsync(index.ContentItemId, VersionOptions.Published);
             if (contentItem == null)
                 continue;
 
@@ -95,7 +98,7 @@ public class ElsaAgentStore(
         if (contentItem == null)
             return;
 
-        await contentManager.RemoveAsync(contentItem);
+        await ContentManager.RemoveAsync(contentItem);
     }
 
     public async Task<long> DeleteManyAsync(AgentDefinitionFilter filter, CancellationToken cancellationToken = default)
@@ -105,18 +108,18 @@ public class ElsaAgentStore(
 
         foreach (var index in indexes)
         {
-            var contentItem = await contentManager.GetAsync(index.ContentItemId, VersionOptions.Latest);
+            var contentItem = await ContentManager.GetAsync(index.ContentItemId, VersionOptions.Latest);
             if (contentItem == null)
                 continue;
 
-            await contentManager.RemoveAsync(contentItem);
+            await ContentManager.RemoveAsync(contentItem);
             count++;
         }
 
         return count;
     }
 
-    private async Task ApplyDefinitionAsync(ContentItem contentItem, AgentDefinition definition, CancellationToken cancellationToken)
+    private void ApplyDefinition(ContentItem contentItem, AgentDefinition definition)
     {
         var agentId = string.IsNullOrWhiteSpace(definition.Id) ? contentItem.ContentItemId : definition.Id;
         definition.Id = agentId;
@@ -124,7 +127,7 @@ public class ElsaAgentStore(
 
         contentItem.DisplayText = definition.Name;
 
-        await contentItem.AlterAsync<AgentPart>(part =>
+        contentItem.Alter<AgentPart>(part =>
         {
             part.AgentId = agentId;
             part.Name = definition.Name;
@@ -146,7 +149,7 @@ public class ElsaAgentStore(
         if (index == null)
             return null;
 
-        return await contentManager.GetAsync(index.ContentItemId, version);
+        return await ContentManager.GetAsync(index.ContentItemId, version);
     }
 
     private AgentDefinition Map(AgentPart part)

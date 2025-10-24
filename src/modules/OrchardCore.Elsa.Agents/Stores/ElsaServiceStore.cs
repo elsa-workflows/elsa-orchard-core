@@ -1,4 +1,3 @@
-using System.Linq;
 using Elsa.Agents.Persistence.Contracts;
 using Elsa.Agents.Persistence.Entities;
 using Elsa.Agents.Persistence.Filters;
@@ -64,7 +63,7 @@ public class ElsaServiceStore(
         if (existing == null)
             return;
 
-        await session.DeleteAsync(existing, Collection);
+        session.Delete(existing, Collection);
         await session.SaveChangesAsync(cancellationToken);
     }
 
@@ -79,7 +78,7 @@ public class ElsaServiceStore(
             if (service == null)
                 continue;
 
-            await session.DeleteAsync(service, Collection);
+            session.Delete(service, Collection);
             count++;
         }
 

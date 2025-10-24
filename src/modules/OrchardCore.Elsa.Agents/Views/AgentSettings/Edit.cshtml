@@ -33,7 +33,7 @@
                         </div>
                         <div class="col-md-2 text-end">
                             <button type="submit" class="btn btn-sm btn-primary">@T["Update"]</button>
-                            <button type="submit" class="btn btn-sm btn-outline-danger" formaction="@Url.Action("DeleteApiKey", "AgentSettings", new { area = Constants.Area })" formmethod="post" name="id" value="@apiKey.Id" data-url-af="RemoveUrl UnsafeUrl" data-title="@T["Delete API key"]" data-message="@T["Are you sure you want to delete this API key?"]">@T["Delete"]</button>
+                            <a asp-action="DeleteApiKey" asp-route-id="@apiKey.Id" class="btn btn-outline-danger" data-message="@T["Are you sure you want to delete this API key?"]" data-url-af="RemoveUrl UnsafeUrl">@T["Delete"]</a>
                         </div>
                     </form>
                 </div>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-12 text-end">
                             <button type="submit" class="btn btn-sm btn-primary">@T["Update"]</button>
-                            <button type="submit" class="btn btn-sm btn-outline-danger" formaction="@Url.Action("DeleteService", "AgentSettings", new { area = Constants.Area })" formmethod="post" name="id" value="@service.Id" data-url-af="RemoveUrl UnsafeUrl" data-title="@T["Delete service"]" data-message="@T["Are you sure you want to delete this service?"]">@T["Delete"]</button>
+                            <a asp-action="DeleteService" asp-route-id="@service.Id" class="btn btn-outline-danger" data-message="@T["Are you sure you want to delete this service?"]" data-url-af="RemoveUrl UnsafeUrl">@T["Delete"]</a>
                         </div>
                     </form>
                 </div>

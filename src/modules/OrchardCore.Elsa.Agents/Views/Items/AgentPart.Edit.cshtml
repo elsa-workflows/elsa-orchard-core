@@ -1,18 +1,7 @@
-@model AgentEditViewModel
+@model OrchardCore.Elsa.Agents.ViewModels.AgentPartViewModel
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer T
-@{
-    var isNew = string.IsNullOrEmpty(Model.Id);
-    ViewData["Title"] = isNew ? T["Create Agent"] : T["Edit Agent"];
-}
 
-<zone Name="Title"><h1>@ViewData["Title"]</h1></zone>
-
-<form asp-action="@(isNew ? "Create" : "Edit")" method="post" class="needs-validation" novalidate>
-    @Html.AntiForgeryToken()
-    @if (!isNew)
-    {
-        <input type="hidden" asp-for="Id" />
-    }
+<fieldset class="form-group">
     <div class="mb-3">
         <label asp-for="Name" class="form-label">@T["Name"]</label>
         <input asp-for="Name" class="form-control" required />
@@ -26,7 +15,7 @@
     <div class="row g-3">
         <div class="col-md-6">
             <label asp-for="FunctionName" class="form-label">@T["Function name"]</label>
-            <input asp-for="FunctionName" class="form-control" />
+            <input asp-for="FunctionName" class="form-control" required />
             <span asp-validation-for="FunctionName" class="text-danger"></span>
         </div>
         <div class="col-md-6">
@@ -49,7 +38,7 @@
     </div>
     <div class="mb-3 mt-3">
         <label asp-for="PromptTemplate" class="form-label">@T["Prompt template"]</label>
-        <textarea asp-for="PromptTemplate" class="form-control" rows="4"></textarea>
+        <textarea asp-for="PromptTemplate" class="form-control" rows="4" required></textarea>
         <span asp-validation-for="PromptTemplate" class="text-danger"></span>
     </div>
     <div class="mb-3">
@@ -67,13 +56,4 @@
         <textarea asp-for="ExecutionSettingsJson" class="form-control font-monospace" rows="4"></textarea>
         <span asp-validation-for="ExecutionSettingsJson" class="text-danger"></span>
     </div>
-    <div class="btn-toolbar gap-2">
-        <button type="submit" name="submit" value="save" class="btn btn-primary">@T["Save"]</button>
-        <button type="submit" name="submit" value="publish" class="btn btn-success">@T["Save & Publish"]</button>
-        @if (!isNew)
-        {
-            <button type="submit" name="submit" value="unpublish" class="btn btn-outline-warning">@T["Save & Unpublish"]</button>
-        }
-        <a asp-action="List" class="btn btn-secondary">@T["Cancel"]</a>
-    </div>
-</form>
+</fieldset>

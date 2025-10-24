@@ -21,7 +21,7 @@ public class AdminMenu(IStringLocalizer<AdminMenu> localizer) : INavigationProvi
                         .AddClass("elsa-agents")
                         .Id(AgentConstants.AgentAdminMenuId)
                         .Add(T["Agents"], item => item
-                            .Action("List", "AgentAdmin", new { area = Constants.Area })
+                            .Action("List", "Admin", new { area = "OrchardCore.Contents", contentTypeId = AgentConstants.AgentContentType })
                             .Permission(Permissions.ManageAgents)
                             .LocalNav())
                         .Add(T["Settings"], item => item
@@ -41,7 +41,7 @@ public class AdminMenu(IStringLocalizer<AdminMenu> localizer) : INavigationProvi
                         .AddClass("elsa-agents")
                         .Id(AgentConstants.AgentAdminMenuId)
                         .Add(T["Agents"], item => item
-                            .Action("List", "AgentAdmin", new { area = Constants.Area })
+                            .Action("List", "Admin", new { area = "OrchardCore.Contents", contentTypeId = AgentConstants.AgentContentType })
                             .Permission(Permissions.ManageAgents)
                             .LocalNav())
                         .Add(T["Settings"], item => item

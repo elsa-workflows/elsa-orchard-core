@@ -15,13 +15,6 @@
         <PackageVersion Include="Elsa.Workflows.Runtime" Version="$(ElsaVersion)"/>
         <PackageVersion Include="Elsa.Workflows.Runtime.Distributed" Version="$(ElsaVersion)"/>
     </ItemGroup>
-    <ItemGroup Label="Elsa Agents">
-        <PackageVersion Include="Elsa.Agents" Version="3.5.1"/>
-        <PackageVersion Include="Elsa.Agents.Activities" Version="3.5.1"/>
-        <PackageVersion Include="Elsa.Agents.Core" Version="3.5.1"/>
-        <PackageVersion Include="Elsa.Agents.Models" Version="3.5.1"/>
-        <PackageVersion Include="Elsa.Agents.Persistence" Version="3.5.1"/>
-    </ItemGroup>
     <ItemGroup Label="Elsa Studio">
         <PackageVersion Include="Elsa.Studio.Core" Version="$(ElsaStudioVersion)"/>
         <PackageVersion Include="Elsa.Studio.Core.BlazorWasm" Version="$(ElsaStudioVersion)"/>
@@ -32,6 +25,10 @@
         <PackageVersion Include="Elsa.Studio.Shell" Version="$(ElsaStudioVersion)"/>
     </ItemGroup>
     <ItemGroup Label="Elsa Extensions">
+        <PackageVersion Include="Elsa.Agents.Activities" Version="$(ElsaExtensionsVersion)"/>
+        <PackageVersion Include="Elsa.Agents.Core" Version="3.6.0-preview.158"/>
+        <PackageVersion Include="Elsa.Agents.Models" Version="$(ElsaExtensionsVersion)"/>
+        <PackageVersion Include="Elsa.Agents.Persistence" Version="$(ElsaExtensionsVersion)"/>
         <PackageVersion Include="Elsa.Scheduling.Quartz" Version="$(ElsaExtensionsVersion)"/>
         <PackageVersion Include="Elsa.Sql" Version="$(ElsaExtensionsVersion)"/>
     </ItemGroup>
@@ -49,6 +46,7 @@
         <PackageVersion Include="OrchardCore.OpenId.Core" Version="$(OrchardVersion)"/>
         <PackageVersion Include="OrchardCore.Queries" Version="$(OrchardVersion)"/>
         <PackageVersion Include="OrchardCore.ResourceManagement" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Settings" Version="$(OrchardVersion)"/>
     </ItemGroup>
     <ItemGroup Label="Microsoft">
         <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(MicrosoftVersion)"/>

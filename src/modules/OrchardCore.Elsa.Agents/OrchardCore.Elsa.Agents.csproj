@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup Label="Elsa">
     <PackageReference Include="Elsa" />
-    <PackageReference Include="Elsa.Agents" />
     <PackageReference Include="Elsa.Agents.Activities" />
     <PackageReference Include="Elsa.Agents.Core" />
     <PackageReference Include="Elsa.Agents.Models" />
