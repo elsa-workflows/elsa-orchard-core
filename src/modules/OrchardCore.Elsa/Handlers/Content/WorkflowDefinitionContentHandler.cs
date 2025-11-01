@@ -1,5 +1,4 @@
 using Elsa.Mediator.Contracts;
-using Elsa.Workflows;
 using Elsa.Workflows.Management.Entities;
 using Elsa.Workflows.Management.Mappers;
 using Elsa.Workflows.Management.Models;
@@ -12,10 +11,7 @@ using OrchardCore.Elsa.Services;
 
 namespace OrchardCore.Elsa.Handlers.Content;
 
-public class WorkflowDefinitionContentHandler(
-    IMediator mediator,
-    IApiSerializer apiSerializer,
-    IServiceProvider serviceProvider
+public class WorkflowDefinitionContentHandler(IMediator mediator, IServiceProvider serviceProvider
 ) : ContentHandlerBase
 {
     private readonly Lazy<WorkflowDefinitionPartMapper> _workflowDefinitionPartMapper = new(serviceProvider.GetRequiredService<WorkflowDefinitionPartMapper>);
@@ -136,6 +132,9 @@ public class WorkflowDefinitionContentHandler(
 
     public override async Task RemovingAsync(RemoveContentContext context)
     {
+        if (!context.ContentItem.Has<WorkflowDefinitionPart>())
+            return;
+        
         var workflowDefinitionPart = context.ContentItem.As<WorkflowDefinitionPart>();
         await mediator.SendAsync(new WorkflowDefinitionDeleting(workflowDefinitionPart.DefinitionId));
     }

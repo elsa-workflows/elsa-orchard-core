@@ -12,5 +12,5 @@ using OrchardCore.Modules.Manifest;
     Name = "Content Activities",
     Description = "Provides content related activities.",
     Category = "Elsa",
-    Dependencies = ["OrchardCore.Elsa", "OrchardCore.Contents"]
+    Dependencies = ["OrchardCore.Elsa", "OrchardCore.Contents", "OrchardCore.Title", "OrchardCore.Taxonomies"]
 )]

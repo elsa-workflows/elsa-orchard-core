@@ -14,9 +14,12 @@
         <PackageReference Include="OrchardCore.Contents"/>
         <PackageReference Include="OrchardCore.Module.Targets"/>
         <PackageReference Include="OrchardCore.ContentManagement"/>
+        <PackageReference Include="OrchardCore.Taxonomies.Core" />
+        <PackageReference Include="OrchardCore.Title" />
     </ItemGroup>
 
     <ItemGroup Label="Elsa">
+        <PackageReference Include="Elsa.Expressions.JavaScript"/>
         <PackageReference Include="Elsa.Workflows.Core"/>
         <PackageReference Include="Elsa.Workflows.Management"/>
         <PackageReference Include="Elsa.Workflows.Runtime"/>
