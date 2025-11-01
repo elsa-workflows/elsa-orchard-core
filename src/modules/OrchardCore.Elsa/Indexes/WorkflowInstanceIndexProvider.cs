@@ -1,36 +1,36 @@
-using Elsa.Workflows.Management.Entities;
 using JetBrains.Annotations;
+using OrchardCore.Elsa.Documents;
 using YesSql.Indexes;
 
 namespace OrchardCore.Elsa.Indexes;
 
 [UsedImplicitly]
-public class WorkflowInstanceIndexProvider : IndexProvider<WorkflowInstance>
+public class WorkflowInstanceIndexProvider : IndexProvider<WorkflowInstanceDocument>
 {
     public WorkflowInstanceIndexProvider()
     {
         CollectionName = ElsaCollections.WorkflowInstances;
     }
 
-    public override void Describe(DescribeContext<WorkflowInstance> context)
+    public override void Describe(DescribeContext<WorkflowInstanceDocument> context)
     {
-        context.For<WorkflowInstanceIndex>().Map(instance => new()
+        context.For<WorkflowInstanceIndex>().Map(document => new()
         {
-            InstanceId = instance.Id,
-            DefinitionId = instance.DefinitionId,
-            DefinitionVersionId = instance.DefinitionVersionId,
-            Version = instance.Version,
-            Name = instance.Name,
-            Status = instance.Status,
-            CreatedAt = instance.CreatedAt,
-            FinishedAt = instance.FinishedAt,
-            CorrelationId = instance.CorrelationId,
-            IncidentCount = instance.IncidentCount,
-            IsSystem = instance.IsSystem,
-            SubStatus = instance.SubStatus,
-            UpdatedAt = instance.UpdatedAt,
-            ParentInstanceId = instance.ParentWorkflowInstanceId,
-            HasIncidents = instance.IncidentCount > 0
+            InstanceId = document.InstanceId,
+            DefinitionId = document.DefinitionId,
+            DefinitionVersionId = document.DefinitionVersionId,
+            Version = document.Version,
+            Name = document.Name,
+            Status = document.Status,
+            CreatedAt = document.CreatedAt,
+            FinishedAt = document.FinishedAt,
+            CorrelationId = document.CorrelationId,
+            IncidentCount = document.IncidentCount,
+            IsSystem = document.IsSystem,
+            SubStatus = document.SubStatus,
+            UpdatedAt = document.UpdatedAt,
+            ParentInstanceId = document.ParentWorkflowInstanceId,
+            HasIncidents = document.IncidentCount > 0
         });
     }
 }

@@ -1,6 +1,7 @@
 using Elsa.Workflows.Management.Entities;
 using Elsa.Workflows.Management.Enums;
 using Elsa.Workflows.Management.Filters;
+using OrchardCore.Elsa.Documents;
 using OrchardCore.Elsa.Indexes;
 using YesSql;
 using YesSql.Services;
@@ -9,7 +10,7 @@ namespace OrchardCore.Elsa.Extensions;
 
 public static class WorkflowInstanceFilterExtensions
 {
-    public static IQuery<WorkflowInstance, WorkflowInstanceIndex> Apply(this WorkflowInstanceFilter filter, IQuery<WorkflowInstance, WorkflowInstanceIndex> query)
+    public static IQuery<WorkflowInstanceDocument, WorkflowInstanceIndex> Apply(this WorkflowInstanceFilter filter, IQuery<WorkflowInstanceDocument, WorkflowInstanceIndex> query)
     {
         if (filter.Id != null) query = query.Where(x => x.InstanceId == filter.Id);
         if (filter.Ids != null) query = query.Where(x => x.InstanceId.IsIn(filter.Ids));
