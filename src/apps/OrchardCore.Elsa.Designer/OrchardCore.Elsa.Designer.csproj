@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <StaticWebAssetBasePath>OrchardCore.Elsa</StaticWebAssetBasePath>
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>

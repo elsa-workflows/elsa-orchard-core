@@ -54,11 +54,6 @@ jobs:
           else
             echo "VERSION=${{env.base_version}}-${PACKAGE_PREFIX}.${{github.run_number}}" >> $GITHUB_ENV
           fi
-      - name: Build workflow designer client assets
-        working-directory: ./src/OrchardCore.Elsa/ClientApp
-        run: |
-          npm install --force
-          npm run build
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.x
