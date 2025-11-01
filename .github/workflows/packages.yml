@@ -1,4 +1,4 @@
-name: Orchard Core Elsa Workflows Packages
+name: Packages
 on:
   workflow_dispatch:
   push:

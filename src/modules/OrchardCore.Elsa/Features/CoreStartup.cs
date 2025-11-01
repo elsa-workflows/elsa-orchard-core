@@ -19,9 +19,10 @@ using OrchardCore.Modules;
 using OrchardCore.Navigation;
 using OrchardCore.Users.Services;
 
-namespace OrchardCore.Elsa;
+namespace OrchardCore.Elsa.Features;
 
-public class Startup : StartupBase
+[Feature("OrchardCore.Elsa")]
+public class CoreStartup : StartupBase
 {
     public override int Order => int.MaxValue; // Run after all other modules.
     
@@ -29,7 +30,7 @@ public class Startup : StartupBase
     {
         services.AddElsa(elsa =>
         {
-            elsa.AddActivitiesFrom<Startup>();
+            elsa.AddActivitiesFrom<CoreStartup>();
             elsa.UseWorkflowManagement(workflowManagement =>
             {
                 workflowManagement.UseWorkflowDefinitionPublisher(sp => ActivatorUtilities.CreateInstance<ContentItemWorkflowDefinitionPublisher>(sp));
@@ -47,7 +48,7 @@ public class Startup : StartupBase
             elsa.UseJavaScript();
             elsa.UseLiquid();
             elsa.UseResilience();
-            elsa.UseWorkflowsApi(api => api.AddFastEndpointsAssembly<Startup>());
+            elsa.UseWorkflowsApi(api => api.AddFastEndpointsAssembly<CoreStartup>());
         });
         
         services.Configure<StoreCollectionOptions>(o =>

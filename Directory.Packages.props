@@ -7,6 +7,7 @@
         <PackageVersion Include="Elsa" Version="$(ElsaVersion)"/>
         <PackageVersion Include="Elsa.Expressions.JavaScript" Version="$(ElsaVersion)"/>
         <PackageVersion Include="Elsa.Expressions.Liquid" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Http" Version="$(ElsaVersion)"/>
         <PackageVersion Include="Elsa.Scheduling" Version="$(ElsaVersion)"/>
         <PackageVersion Include="Elsa.Workflows.Api" Version="$(ElsaVersion)"/>
         <PackageVersion Include="Elsa.Workflows.Core" Version="$(ElsaVersion)"/>
@@ -27,6 +28,7 @@
     <ItemGroup Label="Elsa Extensions">
         <PackageVersion Include="Elsa.Scheduling.Quartz" Version="$(ElsaExtensionsVersion)"/>
         <PackageVersion Include="Elsa.Sql" Version="$(ElsaExtensionsVersion)"/>
+        <PackageVersion Include="Elsa.Data.Csv" Version="3.6.0-preview.166"/>
     </ItemGroup>
     <ItemGroup Label="Orchard">
         <PackageVersion Include="OrchardCore.Admin.Abstractions" Version="$(OrchardVersion)"/>
@@ -46,7 +48,7 @@
     <ItemGroup Label="Microsoft">
         <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(MicrosoftVersion)"/>
         <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(MicrosoftVersion)" PrivateAssets="all"/>
-        <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.8"/>
+        <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="$(MicrosoftVersion)"/>
     </ItemGroup>
     <ItemGroup>
         <PackageVersion Include="ncrontab" Version="3.3.3"/>

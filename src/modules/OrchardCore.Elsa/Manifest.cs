@@ -11,7 +11,15 @@ using OrchardCore.OpenId;
 [assembly: Feature(
     Id = "OrchardCore.Elsa",
     Name = "Core Elsa Services",
-    Description = "Provides the foundational services for Elsa.",
+    Description = "Provides foundational Elsa services.",
     Category = "Elsa",
     Dependencies = ["OrchardCore.Contents", OpenIdConstants.Features.Core]
+)]
+
+[assembly: Feature(
+    Id = "OrchardCore.Elsa.Http",
+    Name = "HTTP Activities",
+    Description = "Provides HTTP activities.",
+    Category = "Elsa",
+    Dependencies = ["OrchardCore.Elsa"]
 )]

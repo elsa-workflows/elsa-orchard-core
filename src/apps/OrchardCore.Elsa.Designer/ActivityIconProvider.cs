@@ -24,6 +24,7 @@ public class ActivityIconProvider : IActivityDisplaySettingsProvider
             ["OrchardCore.Content.PublishContent"] = new(OrchardCoreColors.ContentAction, Icons.Material.Filled.CloudUpload),
             ["OrchardCore.Content.UnpublishContent"] = new(OrchardCoreColors.ContentAction, Icons.Material.Filled.CloudDownload),
             ["OrchardCore.UI.DisplayNotification"] = new(OrchardCoreColors.UIAction, Icons.Material.Outlined.Info),
+            ["OrchardCore.Queries.RunSqlQuery"] = new(OrchardCoreColors.Queries, OrchardCoreIcons.Tabler.Database),
         };
     }
 }
