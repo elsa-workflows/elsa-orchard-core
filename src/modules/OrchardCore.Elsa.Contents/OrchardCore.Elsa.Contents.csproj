@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+        <IsPackable>true</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
