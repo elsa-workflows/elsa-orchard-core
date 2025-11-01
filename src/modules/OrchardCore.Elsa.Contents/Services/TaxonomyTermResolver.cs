@@ -11,8 +11,8 @@ using OrchardCore.Title.Models;
 namespace OrchardCore.Elsa.Contents.Services;
 
 public class TaxonomyTermResolver(
-    IContentDefinitionManager contentDefinitionManager, 
-    IContentManager contentManager, 
+    IContentDefinitionManager contentDefinitionManager,
+    IContentManager contentManager,
     IContentHandleManager contentHandleManager,
     IEnumerable<IContentHandler> contentHandlers,
     ILogger<TaxonomyTermResolver> logger) : ITaxonomyTermResolver
@@ -27,7 +27,18 @@ public class TaxonomyTermResolver(
         if (tagsTaxonomyContentItem == null)
             throw new InvalidOperationException("Could not find tags taxonomy");
 
-        var taxonomyPart = tagsTaxonomyContentItem.As<TaxonomyPart>();
+        return await ResolveTermAsync(tagsTaxonomyContentItem, contentTypeDefinition, requestedTags, cancellationToken);
+    }
+
+    public async Task<IEnumerable<ContentItem>> ResolveTermAsync(ContentItem tagsTaxonomyContentItem, IEnumerable<string> requestedTags, CancellationToken cancellationToken = default)
+    {
+        var contentTypeDefinition = await contentDefinitionManager.GetTypeDefinitionAsync("Taxonomy");
+        return await ResolveTermAsync(tagsTaxonomyContentItem, contentTypeDefinition, requestedTags, cancellationToken);
+    }
+
+    private async Task<IEnumerable<ContentItem>> ResolveTermAsync(ContentItem tagsTaxonomyContentItem, ContentTypeDefinition contentTypeDefinition, IEnumerable<string> requestedTags, CancellationToken cancellationToken = default)
+    {
+        var taxonomyPart = tagsTaxonomyContentItem.ContentItem.As<TaxonomyPart>();
         var existingTagTerms = taxonomyPart.Terms.Where(t => t.Has<TitlePart>() && requestedTags.Contains(t.As<TitlePart>().Title, StringComparer.OrdinalIgnoreCase)).ToList();
         var allTagTerms = existingTagTerms.ToList();
         var existingTags = existingTagTerms.Select(t => t.As<TitlePart>().Title).ToList();
@@ -39,9 +50,9 @@ public class TaxonomyTermResolver(
             allTagTerms.Add(newTagTerm);
         }
 
-        if (!missingTagTerms.Any()) 
+        if (!missingTagTerms.Any())
             return allTagTerms;
-        
+
         if (contentTypeDefinition.IsDraftable())
             await contentManager.PublishAsync(tagsTaxonomyContentItem);
         else
@@ -49,7 +60,7 @@ public class TaxonomyTermResolver(
 
         return allTagTerms;
     }
-    
+
     private async Task<ContentItem> CreateTagTermContentItem(ContentItem tagsTaxonomy, string tagName)
     {
         // Create a tag term but only run content handlers, not content item display manager update editor.
