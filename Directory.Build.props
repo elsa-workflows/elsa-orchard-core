@@ -40,7 +40,7 @@
         <None Include="..\..\icon.png" Pack="true" PackagePath="\"/>
     </ItemGroup>
     <PropertyGroup>
-        <ElsaVersion>3.6.0-preview.3780</ElsaVersion>
+        <ElsaVersion>3.6.0-preview.3788</ElsaVersion>
         <ElsaStudioVersion>3.6.0-preview.1261</ElsaStudioVersion>
         <ElsaExtensionsVersion>3.6.0-preview.166</ElsaExtensionsVersion>
         <OrchardVersion>3.0.0-preview-18758</OrchardVersion>
