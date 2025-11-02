@@ -37,7 +37,7 @@
         <NoWarn>$(NoWarn);IL2026;IL2046;IL2057;IL2067;IL2070;IL2072;IL2075;IL2087;IL2091</NoWarn>
     </PropertyGroup>
     <ItemGroup Label="Files">
-        <None Include="..\..\icon.png" Pack="true" PackagePath="\"/>
+        <None Include="..\..\..\icon.png" Pack="true" PackagePath="\"/>
     </ItemGroup>
     <PropertyGroup>
         <ElsaVersion>3.6.0-preview.3788</ElsaVersion>
