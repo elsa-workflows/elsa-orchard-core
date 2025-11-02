@@ -1,4 +1,6 @@
+using Elsa.Common.Multitenancy.HostedServices;
 using Elsa.Extensions;
+using Elsa.Mediator.HostedServices;
 using Elsa.Resilience.Extensions;
 using Elsa.Workflows.Runtime.Distributed.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -36,6 +38,7 @@ public class CoreStartup : StartupBase
                 workflowManagement.UseWorkflowDefinitionPublisher(sp => ActivatorUtilities.CreateInstance<ContentItemWorkflowDefinitionPublisher>(sp));
                 workflowManagement.UseWorkflowDefinitions(workflowDefinitions => workflowDefinitions.WorkflowDefinitionStore = sp => ActivatorUtilities.CreateInstance<ElsaWorkflowDefinitionStore>(sp));
                 workflowManagement.UseWorkflowInstances(workflowInstances => workflowInstances.WorkflowInstanceStore = sp => ActivatorUtilities.CreateInstance<ElsaWorkflowInstanceStore>(sp));
+                workflowManagement.UseCache();
             });
             elsa.UseWorkflowRuntime(workflowRuntime =>
             {
@@ -44,6 +47,7 @@ public class CoreStartup : StartupBase
                 workflowRuntime.WorkflowExecutionLogStore = sp => ActivatorUtilities.CreateInstance<ElsaWorkflowExecutionLogStore>(sp);
                 workflowRuntime.ActivityExecutionLogStore = sp => ActivatorUtilities.CreateInstance<ElsaActivityExecutionRecordStore>(sp);
                 workflowRuntime.UseDistributedRuntime();
+                workflowRuntime.UseCache();
             });
             elsa.UseJavaScript();
             elsa.UseLiquid();
@@ -67,8 +71,11 @@ public class CoreStartup : StartupBase
             .AddDataMigration<StoredBookmarkMigrations>()
             .AddDataMigration<WorkflowExecutionLogRecordMigrations>()
             .AddDataMigration<ActivityExecutionRecordMigrations>()
+            .AddSingleton<JobRunnerHostedService>()
+            .AddSingleton<ActivateTenants>()
             .AddScoped<INavigationProvider, AdminMenu>()
             .AddScoped<IModularTenantEvents, PopulateRegistriesTask>()
+            .AddScoped<IModularTenantEvents, StartHostedServices>()
             .AddScoped<IContentHandler, WorkflowDefinitionContentHandler>()
             .AddScoped<IUserClaimsProvider, PermissionsClaimsProvider>()
             .AddScoped<WorkflowDefinitionPartMapper>()

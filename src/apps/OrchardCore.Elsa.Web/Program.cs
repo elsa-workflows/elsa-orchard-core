@@ -1,3 +1,4 @@
+using Elsa.Mediator.Options;
 using OrchardCore.Elsa.Extensions;
 using OrchardCore.Elsa.Middleware;
 using Quartz;
@@ -16,6 +17,7 @@ builder.Services
     .AddQuartzHostedService()
     .AddOrchardCms();
 
+builder.Services.Configure<MediatorOptions>(options => options.JobWorkerCount = 1);
 builder.Services.ConfigureWebAssemblyStaticFiles();
 
 var app = builder.Build();

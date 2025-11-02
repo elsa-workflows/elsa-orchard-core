@@ -14,7 +14,7 @@ namespace OrchardCore.Elsa.Timers.Common;
 [UsedImplicitly]
 public class CreateSchedules(IServiceScopeFactory scopeFactory) : ModularTenantEvents
 {
-    public override async Task ActivatingAsync()
+    public override async Task ActivatedAsync()
     {
         using var scope = scopeFactory.CreateScope();
         var serviceProvider = scope.ServiceProvider;
