@@ -127,7 +127,7 @@ public class ElsaWorkflowDefinitionStore(
 
     public async Task SaveAsync(WorkflowDefinition definition, CancellationToken cancellationToken = default)
     {
-        var contentItem = definition.Id != null! ? await ContentManager.GetVersionAsync(definition.Id) : null;
+        var contentItem = string.IsNullOrEmpty(definition.Id) ? null : await ContentManager.GetVersionAsync(definition.Id);
 
         if (contentItem == null)
             contentItem = await ContentManager.NewAsync("WorkflowDefinition");

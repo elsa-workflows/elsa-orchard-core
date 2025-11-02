@@ -4,5 +4,6 @@ namespace OrchardCore.Elsa.Contents.Contracts;
 
 public interface ITaxonomyTermResolver
 {
-    Task<IEnumerable<ContentItem>> ResolveTermAsync(string taxonomyHandle, IEnumerable<string> requestedTags, CancellationToken cancellationToken = default);
+    Task<ContentItem> ResolveTermAsync(string taxonomyHandle, string alias, CancellationToken cancellationToken = default);
+    Task<IEnumerable<ContentItem>> ResolveTermsAsync(string taxonomyHandle, IEnumerable<string> aliases, CancellationToken cancellationToken = default);
 }

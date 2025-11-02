@@ -17,7 +17,13 @@ public class TaxonomyTermResolver(
     IEnumerable<IContentHandler> contentHandlers,
     ILogger<TaxonomyTermResolver> logger) : ITaxonomyTermResolver
 {
-    public async Task<IEnumerable<ContentItem>> ResolveTermAsync(string taxonomyHandle, IEnumerable<string> requestedTags, CancellationToken cancellationToken = default)
+    public async Task<ContentItem> ResolveTermAsync(string taxonomyHandle, string alias, CancellationToken cancellationToken = default)
+    {
+        var terms = await ResolveTermsAsync(taxonomyHandle, [alias], cancellationToken);
+        return terms.First();
+    }
+
+    public async Task<IEnumerable<ContentItem>> ResolveTermsAsync(string taxonomyHandle, IEnumerable<string> aliases, CancellationToken cancellationToken = default)
     {
         var contentTypeDefinition = await contentDefinitionManager.GetTypeDefinitionAsync("Taxonomy");
         var versionOptions = contentTypeDefinition.IsDraftable() ? VersionOptions.DraftRequired : VersionOptions.Latest;
@@ -25,9 +31,9 @@ public class TaxonomyTermResolver(
         var tagsTaxonomyContentItem = await contentManager.GetAsync(tagsTaxonomyContentItemId, versionOptions);
 
         if (tagsTaxonomyContentItem == null)
-            throw new InvalidOperationException("Could not find tags taxonomy");
+            throw new InvalidOperationException($"Could not find taxonomy with handle {taxonomyHandle}");
 
-        return await ResolveTermAsync(tagsTaxonomyContentItem, contentTypeDefinition, requestedTags, cancellationToken);
+        return await ResolveTermAsync(tagsTaxonomyContentItem, contentTypeDefinition, aliases, cancellationToken);
     }
 
     public async Task<IEnumerable<ContentItem>> ResolveTermAsync(ContentItem tagsTaxonomyContentItem, IEnumerable<string> requestedTags, CancellationToken cancellationToken = default)

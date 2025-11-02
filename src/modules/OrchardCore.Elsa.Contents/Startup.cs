@@ -36,7 +36,7 @@ public class Startup : StartupBase
     private async Task<object> ResolveTermAsync(ExpressionExecutionContext context, string taxonomyHandle, string termTitle)
     {
         var resolver = context.ServiceProvider.GetRequiredService<ITaxonomyTermResolver>();
-        var terms = await resolver.ResolveTermAsync(taxonomyHandle, [termTitle], context.CancellationToken);
+        var terms = await resolver.ResolveTermsAsync(taxonomyHandle, [termTitle], context.CancellationToken);
         return terms.First();
     }
 }

@@ -24,7 +24,7 @@ public class ResolveTerm : CodeActivity<ContentItem>
         var resolver = context.GetRequiredService<ITaxonomyTermResolver>();
         var taxonomyHandle = TaxonomyHandle.Get(context);
         var alias = Alias.Get(context);
-        var contentItem = await resolver.ResolveTermAsync(taxonomyHandle, [alias], cancellationToken);
+        var contentItem = await resolver.ResolveTermAsync(taxonomyHandle, alias, cancellationToken);
 
         context.SetResult(contentItem);
     }
