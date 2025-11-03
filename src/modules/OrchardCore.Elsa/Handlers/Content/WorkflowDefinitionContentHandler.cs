@@ -77,20 +77,20 @@ public class WorkflowDefinitionContentHandler(IMediator mediator, IServiceProvid
         await newItem.AlterAsync<WorkflowDefinitionPart>(async part =>
         {
             part.DefinitionVersionId = newItem.ContentItemVersionId;
-            part.IsLatest = true;
-            part.IsPublished = true;
+            //part.IsLatest = true;
+            //part.IsPublished = true;
             newItem.DisplayText = part.Name;
             var definitionModel = WorkflowDefinitionPartSerializer.UpdateSerializedData(part);
             var definition = WorkflowDefinitionMapper.MapToWorkflowDefinition(definitionModel);
             await mediator.SendAsync(new WorkflowDefinitionPublishing(definition));
         });
 
-        previousItem?.Alter<WorkflowDefinitionPart>(part =>
-        {
-            part.IsPublished = false;
-            part.IsLatest = false;
-            WorkflowDefinitionPartSerializer.UpdateSerializedData(part);
-        });
+        // previousItem?.Alter<WorkflowDefinitionPart>(part =>
+        // {
+        //     part.IsPublished = false;
+        //     part.IsLatest = false;
+        //     WorkflowDefinitionPartSerializer.UpdateSerializedData(part);
+        // });
     }
 
     public override async Task PublishedAsync(PublishContentContext context)
@@ -118,12 +118,12 @@ public class WorkflowDefinitionContentHandler(IMediator mediator, IServiceProvid
         if (!context.ContentItem.Has<WorkflowDefinitionPart>())
             return;
 
-        context.ContentItem.Alter<WorkflowDefinitionPart>(part =>
-        {
-            part.IsPublished = false;
-            part.IsLatest = false;
-            WorkflowDefinitionPartSerializer.UpdateSerializedData(part);
-        });
+        // context.ContentItem.Alter<WorkflowDefinitionPart>(part =>
+        // {
+        //     part.IsPublished = false;
+        //     part.IsLatest = false;
+        //     WorkflowDefinitionPartSerializer.UpdateSerializedData(part);
+        // });
 
         var workflowDefinitionPart = context.ContentItem.As<WorkflowDefinitionPart>();
         var workflowDefinition = WorkflowDefinitionPartMapper.Map(workflowDefinitionPart);

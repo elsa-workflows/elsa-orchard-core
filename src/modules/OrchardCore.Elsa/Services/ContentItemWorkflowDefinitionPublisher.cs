@@ -1,3 +1,4 @@
+using Elsa.Caching;
 using Elsa.Common;
 using Elsa.Mediator.Contracts;
 using Elsa.Workflows;
@@ -7,11 +8,11 @@ using Elsa.Workflows.Management.Entities;
 using Elsa.Workflows.Management.Materializers;
 using Elsa.Workflows.Management.Models;
 using Elsa.Workflows.Management.Notifications;
+using Elsa.Workflows.Management.Stores;
 using Elsa.Workflows.Models;
-using Open.Linq.AsyncExtensions;
 using OrchardCore.ContentManagement;
 using OrchardCore.Elsa.Parts;
-using Parallel = System.Threading.Tasks.Parallel;
+
 
 namespace OrchardCore.Elsa.Services;
 
@@ -23,6 +24,8 @@ public class ContentItemWorkflowDefinitionPublisher(
     IWorkflowDefinitionService workflowDefinitionService,
     IWorkflowValidator workflowValidator,
     IMediator mediator,
+    IWorkflowDefinitionCacheManager workflowDefinitionCacheManager,
+    ICacheManager cacheManager,
     WorkflowDefinitionPartMapper workflowDefinitionPartMapper,
     WorkflowDefinitionPartSerializer workflowDefinitionPartSerializer) : IWorkflowDefinitionPublisher
 {
@@ -74,6 +77,8 @@ public class ContentItemWorkflowDefinitionPublisher(
         if (validationErrors.Any())
             return new(false, validationErrors, new([]));
 
+        await mediator.SendAsync(new WorkflowDefinitionPublishing(definition), cancellationToken);
+        
         var contentItem = await contentManager.GetAsync(definition.DefinitionId, VersionOptions.DraftRequired);
 
         if (definition.IsPublished)
@@ -87,8 +92,8 @@ public class ContentItemWorkflowDefinitionPublisher(
         {
             part.DefinitionId = definition.DefinitionId;
             part.DefinitionVersionId = definition.Id;
-            part.IsPublished = definition.IsPublished;
-            part.IsLatest = definition.IsLatest;
+            // part.IsPublished = definition.IsPublished;
+            // part.IsLatest = definition.IsLatest;
             part.Name = definition.Name;
             part.Description = definition.Description;
             part.IsReadonly = definition.IsReadonly;
@@ -103,6 +108,7 @@ public class ContentItemWorkflowDefinitionPublisher(
         await contentManager.PublishAsync(contentItem);
         var affectedWorkflows = new AffectedWorkflows(new List<WorkflowDefinition>());
         await mediator.SendAsync(new WorkflowDefinitionPublished(definition, affectedWorkflows), cancellationToken);
+        await RefreshCacheAsync(definition.DefinitionId, cancellationToken);
         return new(true, validationErrors, affectedWorkflows);
     }
 
@@ -112,15 +118,22 @@ public class ContentItemWorkflowDefinitionPublisher(
 
         if (contentItem == null)
             return null;
-
+        
+        var definition =  workflowDefinitionPartMapper.Map(contentItem.As<WorkflowDefinitionPart>());
+        await mediator.SendAsync(new WorkflowDefinitionRetracting(definition), cancellationToken);
         await contentManager.UnpublishAsync(contentItem);
+        await mediator.SendAsync(new WorkflowDefinitionRetracted(definition), cancellationToken);
+        await RefreshCacheAsync(definitionId, cancellationToken);
         return workflowDefinitionPartMapper.Map(contentItem.As<WorkflowDefinitionPart>());
     }
 
     public async Task<WorkflowDefinition> RetractAsync(WorkflowDefinition definition, CancellationToken cancellationToken = default)
     {
         var contentItem = await contentManager.GetAsync(definition.DefinitionId, VersionOptions.Latest);
+        await mediator.SendAsync(new WorkflowDefinitionRetracting(definition), cancellationToken);
         await contentManager.UnpublishAsync(contentItem);
+        await mediator.SendAsync(new WorkflowDefinitionRetracted(definition), cancellationToken);
+        await RefreshCacheAsync(definition.DefinitionId, cancellationToken);
         return workflowDefinitionPartMapper.Map(contentItem.As<WorkflowDefinitionPart>());
     }
 
@@ -134,10 +147,10 @@ public class ContentItemWorkflowDefinitionPublisher(
 
         var latestVersion = allVersions.OrderByDescending(x => x.Version).First();
         
-        latestVersion.ContentItem.Alter<WorkflowDefinitionPart>(part =>
-        {
-            part.IsLatest = false;
-        });
+        // latestVersion.ContentItem.Alter<WorkflowDefinitionPart>(part =>
+        // {
+        //     part.IsLatest = false;
+        // });
         
         var draft = await contentManager.GetAsync(definitionId, VersionOptions.DraftRequired);
         
@@ -148,8 +161,8 @@ public class ContentItemWorkflowDefinitionPublisher(
             part.SerializedData = specifiedVersion.SerializedData;
             part.Description = specifiedVersion.Description;
             part.Name = specifiedVersion.Name;
-            part.IsLatest = true;
-            part.IsPublished = false;
+            // part.IsLatest = true;
+            // part.IsPublished = false;
             part.IsReadonly = specifiedVersion.IsReadonly;
             part.IsSystem = specifiedVersion.IsSystem;
             part.MaterializerName = specifiedVersion.MaterializerName;
@@ -161,6 +174,7 @@ public class ContentItemWorkflowDefinitionPublisher(
         await contentManager.SaveDraftAsync(latestVersion.ContentItem);
         await contentManager.SaveDraftAsync(draft);
         
+        await RefreshCacheAsync(definitionId, cancellationToken);
         return workflowDefinitionPartMapper.Map(specifiedVersion);
     }
 
@@ -174,8 +188,8 @@ public class ContentItemWorkflowDefinitionPublisher(
         contentItem.Alter<WorkflowDefinitionPart>(part =>
         {
             var isNewVersion = part.DefinitionVersionId != contentItem.ContentItemVersionId;
-            part.IsPublished = false;
-            part.IsLatest = true;
+            // part.IsPublished = false;
+            // part.IsLatest = true;
             part.DefinitionVersionId = contentItem.ContentItemVersionId;
 
             if (isNewVersion)
@@ -189,7 +203,16 @@ public class ContentItemWorkflowDefinitionPublisher(
 
     public async Task<WorkflowDefinition> SaveDraftAsync(WorkflowDefinition definition, CancellationToken cancellationToken = default)
     {
+        await mediator.SendAsync(new WorkflowDefinitionDraftSaving(definition), cancellationToken);
         await workflowDefinitionStore.SaveAsync(definition, cancellationToken);
+        await mediator.SendAsync(new WorkflowDefinitionDraftSaved(definition), cancellationToken);
+        await RefreshCacheAsync(definition.DefinitionId, cancellationToken);
         return definition;
+    }
+    
+    private async Task RefreshCacheAsync(string definitionId, CancellationToken cancellationToken = default)
+    {
+        await workflowDefinitionCacheManager.EvictWorkflowDefinitionAsync(definitionId, cancellationToken);
+        await cacheManager.TriggerTokenAsync(typeof(CachingWorkflowDefinitionStore).FullName!, cancellationToken);
     }
 }

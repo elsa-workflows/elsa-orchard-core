@@ -1,25 +1,27 @@
-using Elsa.Workflows.Runtime.Entities;
+using JetBrains.Annotations;
+using OrchardCore.Elsa.Documents;
 using YesSql.Indexes;
 
 namespace OrchardCore.Elsa.Indexes;
 
-public class StoredTriggerIndexProvider : IndexProvider<StoredTrigger>
+[UsedImplicitly]
+public class StoredTriggerIndexProvider : IndexProvider<StoredTriggerDocument>
 {
     public StoredTriggerIndexProvider()
     {
         CollectionName = ElsaCollections.StoredTriggers;
     }
-    
-    public override void Describe(DescribeContext<StoredTrigger> context)
+
+    public override void Describe(DescribeContext<StoredTriggerDocument> context)
     {
-        context.For<StoredTriggerIndex>().Map(trigger => new()
+        context.For<StoredTriggerIndex>().Map(document => new()
         {
-            TriggerId = trigger.Id,
-            WorkflowDefinitionId = trigger.WorkflowDefinitionId,
-            WorkflowDefinitionVersionId = trigger.WorkflowDefinitionVersionId,
-            Name = trigger.Name,
-            ActivityId = trigger.ActivityId,
-            Hash = trigger.Hash,
+            TriggerId = document.TriggerId,
+            WorkflowDefinitionId = document.WorkflowDefinitionId,
+            WorkflowDefinitionVersionId = document.WorkflowDefinitionVersionId,
+            Name = document.Name,
+            ActivityId = document.ActivityId,
+            Hash = document.Hash,
         });
     }
 }

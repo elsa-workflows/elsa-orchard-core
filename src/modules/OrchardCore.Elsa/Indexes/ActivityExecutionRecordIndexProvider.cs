@@ -1,8 +1,10 @@
+using JetBrains.Annotations;
 using OrchardCore.Elsa.Documents;
 using YesSql.Indexes;
 
 namespace OrchardCore.Elsa.Indexes;
 
+[UsedImplicitly]
 public class ActivityExecutionRecordIndexProvider : IndexProvider<ActivityExecutionRecordDocument>
 {
     public ActivityExecutionRecordIndexProvider()

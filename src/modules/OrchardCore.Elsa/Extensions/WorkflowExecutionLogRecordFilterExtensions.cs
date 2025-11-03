@@ -1,5 +1,6 @@
 using Elsa.Workflows.Runtime.Entities;
 using Elsa.Workflows.Runtime.Filters;
+using OrchardCore.Elsa.Documents;
 using OrchardCore.Elsa.Indexes;
 using YesSql;
 using YesSql.Services;
@@ -8,7 +9,7 @@ namespace OrchardCore.Elsa.Extensions;
 
 public static class WorkflowExecutionLogRecordFilterExtensions
 {
-    public static IQuery<WorkflowExecutionLogRecord, WorkflowExecutionLogRecordIndex> Apply(this WorkflowExecutionLogRecordFilter filter, IQuery<WorkflowExecutionLogRecord, WorkflowExecutionLogRecordIndex> query)
+    public static IQuery<WorkflowExecutionLogRecordDocument, WorkflowExecutionLogRecordIndex> Apply(this WorkflowExecutionLogRecordFilter filter, IQuery<WorkflowExecutionLogRecordDocument, WorkflowExecutionLogRecordIndex> query)
     {
         if (filter.Id != null) query = query.Where(x => x.RecordId == filter.Id);
         if (filter.Ids != null) query = query.Where(x => x.RecordId.IsIn(filter.Ids));

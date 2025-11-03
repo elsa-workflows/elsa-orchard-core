@@ -11,8 +11,8 @@ public class WorkflowDefinitionPart : ContentPart
     public string? Description { get; set; }
     public string? ProviderName { get; set; }
     public string MaterializerName { get; set; } = null!;
-    public bool IsPublished { get; set; }
-    public bool IsLatest { get; set; }
+    //public bool IsPublished { get; set; }
+    //public bool IsLatest { get; set; }
     public bool UsableAsActivity { get; set; }
     public bool IsSystem { get; set; }
     public bool IsReadonly { get; set; }

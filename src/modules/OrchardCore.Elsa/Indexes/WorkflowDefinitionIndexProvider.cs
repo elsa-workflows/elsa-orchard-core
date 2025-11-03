@@ -1,9 +1,11 @@
+using JetBrains.Annotations;
 using OrchardCore.ContentManagement;
 using OrchardCore.Elsa.Parts;
 using YesSql.Indexes;
 
 namespace OrchardCore.Elsa.Indexes;
 
+[UsedImplicitly]
 public class WorkflowDefinitionIndexProvider : IndexProvider<ContentItem>
 {
     public override void Describe(DescribeContext<ContentItem> context)
@@ -20,8 +22,8 @@ public class WorkflowDefinitionIndexProvider : IndexProvider<ContentItem>
                 {
                     DefinitionId = contentItem.ContentItemId,
                     DefinitionVersionId = contentItem.ContentItemVersionId,
-                    IsLatest = workflowDefinitionPart.IsLatest,
-                    IsPublished = workflowDefinitionPart.IsPublished,
+                    IsLatest = workflowDefinitionPart.ContentItem.Latest,
+                    IsPublished = workflowDefinitionPart.ContentItem.Published,
                     IsSystem = workflowDefinitionPart.IsSystem,
                     UsableAsActivity = workflowDefinitionPart.UsableAsActivity,
                     MaterializerName = workflowDefinitionPart.MaterializerName,

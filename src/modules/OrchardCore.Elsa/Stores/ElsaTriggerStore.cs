@@ -6,6 +6,7 @@ using Elsa.Workflows.Runtime.Entities;
 using Elsa.Workflows.Runtime.Filters;
 using Elsa.Workflows.Runtime.OrderDefinitions;
 using Open.Linq.AsyncExtensions;
+using OrchardCore.Elsa.Documents;
 using OrchardCore.Elsa.Indexes;
 using OrchardCore.Elsa.Extensions;
 using YesSql;
@@ -18,10 +19,9 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
 
     public async ValueTask SaveAsync(StoredTrigger record, CancellationToken cancellationToken = default)
     {
-        var existingRecord = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
-        existingRecord = MapRecord(existingRecord, record);
-        var serializedRecord = OnSave(existingRecord);
-        await session.SaveAsync(serializedRecord, Collection);
+        var document = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
+        document = Map(document, record);
+        await session.SaveAsync(document, Collection);
         await session.FlushAsync(cancellationToken);
     }
 
@@ -29,18 +29,9 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
     {
         foreach (var record in records)
         {
-            var existingRecord = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
-            if (existingRecord != null)
-            {
-                var mappedRecord = MapRecord(existingRecord, record);
-                var serializedRecord = OnSave(mappedRecord);
-                await session.SaveAsync(serializedRecord, Collection);
-            }
-            else
-            {
-                var serializedRecord = OnSave(record);
-                await session.SaveAsync(serializedRecord, Collection);
-            }
+            var document = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
+            document = Map(document, record);
+            await session.SaveAsync(document, Collection);
         }
 
         await session.FlushAsync(cancellationToken);
@@ -48,14 +39,14 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
 
     public async ValueTask<StoredTrigger?> FindAsync(TriggerFilter filter, CancellationToken cancellationToken = default)
     {
-        var record = await Query(filter).FirstOrDefaultAsync(cancellationToken);
-        return OnLoad(record);
+        var document = await Query(filter).FirstOrDefaultAsync(cancellationToken);
+        return Map(document);
     }
 
     public async ValueTask<IEnumerable<StoredTrigger>> FindManyAsync(TriggerFilter filter, CancellationToken cancellationToken = default)
     {
-        var records = await Query(filter).ListAsync(cancellationToken);
-        return OnLoad(records);
+        var documents = await Query(filter).ListAsync(cancellationToken);
+        return Map(documents);
     }
 
     public ValueTask<Page<StoredTrigger>> FindManyAsync(TriggerFilter filter, PageArgs pageArgs, CancellationToken cancellationToken = default)
@@ -67,9 +58,9 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
     {
         var query = Query(filter, order, pageArgs);
         var count = await query.CountAsync(cancellationToken);
-        var records = await query.ListAsync(cancellationToken).ToList();
+        var documents = await query.ListAsync(cancellationToken).ToList();
 
-        return Page.Of(OnLoad(records).ToList(), count);
+        return Page.Of(Map(documents).ToList(), count);
     }
 
     public async ValueTask ReplaceAsync(IEnumerable<StoredTrigger> removed, IEnumerable<StoredTrigger> added, CancellationToken cancellationToken = default)
@@ -92,15 +83,15 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
 
         while (true)
         {
-            var query = Query(filter).OrderBy(x => x.Id).Skip(pageArgs.Offset!.Value).Take(pageArgs.Limit!.Value);
-            var records = await query.ListAsync(cancellationToken).ToList();
-            count += records.Count;
+            var query = Query(filter).OrderBy(x => x.TriggerId).Skip(pageArgs.Offset!.Value).Take(pageArgs.Limit!.Value);
+            var documents = await query.ListAsync(cancellationToken).ToList();
+            count += documents.Count;
 
-            if (records.Count == 0)
+            if (documents.Count == 0)
                 break;
 
-            foreach (var record in records)
-                session.Delete(record, Collection);
+            foreach (var document in documents)
+                session.Delete(document, Collection);
 
             pageArgs = pageArgs.Next();
         }
@@ -109,14 +100,14 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
         return count;
     }
 
-    private IQuery<StoredTrigger, StoredTriggerIndex> Query(TriggerFilter filter)
+    private IQuery<StoredTriggerDocument, StoredTriggerIndex> Query(TriggerFilter filter)
     {
-        return session.Query<StoredTrigger, StoredTriggerIndex>(Collection).Apply(filter);
+        return session.Query<StoredTriggerDocument, StoredTriggerIndex>(Collection).Apply(filter);
     }
 
-    private IQuery<StoredTrigger, StoredTriggerIndex> Query<TOrderBy>(TriggerFilter filter, StoredTriggerOrder<TOrderBy>? order = null, PageArgs? pageArgs = null)
+    private IQuery<StoredTriggerDocument, StoredTriggerIndex> Query<TOrderBy>(TriggerFilter filter, StoredTriggerOrder<TOrderBy>? order = null, PageArgs? pageArgs = null)
     {
-        var query = session.Query<StoredTrigger, StoredTriggerIndex>(Collection).Apply(filter);
+        var query = session.Query<StoredTriggerDocument, StoredTriggerIndex>(Collection).Apply(filter);
         if (order != null) query = query.Apply(order);
 
         if (pageArgs != null)
@@ -128,52 +119,49 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
         return query;
     }
 
-    private StoredTrigger OnSave(StoredTrigger record)
-    {
-        var serializedRecord = new StoredTrigger
-        {
-            ActivityId = record.ActivityId,
-            Payload = record.Payload,
-            Hash = record.Hash,
-            Id = record.Id,
-            Name = record.Name,
-            TenantId = record.TenantId,
-            WorkflowDefinitionId = record.WorkflowDefinitionId,
-            WorkflowDefinitionVersionId = record.WorkflowDefinitionVersionId
-        };
-
-        if (serializedRecord.Payload != null)
-            serializedRecord.Payload = payloadSerializer.Serialize(serializedRecord.Payload);
-
-        return serializedRecord;
-    }
-
-    private IEnumerable<StoredTrigger> OnLoad(IEnumerable<StoredTrigger> records)
-    {
-        return records.Select(record => OnLoad(record)!);
-    }
-
-    private StoredTrigger? OnLoad(StoredTrigger? record)
-    {
-        if (record?.Payload is string serializedPayload)
-            record.Payload = payloadSerializer.Deserialize(serializedPayload);
-
-        return record;
-    }
-
-    private StoredTrigger MapRecord(StoredTrigger? target, StoredTrigger source)
+    private StoredTriggerDocument Map(StoredTriggerDocument? target, StoredTrigger source)
     {
         if (target == null)
-            return source;
+            target = new();
 
-        target.ActivityId = source.ActivityId;
-        target.Payload = source.Payload;
-        target.Hash = source.Hash;
-        target.Id = source.Id;
-        target.Name = source.Name;
+        target.TriggerId = source.Id;
         target.TenantId = source.TenantId;
         target.WorkflowDefinitionId = source.WorkflowDefinitionId;
         target.WorkflowDefinitionVersionId = source.WorkflowDefinitionVersionId;
+        target.Name = source.Name;
+        target.ActivityId = source.ActivityId;
+        target.Hash = source.Hash;
+
+        if (source.Payload != null)
+            target.SerializedPayload = payloadSerializer.Serialize(source.Payload);
+
         return target;
+    }
+
+    private IEnumerable<StoredTrigger> Map(IEnumerable<StoredTriggerDocument> source)
+    {
+        return source.Select(x => Map(x)!);
+    }
+
+    private StoredTrigger? Map(StoredTriggerDocument? source)
+    {
+        if (source == null)
+            return null;
+
+        var payload = source.SerializedPayload != null
+            ? payloadSerializer.Deserialize(source.SerializedPayload)
+            : null;
+
+        return new()
+        {
+            Id = source.TriggerId,
+            TenantId = source.TenantId,
+            WorkflowDefinitionId = source.WorkflowDefinitionId,
+            WorkflowDefinitionVersionId = source.WorkflowDefinitionVersionId,
+            Name = source.Name,
+            ActivityId = source.ActivityId,
+            Hash = source.Hash,
+            Payload = payload
+        };
     }
 }

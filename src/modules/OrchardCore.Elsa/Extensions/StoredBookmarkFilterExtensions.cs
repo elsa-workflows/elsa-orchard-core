@@ -1,5 +1,6 @@
 using Elsa.Workflows.Runtime.Entities;
 using Elsa.Workflows.Runtime.Filters;
+using OrchardCore.Elsa.Documents;
 using OrchardCore.Elsa.Indexes;
 using YesSql;
 using YesSql.Services;
@@ -8,7 +9,7 @@ namespace OrchardCore.Elsa.Extensions;
 
 public static class StoredBookmarkFilterExtensions
 {
-    public static IQuery<StoredBookmark, StoredBookmarkIndex> Apply(this BookmarkFilter filter, IQuery<StoredBookmark, StoredBookmarkIndex> query)
+    public static IQuery<StoredBookmarkDocument, StoredBookmarkIndex> Apply(this BookmarkFilter filter, IQuery<StoredBookmarkDocument, StoredBookmarkIndex> query)
     {
         if (filter.BookmarkId != null) query = query.Where(x => x.BookmarkId == filter.BookmarkId);
         if (filter.BookmarkIds != null) query = query.Where(x => x.BookmarkId.IsIn(filter.BookmarkIds));

@@ -1,5 +1,6 @@
 using Elsa.Workflows.Runtime.Entities;
 using Elsa.Workflows.Runtime.Filters;
+using OrchardCore.Elsa.Documents;
 using OrchardCore.Elsa.Indexes;
 using YesSql;
 using YesSql.Services;
@@ -8,7 +9,7 @@ namespace OrchardCore.Elsa.Extensions;
 
 public static class StoredTriggerFilterExtensions
 {
-    public static IQuery<StoredTrigger, StoredTriggerIndex> Apply(this TriggerFilter filter, IQuery<StoredTrigger, StoredTriggerIndex> query)
+    public static IQuery<StoredTriggerDocument, StoredTriggerIndex> Apply(this TriggerFilter filter, IQuery<StoredTriggerDocument, StoredTriggerIndex> query)
     {
         if (filter.Id != null) query = query.Where(x => x.TriggerId == filter.Id);
         if (filter.Ids != null) query = query.Where(x => x.TriggerId.IsIn(filter.Ids));

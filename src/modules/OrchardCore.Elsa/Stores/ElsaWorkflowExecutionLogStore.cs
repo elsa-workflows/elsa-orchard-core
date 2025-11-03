@@ -1,16 +1,18 @@
 using Elsa.Common.Models;
+using Elsa.Workflows;
 using Elsa.Workflows.Runtime;
 using Elsa.Workflows.Runtime.Entities;
 using Elsa.Workflows.Runtime.Filters;
 using Elsa.Workflows.Runtime.OrderDefinitions;
 using Open.Linq.AsyncExtensions;
+using OrchardCore.Elsa.Documents;
 using OrchardCore.Elsa.Indexes;
 using OrchardCore.Elsa.Extensions;
 using YesSql;
 
 namespace OrchardCore.Elsa.Stores;
 
-public class ElsaWorkflowExecutionLogStore(ISession session) : IWorkflowExecutionLogStore
+public class ElsaWorkflowExecutionLogStore(ISession session, IPayloadSerializer payloadSerializer) : IWorkflowExecutionLogStore
 {
     private const string Collection = ElsaCollections.WorkflowExecutionLogRecords;
 
@@ -18,9 +20,9 @@ public class ElsaWorkflowExecutionLogStore(ISession session) : IWorkflowExecutio
     {
         foreach (var record in records)
         {
-            var existingRecord = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
-            existingRecord = MapRecord(existingRecord, record);
-            await session.SaveAsync(existingRecord, Collection);
+            var document = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
+            document = Map(document, record);
+            await session.SaveAsync(document, Collection);
         }
 
         await session.FlushAsync(cancellationToken);
@@ -28,52 +30,58 @@ public class ElsaWorkflowExecutionLogStore(ISession session) : IWorkflowExecutio
 
     public async Task AddAsync(WorkflowExecutionLogRecord record, CancellationToken cancellationToken = default)
     {
-        await session.SaveAsync(record, Collection);
+        var document = Map(null, record);
+        await session.SaveAsync(document, Collection);
         await session.FlushAsync(cancellationToken);
     }
 
     public async Task AddManyAsync(IEnumerable<WorkflowExecutionLogRecord> records, CancellationToken cancellationToken = default)
     {
         foreach (var record in records)
-            await session.SaveAsync(record, Collection);
+        {
+            var document = Map(null, record);
+            await session.SaveAsync(document, Collection);
+        }
 
         await session.FlushAsync(cancellationToken);
     }
 
     public async Task SaveAsync(WorkflowExecutionLogRecord record, CancellationToken cancellationToken = default)
     {
-        var recordToSave = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
-        recordToSave = MapRecord(recordToSave, record);
-        await session.SaveAsync(recordToSave, Collection);
+        var document = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
+        document = Map(document, record);
+        await session.SaveAsync(document, Collection);
         await session.FlushAsync(cancellationToken);
     }
 
     public async Task<WorkflowExecutionLogRecord?> FindAsync(WorkflowExecutionLogRecordFilter filter, CancellationToken cancellationToken = default)
     {
-        return await Query(filter).FirstOrDefaultAsync(cancellationToken);
+        var document = await Query(filter).FirstOrDefaultAsync(cancellationToken);
+        return Map(document);
     }
 
     public async Task<WorkflowExecutionLogRecord?> FindAsync<TOrderBy>(WorkflowExecutionLogRecordFilter filter, WorkflowExecutionLogRecordOrder<TOrderBy> order, CancellationToken cancellationToken = default)
     {
-        return await Query(filter, order).FirstOrDefaultAsync(cancellationToken);
+        var document = await Query(filter, order).FirstOrDefaultAsync(cancellationToken);
+        return Map(document);
     }
 
     public async Task<Page<WorkflowExecutionLogRecord>> FindManyAsync(WorkflowExecutionLogRecordFilter filter, PageArgs pageArgs, CancellationToken cancellationToken = default)
     {
         var query = Query(filter, pageArgs);
         var count = await query.CountAsync(cancellationToken);
-        var records = await query.ListAsync(cancellationToken).ToList();
+        var documents = await query.ListAsync(cancellationToken).ToList();
 
-        return Page.Of(records, count);
+        return Page.Of(Map(documents).ToList(), count);
     }
 
     public async Task<Page<WorkflowExecutionLogRecord>> FindManyAsync<TOrderBy>(WorkflowExecutionLogRecordFilter filter, PageArgs pageArgs, WorkflowExecutionLogRecordOrder<TOrderBy> order, CancellationToken cancellationToken = default)
     {
         var query = Query(filter, order, pageArgs);
         var count = await query.CountAsync(cancellationToken);
-        var records = await query.ListAsync(cancellationToken).ToList();
+        var documents = await query.ListAsync(cancellationToken).ToList();
 
-        return Page.Of(records, count);
+        return Page.Of(Map(documents).ToList(), count);
     }
 
     public async Task<long> DeleteManyAsync(WorkflowExecutionLogRecordFilter filter, CancellationToken cancellationToken = default)
@@ -83,15 +91,15 @@ public class ElsaWorkflowExecutionLogStore(ISession session) : IWorkflowExecutio
 
         while (true)
         {
-            var query = Query(filter).OrderBy(x => x.Id).Skip(pageArgs.Offset!.Value).Take(pageArgs.Limit!.Value);
-            var records = await query.ListAsync(cancellationToken).ToList();
-            count += records.Count;
+            var query = Query(filter).OrderBy(x => x.RecordId).Skip(pageArgs.Offset!.Value).Take(pageArgs.Limit!.Value);
+            var documents = await query.ListAsync(cancellationToken).ToList();
+            count += documents.Count;
 
-            if (records.Count == 0)
+            if (documents.Count == 0)
                 break;
 
-            foreach (var record in records)
-                session.Delete(record, Collection);
+            foreach (var document in documents)
+                session.Delete(document, Collection);
 
             pageArgs = pageArgs.Next();
         }
@@ -99,14 +107,14 @@ public class ElsaWorkflowExecutionLogStore(ISession session) : IWorkflowExecutio
         return count;
     }
 
-    private IQuery<WorkflowExecutionLogRecord, WorkflowExecutionLogRecordIndex> Query(WorkflowExecutionLogRecordFilter filter, PageArgs? pageArgs = null)
+    private IQuery<WorkflowExecutionLogRecordDocument, WorkflowExecutionLogRecordIndex> Query(WorkflowExecutionLogRecordFilter filter, PageArgs? pageArgs = null)
     {
         return Query<string>(filter, pageArgs: pageArgs);
     }
 
-    private IQuery<WorkflowExecutionLogRecord, WorkflowExecutionLogRecordIndex> Query<TOrderBy>(WorkflowExecutionLogRecordFilter filter, WorkflowExecutionLogRecordOrder<TOrderBy>? order = null, PageArgs? pageArgs = null)
+    private IQuery<WorkflowExecutionLogRecordDocument, WorkflowExecutionLogRecordIndex> Query<TOrderBy>(WorkflowExecutionLogRecordFilter filter, WorkflowExecutionLogRecordOrder<TOrderBy>? order = null, PageArgs? pageArgs = null)
     {
-        var query = session.Query<WorkflowExecutionLogRecord, WorkflowExecutionLogRecordIndex>(Collection).Apply(filter);
+        var query = session.Query<WorkflowExecutionLogRecordDocument, WorkflowExecutionLogRecordIndex>(Collection).Apply(filter);
         if (order != null) query = query.Apply(order);
 
         if (pageArgs != null)
@@ -117,31 +125,70 @@ public class ElsaWorkflowExecutionLogStore(ISession session) : IWorkflowExecutio
 
         return query;
     }
-    
-    private WorkflowExecutionLogRecord MapRecord(WorkflowExecutionLogRecord? target, WorkflowExecutionLogRecord source)
+
+    private WorkflowExecutionLogRecordDocument Map(WorkflowExecutionLogRecordDocument? target, WorkflowExecutionLogRecord source)
     {
         if (target == null)
-            return source;
+            target = new();
 
-        target.Id = source.Id;
-        target.WorkflowInstanceId = source.WorkflowInstanceId;
-        target.Timestamp = source.Timestamp;
-        target.EventName = source.EventName;
-        target.ActivityId = source.ActivityId;
-        target.ActivityType = source.ActivityType;
-        target.ActivityNodeId = source.ActivityNodeId;
-        target.ActivityTypeVersion = source.ActivityTypeVersion;
+        target.RecordId = source.Id;
         target.TenantId = source.TenantId;
-        target.Payload = source.Payload;
-        target.ActivityInstanceId = source.ActivityInstanceId;
-        target.Message = source.Message;
-        target.ParentActivityInstanceId = source.ParentActivityInstanceId;
-        target.Sequence = source.Sequence;
-        target.Source = source.Source;
+        target.WorkflowInstanceId = source.WorkflowInstanceId;
         target.WorkflowDefinitionId = source.WorkflowDefinitionId;
         target.WorkflowDefinitionVersionId = source.WorkflowDefinitionVersionId;
         target.WorkflowVersion = source.WorkflowVersion;
+        target.ActivityId = source.ActivityId;
+        target.ActivityNodeId = source.ActivityNodeId;
+        target.ActivityType = source.ActivityType;
+        target.ActivityTypeVersion = source.ActivityTypeVersion;
+        target.ActivityInstanceId = source.ActivityInstanceId;
+        target.ParentActivityInstanceId = source.ParentActivityInstanceId;
+        target.EventName = source.EventName;
+        target.Message = source.Message;
+        target.Source = source.Source;
+        target.Timestamp = source.Timestamp;
+        target.Sequence = source.Sequence;
+
+        if (source.Payload != null)
+            target.SerializedPayload = payloadSerializer.Serialize(source.Payload);
 
         return target;
+    }
+
+    private IEnumerable<WorkflowExecutionLogRecord> Map(IEnumerable<WorkflowExecutionLogRecordDocument> source)
+    {
+        return source.Select(x => Map(x)!);
+    }
+
+    private WorkflowExecutionLogRecord? Map(WorkflowExecutionLogRecordDocument? source)
+    {
+        if (source == null)
+            return null;
+
+        var payload = source.SerializedPayload != null
+            ? payloadSerializer.Deserialize(source.SerializedPayload)
+            : null;
+
+        return new()
+        {
+            Id = source.RecordId,
+            TenantId = source.TenantId,
+            WorkflowInstanceId = source.WorkflowInstanceId,
+            WorkflowDefinitionId = source.WorkflowDefinitionId,
+            WorkflowDefinitionVersionId = source.WorkflowDefinitionVersionId,
+            WorkflowVersion = source.WorkflowVersion,
+            ActivityId = source.ActivityId,
+            ActivityNodeId = source.ActivityNodeId,
+            ActivityType = source.ActivityType,
+            ActivityTypeVersion = source.ActivityTypeVersion,
+            ActivityInstanceId = source.ActivityInstanceId,
+            ParentActivityInstanceId = source.ParentActivityInstanceId,
+            EventName = source.EventName,
+            Message = source.Message,
+            Source = source.Source,
+            Timestamp = source.Timestamp,
+            Sequence = source.Sequence,
+            Payload = payload
+        };
     }
 }

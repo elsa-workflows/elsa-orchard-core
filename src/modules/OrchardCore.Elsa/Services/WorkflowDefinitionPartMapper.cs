@@ -18,8 +18,8 @@ public class WorkflowDefinitionPartMapper(IApiSerializer apiSerializer, Workflow
         definitionModel.ToolVersion = part.ToolVersion;
         definitionModel.Name = part.Name;
         definitionModel.Description = part.Description;
-        definitionModel.IsLatest = part.IsLatest;
-        definitionModel.IsPublished = part.IsPublished;
+        definitionModel.IsLatest = part.ContentItem.Latest;
+        definitionModel.IsPublished = part.ContentItem.Published;
         definitionModel.IsReadonly = part.IsReadonly;
         definitionModel.IsSystem = part.IsSystem;
         
@@ -41,8 +41,8 @@ public class WorkflowDefinitionPartMapper(IApiSerializer apiSerializer, Workflow
             Name = part.Name,
             Id = part.DefinitionVersionId,
             DefinitionId = part.DefinitionId,
-            IsLatest = part.IsLatest,
-            IsPublished = part.IsPublished,
+            IsLatest = part.ContentItem.Latest,
+            IsPublished = part.ContentItem.Published,
             IsReadonly = part.IsReadonly,
             ToolVersion = part.ToolVersion,
             IsSystem = part.IsSystem,
@@ -61,8 +61,8 @@ public class WorkflowDefinitionPartMapper(IApiSerializer apiSerializer, Workflow
     {
         target.DefinitionId = source.DefinitionId;
         target.DefinitionVersionId = source.Id;
-        target.IsLatest = source.IsLatest;
-        target.IsPublished = source.IsPublished;
+        // target.IsLatest = source.IsLatest;
+        // target.IsPublished = source.IsPublished;
         target.Version = source.Version;
         target.ToolVersion = source.ToolVersion;
         target.Name = source.Name!;
@@ -83,8 +83,8 @@ public class WorkflowDefinitionPartMapper(IApiSerializer apiSerializer, Workflow
             Name = part.Name,
             Id = part.DefinitionVersionId,
             DefinitionId = part.DefinitionId,
-            IsLatest = part.IsLatest,
-            IsPublished = part.IsPublished,
+            IsLatest = part.ContentItem.Latest,
+            IsPublished = part.ContentItem.Published,
             IsReadonly = part.IsReadonly,
             MaterializerName = part.MaterializerName,
             ProviderName = part.ProviderName,

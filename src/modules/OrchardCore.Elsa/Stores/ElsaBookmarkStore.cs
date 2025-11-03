@@ -4,6 +4,7 @@ using Elsa.Workflows.Runtime;
 using Elsa.Workflows.Runtime.Entities;
 using Elsa.Workflows.Runtime.Filters;
 using Open.Linq.AsyncExtensions;
+using OrchardCore.Elsa.Documents;
 using OrchardCore.Elsa.Indexes;
 using OrchardCore.Elsa.Extensions;
 using YesSql;
@@ -16,10 +17,9 @@ public class ElsaBookmarkStore(ISession session, IPayloadSerializer payloadSeria
 
     public async ValueTask SaveAsync(StoredBookmark record, CancellationToken cancellationToken = default)
     {
-        var existingRecord = await Query(new() { BookmarkId = record.Id }).FirstOrDefaultAsync(cancellationToken);
-        existingRecord = MapRecord(existingRecord, record);
-        var serializedRecord = OnSave(existingRecord);
-        await session.SaveAsync(serializedRecord, Collection);
+        var document = await Query(new() { BookmarkId = record.Id }).FirstOrDefaultAsync(cancellationToken);
+        document = Map(document, record);
+        await session.SaveAsync(document, Collection);
         await session.FlushAsync(cancellationToken);
     }
 
@@ -27,10 +27,9 @@ public class ElsaBookmarkStore(ISession session, IPayloadSerializer payloadSeria
     {
         foreach (var record in records)
         {
-            var existingRecord = await Query(new() { BookmarkId = record.Id }).FirstOrDefaultAsync(cancellationToken);
-            existingRecord = MapRecord(existingRecord, record);
-            var serializedRecord = OnSave(existingRecord);
-            await session.SaveAsync(serializedRecord, Collection);
+            var document = await Query(new() { BookmarkId = record.Id }).FirstOrDefaultAsync(cancellationToken);
+            document = Map(document, record);
+            await session.SaveAsync(document, Collection);
         }
 
         await session.FlushAsync(cancellationToken);
@@ -38,14 +37,14 @@ public class ElsaBookmarkStore(ISession session, IPayloadSerializer payloadSeria
 
     public async ValueTask<StoredBookmark?> FindAsync(BookmarkFilter filter, CancellationToken cancellationToken = default)
     {
-        var record = await Query(filter).FirstOrDefaultAsync(cancellationToken);
-        return OnLoad(record);
+        var document = await Query(filter).FirstOrDefaultAsync(cancellationToken);
+        return Map(document);
     }
 
     public async ValueTask<IEnumerable<StoredBookmark>> FindManyAsync(BookmarkFilter filter, CancellationToken cancellationToken = default)
     {
-        var records = await Query(filter).ListAsync(cancellationToken);
-        return OnLoad(records);
+        var documents = await Query(filter).ListAsync(cancellationToken);
+        return Map(documents);
     }
 
     public async ValueTask<long> DeleteAsync(BookmarkFilter filter, CancellationToken cancellationToken = default)
@@ -55,15 +54,15 @@ public class ElsaBookmarkStore(ISession session, IPayloadSerializer payloadSeria
 
         while (true)
         {
-            var query = Query(filter).OrderBy(x => x.Id).Skip(pageArgs.Offset!.Value).Take(pageArgs.Limit!.Value);
-            var records = await query.ListAsync(cancellationToken).ToList();
-            count += records.Count;
+            var query = Query(filter).OrderBy(x => x.BookmarkId).Skip(pageArgs.Offset!.Value).Take(pageArgs.Limit!.Value);
+            var documents = await query.ListAsync(cancellationToken).ToList();
+            count += documents.Count;
 
-            if (records.Count == 0)
+            if (documents.Count == 0)
                 break;
 
-            foreach (var record in records)
-                session.Delete(record, Collection);
+            foreach (var document in documents)
+                session.Delete(document, Collection);
 
             pageArgs = pageArgs.Next();
         }
@@ -72,63 +71,64 @@ public class ElsaBookmarkStore(ISession session, IPayloadSerializer payloadSeria
         return count;
     }
 
-    private IQuery<StoredBookmark, StoredBookmarkIndex> Query(BookmarkFilter filter)
+    private IQuery<StoredBookmarkDocument, StoredBookmarkIndex> Query(BookmarkFilter filter)
     {
-        return session.Query<StoredBookmark, StoredBookmarkIndex>(Collection).Apply(filter);
+        return session.Query<StoredBookmarkDocument, StoredBookmarkIndex>(Collection).Apply(filter);
     }
 
-    private StoredBookmark OnSave(StoredBookmark record)
-    {
-        var serializedRecord = new StoredBookmark
-        {
-            Payload = record.Payload,
-            Hash = record.Hash,
-            Id = record.Id,
-            Name = record.Name,
-            TenantId = record.TenantId,
-            WorkflowInstanceId = record.WorkflowInstanceId,
-            ActivityInstanceId = record.ActivityInstanceId,
-            CorrelationId = record.CorrelationId,
-            CreatedAt = record.CreatedAt,
-            Metadata = record.Metadata,
-            ActivityTypeName = record.ActivityTypeName
-        };
-
-        if (serializedRecord.Payload != null)
-            serializedRecord.Payload = payloadSerializer.Serialize(serializedRecord.Payload);
-
-        return serializedRecord;
-    }
-
-    private IEnumerable<StoredBookmark> OnLoad(IEnumerable<StoredBookmark> records)
-    {
-        return records.Select(record => OnLoad(record)!);
-    }
-
-    private StoredBookmark? OnLoad(StoredBookmark? record)
-    {
-        if (record?.Payload is string serializedPayload)
-            record.Payload = payloadSerializer.Deserialize(serializedPayload);
-
-        return record;
-    }
-
-    private StoredBookmark MapRecord(StoredBookmark? target, StoredBookmark source)
+    private StoredBookmarkDocument Map(StoredBookmarkDocument? target, StoredBookmark source)
     {
         if (target == null)
-            return source;
+            target = new();
 
-        target.Payload = source.Payload;
-        target.Hash = source.Hash;
-        target.Id = source.Id;
-        target.Name = source.Name;
+        target.BookmarkId = source.Id;
         target.TenantId = source.TenantId;
+        target.Name = source.Name;
+        target.Hash = source.Hash;
         target.WorkflowInstanceId = source.WorkflowInstanceId;
         target.ActivityInstanceId = source.ActivityInstanceId;
         target.CorrelationId = source.CorrelationId;
         target.CreatedAt = source.CreatedAt;
-        target.Metadata = source.Metadata;
-        target.ActivityTypeName = source.ActivityTypeName;
+
+        if (source.Payload != null)
+            target.SerializedPayload = payloadSerializer.Serialize(source.Payload);
+
+        if (source.Metadata != null)
+            target.SerializedMetadata = payloadSerializer.Serialize(source.Metadata);
+
         return target;
+    }
+
+    private IEnumerable<StoredBookmark> Map(IEnumerable<StoredBookmarkDocument> source)
+    {
+        return source.Select(x => Map(x)!);
+    }
+
+    private StoredBookmark? Map(StoredBookmarkDocument? source)
+    {
+        if (source == null)
+            return null;
+
+        var payload = source.SerializedPayload != null
+            ? payloadSerializer.Deserialize(source.SerializedPayload)
+            : null;
+
+        var metadata = source.SerializedMetadata != null
+            ? payloadSerializer.Deserialize<Dictionary<string, string>>(source.SerializedMetadata)
+            : null;
+
+        return new()
+        {
+            Id = source.BookmarkId,
+            TenantId = source.TenantId,
+            Name = source.Name,
+            Hash = source.Hash,
+            WorkflowInstanceId = source.WorkflowInstanceId,
+            ActivityInstanceId = source.ActivityInstanceId,
+            CorrelationId = source.CorrelationId,
+            CreatedAt = source.CreatedAt,
+            Payload = payload,
+            Metadata = metadata
+        };
     }
 }
