@@ -62,7 +62,7 @@ jobs:
       - name: Build nuget packages
         run: dotnet build Elsa.OrchardCore.sln --configuration Release /p:Version=${VERSION}
       - name: Publish Blazor WASM Designer project
-        run: dotnet publish src/modules/OrchardCore.Elsa.Designer/OrchardCore.Elsa.Designer.csproj --configuration Release /p:Version=${VERSION} --no-build
+        run: dotnet publish src/modules/OrchardCore.Elsa.Designer/OrchardCore.Elsa.Designer.csproj --configuration Release /p:Version=${VERSION}
       - name: Test
         run: dotnet test Elsa.OrchardCore.sln --configuration Release /p:Version=${VERSION} --no-build
       - name: Pack nuget packages
