@@ -95,7 +95,7 @@ public class CoreStartup : StartupBase
 
             provider.Mappings[".pdb"]  = "application/octet-stream";
             provider.Mappings[".wasm"] = "application/wasm";
-            provider.Mappings[".dat"]  = "application/octet-stream"; // you already had this
+            provider.Mappings[".dat"]  = "application/octet-stream";
 
             options.ContentTypeProvider = provider;
         });

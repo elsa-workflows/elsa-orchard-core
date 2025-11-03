@@ -1,13 +1,15 @@
 using Elsa.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OrchardCore.Environment.Shell.Configuration;
 using OrchardCore.Modules;
 
 namespace OrchardCore.Elsa.Features;
 
 [Feature("OrchardCore.Elsa.Http")]
-public class HttpStartup : StartupBase
+public class HttpStartup(IShellConfiguration shellConfiguration) : StartupBase
 {
     public override void ConfigureServices(IServiceCollection services)
     {
@@ -17,8 +19,7 @@ public class HttpStartup : StartupBase
             {
                 http.ConfigureHttpOptions = options =>
                 {
-                    options.BasePath = "/wf";
-                    options.BaseUrl = new("https://localhost:8096");
+                    shellConfiguration.GetSection("Elsa:Http").Bind(options);
                 };
                 http.UseCache();
             });
