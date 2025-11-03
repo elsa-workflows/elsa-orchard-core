@@ -17,11 +17,11 @@ builder.Host.UseSerilog((context, logger) =>
 builder.Services
     .AddQuartz()
     .AddQuartzHostedService()
+    .AddServerSideBlazor()
     .AddOrchardCms();
 
 builder.Services.Configure<MediatorOptions>(options => options.JobWorkerCount = 1);
-builder.Services.Configure<ElsaStudioBlazorOptions>(options => options.RenderMode = RenderMode.WebAssembly);
-builder.Services.ConfigureWebAssemblyStaticFiles();
+builder.Services.Configure<ElsaStudioBlazorOptions>(options => options.RenderMode = RenderMode.Server);
 
 var app = builder.Build();
 
@@ -30,7 +30,6 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
 }
 
-app.RewriteElsaStudioWebAssemblyAssets();
 app.UseStaticFiles();
 app.UseOrchardCore();
 

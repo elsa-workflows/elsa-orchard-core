@@ -4,15 +4,18 @@ using Elsa.Mediator.HostedServices;
 using Elsa.Resilience.Extensions;
 using Elsa.Workflows.Runtime.Distributed.Extensions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using OrchardCore.ContentManagement.Handlers;
 using OrchardCore.Data;
 using OrchardCore.Data.Migration;
 using OrchardCore.Elsa.Handlers.Content;
 using OrchardCore.Elsa.Indexes;
 using OrchardCore.Elsa.Migrations;
+using OrchardCore.Elsa.Options;
 using OrchardCore.Elsa.Security;
 using OrchardCore.Elsa.Services;
 using OrchardCore.Elsa.StartupTasks;
@@ -30,6 +33,8 @@ public class CoreStartup : StartupBase
     
     public override void ConfigureServices(IServiceCollection services)
     {
+        services.AddOptions<ElsaStudioBlazorOptions>();
+
         services.AddElsa(elsa =>
         {
             elsa.AddActivitiesFrom<CoreStartup>();
@@ -103,9 +108,20 @@ public class CoreStartup : StartupBase
 
     public override ValueTask ConfigureAsync(IApplicationBuilder app, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
     {
-        app.UseBlazorFrameworkFiles();
+        var options = serviceProvider.GetRequiredService<IOptions<ElsaStudioBlazorOptions>>().Value;
+
+        if (options.IsWebAssembly)
+        {
+            app.UseBlazorFrameworkFiles();
+        }
+
+        if (options.IsServer)
+        {
+            routes.MapBlazorHub();
+        }
+
         routes.MapWorkflowsApi();
-        
+
         return ValueTask.CompletedTask;
     }
 }

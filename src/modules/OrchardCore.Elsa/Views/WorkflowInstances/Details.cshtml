@@ -1,7 +1,16 @@
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.Extensions.Options
 @using OrchardCore.Elsa.Designer.Components
+@using OrchardCore.Elsa.Options
 @using OrchardCore.Mvc.Core.Utilities
 @model OrchardCore.Elsa.Controllers.WorkflowInstances.Details.WorkflowInstanceViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IOptions<ElsaStudioBlazorOptions> BlazorOptions
+
+@{
+    var renderMode = BlazorOptions.Value.RenderMode;
+    var isWebAssembly = BlazorOptions.Value.IsWebAssembly;
+}
 
 <!-- Manifest & fonts -->
 <link rel="manifest" asp-src="/OrchardCore.Elsa/_content/Elsa.Studio.Shell/site.webmanifest" />
@@ -18,9 +27,9 @@
 <link asp-src="/_content/Radzen.Blazor/css/material-base.css" rel="stylesheet" />
 <link asp-src="/_content/Elsa.Studio.Shell/css/shell.css" rel="stylesheet" />
 
-<!-- Blazor WASM component -->
+<!-- Blazor component -->
 <component type="typeof(WorkflowEditorOrInstanceWrapper)"
-           render-mode="WebAssembly"
+           render-mode="@renderMode"
            param-RemoteEndpoint="@Url.ToAbsoluteUrl("~/elsa/api")"
            param-WorkflowInstanceId="@Model.WorkflowInstance.Id" />
 
@@ -40,18 +49,27 @@
 <script asp-src="/_content/CodeBeam.MudBlazor.Extensions/MudExtensions.min.js" at="Foot"></script>
 <script asp-src="/_content/Radzen.Blazor/Radzen.Blazor.js" at="Foot"></script>
 
-<!-- Bootstrap the WASM runtime from the host application -->
-<script src="/_framework/blazor.webassembly.js" autostart="false"></script>
-<script at="Foot">
-    document.addEventListener('DOMContentLoaded', function () {
-        Blazor.start({
-            loadBootResource: function (type, name, defaultUri, integrity) {
-                // Ensure all _framework resources are loaded from the root
-                if (defaultUri.startsWith('_framework/')) {
-                    return `/${defaultUri}`;
+@if (isWebAssembly)
+{
+    <!-- Bootstrap the WASM runtime from the host application -->
+    <script src="/_framework/blazor.webassembly.js" autostart="false"></script>
+    <script at="Foot">
+        document.addEventListener('DOMContentLoaded', function () {
+            Blazor.start({
+                loadBootResource: function (type, name, defaultUri, integrity) {
+                    // Ensure all _framework resources are loaded from the root
+                    if (defaultUri.startsWith('_framework/'))
+                    {
+                        return `/${defaultUri}`;
+                    }
+
+                    return defaultUri;
                 }
-                return defaultUri;
-            }
+            });
         });
-    });
-</script>
+    </script>
+}
+else
+{
+    <script src="/_framework/blazor.server.js"></script>
+}

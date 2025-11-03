@@ -2,7 +2,12 @@
 
 ## Overview
 
-The OrchardCore.Elsa.Designer is a Razor Class Library (RCL) that provides Blazor components and services for the Elsa workflow designer. This document describes the public API for integrating the Designer into your Blazor WebAssembly applications.
+The OrchardCore.Elsa.Designer is a Razor Class Library (RCL) that provides Blazor components and services for the Elsa workflow designer. The core library is hosting-model agnostic and is accompanied by two lightweight wrapper packages:
+
+- `OrchardCore.Elsa.Designer.BlazorWasm` – extension methods and references for WebAssembly hosts.
+- `OrchardCore.Elsa.Designer.BlazorServer` – extension methods and references for Blazor Server hosts.
+
+Use the package that matches your hosting model, or build a custom host by calling the shared `AddElsaDesignerCore` method described below.
 
 ## Extension Methods
 
@@ -38,34 +43,40 @@ builder.AddElsaDesigner();
 
 Located in: `OrchardCore.Elsa.Designer.Extensions.ServiceCollectionExtensions`
 
-#### `AddElsaDesigner(IConfiguration)`
+#### `AddElsaDesignerCore(IConfiguration, Action<IServiceCollection>)`
 
-Configures all Elsa Designer services.
+Configures all shared Elsa Designer services. The platform-specific packages invoke this method with the appropriate callbacks to register WebAssembly or Server implementations.
 
 ```csharp
-public static IServiceCollection AddElsaDesigner(
+public static IServiceCollection AddElsaDesignerCore(
     this IServiceCollection services,
-    IConfiguration configuration)
+    IConfiguration configuration,
+    Action<IServiceCollection> configurePlatformServices)
 ```
 
 **Description:**
 Registers all services required for the Elsa Designer, including:
 - Backend service for API communication
-- Elsa Studio core services
+- Elsa Studio core services (via `configurePlatformServices`)
 - Workflow management services
 - Authentication provider (no-op for embedded scenarios)
 - Activity display settings
 
 **Parameters:**
 - `configuration`: The configuration to bind backend options from (looks for `Backend:Url` setting)
+- `configurePlatformServices`: Callback that registers hosting-model specific services (e.g. calling `AddCore()` from the Blazor Server or WebAssembly packages).
 
 **Usage:**
 ```csharp
-builder.Services.AddElsaDesigner(builder.Configuration);
+// WebAssembly host
+builder.Services.AddElsaDesigner(builder.Configuration); // Provided by OrchardCore.Elsa.Designer.BlazorWasm
+
+// Blazor Server host
+builder.Services.AddElsaDesigner(builder.Configuration); // Provided by OrchardCore.Elsa.Designer.BlazorServer
 ```
 
 **When to use:**
-Use this directly if you need more control over component registration or want to register components separately.
+Call `AddElsaDesignerCore` when you need to build a custom hosting wrapper. Otherwise, reference the platform-specific package and invoke its `AddElsaDesigner` extension method.
 
 ---
 

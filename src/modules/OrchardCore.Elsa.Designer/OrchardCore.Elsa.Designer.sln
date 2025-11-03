@@ -5,6 +5,10 @@ VisualStudioVersion = 25.0.1703.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.Elsa.Designer", "OrchardCore.Elsa.Designer.csproj", "{0E3A229A-BB55-4346-AB9F-E90C6F92435A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.Elsa.Designer.BlazorWasm", "..\OrchardCore.Elsa.Designer.BlazorWasm\OrchardCore.Elsa.Designer.BlazorWasm.csproj", "{9A98ABE5-25D0-42F1-9C09-997EDB5A4158}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchardCore.Elsa.Designer.BlazorServer", "..\OrchardCore.Elsa.Designer.BlazorServer\OrchardCore.Elsa.Designer.BlazorServer.csproj", "{CF33C993-2DF0-41E7-AD9D-A4F7FC004E99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,8 +17,16 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0E3A229A-BB55-4346-AB9F-E90C6F92435A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E3A229A-BB55-4346-AB9F-E90C6F92435A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E3A229A-BB55-4346-AB9F-E90C6F92435A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E3A229A-BB55-4346-AB9F-E90C6F92435A}.Release|Any CPU.Build.0 = Release|Any CPU
+                {0E3A229A-BB55-4346-AB9F-E90C6F92435A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {0E3A229A-BB55-4346-AB9F-E90C6F92435A}.Release|Any CPU.Build.0 = Release|Any CPU
+                {9A98ABE5-25D0-42F1-9C09-997EDB5A4158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+                {9A98ABE5-25D0-42F1-9C09-997EDB5A4158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {9A98ABE5-25D0-42F1-9C09-997EDB5A4158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {9A98ABE5-25D0-42F1-9C09-997EDB5A4158}.Release|Any CPU.Build.0 = Release|Any CPU
+                {CF33C993-2DF0-41E7-AD9D-A4F7FC004E99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+                {CF33C993-2DF0-41E7-AD9D-A4F7FC004E99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {CF33C993-2DF0-41E7-AD9D-A4F7FC004E99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {CF33C993-2DF0-41E7-AD9D-A4F7FC004E99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

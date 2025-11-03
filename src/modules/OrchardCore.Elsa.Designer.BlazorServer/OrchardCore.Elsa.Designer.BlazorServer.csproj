@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Elsa.Studio.Core.BlazorServer" />
+    <PackageReference Include="Elsa.Studio.Login.BlazorServer" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OrchardCore.Elsa.Designer\OrchardCore.Elsa.Designer.csproj" />
+  </ItemGroup>
+
+</Project>

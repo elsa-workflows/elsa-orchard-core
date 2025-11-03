@@ -10,9 +10,10 @@ This project serves as:
 
 ## Architecture
 
-The Elsa Designer is split into two projects:
-- **OrchardCore.Elsa.Designer** (RCL) - Contains all Blazor components, services, and extensions
-- **OrchardCore.Elsa.Web.Blazor** (WASM App) - Standalone Blazor WebAssembly application that references the Designer RCL
+The Elsa Designer now consists of a shared Razor Class Library and hosting-model specific wrappers:
+- **OrchardCore.Elsa.Designer** (RCL) - Contains all Blazor components and shared services
+- **OrchardCore.Elsa.Designer.BlazorWasm** - Adds WebAssembly-specific services and extension methods
+- **OrchardCore.Elsa.Web.Blazor** (WASM App) - Standalone Blazor WebAssembly application that references the WebAssembly wrapper
 
 ## Creating Your Own WASM Project
 
@@ -24,13 +25,13 @@ To use Elsa workflows in your OrchardCore application, follow these steps:
 dotnet new blazorwasm -n YourProject.Blazor
 ```
 
-### 2. Add Reference to OrchardCore.Elsa.Designer
+### 2. Add Reference to OrchardCore.Elsa.Designer.BlazorWasm
 
 In your `YourProject.Blazor.csproj`:
 
 ```xml
 <ItemGroup>
-    <PackageReference Include="OrchardCore.Elsa.Designer" Version="3.6.0" />
+    <PackageReference Include="OrchardCore.Elsa.Designer.BlazorWasm" Version="3.6.0" />
 </ItemGroup>
 ```
 
@@ -50,7 +51,7 @@ await app.RunStartupTasksAsync();
 await app.RunAsync();
 ```
 
-That's it! The `AddElsaDesigner()` extension method registers root components and configures all required services.
+That's it! The `AddElsaDesigner()` extension method provided by `OrchardCore.Elsa.Designer.BlazorWasm` registers root components and configures all required services.
 
 ### 4. Configure Backend URL
 
