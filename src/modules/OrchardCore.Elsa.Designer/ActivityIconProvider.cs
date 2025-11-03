@@ -23,6 +23,7 @@ public class ActivityIconProvider : IActivityDisplaySettingsProvider
             ["OrchardCore.Content.GetContent"] = new(OrchardCoreColors.ContentAction, Icons.Material.Filled.FileOpen),
             ["OrchardCore.Content.PublishContent"] = new(OrchardCoreColors.ContentAction, Icons.Material.Filled.CloudUpload),
             ["OrchardCore.Content.UnpublishContent"] = new(OrchardCoreColors.ContentAction, Icons.Material.Filled.CloudDownload),
+            ["OrchardCore.Content.ResolveTerm"] = new(OrchardCoreColors.ContentAction, Icons.Material.Filled.ManageSearch),
             ["OrchardCore.UI.DisplayNotification"] = new(OrchardCoreColors.UIAction, Icons.Material.Outlined.Info),
             ["OrchardCore.Queries.RunSqlQuery"] = new(OrchardCoreColors.Queries, OrchardCoreIcons.Tabler.Database),
         };
