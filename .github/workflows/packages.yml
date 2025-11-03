@@ -57,6 +57,8 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.x
+      - name: Install wasm-tools workload
+        run: dotnet workload install wasm-tools
       - name: Build nuget packages
         run: dotnet build Elsa.OrchardCore.sln --configuration Release /p:Version=${VERSION}
       - name: Publish Blazor WASM Designer project
