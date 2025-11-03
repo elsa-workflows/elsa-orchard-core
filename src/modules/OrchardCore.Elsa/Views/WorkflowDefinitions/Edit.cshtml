@@ -50,9 +50,10 @@
         Blazor.start({
             loadBootResource: function (type, name, defaultUri, integrity) {
                 console.log('loadBootResource', type, name, defaultUri, integrity);
-                switch (name) {
-                    case 'dotnet.js':
-                        return `${basePath}/${defaultUri}`;
+
+                // Rewrite all _framework resources to use the basePath
+                if (defaultUri.startsWith('_framework/')) {
+                    return `${basePath}/${defaultUri}`;
                 }
 
                 return defaultUri;
