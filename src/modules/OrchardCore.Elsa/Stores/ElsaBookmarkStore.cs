@@ -20,7 +20,7 @@ public class ElsaBookmarkStore(ISession session, IPayloadSerializer payloadSeria
         existingRecord = MapRecord(existingRecord, record);
         var serializedRecord = OnSave(existingRecord);
         await session.SaveAsync(serializedRecord, Collection);
-        await session.SaveChangesAsync(cancellationToken);
+        await session.FlushAsync(cancellationToken);
     }
 
     public async ValueTask SaveManyAsync(IEnumerable<StoredBookmark> records, CancellationToken cancellationToken)
@@ -33,7 +33,7 @@ public class ElsaBookmarkStore(ISession session, IPayloadSerializer payloadSeria
             await session.SaveAsync(serializedRecord, Collection);
         }
 
-        await session.SaveChangesAsync(cancellationToken);
+        await session.FlushAsync(cancellationToken);
     }
 
     public async ValueTask<StoredBookmark?> FindAsync(BookmarkFilter filter, CancellationToken cancellationToken = default)
@@ -68,7 +68,7 @@ public class ElsaBookmarkStore(ISession session, IPayloadSerializer payloadSeria
             pageArgs = pageArgs.Next();
         }
 
-        await session.SaveChangesAsync(cancellationToken);
+        await session.FlushAsync(cancellationToken);
         return count;
     }
 

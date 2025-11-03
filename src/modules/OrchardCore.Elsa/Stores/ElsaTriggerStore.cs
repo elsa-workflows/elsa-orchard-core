@@ -22,7 +22,7 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
         existingRecord = MapRecord(existingRecord, record);
         var serializedRecord = OnSave(existingRecord);
         await session.SaveAsync(serializedRecord, Collection);
-        await session.SaveChangesAsync(cancellationToken);
+        await session.FlushAsync(cancellationToken);
     }
 
     public async ValueTask SaveManyAsync(IEnumerable<StoredTrigger> records, CancellationToken cancellationToken = default)
@@ -43,7 +43,7 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
             }
         }
 
-        await session.SaveChangesAsync(cancellationToken);
+        await session.FlushAsync(cancellationToken);
     }
 
     public async ValueTask<StoredTrigger?> FindAsync(TriggerFilter filter, CancellationToken cancellationToken = default)
@@ -105,6 +105,7 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
             pageArgs = pageArgs.Next();
         }
 
+        await session.FlushAsync(cancellationToken);
         return count;
     }
 

@@ -23,13 +23,13 @@ public class ElsaWorkflowExecutionLogStore(ISession session) : IWorkflowExecutio
             await session.SaveAsync(existingRecord, Collection);
         }
 
-        await session.SaveChangesAsync(cancellationToken);
+        await session.FlushAsync(cancellationToken);
     }
 
     public async Task AddAsync(WorkflowExecutionLogRecord record, CancellationToken cancellationToken = default)
     {
         await session.SaveAsync(record, Collection);
-        await session.SaveChangesAsync(cancellationToken);
+        await session.FlushAsync(cancellationToken);
     }
 
     public async Task AddManyAsync(IEnumerable<WorkflowExecutionLogRecord> records, CancellationToken cancellationToken = default)
@@ -37,7 +37,7 @@ public class ElsaWorkflowExecutionLogStore(ISession session) : IWorkflowExecutio
         foreach (var record in records)
             await session.SaveAsync(record, Collection);
 
-        await session.SaveChangesAsync(cancellationToken);
+        await session.FlushAsync(cancellationToken);
     }
 
     public async Task SaveAsync(WorkflowExecutionLogRecord record, CancellationToken cancellationToken = default)
@@ -45,7 +45,7 @@ public class ElsaWorkflowExecutionLogStore(ISession session) : IWorkflowExecutio
         var recordToSave = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
         recordToSave = MapRecord(recordToSave, record);
         await session.SaveAsync(recordToSave, Collection);
-        await session.SaveChangesAsync(cancellationToken);
+        await session.FlushAsync(cancellationToken);
     }
 
     public async Task<WorkflowExecutionLogRecord?> FindAsync(WorkflowExecutionLogRecordFilter filter, CancellationToken cancellationToken = default)
