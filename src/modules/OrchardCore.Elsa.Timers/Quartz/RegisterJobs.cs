@@ -2,6 +2,7 @@ using Elsa.Scheduling.Quartz.Contracts;
 using Elsa.Scheduling.Quartz.Jobs;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
+using OrchardCore.Environment.Shell.Scope;
 using OrchardCore.Modules;
 using Quartz;
 using QuartzIScheduler = Quartz.IScheduler;
@@ -14,11 +15,15 @@ namespace OrchardCore.Elsa.Timers.Quartz;
 [UsedImplicitly]
 internal class RegisterJobs(ISchedulerFactory schedulerFactoryFactory, IServiceScopeFactory scopeFactory) : ModularTenantEvents
 {
-    public override async Task ActivatingAsync()
+    public override Task ActivatingAsync()
     {
-        var scheduler = await schedulerFactoryFactory.GetScheduler();
-        await CreateJobAsync<RunWorkflowJob>(scheduler);
-        await CreateJobAsync<ResumeWorkflowJob>(scheduler);
+        ShellScope.AddDeferredTask(async scope =>
+        {
+            var scheduler = await schedulerFactoryFactory.GetScheduler();
+            await CreateJobAsync<RunWorkflowJob>(scheduler);
+            await CreateJobAsync<ResumeWorkflowJob>(scheduler);
+        });
+        return Task.CompletedTask;
     }
     
     private async Task CreateJobAsync<TJobType>(QuartzIScheduler scheduler, CancellationToken cancellationToken = default) where TJobType : IJob

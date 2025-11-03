@@ -4,6 +4,7 @@ using Elsa.Workflows.Runtime.Entities;
 using Elsa.Workflows.Runtime.Filters;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
+using OrchardCore.Environment.Shell.Scope;
 using OrchardCore.Modules;
 
 namespace OrchardCore.Elsa.Timers.Common;
@@ -14,15 +15,19 @@ namespace OrchardCore.Elsa.Timers.Common;
 [UsedImplicitly]
 public class CreateSchedules(IServiceScopeFactory scopeFactory) : ModularTenantEvents
 {
-    public override async Task ActivatedAsync()
+    public override Task ActivatedAsync()
     {
-        using var scope = scopeFactory.CreateScope();
-        var serviceProvider = scope.ServiceProvider;
-        var (triggers, bookmarks) = await GetTriggersAndBookmarksAsync(serviceProvider);
-        var triggerScheduler = serviceProvider.GetRequiredService<ITriggerScheduler>();
-        var bookmarkScheduler = serviceProvider.GetRequiredService<IBookmarkScheduler>();
-        await triggerScheduler.ScheduleAsync(triggers);
-        await bookmarkScheduler.ScheduleAsync(bookmarks);
+        ShellScope.AddDeferredTask(async scope =>
+        {
+            using var serviceScope = scopeFactory.CreateScope();
+            var serviceProvider = serviceScope.ServiceProvider;
+            var (triggers, bookmarks) = await GetTriggersAndBookmarksAsync(serviceProvider);
+            var triggerScheduler = serviceProvider.GetRequiredService<ITriggerScheduler>();
+            var bookmarkScheduler = serviceProvider.GetRequiredService<IBookmarkScheduler>();
+            await triggerScheduler.ScheduleAsync(triggers);
+            await bookmarkScheduler.ScheduleAsync(bookmarks);
+        });
+        return Task.CompletedTask;
     }
 
     public override async Task TerminatingAsync()
