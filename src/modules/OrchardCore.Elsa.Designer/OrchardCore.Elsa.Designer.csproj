@@ -18,4 +18,20 @@
         <PackageReference Include="Elsa.Studio.Shell" />
     </ItemGroup>
 
+    <Target Name="PublishBeforePack" BeforeTargets="GenerateNuspec">
+        <!-- Ensure the project is published before packing -->
+        <MSBuild Projects="$(MSBuildProjectFullPath)"
+                 Targets="Publish"
+                 Properties="Configuration=$(Configuration);PublishDir=$(IntermediateOutputPath)publish/;SelfContained=false" />
+
+        <!-- Include all published _framework files as content in the package -->
+        <ItemGroup>
+            <Content Include="$(IntermediateOutputPath)publish\wwwroot\_framework\**\*" Condition="Exists('$(IntermediateOutputPath)publish\wwwroot\_framework')">
+                <Pack>true</Pack>
+                <PackagePath>staticwebassets/_framework/%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
+                <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+            </Content>
+        </ItemGroup>
+    </Target>
+    
 </Project>
