@@ -1,5 +1,5 @@
-@using OrchardCore.Mvc.Core.Utilities
 @using OrchardCore.Elsa.Designer.Components
+@using OrchardCore.Mvc.Core.Utilities
 @model OrchardCore.Elsa.Controllers.WorkflowInstances.Details.WorkflowInstanceViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -40,20 +40,16 @@
 <script asp-src="/_content/CodeBeam.MudBlazor.Extensions/MudExtensions.min.js" at="Foot"></script>
 <script asp-src="/_content/Radzen.Blazor/Radzen.Blazor.js" at="Foot"></script>
 
-<!-- Bootstrap the WASM runtime from your module base path -->
-<script src="/OrchardCore.Elsa/_framework/blazor.webassembly.js" autostart="false"></script>
+<!-- Bootstrap the WASM runtime from the host application -->
+<script src="/_framework/blazor.webassembly.js" autostart="false"></script>
 <script at="Foot">
-    const basePath = '@Url.Content("/OrchardCore.Elsa")';
-
     document.addEventListener('DOMContentLoaded', function () {
         Blazor.start({
             loadBootResource: function (type, name, defaultUri, integrity) {
-                console.log('loadBootResource', type, name, defaultUri, integrity);
-                switch (name) {
-                    case 'dotnet.js':
-                        return `${basePath}/${defaultUri}`;
+                // Ensure all _framework resources are loaded from the root
+                if (defaultUri.startsWith('_framework/')) {
+                    return `/${defaultUri}`;
                 }
-
                 return defaultUri;
             }
         });

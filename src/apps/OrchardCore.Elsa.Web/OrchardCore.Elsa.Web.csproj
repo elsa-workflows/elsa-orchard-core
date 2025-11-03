@@ -18,6 +18,7 @@
         <ProjectReference Include="..\..\modules\OrchardCore.Elsa.Timers\OrchardCore.Elsa.Timers.csproj"/>
         <ProjectReference Include="..\..\modules\OrchardCore.Elsa.UI\OrchardCore.Elsa.UI.csproj"/>
         <ProjectReference Include="..\..\modules\OrchardCore.Elsa\OrchardCore.Elsa.csproj"/>
+        <ProjectReference Include="..\OrchardCore.Elsa.Web.Blazor\OrchardCore.Elsa.Web.Blazor.csproj"/>
     </ItemGroup>
 
 </Project>

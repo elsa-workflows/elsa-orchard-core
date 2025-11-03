@@ -1,29 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <StaticWebAssetBasePath>OrchardCore.Elsa</StaticWebAssetBasePath>
         <IsPackable>true</IsPackable>
+        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     </PropertyGroup>
-
-    <PropertyGroup>
-        <WasmEnableWebServer>true</WasmEnableWebServer>
-        <WasmDeploymentLayout>Bundle</WasmDeploymentLayout>
-    </PropertyGroup>
-
-    <!-- pack the AppBundle into the NuGet -->
-    <ItemGroup>
-        <Content Include="bin\$(Configuration)\net9.0\browser-wasm\AppBundle\**\*"
-                 Pack="true"
-                 PackagePath="contentFiles\any\any\OrchardCore.Elsa\AppBundle\"
-                 CopyToOutput="true" />
-    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" PrivateAssets="all" />
         <PackageReference Include="Elsa.Studio.Core.BlazorWasm" />
         <PackageReference Include="Elsa.Studio.Login.BlazorWasm" />
         <PackageReference Include="Elsa.Studio.Workflows.Core" />

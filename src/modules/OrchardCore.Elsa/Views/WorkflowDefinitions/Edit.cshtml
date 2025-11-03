@@ -1,6 +1,6 @@
+@using OrchardCore.Elsa.Designer.Components
 @using OrchardCore.Mvc.Core.Utilities
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using OrchardCore.Elsa.Designer.Components
 @model OrchardCore.Elsa.Controllers.WorkflowDefinitions.Edit.EditViewModel
 
 <!-- Manifest & fonts -->
@@ -41,27 +41,21 @@
 <script asp-src="/_content/CodeBeam.MudBlazor.Extensions/MudExtensions.min.js" at="Foot"></script>
 <script asp-src="/_content/Radzen.Blazor/Radzen.Blazor.js" at="Foot"></script>
 
-<!-- Bootstrap the WASM runtime from your module base path -->
-<script src="/OrchardCore.Elsa/_framework/blazor.webassembly.js" autostart="false"></script>
+<!-- Bootstrap the WASM runtime from the host application -->
+<script src="/_framework/blazor.webassembly.js" autostart="false"></script>
 <script at="Foot">
-    const basePath = '@Url.Content("/OrchardCore.Elsa")';
-
     document.addEventListener('DOMContentLoaded', function () {
         Blazor.start({
             loadBootResource: function (type, name, defaultUri, integrity) {
-                console.log('loadBootResource', type, name, defaultUri, integrity);
-
-                // Rewrite all _framework resources to use the basePath
+                // Ensure all _framework resources are loaded from the root
                 if (defaultUri.startsWith('_framework/')) {
-                    return `${basePath}/${defaultUri}`;
+                    return `/${defaultUri}`;
                 }
-
                 return defaultUri;
             }
         });
     });
-</script>
-<script>
+
     window.onWorkflowDefinitionExecuted = function (workflowInstanceId) {
         window.location.href = `/Admin/ElsaWorkflows/WorkflowInstances/Details/${workflowInstanceId}`;
     };

@@ -37,7 +37,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\modules\OrchardCore.Elsa.Designer\OrchardCore.Elsa.Designer.csproj" />
+      <ProjectReference Include="..\OrchardCore.Elsa.Designer\OrchardCore.Elsa.Designer.csproj" />
     </ItemGroup>
 
     <!--    <ItemGroup Label="Elsa">-->

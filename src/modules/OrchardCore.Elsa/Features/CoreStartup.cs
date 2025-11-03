@@ -87,7 +87,7 @@ public class CoreStartup : StartupBase
             .AddIndexProvider<WorkflowExecutionLogRecordIndexProvider>()
             .AddIndexProvider<ActivityExecutionRecordIndexProvider>()
             ;
-        
+
         services.Configure<StaticFileOptions>(options =>
         {
             var provider = options.ContentTypeProvider as FileExtensionContentTypeProvider
