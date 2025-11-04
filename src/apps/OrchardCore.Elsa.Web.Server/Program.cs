@@ -14,11 +14,9 @@ builder.Host.UseSerilog((context, logger) =>
         .ReadFrom.Configuration(context.Configuration);
 });
 
-builder.Services
-    .AddQuartz()
-    .AddQuartzHostedService()
-    .AddServerSideBlazor()
-    .AddOrchardCms();
+builder.Services.AddQuartz();
+builder.Services.AddQuartzHostedService();
+builder.Services.AddServerSideBlazor();
 
 builder.Services.Configure<MediatorOptions>(options => options.JobWorkerCount = 1);
 builder.Services.Configure<ElsaStudioBlazorOptions>(options => options.RenderMode = RenderMode.Server);

@@ -1,5 +1,6 @@
 using Elsa.Studio.Core.BlazorWasm.Extensions;
 using Elsa.Studio.Login.BlazorWasm.Extensions;
+using Elsa.Studio.Workflows.Designer.Extensions;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
