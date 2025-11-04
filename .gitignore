@@ -339,3 +339,5 @@ src/Elsa.OrchardCore.Module/ClientLib/oc-elsa/dist/types/
 *.db-wal
 
 *.db-shm
+
+*.po
