@@ -25,14 +25,14 @@ public class ElsaWorkflowExecutionLogStore(ISession session, IPayloadSerializer 
             await session.SaveAsync(document, Collection);
         }
 
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async Task AddAsync(WorkflowExecutionLogRecord record, CancellationToken cancellationToken = default)
     {
         var document = Map(null, record);
         await session.SaveAsync(document, Collection);
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async Task AddManyAsync(IEnumerable<WorkflowExecutionLogRecord> records, CancellationToken cancellationToken = default)
@@ -43,7 +43,7 @@ public class ElsaWorkflowExecutionLogStore(ISession session, IPayloadSerializer 
             await session.SaveAsync(document, Collection);
         }
 
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async Task SaveAsync(WorkflowExecutionLogRecord record, CancellationToken cancellationToken = default)
@@ -51,7 +51,7 @@ public class ElsaWorkflowExecutionLogStore(ISession session, IPayloadSerializer 
         var document = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
         document = Map(document, record);
         await session.SaveAsync(document, Collection);
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<WorkflowExecutionLogRecord?> FindAsync(WorkflowExecutionLogRecordFilter filter, CancellationToken cancellationToken = default)

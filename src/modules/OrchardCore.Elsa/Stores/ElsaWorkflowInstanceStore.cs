@@ -124,14 +124,14 @@ public class ElsaWorkflowInstanceStore(ISession session, IWorkflowStateSerialize
         var document = await session.Query<WorkflowInstanceDocument, WorkflowInstanceIndex>(Collection).Where(x => x.InstanceId == instance.Id).FirstOrDefaultAsync(cancellationToken);
         document = Map(document, instance);
         await session.SaveAsync(document, Collection);
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask AddAsync(WorkflowInstance instance, CancellationToken cancellationToken = default)
     {
         var document = Map(null, instance);
         await session.SaveAsync(document, Collection);
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask UpdateAsync(WorkflowInstance instance, CancellationToken cancellationToken = default)
@@ -139,7 +139,7 @@ public class ElsaWorkflowInstanceStore(ISession session, IWorkflowStateSerialize
         var document = await session.Query<WorkflowInstanceDocument, WorkflowInstanceIndex>(Collection).Where(x => x.InstanceId == instance.Id).FirstOrDefaultAsync(cancellationToken);
         document = Map(document, instance);
         await session.SaveAsync(document, Collection);
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask SaveManyAsync(IEnumerable<WorkflowInstance> instances, CancellationToken cancellationToken = default)
@@ -151,7 +151,7 @@ public class ElsaWorkflowInstanceStore(ISession session, IWorkflowStateSerialize
             await session.SaveAsync(document, Collection);
         }
 
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask<long> DeleteAsync(WorkflowInstanceFilter filter, CancellationToken cancellationToken = default)

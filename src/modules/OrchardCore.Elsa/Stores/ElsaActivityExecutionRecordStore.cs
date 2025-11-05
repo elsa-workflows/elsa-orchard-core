@@ -27,7 +27,7 @@ public class ElsaActivityExecutionRecordStore(ISession session, IPayloadSerializ
             await session.SaveAsync(existingRecord, Collection);
         }
 
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async Task AddManyAsync(IEnumerable<ActivityExecutionRecord> records, CancellationToken cancellationToken = default)
@@ -38,7 +38,7 @@ public class ElsaActivityExecutionRecordStore(ISession session, IPayloadSerializ
             await session.SaveAsync(document, Collection);
         }
 
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async Task SaveAsync(ActivityExecutionRecord record, CancellationToken cancellationToken = default)
@@ -46,7 +46,7 @@ public class ElsaActivityExecutionRecordStore(ISession session, IPayloadSerializ
         var document = await Query(new() { Id = record.Id }).FirstOrDefaultAsync(cancellationToken);
         document = Map(document, record);
         await session.SaveAsync(document, Collection);
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<ActivityExecutionRecord?> FindAsync(ActivityExecutionRecordFilter filter, CancellationToken cancellationToken = default)

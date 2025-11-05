@@ -22,7 +22,7 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
         var document = await Query(new() { Ids = new List<string> { record.Id } }).FirstOrDefaultAsync(cancellationToken);
         document = Map(document, record);
         await session.SaveAsync(document, Collection);
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask SaveManyAsync(IEnumerable<StoredTrigger> records, CancellationToken cancellationToken = default)
@@ -34,7 +34,7 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
             await session.SaveAsync(document, Collection);
         }
 
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
     }
 
     public async ValueTask<StoredTrigger?> FindAsync(TriggerFilter filter, CancellationToken cancellationToken = default)
@@ -96,7 +96,7 @@ public class ElsaTriggerStore(ISession session, IPayloadSerializer payloadSerial
             pageArgs = pageArgs.Next();
         }
 
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
         return count;
     }
 

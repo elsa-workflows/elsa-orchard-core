@@ -176,7 +176,7 @@ public class ElsaWorkflowDefinitionStore(
             count++;
         }
 
-        await session.FlushAsync(cancellationToken);
+        await session.SaveChangesAsync(cancellationToken);
         return count;
     }
 
