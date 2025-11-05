@@ -18,8 +18,8 @@ public static class StoredBookmarkFilterExtensions
         if (filter.Hashes != null) query = query.Where(x => x.Hash.IsIn(filter.Hashes));
         if (filter.WorkflowInstanceId != null) query = query.Where(x => x.WorkflowInstanceId == filter.WorkflowInstanceId);
         if (filter.WorkflowInstanceIds != null) query = query.Where(x => x.WorkflowInstanceId.IsIn(filter.WorkflowInstanceIds));
-        if (filter.Name != null) query = query.Where(x => x.ActivityTypeName == filter.Name);
-        if (filter.Names != null) query = query.Where(x => x.ActivityTypeName.IsIn(filter.Names));
+        if (filter.Name != null) query = query.Where(x => x.Name == filter.Name);
+        if (filter.Names != null) query = query.Where(x => x.Name.IsIn(filter.Names));
         if (filter.ActivityInstanceId != null) query = query.Where(x => x.ActivityInstanceId == filter.ActivityInstanceId);
         
         return query;

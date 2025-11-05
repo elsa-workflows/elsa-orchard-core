@@ -17,6 +17,7 @@ public class StoredBookmarkIndexProvider : IndexProvider<StoredBookmarkDocument>
         context.For<StoredBookmarkIndex>().Map(document => new()
         {
             BookmarkId = document.BookmarkId,
+            Name = document.Name,
             WorkflowInstanceId = document.WorkflowInstanceId,
             CorrelationId = document.CorrelationId,
             ActivityInstanceId = document.ActivityInstanceId,
