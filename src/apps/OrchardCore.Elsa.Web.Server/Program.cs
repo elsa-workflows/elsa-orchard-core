@@ -1,7 +1,6 @@
 using Elsa.Mediator.Options;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using OrchardCore.Elsa.Extensions;
-using OrchardCore.Elsa.Middleware;
+using OrchardCore.Elsa.Designer.Extensions;
 using OrchardCore.Elsa.Options;
 using Quartz;
 using Serilog;
@@ -14,14 +13,13 @@ builder.Host.UseSerilog((context, logger) =>
         .ReadFrom.Configuration(context.Configuration);
 });
 
-builder.Services
-    .AddQuartz()
-    .AddQuartzHostedService()
-    .AddOrchardCms();
-
+builder.Services.AddQuartz();
+builder.Services.AddQuartzHostedService();
+builder.Services.AddOrchardCms();
+builder.Services.AddServerSideBlazor();
+builder.Services.AddElsaDesigner(builder.Configuration);
 builder.Services.Configure<MediatorOptions>(options => options.JobWorkerCount = 1);
-builder.Services.Configure<ElsaStudioBlazorOptions>(options => options.RenderMode = RenderMode.WebAssembly);
-builder.Services.ConfigureWebAssemblyStaticFiles();
+builder.Services.Configure<ElsaStudioBlazorOptions>(options => options.RenderMode = RenderMode.Server);
 
 var app = builder.Build();
 
@@ -30,7 +28,6 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
 }
 
-app.RewriteElsaStudioWebAssemblyAssets();
 app.UseStaticFiles();
 app.UseOrchardCore();
 

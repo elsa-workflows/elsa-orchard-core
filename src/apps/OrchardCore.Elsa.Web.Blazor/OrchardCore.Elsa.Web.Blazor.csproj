@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\modules\OrchardCore.Elsa.Designer\OrchardCore.Elsa.Designer.csproj" />
+        <ProjectReference Include="..\..\modules\OrchardCore.Elsa.Designer.BlazorWasm\OrchardCore.Elsa.Designer.BlazorWasm.csproj" />
     </ItemGroup>
 
 </Project>

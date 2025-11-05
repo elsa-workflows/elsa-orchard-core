@@ -19,8 +19,10 @@
   <ItemGroup Label="Elsa Studio">
     <PackageVersion Include="Elsa.Studio.Core" Version="$(ElsaStudioVersion)" />
     <PackageVersion Include="Elsa.Studio.Core.BlazorWasm" Version="$(ElsaStudioVersion)" />
+    <PackageVersion Include="Elsa.Studio.Core.BlazorServer" Version="$(ElsaStudioVersion)" />
     <PackageVersion Include="Elsa.Studio.Login" Version="$(ElsaStudioVersion)" />
     <PackageVersion Include="Elsa.Studio.Login.BlazorWasm" Version="$(ElsaStudioVersion)" />
+    <PackageVersion Include="Elsa.Studio.Login.BlazorServer" Version="$(ElsaStudioVersion)" />
     <PackageVersion Include="Elsa.Studio.Workflows" Version="$(ElsaStudioVersion)" />
     <PackageVersion Include="Elsa.Studio.Workflows.Core" Version="$(ElsaStudioVersion)" />
     <PackageVersion Include="Elsa.Studio.Shell" Version="$(ElsaStudioVersion)" />

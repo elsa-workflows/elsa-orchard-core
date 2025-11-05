@@ -1,5 +1,4 @@
 using Elsa.Studio.Contracts;
-using Elsa.Studio.Core.BlazorWasm.Extensions;
 using Elsa.Studio.Extensions;
 using Elsa.Studio.Localization.Time;
 using Elsa.Studio.Localization.Time.Providers;
@@ -7,7 +6,6 @@ using Elsa.Studio.Models;
 using Elsa.Studio.Shell.Extensions;
 using Elsa.Studio.Workflows.Designer.Extensions;
 using Elsa.Studio.Workflows.Extensions;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -16,17 +14,18 @@ using OrchardCore.Elsa.Designer.Services;
 namespace OrchardCore.Elsa.Designer.Extensions;
 
 /// <summary>
-/// Extension methods for configuring the Elsa Designer in a Blazor WebAssembly application.
+/// Extension methods for configuring the Elsa Designer services shared across hosting models.
 /// </summary>
 public static class ServiceCollectionExtensions
 {
     /// <summary>
-    /// Adds the Elsa Designer services to the service collection.
+    /// Configures the shared Elsa Designer services and allows platform specific configuration hooks.
     /// </summary>
     /// <param name="services">The service collection.</param>
-    /// <param name="configuration">The configuration to bind backend options from.</param>
+    /// <param name="configuration">Application configuration.</param>
+    /// <param name="configurePlatformServices">Callback invoked to register platform specific services.</param>
     /// <returns>The service collection.</returns>
-    public static IServiceCollection AddElsaDesigner(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddElsaDesignerCore(this IServiceCollection services, IConfiguration configuration, Action<IServiceCollection> configurePlatformServices)
     {
         services.AddSingleton<BackendService>();
 
@@ -35,7 +34,8 @@ public static class ServiceCollectionExtensions
             ConfigureBackendOptions = options => configuration.GetSection("Backend").Bind(options)
         };
 
-        services.AddCore();
+        configurePlatformServices(services);
+
         services.AddShell();
         services.AddRemoteBackend(backendApiConfig);
         services.AddScoped<IAuthenticationProviderManager, NoopAuthenticationProviderManager>();
@@ -45,17 +45,6 @@ public static class ServiceCollectionExtensions
         services.AddActivityDisplaySettingsProvider<ActivityIconProvider>();
 
         return services;
-    }
-
-    /// <summary>
-    /// Registers custom Elsa Studio elements as root components.
-    /// </summary>
-    /// <param name="rootComponents">The root component mappings.</param>
-    /// <returns>The root component mappings.</returns>
-    public static RootComponentMappingCollection RegisterElsaDesignerComponents(this RootComponentMappingCollection rootComponents)
-    {
-        rootComponents.RegisterCustomElsaStudioElements();
-        return rootComponents;
     }
 }
 

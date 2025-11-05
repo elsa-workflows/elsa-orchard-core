@@ -9,9 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
-        <PackageReference Include="Elsa.Studio.Core.BlazorWasm" />
-        <PackageReference Include="Elsa.Studio.Login.BlazorWasm" />
+        <PackageReference Include="Elsa.Studio.Core" />
         <PackageReference Include="Elsa.Studio.Workflows.Core" />
         <PackageReference Include="Elsa.Studio.Workflows" />
         <PackageReference Include="Elsa.Studio.Shell" />
