@@ -15,7 +15,7 @@
         <PackageIcon>icon.png</PackageIcon>
 
         <!-- For NuGet browsers that currently don't support <PackageIcon> yet -->
-        <PackageIconUrl>https://github.com/elsa-workflows/elsa-orchard-core/blob/main/icon.png</PackageIconUrl>
+        <PackageIconUrl>https://github.com/elsa-workflows/elsa-orchard-core/blob/main/icon.png?raw=true</PackageIconUrl>
 
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <AnalysisModeDocumentation>Default</AnalysisModeDocumentation>
@@ -44,6 +44,6 @@
         <ElsaStudioVersion>3.6.0-render-race.1270</ElsaStudioVersion>
         <ElsaExtensionsVersion>3.6.0-preview.166</ElsaExtensionsVersion>
         <OrchardVersion>3.0.0-preview-18758</OrchardVersion>
-        <MicrosoftVersion>9.0.9</MicrosoftVersion>
+        <MicrosoftVersion>9.0.10</MicrosoftVersion>
     </PropertyGroup>
 </Project>
