@@ -1,65 +1,66 @@
 <Project>
-  <PropertyGroup>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-  </PropertyGroup>
-  <ItemGroup Label="Elsa">
-    <PackageVersion Include="Elsa" Version="$(ElsaVersion)" />
-    <PackageVersion Include="Elsa.Expressions.JavaScript" Version="$(ElsaVersion)" />
-    <PackageVersion Include="Elsa.Expressions.Liquid" Version="$(ElsaVersion)" />
-    <PackageVersion Include="Elsa.Http" Version="$(ElsaVersion)" />
-    <PackageVersion Include="Elsa.Scheduling" Version="$(ElsaVersion)" />
-    <PackageVersion Include="Elsa.Workflows.Api" Version="$(ElsaVersion)" />
-    <PackageVersion Include="Elsa.Workflows.Core" Version="$(ElsaVersion)" />
-    <PackageVersion Include="Elsa.Workflows.Management" Version="$(ElsaVersion)" />
-    <PackageVersion Include="Elsa.Resilience" Version="$(ElsaVersion)" />
-    <PackageVersion Include="Elsa.Workflows.Runtime" Version="$(ElsaVersion)" />
-    <PackageVersion Include="Elsa.Workflows.Runtime.Distributed" Version="$(ElsaVersion)" />
-  </ItemGroup>
-  <ItemGroup Label="Elsa Studio">
-    <PackageVersion Include="Elsa.Studio.Core" Version="$(ElsaStudioVersion)" />
-    <PackageVersion Include="Elsa.Studio.Core.BlazorWasm" Version="$(ElsaStudioVersion)" />
-    <PackageVersion Include="Elsa.Studio.Core.BlazorServer" Version="$(ElsaStudioVersion)" />
-    <PackageVersion Include="Elsa.Studio.Login" Version="$(ElsaStudioVersion)" />
-    <PackageVersion Include="Elsa.Studio.Login.BlazorWasm" Version="$(ElsaStudioVersion)" />
-    <PackageVersion Include="Elsa.Studio.Login.BlazorServer" Version="$(ElsaStudioVersion)" />
-    <PackageVersion Include="Elsa.Studio.Workflows" Version="$(ElsaStudioVersion)" />
-    <PackageVersion Include="Elsa.Studio.Workflows.Core" Version="$(ElsaStudioVersion)" />
-    <PackageVersion Include="Elsa.Studio.Shell" Version="$(ElsaStudioVersion)" />
-  </ItemGroup>
-  <ItemGroup Label="Elsa Extensions">
-    <PackageVersion Include="Elsa.Scheduling.Quartz" Version="$(ElsaExtensionsVersion)" />
-    <PackageVersion Include="Elsa.Sql" Version="$(ElsaExtensionsVersion)" />
-    <PackageVersion Include="Elsa.Data.Csv" Version="$(ElsaExtensionsVersion)" />
-  </ItemGroup>
-  <ItemGroup Label="Orchard">
-    <PackageVersion Include="OrchardCore.Admin.Abstractions" Version="$(OrchardVersion)" />
-    <PackageVersion Include="OrchardCore.Contents" Version="$(OrchardVersion)" />
-    <PackageVersion Include="OrchardCore.Infrastructure" Version="$(OrchardVersion)" />
-    <PackageVersion Include="OrchardCore.Module.Targets" Version="$(OrchardVersion)" />
-    <PackageVersion Include="OrchardCore.Application.Cms.Targets" Version="$(OrchardVersion)" />
-    <PackageVersion Include="OrchardCore.Logging.Serilog" Version="$(OrchardVersion)" />
-    <PackageVersion Include="OrchardCore.ContentManagement" Version="$(OrchardVersion)" />
-    <PackageVersion Include="OrchardCore.ContentTypes.Abstractions" Version="$(OrchardVersion)" />
-    <PackageVersion Include="OrchardCore.DisplayManagement" Version="$(OrchardVersion)" />
-    <PackageVersion Include="OrchardCore.Navigation.Core" Version="$(OrchardVersion)" />
-    <PackageVersion Include="OrchardCore.OpenId.Core" Version="$(OrchardVersion)" />
-    <PackageVersion Include="OrchardCore.Queries" Version="$(OrchardVersion)" />
-    <PackageVersion Include="OrchardCore.ResourceManagement" Version="$(OrchardVersion)" />
-  <PackageVersion Include="OrchardCore.Taxonomies.Core" Version="$(OrchardVersion)" />
-  <PackageVersion Include="OrchardCore.Title" Version="$(OrchardVersion)" />
-  </ItemGroup>
-  <ItemGroup Label="Microsoft">
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(MicrosoftVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(MicrosoftVersion)" PrivateAssets="all" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="$(MicrosoftVersion)" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageVersion Include="ncrontab" Version="3.3.3" />
-    <PackageVersion Include="JetBrains.Annotations" Version="2025.2.2" />
-    <PackageVersion Include="System.Linq.Dynamic.Core" Version="1.6.7" />
-    <PackageVersion Include="YesSql.Abstractions" Version="5.4.6" />
-    <PackageVersion Include="Quartz" Version="3.15.0" />
-    <PackageVersion Include="Quartz.Extensions.Hosting" Version="3.15.0" />
-  </ItemGroup>
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+        <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+    </PropertyGroup>
+    <ItemGroup Label="Elsa">
+        <PackageVersion Include="Elsa" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Api.Client" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Expressions.JavaScript" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Expressions.Liquid" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Http" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Scheduling" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Workflows.Api" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Workflows.Core" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Workflows.Management" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Resilience" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Workflows.Runtime" Version="$(ElsaVersion)"/>
+        <PackageVersion Include="Elsa.Workflows.Runtime.Distributed" Version="$(ElsaVersion)"/>
+    </ItemGroup>
+    <ItemGroup Label="Elsa Studio">
+        <PackageVersion Include="Elsa.Studio.Core" Version="$(ElsaStudioVersion)"/>
+        <PackageVersion Include="Elsa.Studio.Core.BlazorWasm" Version="$(ElsaStudioVersion)"/>
+        <PackageVersion Include="Elsa.Studio.Core.BlazorServer" Version="$(ElsaStudioVersion)"/>
+        <PackageVersion Include="Elsa.Studio.Login" Version="$(ElsaStudioVersion)"/>
+        <PackageVersion Include="Elsa.Studio.Login.BlazorWasm" Version="$(ElsaStudioVersion)"/>
+        <PackageVersion Include="Elsa.Studio.Login.BlazorServer" Version="$(ElsaStudioVersion)"/>
+        <PackageVersion Include="Elsa.Studio.Workflows" Version="$(ElsaStudioVersion)"/>
+        <PackageVersion Include="Elsa.Studio.Workflows.Core" Version="$(ElsaStudioVersion)"/>
+        <PackageVersion Include="Elsa.Studio.Shell" Version="$(ElsaStudioVersion)"/>
+    </ItemGroup>
+    <ItemGroup Label="Elsa Extensions">
+        <PackageVersion Include="Elsa.Scheduling.Quartz" Version="$(ElsaExtensionsVersion)"/>
+        <PackageVersion Include="Elsa.Sql" Version="$(ElsaExtensionsVersion)"/>
+        <PackageVersion Include="Elsa.Data.Csv" Version="$(ElsaExtensionsVersion)"/>
+    </ItemGroup>
+    <ItemGroup Label="Orchard">
+        <PackageVersion Include="OrchardCore.Admin.Abstractions" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Contents" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Infrastructure" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Module.Targets" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Application.Cms.Targets" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Logging.Serilog" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.ContentManagement" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.ContentTypes.Abstractions" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.DisplayManagement" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Navigation.Core" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.OpenId.Core" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Queries" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.ResourceManagement" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Taxonomies.Core" Version="$(OrchardVersion)"/>
+        <PackageVersion Include="OrchardCore.Title" Version="$(OrchardVersion)"/>
+    </ItemGroup>
+    <ItemGroup Label="Microsoft">
+        <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(MicrosoftVersion)"/>
+        <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(MicrosoftVersion)" PrivateAssets="all"/>
+        <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="$(MicrosoftVersion)"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageVersion Include="ncrontab" Version="3.3.3"/>
+        <PackageVersion Include="JetBrains.Annotations" Version="2025.2.2"/>
+        <PackageVersion Include="System.Linq.Dynamic.Core" Version="1.6.7"/>
+        <PackageVersion Include="YesSql.Abstractions" Version="5.4.6"/>
+        <PackageVersion Include="Quartz" Version="3.15.0"/>
+        <PackageVersion Include="Quartz.Extensions.Hosting" Version="3.15.0"/>
+    </ItemGroup>
 </Project>
