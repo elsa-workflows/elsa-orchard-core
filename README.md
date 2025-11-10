@@ -81,6 +81,20 @@ The Elsa Workflows Designer is built with Blazor. At the moment it runs as a Bla
 
 - Open `Elsa.OrchardCore.sln` to work with the Orchard Core modules and sample app.
 
+## Demo application
+
+For a concrete, end-to-end example of integrating these modules into your own solution, see the Harvest demo application:
+
+- Orchard Harvest 2025 Demo: https://github.com/sfmskywalker/orchard-harvest-2025
+
+It demonstrates:
+- Initial Orchard Core setup with Elsa enabled.
+- Dual project structure (CMS + Blazor WASM designer) and project references.
+- Adding and customizing activities (icons/colors/components).
+- Workflow authoring scenarios showcased during the Harvest event.
+
+Use it as a blueprint when starting a fresh project or comparing configuration differences.
+
 ## Upstream Elsa resources
 
 - Documentation: https://docs.elsaworkflows.io/
