@@ -4,6 +4,9 @@
         <TargetFramework>net9.0</TargetFramework>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
         <IsPackable>true</IsPackable>
+        <PackageId>Elsa.OrchardCore.UI</PackageId>
+        <PackageTags>Elsa;Workflows;OrchardCore;UI</PackageTags>
+        <Description>Provides UI-related workflow activities for Orchard Core. Includes activities for displaying notifications and interacting with the user interface.</Description>
     </PropertyGroup>
 
     <ItemGroup>

@@ -6,6 +6,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <IsPackable>true</IsPackable>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+        <PackageId>Elsa.OrchardCore.Designer</PackageId>
+        <PackageTags>Elsa;Workflows;OrchardCore;Designer</PackageTags>
+        <Description>Shared components for the Elsa Studio visual workflow designer. Provides core UI components and workflow design functionality for Orchard Core integration.</Description>
     </PropertyGroup>
 
     <ItemGroup>

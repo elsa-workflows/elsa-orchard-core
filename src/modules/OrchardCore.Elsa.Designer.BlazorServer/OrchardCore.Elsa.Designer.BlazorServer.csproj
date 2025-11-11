@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>true</IsPackable>
+    <PackageId>Elsa.OrchardCore.Designer.BlazorServer</PackageId>
+    <PackageTags>Elsa;Workflows;OrchardCore;Designer;BlazorServer</PackageTags>
+    <Description>Blazor Server implementation of the Elsa Studio workflow designer for Orchard Core. Provides server-side rendering of the visual workflow designer.</Description>
   </PropertyGroup>
 
   <ItemGroup>

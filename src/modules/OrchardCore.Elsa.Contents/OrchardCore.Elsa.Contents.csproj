@@ -4,6 +4,9 @@
         <TargetFramework>net9.0</TargetFramework>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
         <IsPackable>true</IsPackable>
+        <PackageId>Elsa.OrchardCore.Contents</PackageId>
+        <PackageTags>Elsa;Workflows;OrchardCore;Contents</PackageTags>
+        <Description>Provides Elsa workflow activities for Orchard Core content management. Includes activities for creating, updating, publishing, and deleting content items, as well as content event triggers.</Description>
     </PropertyGroup>
 
     <ItemGroup>

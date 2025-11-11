@@ -4,6 +4,9 @@
         <TargetFramework>net9.0</TargetFramework>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
         <IsPackable>true</IsPackable>
+        <PackageId>Elsa.OrchardCore.Module</PackageId>
+        <PackageTags>Elsa;Workflows;OrchardCore;Module</PackageTags>
+        <Description>Core Elsa Workflows integration for Orchard Core CMS. Provides foundational workflow services, HTTP activities, workflow management UI, and integration with Orchard Core's authentication and security features.</Description>
     </PropertyGroup>
 
     <ItemGroup>

@@ -3,6 +3,9 @@
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <IsPackable>true</IsPackable>
+        <PackageId>Elsa.OrchardCore.Timers</PackageId>
+        <PackageTags>Elsa;Workflows;OrchardCore;Timers</PackageTags>
+        <Description>Provides timer services and scheduling activities for Elsa workflows in Orchard Core. Includes Quartz.NET-based scheduling for clustered deployments.</Description>
     </PropertyGroup>
 
     <ItemGroup>
